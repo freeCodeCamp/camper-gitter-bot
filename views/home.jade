@@ -1,0 +1,29 @@
+extends layout
+
+block content
+
+  include nav
+
+  .container-fluid
+    .row
+      .col-md-6
+
+        img.img-circle(src="#{user.avatarUrlMedium}")
+
+        h1 Hello #{user.username}!
+        p  clientId: 
+          span.mono #{clientId}
+        p token: 
+          span.mono #{token}
+
+        p 
+          |Search 
+          a(href='https://developer.gitter.im/docs/welcome')
+            |Developer documentation
+          |. 
+
+        h3 You're currently in the following rooms:
+        - each room in rooms
+          div
+            a(href="https://gitter.im#{room.url}") #{room.name} &nbsp;
+            span.mono [ #{room.id} ]
