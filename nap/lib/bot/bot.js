@@ -9,11 +9,11 @@ var bot = {
 
     staticReplies: {
         menu: "I know lots about **javascript**! Pick one of:\n - `functions` \n - `objects`",
-        help: "we all need help sometimes. Type `menu` for some starting points.",
-        link: "try this http://google.com",
+        help: "Type `menu` for some starting points or check the [guide](http://www.freecodecamp.com/field-guide/all-articles)",
+        link: "try this [guide](http://www.freecodecamp.com/field-guide/all-articles).",
         functions: "function junction. lots of text goes here",
         objects: "good question! well, shall we talk about **classical** or **prototypical** ?",
-        hint: "depending on the topic, I'm going to show you a context sensitive `hint` here"
+        hint: "depending on the topic, I'm going to show you a context sensitive `hint` here."
     },
 
     init: function(gitter, roomUrl) {
