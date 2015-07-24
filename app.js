@@ -76,10 +76,15 @@ app.get('/home', function(req, res) {
 
 
 app.get('/msg', function(req, res) {
-    var reply = bot.reply("random input");
+    var msg = {
+        text: req.query.input
+    }
+    var reply = bot.reply(msg);
     gitter.stashToken(req.session.token);
 
     gitter.postMessage(reply, GitterBot.roomId);
+    // res.set('Content-Type', 'text/plain');
+    res.type('text/plain');
     res.send(reply);
 });
 
