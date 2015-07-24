@@ -70,3 +70,5 @@ gitter.rooms.find(GitterBot.roomId).then(function(room) {
 });
 
 
+oneBot.handleInput("menu");
+

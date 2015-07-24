@@ -4,7 +4,17 @@ var BotObj = {
     OWNERNAME: 'dcsan'
 };
 
+
 var bot = {
+
+    staticReplies: {
+        menu: "I know lots about **javascript**! Pick one of:\n - `functions` \n - `objects`",
+        help: "we all need help sometimes. Type `menu` for some starting points.",
+        link: "try this http://google.com",
+        functions: "function junction. lots of text goes here",
+        objects: "good question! well, shall we talk about **classical** or **prototypical** ?",
+        hint: "depending on the topic, I'm going to show you a context sensitive `hint` here"
+    },
 
     init: function(gitter, roomUrl) {
         // var that = this;
@@ -17,9 +27,9 @@ var bot = {
           // console.log('Joined room: ', room.name);
           // that.room = room;
           BotObj.room = room;
-          console.log("BotObj init", BotObj)
+          // console.log("BotObj init", BotObj)
           room.send("bot joined");
-        });        
+        });
     },
 
     // init2: function(gitter, roomUrl) {
@@ -29,6 +39,14 @@ var bot = {
     //         room.send('joined');
     //     });
     // },
+
+    handleInput: function(text) {
+        var rep1 = this.staticReplies[text];
+        if (rep1)
+            return rep1
+        else
+            return "you said: " + text;
+    },
 
     reply: function(msg) {
         if (msg.operation != "create") {
@@ -42,16 +60,13 @@ var bot = {
             console.warn("skip self reply");
             return;
         }
-
-        console.log("bot.reply msg.text:", msg.text);
-        console.log("bot.reply msg.username:", msg.model.fromUser.username);
-        // console.log("bot.reply msg:", msg);
-
         var input = msg.model.text;
-        var output = input.toUpperCase();
-        var str = ("  input> " + input + "\n output> " + output);
-        console.log("bot\n: ", str);
-        // this.room.send(output, msg.roomId);
+
+        console.log(" in| " + msg.model.fromUser.username + " > " + input);
+
+        // var output = input.toUpperCase();
+        var output = this.handleInput(input);
+        console.log("out|: ", output);
         BotObj.room.send(output);
         return(output);
     }
