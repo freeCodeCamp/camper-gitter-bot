@@ -1,0 +1,20 @@
+{
+  "name": "gitter-demo-app",
+  "version": "0.0.1",
+  "dependencies": {
+    "request": "~2.27.0",
+    "express": "~3.4.4",
+    "jade": "~0.35.0",
+    "underscore": ""
+  },
+  "devDependencies": {
+    "mocha": "",
+    "nodemon": "~1.0.15"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "pretest": "make restart-test-server",
+    "test": "NODE_ENV=test mocha",
+    "posttest": "make stop-test-server"
+  }
+}
