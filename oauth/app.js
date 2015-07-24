@@ -58,11 +58,18 @@ app.get('/', function(req, res) {
 app.get('/home', function(req, res) {
     if (!req.user) return res.redirect('/');
 
-    gitter.stashToken();
+    console.log("/home user:", req.user);
+    console.log("/home session:", req.session);
 
     // Fetch user rooms using the Gitter API
     gitter.fetchRooms(req.user, req.session.token, function(err, rooms) {
         if (err) return res.send(500);
+
+        console.log("rooms", rooms)
+
+        rooms.map( function pt(room) {
+            console.log(room)
+        });
 
         res.render('home', {
             user: req.user,
@@ -77,13 +84,13 @@ app.get('/home', function(req, res) {
 
 app.get('/msg', function(req, res) {
     var msg = {
-        text: req.query.input
+        text: req.query.input,
+        fromUser: {
+            username: 'webhook'
+        }
     }
     var reply = bot.reply(msg);
     gitter.stashToken(req.session.token);
-
-    gitter.postMessage(reply, GitterBot.roomId);
-    // res.set('Content-Type', 'text/plain');
     res.type('text/plain');
     res.send(reply);
 });
@@ -92,7 +99,7 @@ app.listen(port);
 console.log('Demo app running at http://localhost:' + port);
 
 var bot = require('./lib/bot/bot.js'),
-    passportInit = require('./lib/gitter/passportLogin'),
+    passportInit = require('./lib/gitter/passportInit'),
     gitterStream = require('./lib/gitter/streamApi'),
     gitter = require('./lib/gitter/restApi')
 

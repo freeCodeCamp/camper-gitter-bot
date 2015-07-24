@@ -4,6 +4,7 @@ var OWNERNAME = 'dcsan'
 
 var bot = {
     reply: function(msg) {
+        console.log("msg\n", msg);
         if (msg.fromUser.username == OWNERNAME) {
             console.warn("skip self reply");
             return;

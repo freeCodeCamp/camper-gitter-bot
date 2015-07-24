@@ -11,9 +11,12 @@ function handleCallback(err, res) {
 }
 
 // FIXME - this gets overwritten when the web app logs in
-ApiConfig = {
+AppConfig = {
     token: "c082087ee20ec81ae6b29e89cd0cafe523076e58",
-    roomId: "55b1a9030fc9f982beaac901"
+    roomId: "55b1a9030fc9f982beaac901",
+    user: {
+        id: '535b4f90fe5536b46433d746'
+    }
 }
 
 
@@ -22,14 +25,25 @@ var gitter = {
 
     stashToken: function(token) {
         if (token) {
-            ApiConfig.token = token;
+            AppConfig.token = token;
         } else {
-            console.error("tried to stash null token");
+            console.error("tried to stash null token:", token);
         }
-        console.log("stashToken ApiConfig:", ApiConfig);
+        console.log("stashToken AppConfig:", AppConfig);
+        token = token || AppConfig.token;
+        return (token);
+    },
+
+    checkUser: function(user) {
+        if (user == '[') {
+            console.error("WTF user is [")
+            user = AppConfig.user;
+        }
+        return(user);
     },
 
     fetch: function(path, token, cb, opts) {
+        token = token || AppConfig.token;
         var options = {
             url: gitterHost + path,
             headers: {
@@ -61,14 +75,18 @@ var gitter = {
     },
 
     fetchRooms: function(user, token, cb) {
+        // FIXME
+        user = this.checkUser(user);
+        token = this.stashToken(token);
         this.fetch('/api/v1/user/' + user.id + '/rooms', token, function(err, rooms) {
+            console.log("rooms", rooms);
             cb(err, rooms);
         });
     },
 
     postMessage: function(text, roomId) {
-        token = ApiConfig.token;
-        roomId = roomId || ApiConfig.roomId;
+        token = this.stashToken();
+        roomId = roomId || AppConfig.roomId;
         data = { "text": text }
         opts = {
             method: 'POST',

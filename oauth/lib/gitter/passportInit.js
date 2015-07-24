@@ -16,6 +16,7 @@ passportInit = function(gitter) {
             passReqToCallback: true
         },
         function(req, accessToken, refreshToken, profile, done) {
+            console.log("set access token", accessToken);
             req.session.token = accessToken;
             gitter.fetchCurrentUser(accessToken, function(err, user) {
                 return (err ? done(err) : done(null, user));
@@ -24,10 +25,12 @@ passportInit = function(gitter) {
     ));
 
     passport.serializeUser(function(user, done) {
+        console.log("serializeUser", user);
         done(null, JSON.stringify(user));
     });
 
     passport.deserializeUser(function(user, done) {
+        console.log("deserializeUser", user);
         done(null, JSON.parse(user));
     });
 
