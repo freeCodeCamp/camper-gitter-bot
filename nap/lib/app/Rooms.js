@@ -1,27 +1,43 @@
 "use strict";
 
-var RoomData = require('../../data/RoomData.js'),
-    _ = require("underscore");
+var _ = require("underscore");
+
+var RoomData = require('../../data/RoomData.js');
 
 var Rooms = {
 
-    findRoomFromTopic: function(topic) {
+    findByTopic: function(topic) {
         debugger;
 
         var rooms = RoomData.filter(function(rm) {
-            console.log("filter ", rm);
-            if (rm.topics && rm.topics.indexOf(topic) > 0) {
+            var topics = rm.topics;
+            if (!topics) return false;
+
+            if (topics.indexOf(topic) != -1) {
                 return true;
             }
             return false;
         })
-        console.log("topic", topic, "filtered:", rooms);
-        var room = rooms[0]
-        if (room) return room;
 
-        console.warn("cant findRoomFromTopic ", topic)
-        return RoomData[0];
+        return (this.checkRoom(rooms[0], 'findByTopic', topic))
     },
+
+    findByName: function(name) {
+        var rooms = RoomData.filter( function(rm) {
+            return (rm.title == name);
+        })
+        return (this.checkRoom(rooms[0], 'findByName', name))
+    },
+
+    list: function() {
+        return RoomData;
+    },
+
+    checkRoom: function(room, how, tag) {
+        if (room) return room;
+        console.warn("cant findRoom ", how, tag);
+        return (RoomData.defaultRoom);  // careful, this is a property not a func
+    }
 
 };
 

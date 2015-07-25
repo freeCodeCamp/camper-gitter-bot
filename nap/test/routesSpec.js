@@ -8,12 +8,13 @@ AppConfig.topics = require("../data/topics");
 describe("Routes", function(){
 
     it("should find default room route", function() {
-        var redir = routes.findRedirect("default");
-        assert.property(redir, 'topicObj', 'redir has a topicObj');
+        query = {room: "random"};
+        var redir = routes.findRedirect(query);
+        assert.property(redir, 'room', 'redir has a room');
         assert.property(redir, 'org', 'route has an org');
         assert.property(redir, 'url', 'route has a url');
 
-        var url = "https://gitter.im/" + AppConfig.org + "/" + "default room";
+        var url = "https://gitter.im/" + AppConfig.org + "/" + "GeneralChat";
 
         assert.equal(redir.url, url);
     })

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+
+  include nav
+
+  .container-fluid
+    .row
+      .col-md-12
+        h1 GitterBot Rooms
+        ul
+          - each room in rooms
+            
+              a.btn.btn-default.btn-lg(href="/go?room=#{room.title}") #{room.title} &nbsp;              
+              - each topic in room.topics
+                a.btn.btn-primary.btn-sm(href="/go?topic=#{topic}") #{topic}
+              br
+
+          

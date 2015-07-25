@@ -1,9 +1,9 @@
 "use strict";
 
 var RoomData = [
-
+    // 1st room is the default if we can't find anything else
     {
-        title: "Default Room",
+        title: "GeneralChat",
         topics: ["default room"]
     },
 
@@ -13,12 +13,15 @@ var RoomData = [
     },
 
     {
-        title: "Frontend Chatter",
+        title: "Frontend",
         topics: ["css", "bootstrap", "html"]
     }
 
 ]
 
-console.log("RoomData", RoomData);
+// alias
+RoomData.defaultRoom = RoomData[0];
+
+// console.log("RoomData", RoomData);
 
 module.exports = RoomData;

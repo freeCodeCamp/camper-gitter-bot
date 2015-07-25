@@ -14,3 +14,11 @@
 .mono {
   font-family: Monaco, "Liberation Mono", Courier, monospace;
 }
+
+.room-name {
+    font-size: 24px;
+}
+
+.topic-name {
+    font-size: 12px;
+}
