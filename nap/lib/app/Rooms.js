@@ -29,8 +29,11 @@ var Rooms = {
         return (this.checkRoom(rooms[0], 'findByName', name))
     },
 
-    list: function() {
-        return RoomData;
+    names: function() {
+        this.roomList = RoomData.map(function(room) {
+            return room.title
+        })
+        return this.roomList;
     },
 
     checkRoom: function(room, how, tag) {

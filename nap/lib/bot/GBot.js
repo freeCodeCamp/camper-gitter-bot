@@ -2,12 +2,9 @@
 
 var AppConfig = require('../../config/AppConfig');
 
-var BotObj = {
-    OWNERNAME: 'dcsan'
-};
+var RoomData = require('../../data/RoomData.js');
 
-
-var bot = {
+var GBot = {
 
     staticReplies: {
         menu: "I know lots about **javascript**! Pick one of:\n - `functions` \n - `objects`",
@@ -26,28 +23,53 @@ var bot = {
         star: "> some stuff here quoted \n\n[vote](http://www.freecodecamp.com/field-guide/all-articles)\n" + "> another one here \n[vote](http://www.freecodecamp.com/field-guide/all-articles)"
     },
 
-    init: function(gitter, roomUrl) {
-        // var that = this;
-        // BotObj.gitter = gitter;
-        gitter.rooms.join(roomUrl, function(err, room) {
-          if (err) {
-            console.log('Not possible to join the room: ', err);
-            return;
-          }
-          // console.log('Joined room: ', room.name);
-          // that.room = room;
-          BotObj.room = room;
-          // console.log("BotObj init", BotObj)
-          room.send("bot joined");
-        });
+    init: function(gitter) {
+        RoomData.map(function(oneRoom) {
+            var roomUrl = oneRoom.path;
+            console.log("oneRoom", oneRoom);
+            gitter.rooms.join(roomUrl, function(err, room) {
+                if (err) {
+                    console.log('Not possible to join the room: ', err, roomUrl);
+                    return;
+                }
+                console.log('joined> ', room);
+                GBot.listenToRoom(room);
+            });
+
+        })
     },
+
+    listenToRoom: function(room) {
+        // gitter.rooms.find(room.id).then(function(room) {
+
+            var events = room.streaming().chatMessages();
+
+            // The 'snapshot' event is emitted once, with the last messages in the room
+            // events.on('snapshot', function(snapshot) {
+            //     console.log(snapshot.length + ' messages in the snapshot');
+            // });
+
+            // The 'chatMessages' event is emitted on each new message
+            events.on('chatMessages', function(message) {
+                console.log("------");
+                console.log('operation> ' + message.operation);
+                console.log('model> ', message.model);
+                console.log('message> ', message);
+                console.log('room> ', room);
+                console.log("------");
+                // GBot.reply(message);
+            });
+        // });
+
+    },
+
 
     getName: function() {
         return AppConfig.botname;
     },
 
     say: function(text) {
-        BotObj.room.send(text);
+        GBot.room.send(text);
     },
 
     announce: function(opts) {
@@ -76,10 +98,10 @@ var bot = {
             return;
         }
         console.log("msg\n", msg);
-        console.log("BotObj\n", BotObj);
+        console.log("GBot\n", GBot);
 
-        if (msg.model.fromUser.username == BotObj.OWNERNAME) {
-            console.warn("skip self reply");
+        if (msg.model.fromUser.username == AppConfig.botname) {
+            console.warn("skip reply to bot");
             return;
         }
         var input = msg.model.text;
@@ -89,10 +111,9 @@ var bot = {
         // var output = input.toUpperCase();
         var output = this.handleInput(input);
         console.log("out|: ", output);
-        BotObj.room.send(output);
-        return(output);
+        GBot.room.send(output);
+        return (output);
     }
 }
 
-module.exports = bot;
-
+module.exports = GBot;

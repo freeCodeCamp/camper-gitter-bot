@@ -9,9 +9,9 @@ var port = process.env.PORT || 7000;
 // other requires
 var Gitter = require('node-gitter');
 var AppConfig = require("./config/AppConfig");
-var routes = require("./lib/app/routes.js");
-var oneBot = require("./lib/bot/bot.js");
+var GBot = require("./lib/bot/GBot.js");
 
+var routes = require("./lib/app/routes.js");
 var passport = require("./lib/gitter/passportModule");
 
 
@@ -46,28 +46,12 @@ gitter.currentUser().then(function(user) {
 });
 
 
-oneBot.init(gitter, "dcsan/botzy");
-routes.init(app, oneBot, gitter, passport);
-
-gitter.rooms.find(AppConfig.roomId).then(function(room) {
-
-    var events = room.streaming().chatMessages();
-
-    // The 'snapshot' event is emitted once, with the last messages in the room
-    events.on('snapshot', function(snapshot) {
-        console.log(snapshot.length + ' messages in the snapshot');
-    });
-
-    // The 'chatMessages' event is emitted on each new message
-    events.on('chatMessages', function(message) {
-        console.log('A message was ' + message.operation);
-        console.log('Text: ', message);
-        oneBot.reply(message);
-    });
-});
+GBot.init(gitter);
+routes.init(app, GBot, gitter, passport);
 
 
-oneBot.handleInput("menu");
+
+GBot.handleInput("menu");
 
 
 
