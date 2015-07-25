@@ -51,13 +51,13 @@ var GBot = {
 
             // The 'chatMessages' event is emitted on each new message
             events.on('chatMessages', function(message) {
-                console.log("------");
-                console.log('operation> ' + message.operation);
-                console.log('model> ', message.model);
-                console.log('message> ', message);
-                console.log('room> ', room);
-                console.log("------");
-                // GBot.reply(message);
+                // console.log("------");
+                // console.log('operation> ' + message.operation);
+                // console.log('model> ', message.model);
+                console.log('message> ', message.model.text);
+                // console.log('room> ', room);
+                // console.log("------");
+                GBot.reply(message, room);
             });
         // });
 
@@ -92,13 +92,13 @@ var GBot = {
             return "you said: " + text;
     },
 
-    reply: function(msg) {
+    reply: function(msg, room) {
         if (msg.operation != "create") {
             console.log("skip msg reply", msg);
             return;
         }
-        console.log("msg\n", msg);
-        console.log("GBot\n", GBot);
+        // console.log("msg\n", msg);
+        // console.log("GBot\n", GBot);
 
         if (msg.model.fromUser.username == AppConfig.botname) {
             console.warn("skip reply to bot");
@@ -111,7 +111,7 @@ var GBot = {
         // var output = input.toUpperCase();
         var output = this.handleInput(input);
         console.log("out|: ", output);
-        GBot.room.send(output);
+        room.send(output);
         return (output);
     }
 }
