@@ -6,15 +6,22 @@ var AppConfig = {
     token: process.env.GITTER_USER_TOKEN,
     org: "bothelp",
     testUser: 'bothelp',
-    botname: 'bothelp'
+    botname: 'bothelp',
+    webuser: 'dcsan'
 }
 
 // TODO - fill in username if we get it from oAuth request
 AppConfig.who = function(req) {
+    var who;
+
     if (req.user) {
         console.warn("got a user in the request but ignoring");
+    } else if (req.who) {
+        who = req.who;
+    } else {
+        who = AppConfig.webuser;
     }
-    return (AppConfig.testUser);
+    return who;
 }
 
 // TODO read from config file for dev/live modes and running env
@@ -22,7 +29,5 @@ AppConfig.getOrg = function(req) {
     return (AppConfig.org);
 }
 
-
-AppConfig.topics = require("../data/topics");
 
 module.exports = AppConfig;

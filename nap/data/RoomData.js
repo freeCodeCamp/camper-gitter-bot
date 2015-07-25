@@ -4,19 +4,19 @@ var RoomData = [
     // 1st room is the default if we can't find anything else
     {
         title: "GeneralChat",
-        path: "bothelp/GeneralChat",
+        name: "bothelp/GeneralChat",
         topics: ["default room"]
     },
 
     {
         title: "JS-Basics",
-        path: "bothelp/JS-Basics",
+        name: "bothelp/JS-Basics",
         topics: ['objects', 'functions', 'prototype']
     },
 
     {
         title: "Frontend",
-        path: "bothelp/Frontend",
+        name: "bothelp/Frontend",
         topics: ["css", "bootstrap", "html"]
     }
 

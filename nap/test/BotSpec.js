@@ -1,12 +1,12 @@
 var expect = require("chai").expect,
     assert = require("chai").assert;
 
-var Bot = require("../lib/bot/Bot.js");
+var GBot = require("../lib/bot/GBot.js");
 
-describe("Bot", function(){
+describe("GBot", function(){
 
     it("should have a name", function() {
-        assert.equal(Bot.getName(), "bothelp");
+        assert.equal(GBot.getName(), "bothelp");
     })
 
 });

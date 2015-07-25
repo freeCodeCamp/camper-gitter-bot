@@ -7,7 +7,8 @@ var assert = require("chai").assert;
 // but needed for tests too so want this class self contained
 
 var AppConfig = require('../../config/AppConfig'),
-    Rooms = require('../../lib/app/Rooms.js');
+    Rooms = require('../../lib/app/Rooms.js'),
+    RoomData = require('../../data/RoomData.js');
 
 var routes = {
 
@@ -18,13 +19,13 @@ var routes = {
 
         if (query.topic) {
             query.roomObj = Rooms.findByTopic(query.topic);
-        }
-        if (query.room) {
+        } else if (query.room) {
             query.roomObj = Rooms.findByName(query.room);
         }
+        console.log("found ", query.roomObj);
         assert.isObject(query.roomObj);
 
-        query.url = "https://gitter.im/" + query.org + "/" + query.roomObj.title;
+        query.url = "https://gitter.im/" + query.roomObj.name;
         return query;
     },
 
@@ -38,13 +39,11 @@ var routes = {
         app.get("/go", function(req, res) {
             // console.log(req);
             var topic = req.query.topic,
-                room = req.query.room,
+                room  = req.query.room,
+                who   = AppConfig.who(req),
                 redir = that.findRedirect(req.query);
 
             bot.announce(redir)
-
-            bot.say("----");
-            bot.say("topic: **" + topic + "**");
             res.redirect(redir.url);
 
         });
@@ -55,7 +54,7 @@ var routes = {
                 user: req.user,
                 who: AppConfig.who(req),
                 token: req.session.token,
-                rooms: Rooms.list()
+                rooms: RoomData
             });
         });
 

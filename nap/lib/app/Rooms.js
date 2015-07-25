@@ -24,14 +24,14 @@ var Rooms = {
 
     findByName: function(name) {
         var rooms = RoomData.filter( function(rm) {
-            return (rm.title == name);
+            return (rm.name == name);
         })
         return (this.checkRoom(rooms[0], 'findByName', name))
     },
 
     names: function() {
         this.roomList = RoomData.map(function(room) {
-            return room.title
+            return room.name
         })
         return this.roomList;
     },

@@ -12,8 +12,11 @@ block content
         .container-fluid
           .row
             .col-md-2
-              a.btn.btn-lg.btn-success(href="/go?room=#{room.title}&who=#{who}") #{room.title} &nbsp;
+              a.btn.btn-lg.btn-success(href="/go?room=#{room.name}&who=#{who}") #{room.title} &nbsp;
             .col-md-10
               - each topic in room.topics
                 a.btn.btn-default(href="/go?topic=#{topic}&who=#{who}") #{topic}
+                &nbsp;
+                span /go?topic=#{topic}&who=#{who}
+                br
 

@@ -15,5 +15,7 @@ describe("Environment", function(){
             assert.equal(check, 'function', "not running ES6");
         }
 
+        // node -p process.versions.v8 3.28.71.19
+
     })
 });

@@ -1,5 +1,7 @@
 TODO
 
+bot greeting with topic
+
 Helper bot
     with query syntax
 

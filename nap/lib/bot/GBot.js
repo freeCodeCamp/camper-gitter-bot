@@ -24,19 +24,30 @@ var GBot = {
     },
 
     init: function(gitter) {
+        GBot.roomList = [];
         RoomData.map(function(oneRoom) {
-            var roomUrl = oneRoom.path;
+            var roomUrl = oneRoom.name;
             console.log("oneRoom", oneRoom);
             gitter.rooms.join(roomUrl, function(err, room) {
                 if (err) {
                     console.log('Not possible to join the room: ', err, roomUrl);
                     return;
                 }
-                console.log('joined> ', room);
+                GBot.roomList.push(room)
                 GBot.listenToRoom(room);
+                console.log('joined> ', room);
+                GBot.status();
             });
-
         })
+        GBot.status();
+        
+    },
+
+    status: function() {
+        console.log("----- GBot.status>");
+        GBot.roomList.map(function(rm) {
+            console.log(">", rm.name);
+        })        
     },
 
     listenToRoom: function(room) {
@@ -68,12 +79,35 @@ var GBot = {
         return AppConfig.botname;
     },
 
-    say: function(text) {
-        GBot.room.send(text);
+    say: function(text, room) {
+        room.send(text);
     },
 
+    // when a new user comes into a room
     announce: function(opts) {
         console.log("Bot.announce", opts);
+
+        var text = "----\n";
+        var rooms = GBot.roomList.filter(function(rm) {
+            console.log("checking room", rm.name, opts.roomObj.name);
+            var match = (rm.name == opts.roomObj.name);
+            if (match) {
+                console.log("matched!")
+                return true;
+            }
+            return false;
+        })
+        console.log("found rooms", rooms);
+
+        if (opts.who && opts.topic) {
+            text += "@" + opts.who + " has a question on\n";
+            text += "## " + opts.topic;
+        } else if (opts.topic) {
+            text += "a question on: **" + opts.topic + "**";
+        } else if (opts.who) {
+            text += "welcome @" + opts.who;
+        }
+        GBot.say(text, rooms[0]);
     },
 
     // init2: function(gitter, roomUrl) {

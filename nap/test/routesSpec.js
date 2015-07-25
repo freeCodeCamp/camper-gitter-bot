@@ -3,8 +3,6 @@ var assert = require("chai").assert;
 var routes = require("../lib/app/routes.js");
 var AppConfig = require("../config/AppConfig");
 
-AppConfig.topics = require("../data/topics");
-
 describe("Routes", function(){
 
     it("should find default room route", function() {
