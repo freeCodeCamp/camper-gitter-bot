@@ -5,15 +5,15 @@ block content
   include nav
 
   .container-fluid
-    .row
-      .col-md-12
-        h1 GitterBot Rooms
-        ul
-          - each room in rooms
-            
-              a.btn.btn-default.btn-lg(href="/go?room=#{room.title}") #{room.title} &nbsp;              
-              - each topic in room.topics
-                a.btn.btn-primary.btn-sm(href="/go?topic=#{topic}") #{topic}
-              br
+    h1 GitterBot Rooms
 
-          
+    - each room in rooms
+      .well
+        .container-fluid
+          .row
+            .col-md-2
+              a.btn.btn-lg.btn-success(href="/go?room=#{room.title}") #{room.title} &nbsp;
+            .col-md-10
+              - each topic in room.topics
+                a.btn.btn-default(href="/go?topic=#{topic}") #{topic}
+
