@@ -1,15 +1,18 @@
 /*jshint globalstrict:true, trailing:false, unused:true, node:true */
 "use strict";
 
+require('./lib/util/util.js')
+
 if ('function' !== typeof Map) throw new Error("ES6 is required; add --harmony");
 
 var express = require('express');
 var port = process.env.PORT || 7000;
 
 // other requires
-var Gitter = require('node-gitter');
-var AppConfig = require("./config/AppConfig");
-var GBot = require("./lib/bot/GBot.js");
+var Gitter = require('node-gitter'),
+    AppConfig = require("./config/AppConfig"),
+    GBot = require("./lib/bot/GBot.js");
+    
 
 var routes = require("./lib/app/routes.js");
 var passport = require("./lib/gitter/passportModule");

@@ -2,7 +2,13 @@
 
 var AppConfig = require('../../config/AppConfig');
 
-var RoomData = require('../../data/RoomData.js');
+var RoomData = require('../../data/RoomData.js'),
+    KBase = require("../../lib/bot/KBase.js");
+
+function clog(msg, obj) {
+    obj = obj || "";
+    console.log("GBot>", msg, obj);
+}
 
 var GBot = {
 
@@ -24,29 +30,28 @@ var GBot = {
     },
 
     init: function(gitter) {
+        KBase.init();
         GBot.roomList = [];
-        RoomData.map(function(oneRoom) {
-            var roomUrl = oneRoom.name;
-            console.log("oneRoom", oneRoom);
+        RoomData.map(function(oneRoomData) {
+            var roomUrl = oneRoomData.name;
+            // console.log("oneRoomData", oneRoomData);
             gitter.rooms.join(roomUrl, function(err, room) {
                 if (err) {
-                    console.log('Not possible to join the room: ', err, roomUrl);
+                    console.warn('Not possible to join the room: ', err, roomUrl);
                     return;
                 }
                 GBot.roomList.push(room)
                 GBot.listenToRoom(room);
-                console.log('joined> ', room);
-                GBot.status();
+                clog('joined> ', room.uri);
             });
         })
-        GBot.status();
-        
+        GBot.status();  // gets called async TODO - use a promise
     },
 
     status: function() {
         console.log("----- GBot.status>");
         GBot.roomList.map(function(rm) {
-            console.log(">", rm.name);
+            clog(">", rm.name);
         })        
     },
 
@@ -65,7 +70,7 @@ var GBot = {
                 // console.log("------");
                 // console.log('operation> ' + message.operation);
                 // console.log('model> ', message.model);
-                console.log('message> ', message.model.text);
+                clog('message> ', message.model.text);
                 // console.log('room> ', room);
                 // console.log("------");
                 GBot.reply(message, room);
@@ -85,7 +90,7 @@ var GBot = {
 
     // when a new user comes into a room
     announce: function(opts) {
-        console.log("Bot.announce", opts);
+        clog("Bot.announce", opts);
 
         var text = "----\n";
         var rooms = GBot.roomList.filter(function(rm) {
@@ -97,7 +102,7 @@ var GBot = {
             }
             return false;
         })
-        console.log("found rooms", rooms);
+        // clog("found rooms", rooms);
 
         if (opts.who && opts.topic) {
             text += "@" + opts.who + " has a question on\n";

@@ -55,7 +55,7 @@ var opts = {
     passReqToCallback: true
 }
 
-console.log("oauth opts", opts);
+// console.log("oauth opts", opts);
 
 passport.use(new OAuth2Strategy( 
     opts,
@@ -69,12 +69,12 @@ passport.use(new OAuth2Strategy(
 ));
 
 passport.serializeUser(function(user, done) {
-    console.log("serializeUser", user);
+    // console.log("serializeUser", user);
     done(null, JSON.stringify(user));
 });
 
 passport.deserializeUser(function(user, done) {
-    console.log("deserializeUser", user);
+    // console.log("deserializeUser", user);
     done(null, JSON.parse(user));
 });
 

@@ -5,7 +5,8 @@
     "request": "~2.27.0",
     "express": "~3.4.4",
     "jade": "~0.35.0",
-    "underscore": ""
+    "underscore": "",
+    "glob": ""
   },
   "devDependencies": {
     "mocha": "",

@@ -1,6 +1,7 @@
 TODO
 
-bot greeting with topic
+X bot greeting with topic
+    welcome hint
 
 Helper bot
     with query syntax
@@ -8,3 +9,14 @@ Helper bot
 YAML importer
     break up room data into a yaml file
 
+
+
+------------
+Questions
+
+Rooms, RoomData, - classnames?
+ES6 classes or prototypes?
+
+
+
+topics 
