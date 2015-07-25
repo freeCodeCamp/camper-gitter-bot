@@ -11,9 +11,17 @@ var bot = {
         menu: "I know lots about **javascript**! Pick one of:\n - `functions` \n - `objects`",
         help: "Type `menu` for some starting points or check the [guide](http://www.freecodecamp.com/field-guide/all-articles)",
         link: "try this [guide](http://www.freecodecamp.com/field-guide/all-articles).",
-        functions: "function junction. lots of text goes here",
         objects: "good question! well, shall we talk about **classical** or **prototypical** ?",
-        hint: "depending on the topic, I'm going to show you a context sensitive `hint` here."
+        hint: "depending on the topic, I'm going to show you a context sensitive `hint` here.",
+        image1: "![This is a cat](http://40.media.tumblr.com/tumblr_m2nmt6CouC1rtpv45o1_500.jpg)",
+        image2: "http://40.media.tumblr.com/tumblr_m2nmt6CouC1rtpv45o1_500.jpg",
+        quote: "> this is a quote",
+        functions: "this is a function: \n ```javascript \nfunction foo() {\n" + "  alert('hi');\n" + "}; ```",
+        heading: "# This is a heading",
+        code: "this is inline code `foo();` yay.",
+        tasks: "- [x] learn to code\n- [ ] ?????\n- [ ] profit?",
+        graph: "http://myserver.com/graphs?period=today.gif",
+        star: "> some stuff here quoted \n\n[vote](http://www.freecodecamp.com/field-guide/all-articles)\n" + "> another one here \n[vote](http://www.freecodecamp.com/field-guide/all-articles)"
     },
 
     init: function(gitter, roomUrl) {
@@ -30,6 +38,10 @@ var bot = {
           // console.log("BotObj init", BotObj)
           room.send("bot joined");
         });
+    },
+
+    say: function(text) {
+        BotObj.room.send(text);
     },
 
     // init2: function(gitter, roomUrl) {

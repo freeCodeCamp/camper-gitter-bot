@@ -30,20 +30,15 @@ app.use(express.session({
 // app.use(passport.session());
 app.use(app.router);
 
-app.get('/test', function(req, res) {
-    res.send("test")
-})
-
-
 var Gitter = require('node-gitter');
-
 var gitter = new Gitter(GitterBot.token);
 
-gitter.currentUser()
-    .then(function(user) {
-        console.log('You are logged in as:', user.username);
-    });
+gitter.currentUser().then(function(user) {
+    console.log('You are logged in as:', user.username);
+});
 
+
+var routes = require("./lib/app/routes.js");
 
 app.listen(port);
 console.log('Demo app running at http://localhost:' + port);
@@ -51,6 +46,7 @@ console.log('Demo app running at http://localhost:' + port);
 
 var oneBot = require("./lib/bot/bot.js");
 oneBot.init(gitter, "dcsan/botzy");
+routes.init(app, oneBot);
 
 gitter.rooms.find(GitterBot.roomId).then(function(room) {
 
