@@ -1,5 +1,7 @@
 "use strict";
 
+var AppConfig = require('../../config/AppConfig');
+
 var BotObj = {
     OWNERNAME: 'dcsan'
 };
@@ -40,8 +42,16 @@ var bot = {
         });
     },
 
+    getName: function() {
+        return AppConfig.botname;
+    },
+
     say: function(text) {
         BotObj.room.send(text);
+    },
+
+    announce: function(opts) {
+        console.log("Bot.announce", opts);
     },
 
     // init2: function(gitter, roomUrl) {

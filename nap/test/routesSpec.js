@@ -14,7 +14,7 @@ describe("Routes", function(){
         assert.property(redir, 'org', 'route has an org');
         assert.property(redir, 'url', 'route has a url');
 
-        var url = "https://gitter.im/" + AppConfig.org + "/" + "GeneralChat";
+        var url = "https://gitter.im/" + AppConfig.getOrg() + "/" + "GeneralChat";
 
         assert.equal(redir.url, url);
     })

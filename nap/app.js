@@ -12,8 +12,7 @@ var AppConfig = require("./config/AppConfig");
 var routes = require("./lib/app/routes.js");
 var oneBot = require("./lib/bot/bot.js");
 
-
-
+var passport = require("./lib/gitter/passportModule");
 
 
 // Client OAuth configuration
@@ -32,28 +31,23 @@ app.use(express.cookieParser());
 app.use(express.session({
     secret: 'keyboard cat'
 }));
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(app.router);
 
+
+
 var gitter = new Gitter(AppConfig.token);
+
+
 
 gitter.currentUser().then(function(user) {
     console.log('You are logged in as:', user.username);
 });
 
 
-
-
-
-
-app.listen(port);
-console.log('Demo app running at http://localhost:' + port);
-
-
-
 oneBot.init(gitter, "dcsan/botzy");
-routes.init(app, oneBot, AppConfig);
+routes.init(app, oneBot, gitter, passport);
 
 gitter.rooms.find(AppConfig.roomId).then(function(room) {
 
@@ -75,3 +69,7 @@ gitter.rooms.find(AppConfig.roomId).then(function(room) {
 
 oneBot.handleInput("menu");
 
+
+
+app.listen(port);
+console.log('Demo app running at http://localhost:' + port);
