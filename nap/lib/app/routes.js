@@ -83,7 +83,7 @@ var routes = {
 
             res.render('home', {
                 user: req.user,
-                token: req.session.token,
+                sessionToken: req.session.token,
                 rooms: []
             });
 
@@ -96,7 +96,7 @@ var routes = {
                 if (err) return res.send(500);
                 res.render('home', {
                     user: req.user,
-                    token: req.session.token,
+                    sessionToken: req.session.token,
                     clientId: clientId,
                     rooms: rooms
                 });
