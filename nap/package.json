@@ -9,7 +9,8 @@
   },
   "devDependencies": {
     "mocha": "",
-    "nodemon": "~1.0.15"
+    "nodemon": "~1.0.15",
+    "chai": ""
   },
   "scripts": {
     "start": "node app.js",

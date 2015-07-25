@@ -1,14 +1,18 @@
 /*jshint globalstrict:true, trailing:false, unused:true, node:true */
 "use strict";
 
-var GitterBot = {
-    roomId: '55b1a9030fc9f982beaac901', // botzy
-    clientId: process.env.GITTER_KEY,
-    token: process.env.GITTER_TOKEN
-}
-
 var express = require('express');
 var port = process.env.PORT || 7000;
+
+// other requires
+var Gitter = require('node-gitter');
+var AppConfig = require("./config/AppConfig");
+var routes = require("./lib/app/routes.js");
+var oneBot = require("./lib/bot/bot.js");
+
+
+
+
 
 // Client OAuth configuration
 
@@ -30,25 +34,26 @@ app.use(express.session({
 // app.use(passport.session());
 app.use(app.router);
 
-var Gitter = require('node-gitter');
-var gitter = new Gitter(GitterBot.token);
+var gitter = new Gitter(AppConfig.token);
 
 gitter.currentUser().then(function(user) {
     console.log('You are logged in as:', user.username);
 });
 
 
-var routes = require("./lib/app/routes.js");
+
+
+
 
 app.listen(port);
 console.log('Demo app running at http://localhost:' + port);
 
 
-var oneBot = require("./lib/bot/bot.js");
-oneBot.init(gitter, "dcsan/botzy");
-routes.init(app, oneBot);
 
-gitter.rooms.find(GitterBot.roomId).then(function(room) {
+oneBot.init(gitter, "dcsan/botzy");
+routes.init(app, oneBot, AppConfig);
+
+gitter.rooms.find(AppConfig.roomId).then(function(room) {
 
     var events = room.streaming().chatMessages();
 

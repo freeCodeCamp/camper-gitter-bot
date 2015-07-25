@@ -1,0 +1,14 @@
+extends layout
+
+block content
+
+	include nav
+
+	.container-fluid
+		.row
+			.col-md-12
+				h1 GitterBot topics
+				ul
+					- each topic in topics
+						li
+							a(href="/in?topic=#{topic.title}") #{topic.room} / #{topic.title}
