@@ -7,11 +7,17 @@ var routes = {
             res.send("test");
         });
 
+        // http://localhost:7000/in?topic=FreeCodecamp
         app.get("/in", function(req, res) {
             console.log(req);
-            var topic = req.query.topic;
-            bot.say("# " + topic);
-            res.send("in topic=" + topic);
+            var topic = req.query.topic,
+                user = "FreeCodeCamp",
+                room = topic || "FreeCodeCamp";
+
+            var url = "https://gitter.im/" + user + "/" + room;
+            bot.say("# topic: " + topic);
+            res.redirect(url);
+
         })
     }
 
