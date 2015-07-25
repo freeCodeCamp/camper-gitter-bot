@@ -2,8 +2,8 @@
 
 var AppConfig = {
     roomId: '55b1a9030fc9f982beaac901', // botzy
-    clientId: process.env.GITTER_KEY,
-    token: process.env.GITTER_TOKEN,
+    clientId: process.env.GITTER_APP_KEY,
+    token: process.env.GITTER_USER_TOKEN,
     org: "bothelp",
     testUser: 'bothelp',
     botname: 'bothelp'

@@ -1,7 +1,7 @@
 var https = require('https');
 
 function listenToRoom(roomId, bot) {
-    var token = process.env.GITTER_TOKEN;
+    var token = process.env.GITTER_USER_TOKEN;
     var heartbeat = " \n";
 
     console.log("listenToRoom", roomId)
