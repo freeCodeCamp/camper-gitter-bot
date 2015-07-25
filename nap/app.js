@@ -1,6 +1,8 @@
 /*jshint globalstrict:true, trailing:false, unused:true, node:true */
 "use strict";
 
+if ('function' !== typeof Map) throw new Error("ES6 is required; add --harmony");
+
 var express = require('express');
 var port = process.env.PORT || 7000;
 
