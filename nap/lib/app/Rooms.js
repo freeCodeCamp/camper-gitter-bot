@@ -2,7 +2,8 @@
 
 var _ = require("underscore");
 
-var RoomData = require('../../data/RoomData.js');
+var RoomData = require('../../data/RoomData.js'),
+    Utils = require('../utils/Utils');
 
 var Rooms = {
 
@@ -38,7 +39,7 @@ var Rooms = {
 
     checkRoom: function(room, how, tag) {
         if (room) return room;
-        console.warn("cant findRoom ", how, tag);
+        // Utils.warn("Rooms", "failed", how, tag);
         return (RoomData.defaultRoom);  // careful, this is a property not a func
     }
 

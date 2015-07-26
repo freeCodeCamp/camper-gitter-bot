@@ -6,12 +6,14 @@
     "express": "~3.4.4",
     "jade": "~0.35.0",
     "underscore": "",
-    "glob": ""
+    "glob": "",
+    "cli-color": ""
   },
   "devDependencies": {
     "mocha": "",
     "nodemon": "~1.0.15",
-    "chai": ""
+    "chai": "",
+    "chai-as-promised": ""    
   },
   "scripts": {
     "start": "node app.js",

@@ -1,7 +1,6 @@
 /*jshint globalstrict:true, trailing:false, unused:true, node:true */
 "use strict";
 
-require('./lib/util/util.js')
 
 if ('function' !== typeof Map) throw new Error("ES6 is required; add --harmony");
 
