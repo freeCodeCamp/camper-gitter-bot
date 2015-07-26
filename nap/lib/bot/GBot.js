@@ -120,15 +120,27 @@ var GBot = {
         wiki = this.checkWiki(input)
         if (wiki) return wiki;
 
-        str = "searching for **" + input.topic + "**";
+        // else
+        str = "help for **" + input.topic + "**";
         return str;
     },
 
     checkThanks: function(input) {
         assert.isObject(input, "checkThanks expects an object");
-        var mentions = input.message.mentions;
-        clog("thanks", input);
-        return (input);
+        assert.isTrue(input.thanks);
+        var mentions, output, fromUser, toUser;
+
+        clog("thanks input.message>", input.message);
+
+        mentions = input.message.model.mentions;
+        if (mentions) {
+            // TODO - build a list
+            toUser = "@" + mentions[0].screenName
+        }
+        fromUser = "@" + input.message.model.fromUser.username
+        output = fromUser + " sends karma to " + toUser;
+        output += "\n :thumbsup: :thumbsup: :thumbsup: :thumbsup: :thumbsup: :sparkles: :sparkles: "
+        return output;
     },
 
     // turns raw text input into a json format
@@ -166,6 +178,7 @@ var GBot = {
     },
 
     // search all reply methods
+    // returns a string to send
     findAnyReply: function(message) {
         var res;
         var input = this.parseInput(message);

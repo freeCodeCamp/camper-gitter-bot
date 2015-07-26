@@ -91,5 +91,13 @@ describe("GBot", function(){
     })
 
 
+    it("should find a thanks command", function() {
+        GBot.init();
+        var msg = Utils.makeMessageFromString("thanks @bob");
+        var res = GBot.findAnyReply(msg);
+        assert.isTrue(res.thanks);
+        console.log(res);
+    })
+
 
 });

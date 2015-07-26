@@ -17,19 +17,19 @@ var Utils = {
     },
 
     clog: function(where, msg, obj) {
-        if (this.logLevel < 3) return;
+        if (this.logLevel < 4) return;
         obj = obj || "" ;
         console.log(this.bright(where), this.dimmed(msg), obj );
     },
 
     warn: function(where, msg, obj) {
-        if (this.logLevel < 2) return;
+        if (this.logLevel < 3) return;
         obj = obj || "" ;
         console.log(this.warning(where), this.warning(msg), obj);
     },
 
     error: function(where, msg, obj) {
-        if (this.logLevel < 1) return;
+        if (this.logLevel < 2) return;
         obj = obj || "" ;
         console.log(this.warning(where), this.dimmed(msg), obj);
     },
@@ -41,6 +41,7 @@ var Utils = {
 
     // used for tests
     // and also strings to commands
+    // https://developer.gitter.im/docs/messages-resource
     makeMessageFromString: function(text) {
         var message = {}
         var model = {

@@ -26,7 +26,7 @@ var BotCommands = {
     },
 
     menu: function(input, bot) {
-        msg = Utils.makeMessageFromString('help help');
+        var msg = Utils.makeMessageFromString('help help');
         return bot.findAnyReply(msg);
     },
 
