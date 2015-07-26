@@ -12,31 +12,62 @@ function clog(msg, obj) {
     Utils.clog("BotCommands>", msg, obj);
 }
 
+var contactBox = "\n if you'd like to help please [get in touch!](https://github.com/bothelpers) :thumbsup: ",
+    topLine = "----\n",
+    wipHeader = "\n work in progress!";
+
+
 var BotCommands = {
 
     init: function(bot) {
         // FIXME - this is sketchy storing references like a global
+        // called from the bot where we don't always have an instance
         BotCommands.bot = bot;
     },
 
     menu: function(input, bot) {
-        return "menu command";
+        return bot.findAnyReply('help help');
     },
 
-    status: function(bot) {
-        return "status command"
+    status: function(input, bot) {
+        return bot.statusMesssage();
     },
 
-    topics: function(bot) {
+    topics: function(input, bot) {
         return "topics command"
     },
 
-    index: function(bot) {
-        var str = "## index of all topics"
+    topic: function(input, bot) {
+        if (input.topic) {
+            return "/topic " + input.topic;
+        } else {
+            return "what topic do you want to talk about?"
+            bot.say("> type topics for a list of topics")
+        }
+    },
+
+    search: function(input, bot) {
+        var str = topLine + wipHeader;
+        str += "## search for" + input.text;
+        str += "\n results will be here!";
+        str += contactBox;
+    },
+
+    index: function(input, bot) {
+        var str = "## index of all topics";
+        str += wipHeader;
+        return str;
         // KBase.
     },
 
-    rejoin: function() {
+    commands: function(input, bot) {
+        var str = "## commands:\n";
+        str += BotCommands.cmdList.join("\n- ");
+        return str;
+    },
+
+    // FIXME - this isn't working it seems
+    rejoin: function(input, bot) {
         clog("GBot", GBot);
         BotCommands.bot.scanRooms();
         return "rejoined";
@@ -45,8 +76,10 @@ var BotCommands = {
 }
 
 
-// setup aliases?
+// setup aliases
 BotCommands.help = BotCommands.menu;
+BotCommands.bothelp = BotCommands.menu;
+BotCommands['@bothelp hi'] = BotCommands.menu;
 
 // TODO - some of these should be filtered/as private
 BotCommands.cmdList = Object.keys(BotCommands);

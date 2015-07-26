@@ -14,7 +14,7 @@ var AppConfig = require("./config/AppConfig"),
     Utils = require("./lib/utils/Utils"),
     routes = require("./lib/app/routes.js");
 
-Utils.cls();    
+// Utils.cls();
 
 
 // Client OAuth configuration

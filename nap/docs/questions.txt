@@ -1,0 +1,12 @@
+# questions
+
+## content
+
+what content to expose through the bot?
+
+
+-------------------------------------------------------------
+# Tech
+
+CI tool used?
+

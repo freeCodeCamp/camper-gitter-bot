@@ -52,7 +52,7 @@ describe("GBot", function(){
 
     it("should have a menu command", function() {
         var help = GBot.findAnyReply("menu");
-        assert.equal(help, "menu command");
+        assert.match(help, /Help with/ );
     })
 
     it("should have a topics command", function() {

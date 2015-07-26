@@ -12,8 +12,8 @@ var KBase = {
 
     staticReplies: {
         ebn: "this is the ebn test response",
-        menu: "I know lots about **javascript**! Pick one of:\n - `functions` \n - `objects`",
-        help: "Type `menu` for some starting points or check the [guide](http://www.freecodecamp.com/field-guide/all-articles)",
+        // menu: "I know lots about **javascript**! Pick one of:\n - `functions` \n - `objects`",
+        // help: "Type `menu` for some starting points or check the [guide](http://www.freecodecamp.com/field-guide/all-articles)",
         link: "try this [guide](http://www.freecodecamp.com/field-guide/all-articles).",
         objects: "good question! well, shall we talk about **classical** or **prototypical** ?",
         hint: "depending on the topic, I'm going to show you a context sensitive `hint` here.",

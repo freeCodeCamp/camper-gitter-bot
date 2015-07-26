@@ -41,7 +41,7 @@ var GBot = {
             }
             GBot.roomList.push(room)
             GBot.listenToRoom(room);
-            var text = GBot.getMessage(opts)
+            var text = GBot.getAnnounceMessage(opts)
             GBot.say(text, room);
             clog('joined> ', room.uri);
             return (room);
@@ -62,7 +62,7 @@ var GBot = {
     // announce: function(opts) {
     //     clog("Bot.announce", opts);
 
-    getMessage: function(opts) {
+    getAnnounceMessage: function(opts) {
         var text = "----\n";
         if (opts.who && opts.topic) {
             text += "@" + opts.who + " has a question on\n";
@@ -78,18 +78,19 @@ var GBot = {
     checkWiki: function(input) {
         assert.isObject(input, "checkWiki expects an object");
         var topic, str, dmLink;
+        clog("checkWiki", input);
 
         dmLink = AppConfig.dmLink;
 
-        if (topic = KBase.staticReplies[input.topic])
+        if (topic = KBase.staticReplies[input.cleanTopic])
             return topic;
 
-        if (topic = KBase.getTopic(input.topic)) {
+        if (topic = KBase.getTopic(input.cleanTopic)) {
             clog("topic", topic);
             str = "----\n"
             // str += "## " + input.topic + "\n"
             str += topic.data + "\n"
-            // str += "----\n"
+            str += "----\n"
             str += "\n> ![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=32)"
             str += " [DM bothelp](" + AppConfig.topicDmUri(topic.topic) + ")"
             str += " | [wikilink **" + topic.topic + "**](https://github.com/bothelpers/kbase/wiki/" + topic.topic + ")"
@@ -106,7 +107,7 @@ var GBot = {
         })
         var cmd = cmds[0]
         if (cmd) {
-            var res = BotCommands[cmd](input);
+            var res = BotCommands[cmd](input, this);
             return res;
         }
         return false;
@@ -124,26 +125,30 @@ var GBot = {
     },
 
     // turns raw text input into a json format
-    parseInput: function(text) {
+    parseInput: function(text, message) {
         var res, str, topic;
         var blob = {
-            text: text
+            text: text,
+            message: message,
+            help: false
         };
 
-        if (res = text.match(/(help|wiki|check) (.*)/)) {
+        if (res = text.match(/(help|wiki|check|hint|tip|bothelp) (.*)/)) {
             blob.topic = res[2]
+            blob.cleanTopic = blob.topic.replace(" ", "-").toLowerCase();
             blob.help = true
             blob.intent = res[1]
-        } else {
-            blob.help = false;
+            return blob
         }
+
+        clog('blob', blob);
         return blob;
     },
 
     // search all reply methods
-    findAnyReply: function(text) {
+    findAnyReply: function(text, message) {
         var reply, res;
-        var input = this.parseInput(text);
+        var input = this.parseInput(text, message);
 
         if (input.help == true) {
             return this.checkHelp(input)
@@ -159,22 +164,29 @@ var GBot = {
     addToRoomList: function(room) {
         // check for dupes
         this.roomList = this.roomList || [];
-        if (this.alreadyJoined(room, this.roomList)) {
+        if (this.hasAlreadyJoined(room, this.roomList)) {
             return false;
         };
 
-        clog("addToRoomList", room, this.roomList);
+        clog("addToRoomList", room.name);
         this.roomList.push(room);
         return true;
     },
 
+    statusMessage: function() {
+        var list = this.roomList.map(function(rm) {
+            return rm.name;
+        })
+        var str = list.join("\n- ")
+        return(str);
+    },
 
-    alreadyJoined: function(room, roomList) {
+    hasAlreadyJoined: function(room, roomList) {
         var checks = roomList.filter(function(rm) {
             rm.name == room.name;
         })
-        var checkOne = checks[0]
-        clog("alreadyJoined:", checkOne)
+        var checkOne = checks[0];
+        Utils.warning("GBot", "hasAlreadyJoined:", checkOne);
         if (checkOne) {
             return true;
         }
@@ -206,16 +218,17 @@ var GBot = {
                 // console.warn("skip reply to bot");
                 return;
             }
-            GBot.sendReply(message, room);
+            message.room = room; // why don't gitter do this?
+            GBot.sendReply(message);
         });
     },
 
-    sendReply: function(msg, room) {
+    sendReply: function(msg) {
         var input = msg.model.text;
         clog(" in| " + msg.model.fromUser.username + " > " + input);
-        var output = this.findAnyReply(input);
+        var output = this.findAnyReply(input, msg);
         clog("out|: ", output);
-        room.send(output);
+        msg.room.send(output);
         return (output);
     },
 

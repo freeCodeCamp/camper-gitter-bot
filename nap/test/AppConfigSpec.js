@@ -6,7 +6,7 @@ var AppConfig = require("../config/AppConfig"),
     Utils = require('../lib/utils/Utils');
 
 // this is start of test suite, so just clear the screen
-Utils.cls();
+// Utils.cls();
 
 describe("AppConfig", function(){
 
@@ -16,7 +16,7 @@ describe("AppConfig", function(){
 
     it("should make a topicDmUri", function() {
         var topicDmUri = AppConfig.topicDmUri();
-        var expUri = AppConfig.appHost + "/go?room=bothelp"
+        var expUri = AppConfig.appHost + "/go?dm=y&room=bothelp"
 
         expect(topicDmUri).to.equal(expUri);
     })
