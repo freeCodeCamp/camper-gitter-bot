@@ -34,6 +34,22 @@ var Utils = {
         console.log(this.warning(where), this.dimmed(msg), obj);
     },
 
+    // FIXME!!!
+    sanitize: function(text) {
+        return text;
+    },
+
+    // used for tests
+    // and also strings to commands
+    makeMessageFromString: function(text) {
+        var message = {}
+        var model = {
+            text: text
+        }
+        message.model = model;
+        return message;
+    }
+
 }
 
 Utils.logLevel = parseInt(process.env.LOG_LEVEL || 4);

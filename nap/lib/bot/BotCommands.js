@@ -26,11 +26,19 @@ var BotCommands = {
     },
 
     menu: function(input, bot) {
-        return bot.findAnyReply('help help');
+        msg = Utils.makeMessageFromString('help help');
+        return bot.findAnyReply(msg);
     },
 
-    status: function(input, bot) {
-        return bot.statusMesssage();
+    status: function(input, bot) {        
+        var list = bot.roomList.map(function(rm) {
+            return rm.name;
+        })
+        var str = "## roomList\n - "
+        str += list.join("\n - ")
+        // str += "- " + JSON.stringify(list,null,2) + "```";
+        clog("status", str);
+        return(str);
     },
 
     topics: function(input, bot) {
@@ -79,6 +87,7 @@ var BotCommands = {
 // setup aliases
 BotCommands.help = BotCommands.menu;
 BotCommands.bothelp = BotCommands.menu;
+BotCommands.hello = BotCommands.menu;
 BotCommands['@bothelp hi'] = BotCommands.menu;
 
 // TODO - some of these should be filtered/as private

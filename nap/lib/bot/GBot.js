@@ -124,38 +124,60 @@ var GBot = {
         return str;
     },
 
+    checkThanks: function(input) {
+        assert.isObject(input, "checkThanks expects an object");
+        var mentions = input.message.mentions;
+        clog("thanks", input);
+        return (input);
+    },
+
     // turns raw text input into a json format
-    parseInput: function(text, message) {
-        var res, str, topic;
-        var blob = {
-            text: text,
+    parseInput: function(message) {
+        var res, str, topic, cleanText, input;
+
+        cleanText = message.model.text;
+        cleanText = cleanText.valueOf();    // get value so we avoid circular refs with input.msg
+        cleanText = Utils.sanitize(cleanText);
+
+        // TODO sanitize
+        input = {
+            text: cleanText,
             message: message,
-            help: false
+            help: false,
+            thanks: false
         };
 
-        if (res = text.match(/(help|wiki|check|hint|tip|bothelp) (.*)/)) {
-            blob.topic = res[2]
-            blob.cleanTopic = blob.topic.replace(" ", "-").toLowerCase();
-            blob.help = true
-            blob.intent = res[1]
-            return blob
+
+        if (res = input.text.match(/(help|wiki|check|hint|tip) (.*)/)) {
+            input.topic = res[2]
+            input.cleanTopic = input.topic.replace(" ", "-").toLowerCase();
+            input.help = true
+            input.intent = res[1]
+            return input
         }
 
-        clog('blob', blob);
-        return blob;
+        if (res = input.text.match(/(thanks|ty|thank you) \@(.*)/)) {
+            input.thanks = true;
+            return input;
+        }
+
+        clog('input', input);
+        return input;
     },
 
     // search all reply methods
-    findAnyReply: function(text, message) {
-        var reply, res;
-        var input = this.parseInput(text, message);
+    findAnyReply: function(message) {
+        var res;
+        var input = this.parseInput(message);
 
-        if (input.help == true) {
+        if (input.help) {
             return this.checkHelp(input)
+        } else if (input.thanks) {
+            return this.checkThanks(input)
         } else if (res = this.checkCommands(input)) {
             return res;
         } else {
-            return "you said: " + text;
+            return "you said: " + input.text;
         }
 
     },
@@ -171,14 +193,6 @@ var GBot = {
         clog("addToRoomList", room.name);
         this.roomList.push(room);
         return true;
-    },
-
-    statusMessage: function() {
-        var list = this.roomList.map(function(rm) {
-            return rm.name;
-        })
-        var str = list.join("\n- ")
-        return(str);
     },
 
     hasAlreadyJoined: function(room, roomList) {
@@ -223,12 +237,11 @@ var GBot = {
         });
     },
 
-    sendReply: function(msg) {
-        var input = msg.model.text;
-        clog(" in| " + msg.model.fromUser.username + " > " + input);
-        var output = this.findAnyReply(input, msg);
-        clog("out|: ", output);
-        msg.room.send(output);
+    sendReply: function(message) {
+        clog(" in|", message.model.fromUser.username + "> " + message.model.text);
+        var output = this.findAnyReply(message);
+        clog("out| ", output);
+        message.room.send(output);
         return (output);
     },
 
@@ -276,16 +289,17 @@ var GBot = {
     },
 
     joinKnownRooms: function() {
+        var that = this;
         RoomData.map(function(oneRoomData) {
             var roomUrl = oneRoomData.name;
             // console.log("oneRoomData", oneRoomData);
             // clog("gitter.rooms", that.gitter.rooms);
-            GBot.gitter.rooms.join(roomUrl, function(err, room) {
+            that.gitter.rooms.join(roomUrl, function(err, room) {
                 if (err) {
                     console.warn('Not possible to join the room: ', err, roomUrl);
                     return;
                 }
-                GBot.listenToRoom(room);
+                that.listenToRoom(room);
                 clog('joined> ', room.name);
             });
         })

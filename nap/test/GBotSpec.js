@@ -9,6 +9,7 @@ function clog(msg, obj) {
 }
 
 
+
 describe("GBot", function(){
 
     it("would be nice if regexes did not give me a headache", function() {
@@ -21,23 +22,27 @@ describe("GBot", function(){
     })
 
     it("should format help input", function() {
-        var output = GBot.parseInput("help bootstrap");
+        var msg = Utils.makeMessageFromString("help bootstrap")
+        var output = GBot.parseInput(msg);
         assert.propertyVal(output, 'topic', 'bootstrap');
         assert.propertyVal(output, 'help', true);
     })
 
     it("should format non-help as false", function() {
-        var output = GBot.parseInput("DONTxx bootstrap");
+        var msg = Utils.makeMessageFromString("DONT bootstrap")
+        var output = GBot.parseInput(msg);
         assert.propertyVal(output, 'help', false);
     })
 
     it("should respond to help", function() {
-        var help = GBot.findAnyReply("help foo");
+        var msg = Utils.makeMessageFromString("help foo")
+        var help = GBot.findAnyReply(msg);
         assert.equal(help, "searching for **foo**");
     })
 
     it("should have an ebn test response", function() {
-        var help = GBot.findAnyReply("help ebn");
+        var msg = Utils.makeMessageFromString("help ebn")
+        var help = GBot.findAnyReply(msg);
         assert.equal(help, "this is the ebn test response");
     })
 
@@ -51,20 +56,40 @@ describe("GBot", function(){
     })
 
     it("should have a menu command", function() {
-        var help = GBot.findAnyReply("menu");
+        var msg = Utils.makeMessageFromString("menu");
+        var help = GBot.findAnyReply(msg);
         assert.match(help, /Help with/ );
     })
 
     it("should have a topics command", function() {
-        var help = GBot.findAnyReply("topics");
+        var msg = Utils.makeMessageFromString("topics");
+        var help = GBot.findAnyReply(msg);
         assert.equal(help, "topics command");
     })
 
-
     it("should have a rejoin command", function() {
         GBot.init();
-        var res = GBot.findAnyReply("rejoin");
+        var msg = Utils.makeMessageFromString("rejoin");
+        var res = GBot.findAnyReply(msg);
         assert.equal(res, "rejoined");
     })
+
+    it("should parse a thanks command", function() {
+        GBot.init();
+        var msg = Utils.makeMessageFromString("thanks @bob");
+        var res = GBot.parseInput(msg);
+        assert.isTrue(res.thanks);
+        console.log(res);
+    })
+
+    it("should parse a thanks command with a hashtag", function() {
+        GBot.init();
+        var msg = Utils.makeMessageFromString("thanks @bob #tag");
+        var res = GBot.parseInput(msg);
+        assert.isTrue(res.thanks);
+        // console.log(res);
+    })
+
+
 
 });
