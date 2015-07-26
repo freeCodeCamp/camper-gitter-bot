@@ -25,14 +25,18 @@ var Router = {
         assert.isObject(query);
         query.org = AppConfig.getOrg();
 
-        if (query.topic) {
-            query.roomObj = Rooms.findByTopic(query.topic);
-        } else if (query.room) {
+        if(query.dm=='y') {
+            query.room = query.room || AppConfig.botname;
+        }
+
+        if (query.room) {
             // need to make a roomObj for other handling
             query.roomObj = {
                 title: query.room,
                 name: query.room
             }
+        } else if (query.topic) {
+            query.roomObj = Rooms.findByTopic(query.topic);
         }
         assert.isObject(query.roomObj);
         query.url = "https://gitter.im/" + query.roomObj.name;
@@ -101,6 +105,12 @@ var Router = {
                 topicDmUri: AppConfig.topicDmUri()
             });
         });
+
+        app.get('/rooms/update', function(req, res) {
+            Router.gbot.scanRooms(req.user, req.session.token);
+            res.send("scanning");
+        });
+
 
         app.get('/home', function(req, res) {
             if (!req.user) return res.redirect('/');

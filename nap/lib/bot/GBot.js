@@ -56,7 +56,7 @@ var GBot = {
             var text = GBot.getMessage(opts)
             GBot.say(text, room);
             clog('joined> ', room.uri);
-            return(room);
+            return (room);
         });
     },
 
@@ -74,7 +74,7 @@ var GBot = {
     // announce: function(opts) {
     //     clog("Bot.announce", opts);
 
-    getMessage: function(opts) {        
+    getMessage: function(opts) {
         var text = "----\n";
         if (opts.who && opts.topic) {
             text += "@" + opts.who + " has a question on\n";
@@ -84,7 +84,7 @@ var GBot = {
         } else if (opts.who) {
             text += "welcome @" + opts.who;
         }
-        return(text);
+        return (text);
     },
 
     checkWiki: function(input) {
@@ -112,9 +112,9 @@ var GBot = {
     },
 
     checkCommands: function(input) {
-        
+
         var cmds = BotCommands.cmdList.filter(function(c) {
-            return (c == input.topic || c==input.text)
+            return (c == input.topic || c == input.text)
         })
         var cmd = cmds[0]
         if (cmd) {
@@ -162,8 +162,17 @@ var GBot = {
         } else if (res = this.checkCommands(input)) {
             return res;
         } else {
-            return "you said: " + text;    
+            return "you said: " + text;
         }
+
+    },
+
+
+    addToRoomList: function(room) {
+        // TODO - check for dupes
+        this.roomList = this.roomList || [];
+        this.roomList.push(room);
+        clog("addToRoomList", room);
         
     },
 
@@ -172,6 +181,7 @@ var GBot = {
         // gitter.rooms.find(room.id).then(function(room) {
 
         var events = room.streaming().chatMessages();
+        this.addToRoomList(room);
 
         // The 'snapshot' event is emitted once, with the last messages in the room
         // events.on('snapshot', function(snapshot) {
@@ -203,15 +213,31 @@ var GBot = {
         return (output);
     },
 
-    scanRooms: function() {
-        var user = this.gitter.currentUser(),
-            token = AppConfig.token;
+    scanRooms: function(user, token) {
+        var user = user || this.gitter.currentUser(),
+            token = token || AppConfig.token;
+
+        clog('user', user)
+        clog('token', token)
+        var that = this;
 
         GitterHelper.fetchRooms(user, token, function(err, rooms) {
             if (err) Utils.error("GBot", "fetchRooms", rooms);
             clog("scanRooms.rooms", rooms);
+            if (!rooms) {
+                Utils.warn("cant scanRooms")
+                return;
+            }
+            // else
+            rooms.map(function(room) {
+                if (room.oneToOne) {
+                    clog("oneToOne", room.name)
+                    that.gitter.rooms.find(room.id).then(function(roomObj) {
+                        that.listenToRoom(roomObj);
+                    })
+                }
+            })
         });
-        
         // GBot.gitter.rooms.find().then(function(rooms) {
         //     clog("found rooms", rooms)
         // })
@@ -220,13 +246,14 @@ var GBot = {
     // FIXME doesnt work for some reason >.<
     updateRooms: function() {
         GBot.gitter.currentUser()
-        .then(function(user) {
-            var list = user.rooms(function(err, obj) {
-                clog("rooms", err, obj)
-            });
-            console.log("list", list);
-            return(list);
-        })
+            .then(function(user) {
+                var list = user.rooms(function(err, obj) {
+                    clog("rooms", err, obj)
+                });
+                clog("user", user);
+                clog("list", list);
+                return (list);
+            })
     }
 
 }

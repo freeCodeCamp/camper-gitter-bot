@@ -36,7 +36,7 @@ var AppConfig = {
     },
 
     topicDmUri: function(topic) {
-        var uri = this.appHost + "/go?room=" + this.botname;
+        var uri = this.appHost + "/go?dm=y&room=" + this.botname;
         if (topic) {
             uri += "&topic=" + topic;
         }

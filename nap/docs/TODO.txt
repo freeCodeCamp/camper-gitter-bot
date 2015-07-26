@@ -1,24 +1,31 @@
 TODO
 
-replace spaces in topic names
+bot integrated for conversation and topics, discussions
+
+# Basic Commands
+    menu - show commands
+    index - all topics
+    help - help page from wiki?
 
 
-X bot greeting with topic
-    welcome hint
+# Bot Querying
+    replace spaces in topic names
+    hierarchical search?
+    Helper bot query syntax
 
-Helper bot query syntax
+thanks @user
+    ask question, fire response?
+    show confirmation "gave a tip to user X!"
+    play animation
 
-commands
-    menu
-    help (nothing)
-    thanks @user
 
-DMs to the bot, between players
-send a link to open 1:1 chat
+# direct messaging
+    DMs to the bot, between players
+    send a link to open 1:1 chat
+
 
 what User info do we get?
 
-bot integrated for conversation and topics, discussions
 
 timeout / gambit / opener to keep activity
 
