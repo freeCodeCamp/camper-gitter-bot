@@ -6,21 +6,23 @@ block content
 
   .container-fluid
 
-    img.img-circle(src="#{user.avatarUrlMedium}")
+    div 
+        img.img-circle(src="#{user.avatarUrlMedium}")
+        span.small Hello 
+        span.h1 #{user.username}!
+    //- p  clientId: 
+    //-   span.mono #{clientId}
+    //- p sessionToken: 
+    //-   span.mono #{sessionToken}
+    //- p 
+    //-   |Search 
+    //-   a(href='https://developer.gitter.im/docs/welcome')
+    //-     |Developer documentation
+    //-   |. 
 
-    h1 Hello #{user.username}!
-    p  clientId: 
-      span.mono #{clientId}
-    p sessionToken: 
-      span.mono #{sessionToken}
+    div.page-header
+        h2 Your rooms
 
-    p 
-      |Search 
-      a(href='https://developer.gitter.im/docs/welcome')
-        |Developer documentation
-      |. 
-
-    h3 You're currently in the following rooms:
     table.table.table-striped.table-hover
         thead
             tr
