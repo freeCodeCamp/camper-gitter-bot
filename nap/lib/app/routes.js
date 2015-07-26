@@ -11,6 +11,8 @@ var AppConfig = require('../../config/AppConfig'),
     Utils = require('../../lib/utils/Utils'),
     RoomData = require('../../data/RoomData.js');
 
+var GitterHelper = require('../../lib/gitter/GitterHelper')
+
 function clog(msg, obj) {
     Utils.clog("Routes>", msg, obj)
 }
@@ -46,8 +48,8 @@ var Router = {
         app.get("/go", function(req, res) {
             // console.log(req);
             var topic = req.query.topic,
-                room  = req.query.room,
-                who   = AppConfig.who(req),
+                room = req.query.room,
+                who = AppConfig.who(req),
                 redir = that.findRedirect(req.query);
 
             gbot.announce(redir)
@@ -84,7 +86,7 @@ var Router = {
         });
 
         // after login home show token
-        app.get('/home', function(req, res) {
+        app.get('/home2', function(req, res) {
             if (!req.user) return res.redirect('/');
 
             res.render('home', {
@@ -95,13 +97,21 @@ var Router = {
 
         });
 
-        app.get('/rooms/update', function(req, res) {
-            var rooms = Router.gbot.updateRooms();
-            res.send("rooms:" + rooms);
-        })
+        app.get('/home', function(req, res) {
+            if (!req.user) return res.redirect('/');
 
+            GitterHelper.fetchRooms(req.user, req.session.token, function(err, rooms) {
+                if (err) return res.send(500);
+                clog("rooms", rooms);
+
+                res.render('home', {
+                    user: req.user,
+                    token: req.session.token,
+                    rooms: rooms
+                });
+            });
+        });
     }
-
 }
 
 module.exports = Router;

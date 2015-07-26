@@ -22,6 +22,7 @@ var GBot = {
         RoomData.map(function(oneRoomData) {
             var roomUrl = oneRoomData.name;
             // console.log("oneRoomData", oneRoomData);
+            console.log("gitter.rooms", that.gitter.rooms);
             that.gitter.rooms.join(roomUrl, function(err, room) {
                 if (err) {
                     console.warn('Not possible to join the room: ', err, roomUrl);

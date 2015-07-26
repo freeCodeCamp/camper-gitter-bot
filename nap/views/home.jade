@@ -5,26 +5,43 @@ block content
   include nav
 
   .container-fluid
-    .row
-      .col-md-6
 
-        img.img-circle(src="#{user.avatarUrlMedium}")
+    img.img-circle(src="#{user.avatarUrlMedium}")
 
-        h1 Hello #{user.username}!
-        p  clientId: 
-          span.mono #{clientId}
-        p sessionToken: 
-          span.mono #{sessionToken}
+    h1 Hello #{user.username}!
+    p  clientId: 
+      span.mono #{clientId}
+    p sessionToken: 
+      span.mono #{sessionToken}
 
-        p 
-          |Search 
-          a(href='https://developer.gitter.im/docs/welcome')
-            |Developer documentation
-          |. 
+    p 
+      |Search 
+      a(href='https://developer.gitter.im/docs/welcome')
+        |Developer documentation
+      |. 
 
-        h3 You're currently in the following rooms:
+    h3 You're currently in the following rooms:
+    table.table.table-striped.table-hover
+        thead
+            tr
+                td name
+                td users
+                td oneToOne
+                td unread
+                td githubType
+                td security
         - each room in rooms
-          div
-            p #{room.id}
-            a(href="https://gitter.im#{room.url}") #{room.name} &nbsp;
-            span.mono [ #{room.id} ]
+            tr
+                td
+                    a.btn.btn-lg.btn-primary(href="https://gitter.im#{room.url}") #{room.name} &nbsp;
+                td #{room.userCount}
+                td
+                    if room.oneToOne
+                        span.label.label-warning TRUE
+                    else
+                        span.label.label-info FALSE
+
+                td #{room.unreadItems}
+                td #{room.githubType}
+                td #{room.security}
+            
