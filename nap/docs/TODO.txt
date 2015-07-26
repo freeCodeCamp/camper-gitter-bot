@@ -1,5 +1,8 @@
 TODO
 
+replace spaces in topic names
+
+
 X bot greeting with topic
     welcome hint
 

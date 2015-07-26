@@ -2,10 +2,17 @@
 
 var RoomData = [
     // 1st room is the default if we can't find anything else
+
+    {
+        title: "bothelp",
+        name: "bothelp",
+        topics: ["chitchat", "dm"]
+    },
+    
     {
         title: "GeneralChat",
         name: "bothelp/GeneralChat",
-        topics: ["chitchat"]
+        topics: ["general", "intros"]
     },
 
     {

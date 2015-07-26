@@ -28,12 +28,15 @@ var Router = {
         if (query.topic) {
             query.roomObj = Rooms.findByTopic(query.topic);
         } else if (query.room) {
-            query.roomObj = Rooms.findByName(query.room);
+            // need to make a roomObj for other handling
+            query.roomObj = {
+                title: query.room,
+                name: query.room
+            }
         }
-        // clog("found ", query.roomObj);
         assert.isObject(query.roomObj);
-
         query.url = "https://gitter.im/" + query.roomObj.name;
+        clog('query', query);
         return query;
     },
 
@@ -55,16 +58,6 @@ var Router = {
             gbot.announce(redir)
             res.redirect(redir.url);
 
-        });
-
-        app.get('/rooms', function(req, res) {
-            // console.log("that", that);
-            res.render('rooms', {
-                user: req.user,
-                who: AppConfig.who(req),
-                token: req.session.token,
-                rooms: RoomData
-            });
         });
 
         app.get('/login', passport.authenticate('oauth2'));
@@ -97,20 +90,36 @@ var Router = {
 
         });
 
+
+        app.get('/rooms', function(req, res) {
+            // console.log("that", that);
+            res.render('rooms', {
+                user: req.user,
+                who: AppConfig.who(req),
+                token: req.session.token,
+                rooms: RoomData,
+                topicDmUri: AppConfig.topicDmUri()
+            });
+        });
+
         app.get('/home', function(req, res) {
             if (!req.user) return res.redirect('/');
 
             GitterHelper.fetchRooms(req.user, req.session.token, function(err, rooms) {
                 if (err) return res.send(500);
-                clog("rooms", rooms);
-
-                res.render('home', {
+                // clog("rooms", rooms);
+                var blob = {
                     user: req.user,
                     token: req.session.token,
-                    rooms: rooms
-                });
+                    rooms: rooms,
+                    topicDmUri: AppConfig.topicDmUri()
+                };
+                clog("rooms.blob", blob);
+                res.render('home', blob);
             });
         });
+
+
     }
 }
 

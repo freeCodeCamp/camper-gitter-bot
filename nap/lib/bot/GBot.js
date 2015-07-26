@@ -1,29 +1,32 @@
 "use strict";
 
 var assert = require("chai").assert;
-var Gitter = require('node-gitter');
+var Gitter = require('node-gitter'),
+    GitterHelper = require('../../lib/gitter/GitterHelper');
 
 var AppConfig = require('../../config/AppConfig'),
-    RoomData = require('../../data/RoomData.js'),
-    KBase = require("../../lib/bot/KBase.js");
+    RoomData = require('../../data/RoomData'),
+    Utils = require('../../lib/utils/Utils'),
+    KBase = require("../../lib/bot/KBase"),
+    BotCommands = require('../../lib/bot/BotCommands');
 
 function clog(msg, obj) {
-    obj = obj || "";
-    console.log("GBot>", msg, obj);
+    Utils.clog("GBot>", msg, obj);
 }
 
 var GBot = {
 
+    // TODO refresh and add oneToOne rooms
     init: function() {
         KBase.initAsync();
         this.roomList = [];
-        this.gitter = new Gitter(AppConfig.token);
+        GBot.gitter = new Gitter(AppConfig.token);
         var that = this;
         RoomData.map(function(oneRoomData) {
             var roomUrl = oneRoomData.name;
             // console.log("oneRoomData", oneRoomData);
-            console.log("gitter.rooms", that.gitter.rooms);
-            that.gitter.rooms.join(roomUrl, function(err, room) {
+            // clog("gitter.rooms", that.gitter.rooms);
+            GBot.gitter.rooms.join(roomUrl, function(err, room) {
                 if (err) {
                     console.warn('Not possible to join the room: ', err, roomUrl);
                     return;
@@ -33,38 +36,28 @@ var GBot = {
                 clog('joined> ', room.uri);
             });
         })
-        GBot.status();  // gets called async TODO - use a promise
+        BotCommands.init(this);
     },
 
-    status: function() {
-        console.log("----- GBot.status>");
-        GBot.roomList.map(function(rm) {
-            clog(">", rm.name);
-        })        
+    announce: function(opts) {
+        this.scanRooms();
+        this.joinRoom(opts, true);
     },
 
-    listenToRoom: function(room) {
-        // gitter.rooms.find(room.id).then(function(room) {
-
-            var events = room.streaming().chatMessages();
-
-            // The 'snapshot' event is emitted once, with the last messages in the room
-            // events.on('snapshot', function(snapshot) {
-            //     console.log(snapshot.length + ' messages in the snapshot');
-            // });
-
-            // The 'chatMessages' event is emitted on each new message
-            events.on('chatMessages', function(message) {
-                // console.log("------");
-                // console.log('operation> ' + message.operation);
-                // console.log('model> ', message.model);
-                clog('message> ', message.model.text);
-                // console.log('room> ', room);
-                // console.log("------");
-                GBot.sendReply(message, room);
-            });
-        // });
-
+    joinRoom: function(opts, announce) {
+        var roomUrl = opts.roomObj.name;
+        GBot.gitter.rooms.join(roomUrl, function(err, room) {
+            if (err) {
+                console.warn('Not possible to join the room: ', err, roomUrl);
+                return;
+            }
+            GBot.roomList.push(room)
+            GBot.listenToRoom(room);
+            var text = GBot.getMessage(opts)
+            GBot.say(text, room);
+            clog('joined> ', room.uri);
+            return(room);
+        });
     },
 
 
@@ -76,22 +69,13 @@ var GBot = {
         room.send(text);
     },
 
+
     // when a new user comes into a room
-    announce: function(opts) {
-        clog("Bot.announce", opts);
+    // announce: function(opts) {
+    //     clog("Bot.announce", opts);
 
+    getMessage: function(opts) {        
         var text = "----\n";
-        var rooms = GBot.roomList.filter(function(rm) {
-            console.log("checking room", rm.name, opts.roomObj.name);
-            var match = (rm.name == opts.roomObj.name);
-            if (match) {
-                console.log("matched!")
-                return true;
-            }
-            return false;
-        })
-        // clog("found rooms", rooms);
-
         if (opts.who && opts.topic) {
             text += "@" + opts.who + " has a question on\n";
             text += "## " + opts.topic;
@@ -100,12 +84,14 @@ var GBot = {
         } else if (opts.who) {
             text += "welcome @" + opts.who;
         }
-        GBot.say(text, rooms[0]);
+        return(text);
     },
 
     checkWiki: function(input) {
         assert.isObject(input, "checkWiki expects an object");
-        var topic, str;
+        var topic, str, dmLink;
+
+        dmLink = AppConfig.dmLink;
 
         if (topic = KBase.staticReplies[input.topic])
             return topic;
@@ -116,12 +102,26 @@ var GBot = {
             // str += "## " + input.topic + "\n"
             str += topic.data + "\n"
             // str += "----\n"
-            str += "\n> [wikilink: " + topic.topic + "](https://github.com/bothelpers/kbase/wiki/" + topic.topic + ")"
-            str += "\n> [DM bothelp](https://gitter.im/bothelp)"
+            str += "\n> ![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=32)"
+            str += " [DM bothelp](" + AppConfig.topicDmUri(topic.topic) + ")"
+            str += " | [wikilink **" + topic.topic + "**](https://github.com/bothelpers/kbase/wiki/" + topic.topic + ")"
             return str
         }
         // else
         return null
+    },
+
+    checkCommands: function(input) {
+        
+        var cmds = BotCommands.cmdList.filter(function(c) {
+            return (c == input.topic || c==input.text)
+        })
+        var cmd = cmds[0]
+        if (cmd) {
+            var res = BotCommands[cmd](input);
+            return res;
+        }
+        return false;
     },
 
     checkHelp: function(input) {
@@ -159,37 +159,67 @@ var GBot = {
 
         if (input.help == true) {
             return this.checkHelp(input)
+        } else if (res = this.checkCommands(input)) {
+            return res;
+        } else {
+            return "you said: " + text;    
         }
+        
+    },
 
-        // default
-        return "you said: " + text;
+
+    listenToRoom: function(room) {
+        // gitter.rooms.find(room.id).then(function(room) {
+
+        var events = room.streaming().chatMessages();
+
+        // The 'snapshot' event is emitted once, with the last messages in the room
+        // events.on('snapshot', function(snapshot) {
+        //     console.log(snapshot.length + ' messages in the snapshot');
+        // });
+
+        // The 'chatMessages' event is emitted on each new message
+        events.on('chatMessages', function(message) {
+            // clog('message> ', message.model.text);
+            if (message.operation != "create") {
+                // console.log("skip msg reply", msg);
+                return;
+            }
+
+            if (message.model.fromUser.username == AppConfig.botname) {
+                // console.warn("skip reply to bot");
+                return;
+            }
+            GBot.sendReply(message, room);
+        });
     },
 
     sendReply: function(msg, room) {
-        if (msg.operation != "create") {
-            console.log("skip msg reply", msg);
-            return;
-        }
-        // console.log("msg\n", msg);
-        // console.log("GBot\n", GBot);
-
-        if (msg.model.fromUser.username == AppConfig.botname) {
-            console.warn("skip reply to bot");
-            return;
-        }
         var input = msg.model.text;
-
-        console.log(" in| " + msg.model.fromUser.username + " > " + input);
-
-        // var output = input.toUpperCase();
+        clog(" in| " + msg.model.fromUser.username + " > " + input);
         var output = this.findAnyReply(input);
-        console.log("out|: ", output);
+        clog("out|: ", output);
         room.send(output);
         return (output);
     },
 
+    scanRooms: function() {
+        var user = this.gitter.currentUser(),
+            token = AppConfig.token;
+
+        GitterHelper.fetchRooms(user, token, function(err, rooms) {
+            if (err) Utils.error("GBot", "fetchRooms", rooms);
+            clog("scanRooms.rooms", rooms);
+        });
+        
+        // GBot.gitter.rooms.find().then(function(rooms) {
+        //     clog("found rooms", rooms)
+        // })
+    },
+
+    // FIXME doesnt work for some reason >.<
     updateRooms: function() {
-        this.gitter.currentUser()
+        GBot.gitter.currentUser()
         .then(function(user) {
             var list = user.rooms(function(err, obj) {
                 clog("rooms", err, obj)

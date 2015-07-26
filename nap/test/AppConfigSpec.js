@@ -14,4 +14,11 @@ describe("AppConfig", function(){
         expect(AppConfig.testUser).to.equal("bothelp");
     })
 
+    it("should make a topicDmUri", function() {
+        var topicDmUri = AppConfig.topicDmUri();
+        var expUri = AppConfig.appHost + "/go?room=bothelp"
+
+        expect(topicDmUri).to.equal(expUri);
+    })
+
 });

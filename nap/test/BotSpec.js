@@ -50,6 +50,21 @@ describe("GBot", function(){
         })
     })
 
+    it("should have a menu command", function() {
+        var help = GBot.findAnyReply("menu");
+        assert.equal(help, "menu command");
+    })
 
+    it("should have a topics command", function() {
+        var help = GBot.findAnyReply("topics");
+        assert.equal(help, "topics command");
+    })
+
+
+    it("should have a rejoin command", function() {
+        GBot.init();
+        var res = GBot.findAnyReply("rejoin");
+        assert.equal(res, "rejoined");
+    })
 
 });

@@ -7,6 +7,7 @@ var RoomData = require('../../data/RoomData.js'),
 
 var Rooms = {
 
+
     findByTopic: function(topic) {
         debugger;
 
@@ -22,6 +23,16 @@ var Rooms = {
 
         return (this.checkRoom(rooms[0], 'findByTopic', topic))
     },
+
+    // var rooms = GBot.roomList.filter(function(rm) {
+    //     clog("checking room", rm.name + "==" + opts.roomObj.name);
+    //     var match = (rm.name == opts.roomObj.name);
+    //     if (match) {
+    //         console.log("matched!")
+    //         return true;
+    //     }
+    //     return false;
+    // })
 
     findByName: function(name) {
         var rooms = RoomData.filter( function(rm) {

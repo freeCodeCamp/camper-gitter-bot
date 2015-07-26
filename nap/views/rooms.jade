@@ -7,13 +7,17 @@ block content
   .container-fluid
     h1 GitterBot Rooms
 
+    a.btn.btn-lg.btn-default(href=topicDmUri) DM with bothelp 
+    span.btn.btn-sm #{topicDmUri}
+
+
     - each room in rooms
       .well
         .container-fluid
           .row
             .col-md-2
               a.btn.btn-lg.btn-success(href="/go?room=#{room.name}&who=#{who}") #{room.title} &nbsp;
-            .col-md-10
+            .col-md-8
               - each topic in room.topics
                 a.btn.btn-default(href="/go?topic=#{topic}&who=#{who}") #{topic}
                 &nbsp;
