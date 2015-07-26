@@ -9,8 +9,7 @@ var port = process.env.PORT || 7000;
 var passport = require("./lib/gitter/passportModule");
 
 // other requires
-var Gitter = require('node-gitter'),
-    AppConfig = require("./config/AppConfig"),
+var AppConfig = require("./config/AppConfig"),
     GBot = require("./lib/bot/GBot"),
     Utils = require("./lib/utils/Utils"),
     routes = require("./lib/app/routes.js");
@@ -40,19 +39,15 @@ app.use(app.router);
 
 
 
-var gitter = new Gitter(AppConfig.token);
+// gitter.currentUser().then(function(user) {
+//     console.log('You are logged in as:', user.username);
+// });
 
 
+GBot.init();
+routes.init(app, GBot, passport);
 
-gitter.currentUser().then(function(user) {
-    console.log('You are logged in as:', user.username);
-});
-
-
-GBot.init(gitter);
-routes.init(app, GBot, gitter, passport);
-
-
+// GBot.updateRooms();
 // needs a room
 // GBot.sendReply("menu");
 

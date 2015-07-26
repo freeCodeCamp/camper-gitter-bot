@@ -1,10 +1,10 @@
 "use strict";
 
 var assert = require("chai").assert;
+var Gitter = require('node-gitter');
 
-var AppConfig = require('../../config/AppConfig');
-
-var RoomData = require('../../data/RoomData.js'),
+var AppConfig = require('../../config/AppConfig'),
+    RoomData = require('../../data/RoomData.js'),
     KBase = require("../../lib/bot/KBase.js");
 
 function clog(msg, obj) {
@@ -14,13 +14,15 @@ function clog(msg, obj) {
 
 var GBot = {
 
-    init: function(gitter) {
+    init: function() {
         KBase.initAsync();
-        GBot.roomList = [];
+        this.roomList = [];
+        this.gitter = new Gitter(AppConfig.token);
+        var that = this;
         RoomData.map(function(oneRoomData) {
             var roomUrl = oneRoomData.name;
             // console.log("oneRoomData", oneRoomData);
-            gitter.rooms.join(roomUrl, function(err, room) {
+            that.gitter.rooms.join(roomUrl, function(err, room) {
                 if (err) {
                     console.warn('Not possible to join the room: ', err, roomUrl);
                     return;
@@ -113,7 +115,8 @@ var GBot = {
             // str += "## " + input.topic + "\n"
             str += topic.data + "\n"
             // str += "----\n"
-            str += "> [wikilink: " + topic.topic + "](https://github.com/bothelpers/kbase/wiki/" + topic.topic + ")"
+            str += "\n> [wikilink: " + topic.topic + "](https://github.com/bothelpers/kbase/wiki/" + topic.topic + ")"
+            str += "\n> [DM bothelp](https://gitter.im/bothelp)"
             return str
         }
         // else
@@ -182,7 +185,19 @@ var GBot = {
         console.log("out|: ", output);
         room.send(output);
         return (output);
+    },
+
+    updateRooms: function() {
+        this.gitter.currentUser()
+        .then(function(user) {
+            var list = user.rooms(function(err, obj) {
+                clog("rooms", err, obj)
+            });
+            console.log("list", list);
+            return(list);
+        })
     }
+
 }
 
 module.exports = GBot;

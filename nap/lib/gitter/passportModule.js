@@ -10,41 +10,7 @@ var clientSecret = process.env.GITTER_APP_SECRET;
 var request = require('request');
 var express = require('express');
 
-
-// Gitter API client helper
-var gitterHelper = {
-    fetch: function(path, token, cb) {
-        var options = {
-            url: gitterHost + path,
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        };
-
-        request(options, function(err, res, body) {
-            if (err) return cb(err);
-
-            if (res.statusCode === 200) {
-                cb(null, JSON.parse(body));
-            } else {
-                cb('err' + res.statusCode);
-            }
-        });
-    },
-
-    fetchCurrentUser: function(token, cb) {
-        this.fetch('/api/v1/user/', token, function(err, user) {
-            cb(err, user[0]);
-        });
-    },
-
-    fetchRooms: function(user, token, cb) {
-        this.fetch('/api/v1/user/' + user.id + '/rooms', token, function(err, rooms) {
-            cb(err, rooms);
-        });
-    }
-};
-
+var GitterHelper = require('./GitterHelper')
 
 var opts = {
     authorizationURL: gitterHost + '/login/oauth/authorize',
@@ -62,7 +28,7 @@ passport.use(new OAuth2Strategy(
     function(req, accessToken, refreshToken, profile, done) {
         console.log("set access token", accessToken);
         req.session.token = accessToken;
-        gitterHelper.fetchCurrentUser(accessToken, function(err, user) {
+        GitterHelper.fetchCurrentUser(accessToken, function(err, user) {
             return (err ? done(err) : done(null, user));
         });
     }
@@ -77,6 +43,22 @@ passport.deserializeUser(function(user, done) {
     // console.log("deserializeUser", user);
     done(null, JSON.parse(user));
 });
+
+
+// list rooms based on api key
+// Fetch user rooms using the Gitter helper
+// passport.fetchRooms = function() {
+//     GitterHelper.fetchRooms(req.user, req.session.token, function(err, rooms) {
+//         if (err) return res.send(500);
+//         res.render('home', {
+//             user: req.user,
+//             sessionToken: req.session.token,
+//             clientId: clientId,
+//             rooms: rooms
+//         });
+//     });
+// })
+
 
 
 module.exports = passport;

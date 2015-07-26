@@ -16,7 +16,7 @@ function clog(msg, obj) {
 }
 
 
-var routes = {
+var Router = {
 
     // query can include a room or a topic
     findRedirect: function(query) {
@@ -35,7 +35,8 @@ var routes = {
         return query;
     },
 
-    init: function(app, bot, gitter, passport) {
+    init: function(app, gbot, passport) {
+        Router.gbot = gbot;
         var that = this;
         app.get('/test', function(req, res) {
             res.send("test");
@@ -49,7 +50,7 @@ var routes = {
                 who   = AppConfig.who(req),
                 redir = that.findRedirect(req.query);
 
-            bot.announce(redir)
+            gbot.announce(redir)
             res.redirect(redir.url);
 
         });
@@ -94,23 +95,13 @@ var routes = {
 
         });
 
-        // list rooms based on api key
-        // Fetch user rooms using the Gitter API
-        app.get('rooms/mine', function(req, res) {            
-            gitter.fetchRooms(req.user, req.session.token, function(err, rooms) {
-                if (err) return res.send(500);
-                res.render('home', {
-                    user: req.user,
-                    sessionToken: req.session.token,
-                    clientId: clientId,
-                    rooms: rooms
-                });
-            });
+        app.get('/rooms/update', function(req, res) {
+            var rooms = Router.gbot.updateRooms();
+            res.send("rooms:" + rooms);
         })
-
 
     }
 
 }
 
-module.exports = routes;
+module.exports = Router;

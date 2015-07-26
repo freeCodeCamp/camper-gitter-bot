@@ -3,11 +3,27 @@ TODO
 X bot greeting with topic
     welcome hint
 
-Helper bot
-    with query syntax
+Helper bot query syntax
 
-YAML importer
-    break up room data into a yaml file
+commands
+    menu
+    help (nothing)
+    thanks @user
+
+DMs to the bot, between players
+send a link to open 1:1 chat
+
+what User info do we get?
+
+bot integrated for conversation and topics, discussions
+
+timeout / gambit / opener to keep activity
+
+
+
+
+YAML importer?
+break up room data into a yaml file
 
 
 
@@ -19,4 +35,5 @@ ES6 classes or prototypes?
 
 
 
-topics 
+config files for different environments
+
