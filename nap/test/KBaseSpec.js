@@ -1,3 +1,5 @@
+"use strict";
+
 // var chai = require("chai");
 // var chaiAsPromised = require("chai-as-promised");
 // chai.use(chaiAsPromised);
@@ -9,23 +11,26 @@ var Utils = require('../lib/utils/Utils'),
     KBase = require("../lib/bot/KBase.js");
 
 function clog(msg, obj) {
-    Utils.clog(">KbaseSpec>", msg, obj)
+    Utils.clog("KbaseSpec>", msg, obj)
 }
 
-clog("KbaseSpec");
 
 describe("KBase", function() {
 
     it("should have a bootstrap entry", function() {
-        promise = KBase.initPromise();
-        clog("promise", promise)
+        var promise = KBase.initAsync();
         promise.then(function(res) {
             var topic = KBase.getTopic("bootstrap");
-            clog("KB.then topic=", topic);
-            clog("KB.then res=", res);
+            // clog("KB.then topic=", topic);
+            // clog("KB.then res=", res);
             assert.equal(topic.name, "bootstrap");
         })
     });
+
+});
+
+
+
 
     // it("should have a bootstrap entry", function() {
     //     // KBase.init();
@@ -49,5 +54,3 @@ describe("KBase", function() {
     //     });
 
     // })
-
-});

@@ -9,7 +9,7 @@ describe("Rooms", function(){
         var room = Rooms.findByTopic("ThisDoesntExistRandomXX");
         assert.isDefined(room);
         expect(room.title).to.equal("GeneralChat");
-        expect(room.name).to.equal("bothelp/GeneralChat");        
+        expect(room.name).to.equal("bothelp/GeneralChat");
     })
 
     it("should find a room for objects topic", function() {

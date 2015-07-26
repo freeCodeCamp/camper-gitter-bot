@@ -1,5 +1,7 @@
 "use strict";
 
+var assert = require("chai").assert;
+
 var AppConfig = require('../../config/AppConfig');
 
 var RoomData = require('../../data/RoomData.js'),
@@ -12,25 +14,8 @@ function clog(msg, obj) {
 
 var GBot = {
 
-    staticReplies: {
-        menu: "I know lots about **javascript**! Pick one of:\n - `functions` \n - `objects`",
-        help: "Type `menu` for some starting points or check the [guide](http://www.freecodecamp.com/field-guide/all-articles)",
-        link: "try this [guide](http://www.freecodecamp.com/field-guide/all-articles).",
-        objects: "good question! well, shall we talk about **classical** or **prototypical** ?",
-        hint: "depending on the topic, I'm going to show you a context sensitive `hint` here.",
-        image1: "![This is a cat](http://40.media.tumblr.com/tumblr_m2nmt6CouC1rtpv45o1_500.jpg)",
-        image2: "http://40.media.tumblr.com/tumblr_m2nmt6CouC1rtpv45o1_500.jpg",
-        quote: "> this is a quote",
-        functions: "this is a function: \n ```javascript \nfunction foo() {\n" + "  alert('hi');\n" + "}; ```",
-        heading: "# This is a heading",
-        code: "this is inline code `foo();` yay.",
-        tasks: "- [x] learn to code\n- [ ] ?????\n- [ ] profit?",
-        graph: "http://myserver.com/graphs?period=today.gif",
-        star: "> some stuff here quoted \n\n[vote](http://www.freecodecamp.com/field-guide/all-articles)\n" + "> another one here \n[vote](http://www.freecodecamp.com/field-guide/all-articles)"
-    },
-
     init: function(gitter) {
-        KBase.init();
+        KBase.initAsync();
         GBot.roomList = [];
         RoomData.map(function(oneRoomData) {
             var roomUrl = oneRoomData.name;
@@ -73,7 +58,7 @@ var GBot = {
                 clog('message> ', message.model.text);
                 // console.log('room> ', room);
                 // console.log("------");
-                GBot.reply(message, room);
+                GBot.sendReply(message, room);
             });
         // });
 
@@ -115,23 +100,68 @@ var GBot = {
         GBot.say(text, rooms[0]);
     },
 
-    // init2: function(gitter, roomUrl) {
-    //     gitter.rooms.join(roomUrl)
-    //     .then(function(room) {
-    //         console.log("joined room ", room);
-    //         room.send('joined');
-    //     });
-    // },
+    checkWiki: function(input) {
+        assert.isObject(input, "checkWiki expects an object");
+        var topic, str;
 
-    handleInput: function(text) {
-        var rep1 = this.staticReplies[text];
-        if (rep1)
-            return rep1
-        else
-            return "you said: " + text;
+        if (topic = KBase.staticReplies[input.topic])
+            return topic;
+
+        if (topic = KBase.getTopic(input.topic)) {
+            clog("topic", topic);
+            str = "----\n"
+            // str += "## " + input.topic + "\n"
+            str += topic.data + "\n"
+            // str += "----\n"
+            str += "> [wikilink: " + topic.topic + "](https://github.com/bothelpers/kbase/wiki/" + topic.topic + ")"
+            return str
+        }
+        // else
+        return null
     },
 
-    reply: function(msg, room) {
+    checkHelp: function(input) {
+        assert.isObject(input, "checkHelp expects an object");
+        var wiki, str, topic;
+
+        wiki = this.checkWiki(input)
+        if (wiki) return wiki;
+
+        str = "searching for **" + input.topic + "**";
+        return str;
+    },
+
+    // turns raw text input into a json format
+    parseInput: function(text) {
+        var res, str, topic;
+        var blob = {
+            text: text
+        };
+
+        if (res = text.match(/(help|wiki|check) (.*)/)) {
+            blob.topic = res[2]
+            blob.help = true
+            blob.intent = res[1]
+        } else {
+            blob.help = false;
+        }
+        return blob;
+    },
+
+    // search all reply methods
+    findAnyReply: function(text) {
+        var reply, res;
+        var input = this.parseInput(text);
+
+        if (input.help == true) {
+            return this.checkHelp(input)
+        }
+
+        // default
+        return "you said: " + text;
+    },
+
+    sendReply: function(msg, room) {
         if (msg.operation != "create") {
             console.log("skip msg reply", msg);
             return;
@@ -148,7 +178,7 @@ var GBot = {
         console.log(" in| " + msg.model.fromUser.username + " > " + input);
 
         // var output = input.toUpperCase();
-        var output = this.handleInput(input);
+        var output = this.findAnyReply(input);
         console.log("out|: ", output);
         room.send(output);
         return (output);

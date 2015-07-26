@@ -5,7 +5,7 @@ var RoomData = [
     {
         title: "GeneralChat",
         name: "bothelp/GeneralChat",
-        topics: ["default room"]
+        topics: ["chitchat"]
     },
 
     {

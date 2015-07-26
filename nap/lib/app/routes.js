@@ -8,7 +8,13 @@ var assert = require("chai").assert;
 
 var AppConfig = require('../../config/AppConfig'),
     Rooms = require('../../lib/app/Rooms.js'),
+    Utils = require('../../lib/utils/Utils'),
     RoomData = require('../../data/RoomData.js');
+
+function clog(msg, obj) {
+    Utils.clog("Routes>", msg, obj)
+}
+
 
 var routes = {
 
@@ -22,7 +28,7 @@ var routes = {
         } else if (query.room) {
             query.roomObj = Rooms.findByName(query.room);
         }
-        console.log("found ", query.roomObj);
+        // clog("found ", query.roomObj);
         assert.isObject(query.roomObj);
 
         query.url = "https://gitter.im/" + query.roomObj.name;

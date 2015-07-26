@@ -1,5 +1,3 @@
-// this can't run strict
-// process.stdout.write('\033c');  // cls
 
 clc = require('cli-color');
 
@@ -10,9 +8,14 @@ var Utils = {
     warning: clc.xterm(232).bgXterm(215),
     errorColors: clc.xterm(232).bgXterm(196),
 
+    // this can't run strict
+    cls: function() {
+        process.stdout.write('\033c');  // cls
+    },
+
     clog: function(where, msg, obj) {
         obj = obj || "" ;
-        console.log(this.bright(where), msg, obj);
+        console.log(this.bright(where), this.dimmed(msg), "\n", obj );
     },
 
     error: function(where, msg, obj) {
