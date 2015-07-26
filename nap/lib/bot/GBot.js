@@ -22,20 +22,8 @@ var GBot = {
         this.roomList = [];
         GBot.gitter = new Gitter(AppConfig.token);
         var that = this;
-        RoomData.map(function(oneRoomData) {
-            var roomUrl = oneRoomData.name;
-            // console.log("oneRoomData", oneRoomData);
-            // clog("gitter.rooms", that.gitter.rooms);
-            GBot.gitter.rooms.join(roomUrl, function(err, room) {
-                if (err) {
-                    console.warn('Not possible to join the room: ', err, roomUrl);
-                    return;
-                }
-                GBot.roomList.push(room)
-                GBot.listenToRoom(room);
-                clog('joined> ', room.uri);
-            });
-        })
+        this.joinKnownRooms();
+        this.scanRooms();
         BotCommands.init(this);
     },
 
@@ -169,27 +157,45 @@ var GBot = {
 
 
     addToRoomList: function(room) {
-        // TODO - check for dupes
+        // check for dupes
         this.roomList = this.roomList || [];
+        if (this.alreadyJoined(room, this.roomList)) {
+            return false;
+        };
+
+        clog("addToRoomList", room, this.roomList);
         this.roomList.push(room);
-        clog("addToRoomList", room);
-        
+        return true;
     },
 
+
+    alreadyJoined: function(room, roomList) {
+        var checks = roomList.filter(function(rm) {
+            rm.name == room.name;
+        })
+        var checkOne = checks[0]
+        clog("alreadyJoined:", checkOne)
+        if (checkOne) {
+            return true;
+        }
+        return false;
+    },
 
     listenToRoom: function(room) {
         // gitter.rooms.find(room.id).then(function(room) {
 
-        var events = room.streaming().chatMessages();
-        this.addToRoomList(room);
+        if (this.addToRoomList(room) == false) {
+            return;
+        }
 
         // The 'snapshot' event is emitted once, with the last messages in the room
         // events.on('snapshot', function(snapshot) {
         //     console.log(snapshot.length + ' messages in the snapshot');
         // });
 
+        var chats = room.streaming().chatMessages();
         // The 'chatMessages' event is emitted on each new message
-        events.on('chatMessages', function(message) {
+        chats.on('chatMessages', function(message) {
             // clog('message> ', message.model.text);
             if (message.operation != "create") {
                 // console.log("skip msg reply", msg);
@@ -254,7 +260,24 @@ var GBot = {
                 clog("list", list);
                 return (list);
             })
+    },
+
+    joinKnownRooms: function() {
+        RoomData.map(function(oneRoomData) {
+            var roomUrl = oneRoomData.name;
+            // console.log("oneRoomData", oneRoomData);
+            // clog("gitter.rooms", that.gitter.rooms);
+            GBot.gitter.rooms.join(roomUrl, function(err, room) {
+                if (err) {
+                    console.warn('Not possible to join the room: ', err, roomUrl);
+                    return;
+                }
+                GBot.listenToRoom(room);
+                clog('joined> ', room.name);
+            });
+        })
     }
+
 
 }
 

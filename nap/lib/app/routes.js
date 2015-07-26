@@ -108,7 +108,7 @@ var Router = {
 
         app.get('/rooms/update', function(req, res) {
             Router.gbot.scanRooms(req.user, req.session.token);
-            res.send("scanning");
+            res.redirect('/home');
         });
 
 
