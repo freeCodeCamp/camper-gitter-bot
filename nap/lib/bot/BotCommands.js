@@ -45,6 +45,12 @@ var BotCommands = {
         return "topics command"
     },
 
+    welcome: function(input, bot) {
+        var str = "## welcome " + input.message.model.fromUser.username;
+        str += "\n type `help` for some things the bothelp can do.";
+        return str;
+    },
+
     topic: function(input, bot) {
         if (input.topic) {
             return "/topic " + input.topic;
@@ -86,9 +92,10 @@ var BotCommands = {
 
 // setup aliases
 BotCommands.help = BotCommands.menu;
-BotCommands.bothelp = BotCommands.menu;
-BotCommands.hello = BotCommands.menu;
-BotCommands['@bothelp hi'] = BotCommands.menu;
+BotCommands.hi = BotCommands.welcome;
+// BotCommands.bothelp = BotCommands.menu;
+BotCommands.hello = BotCommands.welcome;
+// BotCommands['@bothelp hi'] = BotCommands.menu;
 
 // TODO - some of these should be filtered/as private
 BotCommands.cmdList = Object.keys(BotCommands);

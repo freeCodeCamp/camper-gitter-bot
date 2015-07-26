@@ -159,18 +159,18 @@ var GBot = {
             thanks: false
         };
 
+        if (res = input.text.match(/(thanks|ty|thank you) \@(.*)/)) {
+            input.thanks = true;
+            return input;
+        }
 
+        // FIXME this is matching on bothelp not just help
         if (res = input.text.match(/(help|wiki|check|hint|tip) (.*)/)) {
             input.topic = res[2]
             input.cleanTopic = input.topic.replace(" ", "-").toLowerCase();
             input.help = true
             input.intent = res[1]
             return input
-        }
-
-        if (res = input.text.match(/(thanks|ty|thank you) \@(.*)/)) {
-            input.thanks = true;
-            return input;
         }
 
         clog('input', input);
