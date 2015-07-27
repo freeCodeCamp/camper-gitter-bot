@@ -38,6 +38,12 @@ var RoomData = [
         topics: ["css", "bootstrap", "html"]
     },
 
+    {
+        title: "Testing",
+        name: "bothelp/Testing",
+        topics: ["chai", "TDD", "assert"]
+    },
+
 ]
 
 // alias
