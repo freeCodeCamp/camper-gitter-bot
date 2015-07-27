@@ -102,6 +102,14 @@ var BotCommands = {
         var str = fromUser + " has a nice video"
         str += "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
         return str;
+    },
+
+    'wiki-update': function(input, bot) {
+        return "WIP wiki-update";
+    },
+
+    camperCount: function(input, bot) {
+        return "WIP camperCount";
     }
 
 }

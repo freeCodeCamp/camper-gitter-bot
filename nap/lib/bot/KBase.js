@@ -46,11 +46,13 @@ var KBase = {
                     var arr = fpath.split("/");
                     var fname = arr[arr.length - 1];
                     var topic = fname.replace(".md", "");
+                    var data = fs.readFileSync(fpath, "utf8")
+                    data = KBase.processWikiData(data);
                     var blob = {
                         path: fpath,
                         topic: topic,
                         fname: fname,
-                        data: fs.readFileSync(fpath, "utf8")
+                        data: data
                     }
                     KBase.topics[topic] = blob;
                     // clog("blob", blob);
@@ -58,6 +60,12 @@ var KBase = {
                 fulfill(KBase.topics);
             });    
         })
+    },
+
+    // we only show the first para
+    processWikiData: function(data){
+        var part = data.split("##")[0]
+        return part;
     },
 
     getTopic: function(name) {

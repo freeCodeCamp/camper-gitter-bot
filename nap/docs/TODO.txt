@@ -44,6 +44,12 @@ Rooms, RoomData, - classnames?
 ES6 classes or prototypes?
 
 
-
 config files for different environments
+
+
+Mongoose wrapper?
+how best to use mongo?
+
+iojs install/version
+
 
