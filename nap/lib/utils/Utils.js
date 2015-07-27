@@ -1,6 +1,4 @@
-
 clc = require('cli-color');
-
 
 
 var Utils = {
@@ -49,7 +47,17 @@ var Utils = {
         }
         message.model = model;
         return message;
+    },
+
+    messageMock: function(text) {
+        var message = this.makeMessageFromString(text);
+
+        message.model.fromUser = {
+            username: "testuser"
+        }
+        return message;
     }
+
 
 }
 
@@ -57,6 +65,6 @@ Utils.logLevel = parseInt(process.env.LOG_LEVEL || 4);
 
 
 // check if we're in test mode
-console.log("Utils", "argv", process.argv);
+// console.log("Utils", "argv", process.argv);
 
 module.exports = Utils;

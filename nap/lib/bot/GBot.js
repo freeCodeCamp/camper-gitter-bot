@@ -126,6 +126,7 @@ var GBot = {
     },
 
     checkThanks: function(input) {
+        // assert.isInstanceOf(input, String)
         assert.isObject(input, "checkThanks expects an object");
         assert.isTrue(input.thanks);
         var mentions, output, fromUser, toUser;
@@ -196,6 +197,7 @@ var GBot = {
     },
 
 
+    // checks if joined already, otherwise adds
     addToRoomList: function(room) {
         // check for dupes
         this.roomList = this.roomList || [];
@@ -208,29 +210,31 @@ var GBot = {
         return true;
     },
 
-    hasAlreadyJoined: function(room, roomList) {
-        var checks = roomList.filter(function(rm) {
+    // checks if a room is already in bots internal list of joined rooms
+    // this is to avoid listening twice 
+    // see https://github.com/gitterHQ/node-gitter/issues/15
+    // note this is only the bots internal tracking
+    // it has no concept if the gitter API/state already thinks you're joined/listening
+    hasAlreadyJoined: function(room) {
+        var checks = this.roomList.filter(function(rm) {
             rm.name == room.name;
         })
         var checkOne = checks[0];
-        Utils.warning("GBot", "hasAlreadyJoined:", checkOne);
         if (checkOne) {
+            Utils.warning("GBot", "hasAlreadyJoined:", checkOne);
             return true;
         }
         return false;
     },
 
+    // listen to a know room
+    // does a check to see if not already joined according to internal data
     listenToRoom: function(room) {
         // gitter.rooms.find(room.id).then(function(room) {
 
         if (this.addToRoomList(room) == false) {
             return;
         }
-
-        // The 'snapshot' event is emitted once, with the last messages in the room
-        // events.on('snapshot', function(snapshot) {
-        //     console.log(snapshot.length + ' messages in the snapshot');
-        // });
 
         var chats = room.streaming().chatMessages();
         // The 'chatMessages' event is emitted on each new message
@@ -258,6 +262,31 @@ var GBot = {
         return (output);
     },
 
+    // this joins rooms contained in the data/RoomData.js file
+    // ie a set of bot specific discussion rooms
+    joinKnownRooms: function() {
+        var that = this;
+        RoomData.map(function(oneRoomData) {
+            var roomUrl = oneRoomData.name;
+            // console.log("oneRoomData", oneRoomData);
+            // clog("gitter.rooms", that.gitter.rooms);
+            that.gitter.rooms.join(roomUrl, function(err, room) {
+                if (err) {
+                    console.warn('Not possible to join the room: ', err, roomUrl);
+                    return;
+                }
+                that.listenToRoom(room);
+                clog('joined> ', room.name);
+            });
+        })
+    },
+
+    // uses gitter helper to fetch the list of rooms this user is "in"
+    // and then tries to listen to them
+    // this is mainly to pick up new oneOnOne conversations  
+    // when a user DMs the bot
+    // as I can't see an event the bot would get to know about that
+    // so its kind of like "polling" and currently only called from the webUI
     scanRooms: function(user, token) {
         var user = user || this.gitter.currentUser(),
             token = token || AppConfig.token;
@@ -289,6 +318,7 @@ var GBot = {
     },
 
     // FIXME doesnt work for some reason >.<
+    // needs different type of token?
     updateRooms: function() {
         GBot.gitter.currentUser()
             .then(function(user) {
@@ -299,25 +329,7 @@ var GBot = {
                 clog("list", list);
                 return (list);
             })
-    },
-
-    joinKnownRooms: function() {
-        var that = this;
-        RoomData.map(function(oneRoomData) {
-            var roomUrl = oneRoomData.name;
-            // console.log("oneRoomData", oneRoomData);
-            // clog("gitter.rooms", that.gitter.rooms);
-            that.gitter.rooms.join(roomUrl, function(err, room) {
-                if (err) {
-                    console.warn('Not possible to join the room: ', err, roomUrl);
-                    return;
-                }
-                that.listenToRoom(room);
-                clog('joined> ', room.name);
-            });
-        })
     }
-
 
 }
 

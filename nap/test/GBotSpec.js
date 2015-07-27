@@ -37,7 +37,7 @@ describe("GBot", function(){
     it("should respond to help", function() {
         var msg = Utils.makeMessageFromString("help foo")
         var help = GBot.findAnyReply(msg);
-        assert.equal(help, "searching for **foo**");
+        assert.equal(help, "help for **foo**");
     })
 
     it("should have an ebn test response", function() {
@@ -79,7 +79,7 @@ describe("GBot", function(){
         var msg = Utils.makeMessageFromString("thanks @bob");
         var res = GBot.parseInput(msg);
         assert.isTrue(res.thanks);
-        console.log(res);
+        // console.log("thanks parse", res);
     })
 
     it("should parse a thanks command with a hashtag", function() {
@@ -93,10 +93,10 @@ describe("GBot", function(){
 
     it("should find a thanks command", function() {
         GBot.init();
-        var msg = Utils.makeMessageFromString("thanks @bob");
+        var msg = Utils.messageMock("thanks @bob");
         var res = GBot.findAnyReply(msg);
         assert.isTrue(res.thanks);
-        console.log(res);
+        console.log("thanks msg", res);
     })
 
 
