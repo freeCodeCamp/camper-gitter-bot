@@ -90,6 +90,11 @@ var BotCommands = {
         clog("GBot", GBot);
         BotCommands.bot.scanRooms();
         return "rejoined";
+    },
+    music: function(input, bot) {
+        var str = "## Music!"
+        str += "\n http://plug.dj/freecodecamp"
+        return str
     }
 
 }

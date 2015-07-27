@@ -1,5 +1,7 @@
 clc = require('cli-color');
 
+// check if we're in test mode
+// console.log("Utils", "argv", process.argv);
 
 var Utils = {
 
@@ -64,7 +66,5 @@ var Utils = {
 Utils.logLevel = parseInt(process.env.LOG_LEVEL || 4);
 
 
-// check if we're in test mode
-// console.log("Utils", "argv", process.argv);
 
 module.exports = Utils;
