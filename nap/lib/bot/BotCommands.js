@@ -30,6 +30,11 @@ var BotCommands = {
         return bot.findAnyReply(msg);
     },
 
+    test: function(input, bot) {
+        var msg = "All bot systems are go!";
+        return msg;
+    },
+
     status: function(input, bot) {        
         var list = bot.roomList.map(function(rm) {
             return rm.name;

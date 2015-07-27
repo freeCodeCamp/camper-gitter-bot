@@ -20,7 +20,7 @@ var GBot = {
     init: function() {
         KBase.initAsync();
         this.roomList = [];
-        GBot.gitter = new Gitter(AppConfig.token);
+        this.gitter = new Gitter(AppConfig.token);
         var that = this;
         this.joinKnownRooms();
         this.scanRooms();
