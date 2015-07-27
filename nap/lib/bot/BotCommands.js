@@ -95,6 +95,13 @@ var BotCommands = {
         var str = "## Music!"
         str += "\n http://plug.dj/freecodecamp"
         return str
+    },
+
+    rickroll: function(input, bot) {
+        var fromUser = "@" + input.message.model.fromUser.username
+        var str = fromUser + " has a nice video"
+        str += "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        return str;
     }
 
 }
