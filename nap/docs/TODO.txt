@@ -43,7 +43,6 @@ Questions
 Rooms, RoomData, - classnames?
 ES6 classes or prototypes?
 
-
 config files for different environments
 
 

@@ -34,12 +34,13 @@ var KBase = {
             // could also reject
             var glob = require("glob"),
                 options = null,
-                kbpath = __dirname + "/../../data/kbase.wiki/*md";  // FIXME - works relative?
+                kbpath = __dirname + "/../../data/*/*md";  // FIXME - works relative?
 
             // using glob for nested dirs
             glob(kbpath, options, function (err, files) {
                 // clog("files> ", files);
                 KBase.files = files;
+                KBase.topicList = []
 
                 KBase.topics = {}
                 KBase.files.map(function(fpath) {
@@ -54,9 +55,11 @@ var KBase = {
                         fname: fname,
                         data: data
                     }
+                    KBase.topicList.push(fname);
                     KBase.topics[topic] = blob;
                     // clog("blob", blob);
                 });
+                clog("topicList", KBase.topicList);
                 fulfill(KBase.topics);
             });    
         })
