@@ -1,3 +1,6 @@
 [submodule "nap/data/kbase.wiki"]
 	path = nap/data/kbase.wiki
 	url = https://github.com/bothelpers/kbase.wiki.git
+[submodule "nap/data/fcc.wiki"]
+	path = nap/data/fcc.wiki
+	url = https://github.com/FreeCodeCamp/freecodecamp.wiki.git
