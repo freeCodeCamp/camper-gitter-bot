@@ -94,9 +94,17 @@ describe("GBot", function(){
     it("should find a thanks command", function() {
         GBot.init();
         var msg = Utils.messageMock("thanks @bob");
-        var res = GBot.findAnyReply(msg);
+        var res = GBot.parseInput(msg);
         assert.isTrue(res.thanks);
-        console.log("thanks msg", res);
+    })
+
+
+    it("should send a thanks karm reply", function() {
+        GBot.init();
+        var msg = Utils.messageMock("thanks @bob");
+        var res = GBot.findAnyReply(msg);
+        console.log("thanks msg> ", res);
+        assert.match(res, /^@testuser sends karma to/ );
     })
 
 
