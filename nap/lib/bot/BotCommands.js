@@ -35,14 +35,13 @@ var BotCommands = {
         return msg;
     },
 
-    status: function(input, bot) {        
-        var list = bot.roomList.map(function(rm) {
-            return rm.name;
+    rooms: function(input, bot) {
+        var roomNames = bot.roomList.map(function(rm) {
+            var uri = "https://gitter.im/" + rm.name
+            var link = "\n- [" + rm.name + "](" + uri + ")  "
+            return link
         })
-        var str = "## roomList\n - "
-        str += list.join("\n - ")
-        // str += "- " + JSON.stringify(list,null,2) + "```";
-        clog("status", str);
+        var str = "## rooms" + roomNames
         return(str);
     },
 
