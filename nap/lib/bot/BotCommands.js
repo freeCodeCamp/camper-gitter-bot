@@ -35,6 +35,7 @@ var BotCommands = {
         return msg;
     },
 
+    // TODO - sort alphabetically
     rooms: function(input, bot) {
         var roomNames = bot.roomList.map(function(rm) {
             var uri = "https://gitter.im/" + rm.name

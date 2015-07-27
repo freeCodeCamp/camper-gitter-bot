@@ -1,5 +1,10 @@
 "use strict";
 
+// from the webapp
+// users enter the rooms with a topic=XXX url
+// we find a matching room here with that topic
+// and redirect them
+
 var RoomData = [
     // 1st room is the default if we can't find anything else
 
@@ -8,7 +13,13 @@ var RoomData = [
         name: "bothelp",
         topics: ["chitchat", "dm"]
     },
-    
+
+    {
+        title: "Botdiscussion",
+        name: "dcsan/botzy",
+        topics: ['bots', 'fcc', 'teaching']
+    },
+
     {
         title: "GeneralChat",
         name: "bothelp/GeneralChat",
@@ -25,12 +36,6 @@ var RoomData = [
         title: "Frontend",
         name: "bothelp/Frontend",
         topics: ["css", "bootstrap", "html"]
-    },
-
-    {
-        title: "Botdiscussion",
-        name: "dcsan/botzy",
-        topics: ['bots', 'fcc', 'teaching']
     },
 
 ]
