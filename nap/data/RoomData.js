@@ -25,7 +25,13 @@ var RoomData = [
         title: "Frontend",
         name: "bothelp/Frontend",
         topics: ["css", "bootstrap", "html"]
-    }
+    },
+
+    {
+        title: "Botdiscussion",
+        name: "dcsan/botzy",
+        topics: ['bots', 'fcc', 'teaching']
+    },
 
 ]
 

@@ -166,7 +166,7 @@ var GBot = {
         }
 
         // FIXME this is matching on bothelp not just help
-        if (res = input.text.match(/(help|wiki|check|hint|tip) (.*)/)) {
+        if (res = input.text.match(/^(help|wiki|check|hint|tip) (.*)/)) {
             input.topic = res[2]
             input.cleanTopic = input.topic.replace(" ", "-").toLowerCase();
             input.help = true
@@ -191,7 +191,8 @@ var GBot = {
         } else if (res = this.checkCommands(input)) {
             return res;
         } else {
-            return "you said: " + input.text;
+            return;
+            // return "you said: " + input.text;
         }
 
     },
