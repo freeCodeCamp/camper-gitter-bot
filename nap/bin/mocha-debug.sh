@@ -1,6 +1,6 @@
 open "http://localhost:8080/?ws=localhost:8080&port=5858" &
 
-source bin/credentials-bothelp.sh
+source bin/credentials.sh
 
 set -x
 

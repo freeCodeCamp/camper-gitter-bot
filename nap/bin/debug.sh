@@ -1,4 +1,4 @@
-source bin/credentials-dc.sh
+source bin/credentials.sh
 
 set -x
 

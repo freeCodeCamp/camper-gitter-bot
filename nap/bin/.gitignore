@@ -1,2 +1,2 @@
-credentials-dc.sh
-credentials-bothelp.sh
+credentials*
+!credentials-example.sh

@@ -1,4 +1,4 @@
-source bin/credentials-bothelp.sh
+source bin/credentials.sh
 
 BOTZYROOM="55b1a9030fc9f982beaac901"
 

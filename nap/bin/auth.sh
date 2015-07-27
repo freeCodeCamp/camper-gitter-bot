@@ -1,4 +1,4 @@
-source bin/credentials-bothelp.sh
+source bin/credentials.sh
 
 # this doesnt seem to work
 # https://developer.gitter.im/docs/authentication
