@@ -1,7 +1,6 @@
-/*jslint todo: true */
-/*jslint node: true */
-
 "use strict";
+
+
 
 var assert = require("chai").assert;
 var Gitter = require("node-gitter"),

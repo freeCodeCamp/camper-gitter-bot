@@ -1,23 +1,19 @@
-{
-  "env": {
-    "browser": 0
-  },
- 
-  "globals": {
-    "require": 1,
-    "console": 1
-    "module": 1
-  },
- 
-  "rules": {
-    "quotes": [2, "double"],
-    "strict": [2, "global"],
-    "no-console": 0
-  },
+rules:
+  indent:
+    - 2
+    - 4
+  quotes:
+    - 2
+    - double
+  linebreak-style:
+    - 2
+    - unix
+  semi:
+    - 2
+    - always
 
-  "ecmaFeatures": {
-    "blockBindings": true,
-    "forOf": true,
-    "jsx": true
-  },
-}
+
+
+env:
+  es6: true
+  node: true

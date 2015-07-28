@@ -1,16 +1,14 @@
 /*jslint todo: true */
-/*global it */
 
 "use strict";
 
 
+var GBot = require("../../lib/bot/GBot.js"),
+    KBase = require("../bot/KBase"),
+    Utils = require("../../lib/utils/Utils");
 
-var AppConfig = require("../../config/AppConfig"),
-    GBot = require("../../lib/bot/GBot.js"),
-    Rooms = require('../app/Rooms'),
-    KBase = require('../bot/KBase'),
-    Utils = require('../../lib/utils/Utils'),
-    RoomData = require('../../data/RoomData');
+    // Rooms = require('../app/Rooms'),
+    // RoomData = require('../../data/RoomData');
 
 
 function clog(msg, obj) {

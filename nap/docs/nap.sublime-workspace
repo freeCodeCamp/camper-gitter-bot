@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"res",
+				"res	GBotSpec.js"
+			],
+			[
 				"KB",
 				"KBase"
 			],
@@ -510,10 +514,6 @@
 			[
 				"con",
 				"confidence"
-			],
-			[
-				"border",
-				"border-top"
 			]
 		]
 	},
@@ -600,16 +600,44 @@
 		"selected_items":
 		[
 			[
-				"java",
-				"Javascript Beautify"
+				"lint",
+				"SublimeLinter: Lint This View"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"re",
+				"Package Control: Remove Package"
+			],
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack",
+				"Package Control: Remove Package"
 			],
 			[
 				"inst",
 				"Package Control: Install Package"
 			],
 			[
-				"remo",
+				"remove",
 				"Package Control: Remove Package"
+			],
+			[
+				"esl",
+				"Preferences: SublimeLinter Settings – User"
+			],
+			[
+				"java",
+				"Format: Javascript"
+			],
+			[
+				"js",
+				"JSLint"
 			],
 			[
 				"bea",
@@ -688,15 +716,7 @@
 				"JSON Reindent: reindent file or selection"
 			],
 			[
-				"rem",
-				"Package Control: Remove Package"
-			],
-			[
 				"remov",
-				"Package Control: Remove Package"
-			],
-			[
-				"pack",
 				"Package Control: Remove Package"
 			],
 			[
@@ -784,10 +804,6 @@
 				"Package Control: Install Package"
 			],
 			[
-				"remove",
-				"Package Control: Remove Package"
-			],
-			[
 				"uninst",
 				"SublimeLinter: Disable Linter"
 			]
@@ -815,27 +831,39 @@
 	"expanded_folders":
 	[
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/bin",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/data/fcc.wiki",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/config",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/data",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/app",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/bot",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/gitter"
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/gitter",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/utils",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/test"
 	],
 	"file_history":
 	[
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/docs/TODO.txt",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/.eslintrc",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/bot/GBot.js",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/test/RegexSpec.js",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/bot/BotCommands.js",
+		"/Users/dc/Library/Application Support/Sublime Text 3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/test/AppConfigSpec.js",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/data/RoomData.js",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/test/GBotSpec.js",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/utils/Utils.js",
+		"/Users/dc/dev/rikai/gitter/gitterbot/nap/config/AppConfig.js",
+		"/Users/dc/Library/Application Support/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+		"/Users/dc/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/dc/Library/Application Support/Sublime Text 3/Packages/User/JSON.sublime-settings",
+		"/Users/dc/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/bin/update-wiki.sh",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/bin/run.sh",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/bin/dev.sh",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/bin/credentials.sh",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/bot/KBase.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/bot/GBot.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/docs/TODO.txt",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/bin/runup.sh",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/app/Rooms.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/data/RoomData.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/bot/BotCommands.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/test/GBotSpec.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/utils/Utils.js",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/README.md",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/bin/auth.sh",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/bin/post.sh",
@@ -844,9 +872,7 @@
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/bin/credentials-example.sh",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/bin/.gitignore",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/bin/test.sh",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/test/AppConfigSpec.js",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/app.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/config/AppConfig.js",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/docs/regex.js",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/docs/questions.txt",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/app/routes.js",
@@ -888,7 +914,6 @@
 		"/Users/dc/dev/rikai/gitter/gitterbot/lib/gitter/passportLogin.js",
 		"/Users/dc/dev/rikai/gitter/gitterbot/lib/gitter/streamApi.js",
 		"/Users/dc/dev/rikai/gitter/gitterbot/bin/post.sh",
-		"/Users/dc/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/dc/dev/rikai/gitter/gitterbot/package.json",
 		"/Users/dc/dev/rikai/gitter/gitterbot/lib/streamApi.js",
 		"/Users/dc/dev/rikai/gitter/xxx/app.js",
@@ -944,13 +969,7 @@
 		"/Users/dc/dev/shumi/chatU/app/client/in/in.coffee",
 		"/Users/dc/dev/shumi/chatU/app/client/in/in.jade",
 		"/Users/dc/dev/shumi/chatU/app/client/widgets/cha.styl",
-		"/Users/dc/dev/shumi/chatU/app/client/widgets/magnets.jade",
-		"/Users/dc/dev/shumi/chatU/app/client/widgets/magnets.styl",
-		"/Users/dc/dev/shumi/chatU/app/client/widgets/continue.jade",
-		"/Users/dc/dev/shumi/chatU/app/packages/streamer/client/adminResponseWidgets/continue.jade",
-		"/Users/dc/dev/shumi/chatU/app/packages/npm-container/.npm/package/node_modules/google-spreadsheet/package.json",
-		"/Users/dc/dev/shumi/chatU/app/packages/mpgames/client/gameOver/gameOver.coffee",
-		"/Users/dc/dev/shumi/chatU/app/packages/mpgames/client/gameOver/gameOver.styl"
+		"/Users/dc/dev/shumi/chatU/app/client/widgets/magnets.jade"
 	],
 	"find":
 	{
@@ -1096,6 +1115,21 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"'",
+			"stric",
+			"`",
+			"template",
+			"function(",
+			"commands",
+			"Utils",
+			"linki",
+			"function(",
+			"})\n",
+			"function(",
+			"function()",
+			"dmLink",
+			"function(",
+			"beau",
 			"assert",
 			"botCOmm",
 			"roomL",
@@ -1208,22 +1242,7 @@
 			"roomId",
 			"fetchRooms",
 			"fetch options",
-			"login",
-			"postMessage",
-			"json",
-			"postMessage",
-			"post",
-			"access_token",
-			"fetchCurrentUser",
-			"moflow",
-			"testRoom",
-			"fetchRooms",
-			"clientId",
-			"gitterHost",
-			"choice:",
-			"choice",
-			"choices",
-			"task"
+			"login"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1231,6 +1250,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"\"",
+			"function (",
+			"});\n",
+			"function (",
 			"message.",
 			"Utils.makeMessageFromString",
 			"input",
@@ -1354,11 +1377,7 @@
 			"statusMsg",
 			"chatFontSize",
 			"EXIT_ON_GAMEOVER",
-			"restaurant",
-			"font-size 15rem",
-			"font-size 12rem",
-			"font-size 20rem",
-			"font-size 25rem"
+			"restaurant"
 		],
 		"reverse": false,
 		"show_context": false,
@@ -1368,6 +1387,11 @@
 	},
 	"groups":
 	[
+		{
+			"sheets":
+			[
+			]
+		},
 		{
 			"sheets":
 			[
@@ -1391,11 +1415,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.435182446593,
 			1.0
 		],
 		"rows":
@@ -1427,6 +1458,66 @@
 		"selected_items":
 		[
 			[
+				"reg",
+				"test/RegexSpec.js"
+			],
+			[
+				"tod",
+				"docs/TODO.txt"
+			],
+			[
+				"gb",
+				"lib/bot/GBot.js"
+			],
+			[
+				"",
+				".eslintrc"
+			],
+			[
+				"botc",
+				"lib/bot/BotCommands.js"
+			],
+			[
+				"botco",
+				"lib/bot/BotCommands.js"
+			],
+			[
+				"g",
+				"test/GBotSpec.js"
+			],
+			[
+				"gbo",
+				"lib/bot/GBot.js"
+			],
+			[
+				"uti",
+				"lib/utils/Utils.js"
+			],
+			[
+				"appcon",
+				"config/AppConfig.js"
+			],
+			[
+				"rege",
+				"test/RegexSpec.js"
+			],
+			[
+				"appco",
+				"config/AppConfig.js"
+			],
+			[
+				"appc",
+				"config/AppConfig.js"
+			],
+			[
+				"regexsp",
+				"test/RegexSpec.js"
+			],
+			[
+				"gbots",
+				"test/GBotSpec.js"
+			],
+			[
 				"upd",
 				"bin/update-wiki.sh"
 			],
@@ -1443,24 +1534,8 @@
 				"bin/run.sh"
 			],
 			[
-				"gb",
-				"lib/bot/GBot.js"
-			],
-			[
-				"tod",
-				"docs/TODO.txt"
-			],
-			[
 				"rooms",
 				"lib/app/Rooms.js"
-			],
-			[
-				"botc",
-				"lib/bot/BotCommands.js"
-			],
-			[
-				"gbo",
-				"lib/bot/GBot.js"
 			],
 			[
 				"room",
@@ -1475,10 +1550,6 @@
 				"lib/utils/Utils.js"
 			],
 			[
-				"g",
-				"lib/bot/GBot.js"
-			],
-			[
 				"bots",
 				"test/GBotSpec.js"
 			],
@@ -1488,10 +1559,6 @@
 			],
 			[
 				"utils",
-				"lib/utils/Utils.js"
-			],
-			[
-				"uti",
 				"lib/utils/Utils.js"
 			],
 			[
@@ -1507,24 +1574,12 @@
 				"app.js"
 			],
 			[
-				"appc",
-				"config/AppConfig.js"
-			],
-			[
 				"ques",
 				"docs/questions.txt"
 			],
 			[
-				"",
-				"lib/bot/GBot.js"
-			],
-			[
 				"bot",
 				"lib/bot/GBot.js"
-			],
-			[
-				"botco",
-				"lib/bot/BotCommands.js"
 			],
 			[
 				"nav",
@@ -1537,10 +1592,6 @@
 			[
 				"to",
 				"docs/TODO.txt"
-			],
-			[
-				"appcon",
-				"config/AppConfig.js"
 			],
 			[
 				"roo",
@@ -1917,26 +1968,6 @@
 			[
 				"inde",
 				"app/client/index/index.jade"
-			],
-			[
-				"dev",
-				"app/private/config/dev.chatu.json"
-			],
-			[
-				"shared",
-				"app/client/layouts/shared/shared.styl"
-			],
-			[
-				"playertas",
-				"app/packages/mpgames/lib/PlayerTasks.coffee"
-			],
-			[
-				"drills",
-				"app/packages/cards/client/drill/drills.coffee"
-			],
-			[
-				"dril",
-				"app/packages/cards/lib/Drills.coffee"
 			]
 		],
 		"width": 0.0
