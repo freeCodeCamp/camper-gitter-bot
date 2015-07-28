@@ -77,7 +77,7 @@ var GBot = {
 
     checkWiki: function(input) {
         assert.isObject(input, "checkWiki expects an object");
-        var topic, str, dmLink;
+        var topic, dmLink;
         clog("checkWiki", input);
 
         dmLink = AppConfig.dmLink;
@@ -86,14 +86,14 @@ var GBot = {
             return topic;
 
         if (topic = KBase.getTopic(input.cleanTopic)) {
-            clog("topic", topic);
-            str = "----\n"
+            // clog("topic", topic);
             // str += "## " + input.topic + "\n"
+            var str = ""
             str += topic.data + "\n"
-            str += "----\n"
-            str += "\n> ![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=32)"
-            str += " [DM bothelp](" + AppConfig.topicDmUri(topic.topic) + ")"
-            str += " | [wikilink **" + topic.topic + "**](https://github.com/bothelpers/kbase/wiki/" + topic.topic + ")"
+            // str += "----\n"
+            str += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)"
+            str += " [PM CamperBot](" + AppConfig.topicDmUri(topic.topic) + ")"
+            str += " | [wikilink **" + topic.topic + "**](" + AppConfig.wikiHost + topic.topic + ")"
             return str
         }
         // else

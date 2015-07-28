@@ -14,7 +14,7 @@ function clog(msg, obj) {
     Utils.clog("BotCommands>", msg, obj);
 }
 
-var contactBox = "\n if you'd like to help please [get in touch!](https://github.com/bothelpers) :thumbsup: ",
+var contactBox = "\n if you'd like to help please [get in touch!](https://github.com/freecodecamp/freecodecamp) :thumbsup: ",
     topLine = "----\n",
     wipHeader = "\n work in progress!";
 
