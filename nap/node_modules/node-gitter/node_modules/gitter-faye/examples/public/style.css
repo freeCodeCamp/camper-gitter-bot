@@ -1,0 +1,44 @@
+body {
+  margin:         0;
+  padding:        0;
+  font:           16px/1.5 FreeSans, Helvetica, Arial, sans-serif;
+  text-align:     center;
+}
+
+.container {
+  text-align:     left;
+  width:          400px;
+  margin:         0 auto;
+}
+
+h1, form, ul li {
+  padding:        24px 0;
+  border-bottom:  1px solid #c0c0c0;
+}
+
+h1 {
+  font-size:      20px;
+}
+
+h1 em {
+  font-style:     normal;
+  font-weight:    normal;
+  color:          #444;
+  text-transform: uppercase;
+  letter-spacing: -0.06em;
+}
+
+label {
+  color:          #444;
+  font-weight:    bold;
+}
+
+ul, li {
+  list-style:     none;
+  margin:         0;
+  padding:        0;
+}
+
+ul li {
+  padding: 12px 0;
+}

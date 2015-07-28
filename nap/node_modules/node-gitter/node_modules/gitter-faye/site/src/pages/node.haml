@@ -1,0 +1,67 @@
+.content
+  = partial 'node_navigation'
+
+  :textile
+    h4. Setting up
+
+    All Faye clients need a central messaging server to communicate with; the
+    server records which clients are subscribed to which channels and handles
+    routing of messages between clients. Setting up a server in Node.js is
+    simple:
+
+    <pre>var http = require('http'),
+        faye = require('faye');
+
+    var server = http.createServer(),
+        bayeux = new faye.NodeAdapter({mount: '/faye', timeout: 45});
+
+    bayeux.attach(server);
+    server.listen(8000);</pre>
+
+    The @NodeAdapter@ class supports these options during setup:
+
+    * *@mount@* - the path on the host at which the Faye service is available.
+      In this example, clients would connect to @http://localhost:8000/faye@ to
+      talk to the server. The server will handle _any_ request whose path begins
+      with the @mount@ path; this is so that it can interoperate with clients
+      that use different request paths for different channels.
+    * *@timeout@* - the maximum time to hold a connection open before returning
+      the response. This is given in seconds and must be smaller than the
+      timeout on your frontend webserver.
+    * *@engine@* - (optional) the type and parameters for the engine you want to
+      use - see the "engines documentation":/node/engines.html
+    * *@ping@* - (optional) how often, in seconds, to send keep-alive ping
+      messages over WebSocket and EventSource connections. Use this if your Faye
+      server will be accessed through a proxy that kills idle connections.
+
+    It also allows WebSocket extensions to be plugged in. For example, to enable
+    "permessage-deflate":https://github.com/faye/permessage-deflate-node for
+    supporting clients:
+
+    <pre>var faye    = require('faye'),
+        deflate = require('permessage-deflate');
+
+    var bayeux = new faye.NodeAdapter({mount: '/faye', timeout: 45});
+    bayeux.addWebsocketExtension(deflate);</pre>
+
+    You can use any extension that's compatible with the
+    "websocket-extensions":https://github.com/faye/websocket-extensions-node
+    framework.
+
+    Faye should be attached to an existing HTTP server using the @attach()@
+    method. It will handle all requests to paths matching the @mount@ path and
+    delegate all other requests to your handlers.
+
+    <pre>var http = require('http'),
+        faye = require('faye');
+
+    var bayeux = new faye.NodeAdapter({mount: '/faye', timeout: 45});
+
+    // Handle non-Bayeux requests
+    var server = http.createServer(function(request, response) {
+      response.writeHead(200, {'Content-Type': 'text/plain'});
+      response.end('Hello, non-Bayeux request');
+    });
+
+    bayeux.attach(server);
+    server.listen(8000);</pre>

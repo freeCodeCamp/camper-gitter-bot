@@ -46,6 +46,7 @@ var KBase = {
                 KBase.files.map(function(fpath) {
                     var arr = fpath.split("/");
                     var fname = arr[arr.length - 1];
+                    fname = fname.toLowerCase();
                     var topic = fname.replace(".md", "");
                     var data = fs.readFileSync(fpath, "utf8")
                     data = KBase.processWikiData(data);

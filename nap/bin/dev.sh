@@ -1,3 +1,5 @@
+bin/update-wiki.sh
+
 source bin/credentials.sh
 
 set -x

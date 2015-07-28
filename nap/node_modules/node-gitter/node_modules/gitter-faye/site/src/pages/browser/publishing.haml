@@ -1,0 +1,40 @@
+.content
+  = partial 'browser_navigation'
+
+  :textile
+    h4. Sending messages
+
+    Clients do not send each other messages directly, instead they send their
+    messages to channels, and the server figures out which clients need to
+    receive the message. You can send a message using the @#publish()@ method,
+    passing in the channel name and a message object.
+
+    <pre>client.publish('/foo', {text: 'Hi there'});</pre>
+
+    The message object can be any arbitrary JavaScript object that can be
+    serialized to JSON, so it can contain strings, numbers, booleans, arrays and
+    other objects. There are no required fields, and the object will be
+    delivered verbatim to any subscriber functions listening to that channel.
+
+    Just like @subscribe()@, the @publish()@ method returns a
+    "promise":http://promisesaplus.com/ that is fulfilled when the server
+    acknowledges the message. This just means the server received and routed the
+    message successfully, not that it has been received by all other clients.
+    The promise is rejected if the server explcitly returns an error saying it
+    could not publish the message to other clients; network errors are therefore
+    not covered by this API.
+
+    <pre>var publication = client.publish('/foo', {text: 'Hi there'});
+
+    publication.then(function() {
+      alert('Message received by server!');
+    }, function(error) {
+      alert('There was a problem: ' + error.message);
+    });</pre>
+
+    The Faye client will automatically try to resend your messages if it
+    encounters a network error. It will attempt to resend the message until it
+    receives confirmation that the server has processed it. Sometimes, you might
+    not want messages to be retried indefinitely, and Faye gives you two ways to
+    limit this behaviour; see the "dispatch options":/browser/dispatch.html.
+
