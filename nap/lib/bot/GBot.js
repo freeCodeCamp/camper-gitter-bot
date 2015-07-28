@@ -101,12 +101,13 @@ var GBot = {
     },
 
     checkCommands: function(input) {
-
-        var cmds = BotCommands.cmdList.filter(function(c) {
-            return (c == input.topic || c == input.text)
+        var keyword = input.text.split(" ")[0]
+        var cmds = BotCommands.cmdList.filter(function(cmd) {
+            return (cmd == keyword)
         })
         var cmd = cmds[0]
         if (cmd) {
+            input = Utils.splitParams(input);
             var res = BotCommands[cmd](input, this);
             return res;
         }

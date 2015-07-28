@@ -48,43 +48,51 @@ var BotCommands = {
         return(str);
     },
 
-    topics: function(input, bot) {
-        var str = "## topics\n"
-        var list = KBase.topicList.map(function(t) {
-            return (Utils.linkify(t, 'wiki'));
-        })
-        str += list.join("\n")
-        return str;
-    },
-
     welcome: function(input, bot) {
         var str = "## welcome " + input.message.model.fromUser.username;
         str += "\n type `help` for some things the bothelp can do.";
         return str;
     },
 
-    topic: function(input, bot) {
-        if (input.topic) {
-            return "/topic " + input.topic;
-        } else {
-            return "what topic do you want to talk about?"
-            bot.say("> type topics for a list of topics")
-        }
-    },
+    // topic: function(input, bot) {
+    //     if (input.topic) {
+    //         return "/topic " + input.topic;
+    //     } else {
+    //         return "what topic do you want to talk about?"
+    //         bot.say("> type topics for a list of topics")
+    //     }
+    // },
 
-    search: function(input, bot) {
-        var str = topLine + wipHeader;
-        str += "## search for" + input.text;
-        str += "\n results will be here!";
-        str += contactBox;
-    },
-
-    index: function(input, bot) {
-        var str = "## index of all topics";
-        str += wipHeader;
+    // gitter limits to first 10 lines or so
+    // TODO - pagination
+    topics: function(input, bot) {
+        var str = "## topics\n"
+        var shortList = KBase.topicList.slice(0, 10)
+        var list = shortList.map(function(t) {
+            return (Utils.linkify(t, 'wiki'));
+        })
+        str += list.join("\n")
+        clog("shortList", shortList)
+        clog("topics", str)
+        // return "list"
         return str;
-        // KBase.
     },
+
+    find: function(input, bot) {
+        var str = `find **${input.params}**\n`;
+        var shortList = KBase.findTopics(input.params);
+        str += shortList;
+        clog("find", str);
+        return (str);
+    },
+
+    // search: function(input, bot) {
+    //     var str = topLine + wipHeader;
+    //     str += "## search for" + input.text;
+    //     str += "\n results will be here!";
+    //     str += contactBox;
+    //     return str;
+    // },
 
     commands: function(input, bot) {
         var str = "## commands:\n";
@@ -127,6 +135,8 @@ BotCommands.help = BotCommands.menu;
 BotCommands.hi = BotCommands.welcome;
 // BotCommands.bothelp = BotCommands.menu;
 BotCommands.hello = BotCommands.welcome;
+BotCommands.index = BotCommands.topics;
+
 // BotCommands['@bothelp hi'] = BotCommands.menu;
 
 // TODO - some of these should be filtered/as private

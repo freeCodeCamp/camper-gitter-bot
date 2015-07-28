@@ -13,7 +13,8 @@ var AppConfig = {
     webuser: 'dcsan',
     dmLink: "https://gitter.im/bothelp",
     appHost: "http://localhost:7000",
-    wikiHost: "https://github.com/bothelpers/kbase/wiki/",
+    // wikiHost: "https://github.com/bothelpers/kbase/wiki/",
+    wikiHost: "https://github.com/freecodecamp/freecodecamp/wiki/",
     gitterHost: "https://gitter.im/",
 
     who: function(req) {

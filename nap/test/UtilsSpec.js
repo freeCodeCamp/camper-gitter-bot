@@ -25,4 +25,14 @@ describe("Utils", function(){
         assert.equal(str, "thanks-for-that");
     })
 
+
+    it("should split params", function() {
+        var input = {text: "search for food"}
+        var res = Utils.splitParams(input)
+        expect(res.params).to.equal("for food")
+        expect(res.command).to.equal("search")
+        expect(res.text).to.equal("search for food")
+    })
+
+
 });

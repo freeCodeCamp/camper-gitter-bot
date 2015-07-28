@@ -23,7 +23,7 @@ var Utils = {
     // },
 
     clog: function(where, msg, obj) {
-        if (this.logLevel < 4) return;
+        // if (this.logLevel < 4) return;
         obj = obj || "" ;
         console.log(this.bright(where), this.dimmed(msg), obj );
     },
@@ -62,8 +62,9 @@ var Utils = {
         return str;
     },
 
-    prettyize: function(str, opts) {
-        str = str.replace(/\-/g," ")
+    // display filenames replace the - with a space
+    namify: function(str, opts) {
+        str = str.replace(/-/g, " ")
         return str;
     },
 
@@ -81,13 +82,9 @@ var Utils = {
                 host = AppConfig.wikiHost + AppConfig.botname;
         }
 
-        console.log('AppConfig', AppConfig.wikiHost)
-        console.log('AppConfig.wikiHost', AppConfig.wikiHost)
         uri = host + str;
-        var res = `[${str}](${uri}`;
-
-        // str = `<a href='${uri}'>${str}</a>`;
-        link = `[${str}](${uri})`;
+        var name = Utils.namify(str);
+        var link = `[${name}](${uri})`;
         return link;
     },
 
@@ -98,6 +95,13 @@ var Utils = {
             username: "testuser"
         }
         return message;
+    },
+
+    splitParams: function(input) {
+        var words = input.text.split(" ");
+        input.command = words.shift()
+        input.params = words.join(" ")
+        return input;
     }
 
 

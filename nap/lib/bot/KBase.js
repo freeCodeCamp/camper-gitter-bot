@@ -56,7 +56,7 @@ var KBase = {
                         fname: fname,
                         data: data
                     }
-                    KBase.topicList.push(fname);
+                    KBase.topicList.push(topic);
                     KBase.topics[topic] = blob;
                     // clog("blob", blob);
                 });
@@ -81,6 +81,24 @@ var KBase = {
         } else{
             return KBase.topics[name];
         }
+    },
+
+    findTopics: function(keyword) {
+        var shortList = KBase.topicList.filter(function(t){
+            return (t.indexOf(keyword) != -1)
+        })
+        if (shortList.length == 0) {
+            return "nothing found"
+        }
+        // else
+        var linkyList = []
+        for (var i=0; i<shortList.length; i++) {
+            var item = shortList[i];
+            var link = Utils.linkify(item, 'wiki');
+            var line = `\n[${i}] ${link}`;
+            linkyList.push(line);
+        }
+        return linkyList;
     }
 
 }
