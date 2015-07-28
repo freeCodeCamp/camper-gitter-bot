@@ -1,6 +1,9 @@
-"use strict"
+/*jslint todo: true */
+/*global it */
 
-console.log(__dirname);
+"use strict";
+
+
 
 var AppConfig = require("../../config/AppConfig"),
     GBot = require("../../lib/bot/GBot.js"),
@@ -21,40 +24,42 @@ var contactBox = "\n if you'd like to help please [get in touch!](https://github
 
 var BotCommands = {
 
-    init: function(bot) {
+    init: function (bot) {
         // FIXME - this is sketchy storing references like a global
         // called from the bot where we don't always have an instance
         BotCommands.bot = bot;
     },
 
-    menu: function(input, bot) {
+    menu: function (input, bot) {
+        // input;
         var msg = Utils.makeMessageFromString('help help');
         return bot.findAnyReply(msg);
     },
 
-    test: function(input, bot) {
+    test: function (input, bot) {
         var msg = "All bot systems are go!";
         return msg;
     },
 
     // TODO - sort alphabetically
-    rooms: function(input, bot) {
-        var roomNames = bot.roomList.map(function(rm) {
-            var uri = "https://gitter.im/" + rm.name
-            var link = "\n- [" + rm.name + "](" + uri + ")  "
-            return link
-        })
-        var str = "## rooms" + roomNames
-        return(str);
+    rooms: function (input, bot) {
+        var uri, link, str, roomNames;
+        roomNames = bot.roomList.map(function (rm) {
+            uri = "https://gitter.im/" + rm.name;
+            link = "\n- [" + rm.name + "](" + uri + ")  ";
+            return link;
+        });
+        str = "## rooms" + roomNames;
+        return str;
     },
 
-    welcome: function(input, bot) {
+    welcome: function (input, bot) {
         var str = "## welcome " + input.message.model.fromUser.username;
         str += "\n type `help` for some things the bothelp can do.";
         return str;
     },
 
-    // topic: function(input, bot) {
+    // topic: function (input, bot) {
     //     if (input.topic) {
     //         return "/topic " + input.topic;
     //     } else {
@@ -64,29 +69,34 @@ var BotCommands = {
     // },
 
     // gitter limits to first 10 lines or so
-    // TODO - pagination
-    topics: function(input, bot) {
-        var str = "## topics\n"
-        var shortList = KBase.topicList.slice(0, 10)
-        var list = shortList.map(function(t) {
+    // DOME - pagination
+    topics: function (input, bot) {
+        var str, shortList, list;
+        str = "## topics\n";
+        shortList = KBase.topicList.slice(0, 10);
+        list = shortList.map(function (t) {
             return (Utils.linkify(t, 'wiki'));
-        })
-        str += list.join("\n")
-        clog("shortList", shortList)
-        clog("topics", str)
+        });
+        str += list.join("\n");
+        clog("shortList", shortList);
+        clog("topics", str);
         // return "list"
         return str;
     },
 
-    find: function(input, bot) {
+    find: function (input, bot) {
         var str = `find **${input.params}**\n`;
         var shortList = KBase.findTopics(input.params);
+        bot.context = {
+            state: "finding",
+            commands: shortList.commands
+        }
         str += shortList;
         clog("find", str);
         return (str);
     },
 
-    // search: function(input, bot) {
+    // search: function (input, bot) {
     //     var str = topLine + wipHeader;
     //     str += "## search for" + input.text;
     //     str += "\n results will be here!";
@@ -94,36 +104,36 @@ var BotCommands = {
     //     return str;
     // },
 
-    commands: function(input, bot) {
+    commands: function (input, bot) {
         var str = "## commands:\n";
         str += BotCommands.cmdList.join("\n- ");
         return str;
     },
 
     // FIXME - this isn't working it seems
-    rejoin: function(input, bot) {
+    rejoin: function (input, bot) {
         clog("GBot", GBot);
         BotCommands.bot.scanRooms();
         return "rejoined";
     },
-    music: function(input, bot) {
+    music: function (input, bot) {
         var str = "## Music!"
         str += "\n http://plug.dj/freecodecamp"
         return str
     },
 
-    rickroll: function(input, bot) {
+    rickroll: function (input, bot) {
         var fromUser = "@" + input.message.model.fromUser.username
         var str = fromUser + " has a nice video"
         str += "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
         return str;
     },
 
-    'wiki-update': function(input, bot) {
+    'wiki-update': function (input, bot) {
         return "WIP wiki-update";
     },
 
-    camperCount: function(input, bot) {
+    camperCount: function (input, bot) {
         return "WIP camperCount";
     }
 
