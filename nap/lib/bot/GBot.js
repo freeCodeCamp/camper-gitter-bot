@@ -159,11 +159,16 @@ var GBot = {
             help: false,
             thanks: false
         };
-        console.log("input", input)
-        if (res = input.text.match(/(thanks|ty|thank you) \@(.*)/)) {
+        // console.log("input", input)
+        // res = input.text.match(/(thanks|ty|thank you) \@(.*)/i)
+        res = input.text.match(/thanks @(.*)/i)
+        if (res) {
             input.thanks = true;
             return input;
         }
+        // console.log("============ check ", input.text)
+        // console.log("res", res)
+        // console.log("input", input)
 
         // FIXME this is matching on bothelp not just help
         if (res = input.text.match(/^(help|wiki|check|hint|tip) (.*)/)) {

@@ -1,10 +1,7 @@
 "use strict";
 
-var Utils = require('../lib/utils/Utils');
+// var Utils = require('../lib/utils/Utils');
 
-function clog(msg, obj) {
-    Utils.clog("AppConfig", msg, obj)
-}
 
 var AppConfig = {
     roomId: '55b1a9030fc9f982beaac901', // botzy
@@ -16,6 +13,8 @@ var AppConfig = {
     webuser: 'dcsan',
     dmLink: "https://gitter.im/bothelp",
     appHost: "http://localhost:7000",
+    wikiHost: "https://github.com/bothelpers/kbase/wiki/",
+    gitterHost: "https://gitter.im/",
 
     who: function(req) {
         var who;
@@ -40,7 +39,6 @@ var AppConfig = {
         if (topic) {
             uri += "&topic=" + topic;
         }
-        clog("topicDmUri", uri);
         return uri;
     }
 

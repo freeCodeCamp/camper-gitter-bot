@@ -12,6 +12,8 @@ function clog(msg, obj) {
 
 describe("GBot", function(){
 
+    var res, str, msg;
+
     it("would be nice if regexes did not give me a headache", function() {
         var res = "help bootstrap".match(/(help|wiki|check) (.*)/)
         assert.equal(res[2], "bootstrap")
@@ -62,9 +64,9 @@ describe("GBot", function(){
     })
 
     it("should have a topics command", function() {
-        var msg = Utils.makeMessageFromString("topics");
-        var help = GBot.findAnyReply(msg);
-        assert.equal(help, "topics command");
+        msg = Utils.makeMessageFromString("topics");
+        res = GBot.findAnyReply(msg);
+        assert.match(res, /^## topics/i);
     })
 
     it("should have a rejoin command", function() {
@@ -75,10 +77,11 @@ describe("GBot", function(){
     })
 
     it("should parse a thanks command", function() {
-        GBot.init();
-        var msg = Utils.makeMessageFromString("thanks @bob");
-        var res = GBot.parseInput(msg);
-        assert.isTrue(res.thanks);
+        str = "thanks @bob"
+        msg = Utils.makeMessageFromString(str);
+        input = GBot.parseInput(msg);
+        assert.isTrue(input.thanks, str);
+        // console.log("tx res", input)
         // console.log("thanks parse", res);
     })
 
@@ -103,7 +106,7 @@ describe("GBot", function(){
         GBot.init();
         var msg = Utils.messageMock("thanks @bob");
         var res = GBot.findAnyReply(msg);
-        console.log("thanks msg> ", res);
+        // console.log("thanks msg> ", res);
         assert.match(res, /^@testuser sends karma to/ );
     })
 

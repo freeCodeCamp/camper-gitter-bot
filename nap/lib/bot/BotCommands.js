@@ -2,7 +2,8 @@
 
 console.log(__dirname);
 
-var GBot = require("../../lib/bot/GBot.js"),
+var AppConfig = require("../../config/AppConfig"),
+    GBot = require("../../lib/bot/GBot.js"),
     Rooms = require('../app/Rooms'),
     KBase = require('../bot/KBase'),
     Utils = require('../../lib/utils/Utils'),
@@ -48,8 +49,12 @@ var BotCommands = {
     },
 
     topics: function(input, bot) {
-        
-        return KBase.topicList.join("\n - ");
+        var str = "## topics\n"
+        var list = KBase.topicList.map(function(t) {
+            return (Utils.linkify(t, 'wiki'));
+        })
+        str += list.join("\n")
+        return str;
     },
 
     welcome: function(input, bot) {

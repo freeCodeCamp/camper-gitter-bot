@@ -1,4 +1,10 @@
-clc = require('cli-color');
+"use strict"
+
+var assert = require("chai").assert;
+var clc = require('cli-color');
+var AppConfig = require("../../config/AppConfig");
+
+console.log("AppConfig required", AppConfig)
 
 // check if we're in test mode
 // console.log("Utils", "argv", process.argv);
@@ -12,9 +18,9 @@ var Utils = {
     logLevel: 10,  // default
 
     // this can't run strict
-    cls: function() {
-        process.stdout.write('\033c');  // cls
-    },
+    // cls: function() {
+    //     process.stdout.write('\033c');  // cls
+    // },
 
     clog: function(where, msg, obj) {
         if (this.logLevel < 4) return;
@@ -29,7 +35,7 @@ var Utils = {
     },
 
     error: function(where, msg, obj) {
-        if (this.logLevel < 2) return;
+        if (this.logLevel < 1) return;
         obj = obj || "" ;
         console.log(this.warning(where), this.dimmed(msg), obj);
     },
@@ -46,11 +52,43 @@ var Utils = {
         return message;
     },
 
-    sanitize: function(str) {
+    sanitize: function(str, opts) {
+        if (opts && opts.spaces) {
+            str = str.replace(/\s/g, "-");
+        }
         str = str.toLowerCase()
         str = str.replace(".md", "");
-        str = str.replace(/([^a-z0-9áéíóúñü_-\s\.,]|[\t\n\f\r\v\0])/gim,"");
+        str = str.replace(/([^a-z0-9áéíóúñü_@\-\s]|[\t\n\f\r\v\0])/gim,"");
         return str;
+    },
+
+    prettyize: function(str, opts) {
+        str = str.replace(/\-/g," ")
+        return str;
+    },
+
+    linkify: function(str, where) {
+        var host, link, uri, res;
+
+        switch (where) {
+            case 'gitter':
+                host = AppConfig.gitterHost + AppConfig.botname;
+                break;
+            case 'wiki':
+                host = AppConfig.wikiHost;
+                break;
+            default:
+                host = AppConfig.wikiHost + AppConfig.botname;
+        }
+
+        console.log('AppConfig', AppConfig.wikiHost)
+        console.log('AppConfig.wikiHost', AppConfig.wikiHost)
+        uri = host + str;
+        var res = `[${str}](${uri}`;
+
+        // str = `<a href='${uri}'>${str}</a>`;
+        link = `[${str}](${uri})`;
+        return link;
     },
 
     messageMock: function(text) {
