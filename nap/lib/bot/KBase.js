@@ -91,14 +91,14 @@ var KBase = {
             return "nothing found"
         }
         // else
-        var linkyList = []
+        var findResults = "";
         for (var i=0; i<shortList.length; i++) {
             var item = shortList[i];
             var link = Utils.linkify(item, 'wiki');
             var line = `\n[${i}] ${link}`;
-            linkyList.push(line);
+            findResults += line;
         }
-        return linkyList;
+        return findResults;
     }
 
 }

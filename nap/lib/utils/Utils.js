@@ -71,6 +71,8 @@ var Utils = {
     linkify: function(str, where) {
         var host, link, uri, res;
 
+        str = str.replace("?", "%3F");  // not URL encoded
+
         switch (where) {
             case 'gitter':
                 host = AppConfig.gitterHost + AppConfig.botname;
