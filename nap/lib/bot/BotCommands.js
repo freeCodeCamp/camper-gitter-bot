@@ -48,7 +48,8 @@ var BotCommands = {
     },
 
     topics: function(input, bot) {
-        return KBase.topicList.join("\n -");
+        
+        return KBase.topicList.join("\n - ");
     },
 
     welcome: function(input, bot) {

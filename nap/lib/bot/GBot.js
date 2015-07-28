@@ -159,7 +159,7 @@ var GBot = {
             help: false,
             thanks: false
         };
-
+        console.log("input", input)
         if (res = input.text.match(/(thanks|ty|thank you) \@(.*)/)) {
             input.thanks = true;
             return input;

@@ -34,11 +34,6 @@ var Utils = {
         console.log(this.warning(where), this.dimmed(msg), obj);
     },
 
-    // FIXME!!!
-    sanitize: function(text) {
-        return text;
-    },
-
     // used for tests
     // and also strings to commands
     // https://developer.gitter.im/docs/messages-resource
@@ -49,6 +44,13 @@ var Utils = {
         }
         message.model = model;
         return message;
+    },
+
+    sanitize: function(str) {
+        str = str.toLowerCase()
+        str = str.replace(".md", "");
+        str = str.replace(/([^a-z0-9áéíóúñü_-\s\.,]|[\t\n\f\r\v\0])/gim,"");
+        return str;
     },
 
     messageMock: function(text) {
