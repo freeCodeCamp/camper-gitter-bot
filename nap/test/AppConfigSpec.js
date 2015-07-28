@@ -1,24 +1,31 @@
-var expect = require("chai").expect,
-    assert = require("chai").assert;
+/*globals require, it, describe */
 
-var routes = require("../lib/app/routes.js");
-var AppConfig = require("../config/AppConfig"),
-    Utils = require('../lib/utils/Utils');
+/* jshint -W097 */
+
+"use strict";
+
+var expect = require("chai").expect;
+
+
+var AppConfig = require("../config/AppConfig");
+
+    // Utils = require("../lib/utils/Utils");
 
 // this is start of test suite, so just clear the screen
 // Utils.cls();
 
-describe("AppConfig", function(){
+describe("AppConfig", function () {
 
-    it("should have default AppConfig", function() {
+    it("should have default AppConfig", function () {
         expect(AppConfig.testUser).to.equal("bothelp");
-    })
+    });
 
-    it("should make a topicDmUri", function() {
-        var topicDmUri = AppConfig.topicDmUri();
-        var expUri = AppConfig.appHost + "/go?dm=y&room=bothelp"
+    it("should make a topicDmUri", function () {
+        var topicDmUri, expUri;
+        topicDmUri = AppConfig.topicDmUri();
+        expUri = AppConfig.appHost + "/go?dm=y&room=bothelp";
 
         expect(topicDmUri).to.equal(expUri);
-    })
+    });
 
 });

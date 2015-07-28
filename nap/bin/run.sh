@@ -5,6 +5,9 @@ set -x
 GITTER_USER_TOKEN=${GITTER_USER_TOKEN} \
     GITTER_APP_KEY=${GITTER_APP_KEY} \
     GITTER_APP_SECRET=${GITTER_APP_SECRET} \
-    node --harmony app.js
+    LOG_LEVEL=10 \
+    PORT=7891 \
+    iojs app.js
 
-    # node -x iojs app.js
+    # node --harmony app.js
+    # nodemon -x iojs app.js

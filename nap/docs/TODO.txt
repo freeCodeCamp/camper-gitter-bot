@@ -1,6 +1,21 @@
 TODO
 
-bot integrated for conversation and topics, discussions
+
+find / choose from list
+fix help/choose first matching item
+
+if only one item return right away
+
+
+
+archiving messages?
+after basic thanks/karma system?
+
+DM system
+
+
+# chatbot script
+integrated for conversation and topics, discussions
 
 # Basic Commands
     menu - show commands

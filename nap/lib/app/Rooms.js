@@ -7,9 +7,8 @@ var RoomData = require('../../data/RoomData.js'),
 
 var Rooms = {
 
-
     findByTopic: function(topic) {
-        debugger;
+        x+1;
 
         var rooms = RoomData.filter(function(rm) {
             var topics = rm.topics;

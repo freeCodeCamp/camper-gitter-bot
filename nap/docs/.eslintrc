@@ -1,0 +1,23 @@
+{
+  "env": {
+    "browser": 0
+  },
+ 
+  "globals": {
+    "require": 1,
+    "console": 1
+    "module": 1
+  },
+ 
+  "rules": {
+    "quotes": [2, "double"],
+    "strict": [2, "global"],
+    "no-console": 0
+  },
+
+  "ecmaFeatures": {
+    "blockBindings": true,
+    "forOf": true,
+    "jsx": true
+  },
+}
