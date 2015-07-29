@@ -38,7 +38,7 @@ var KBase = {
         return new Promise(function (fulfill, reject) {
             // could also reject
             var options = null,
-                kbpath = __dirname + "/../../data/*/*md";  // FIXME - works relative?
+                kbpath = __dirname + "/../../data/wiki/*md";  // FIXME - works relative?
 
             // using glob for nested dirs
             glob(kbpath, options, function (err, files) {
