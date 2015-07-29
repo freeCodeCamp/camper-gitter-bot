@@ -97,8 +97,14 @@ var BotCommands = {
     help: function (input, bot) {
         // input;
         // var msg = Utils.makeMessageFromString("help help");
-        return "try typing wiki $topic or topics for a list";
+        // return "try this: `wiki $topic` or topics for a list";
         // return bot.findAnyReply(msg);
+        if (input.params) {
+            return this.wiki(input, bot);
+        } else {
+            var topicData = KBase.getTopicData("help");
+            return topicData.data;
+        }
     },
 
 
@@ -121,7 +127,7 @@ var BotCommands = {
 
     welcome: function (input, bot) {
         var str = "## welcome " + input.message.model.fromUser.username;
-        str += "\n type `help` for some things the bothelp can do.";
+        str += "\n type `help` for some things the bot can do.";
         return str;
     },
 
