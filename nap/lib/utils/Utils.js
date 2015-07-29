@@ -6,7 +6,7 @@ var clc = require("cli-color");
 var AppConfig = require("../../config/AppConfig");
 // var winston = require("winston");
 
-var Logger = require("./Logger.js");
+// var Logger = require("./Logger.js");
 
 
 // console.log("AppConfig required", AppConfig);
@@ -88,7 +88,8 @@ var Utils = {
         }
         str = str.toLowerCase();
         str = str.replace(".md", "");
-        str = str.replace(/([^a-z0-9áéíóúñü_@\-\s\?]|[\t\n\f\r\v\0])/gim, "");
+        // \?   leave Q marks
+        str = str.replace(/([^a-z0-9áéíóúñü_@\-\s]|[\t\n\f\r\v\0])/gim, "");
         return str;
     },
 
@@ -118,9 +119,6 @@ var Utils = {
             default:
                 host = AppConfig.wikiHost + AppConfig.botname;
         }
-
-        // Utils.clog("AppConfig", AppConfig);
-        console.dir(AppConfig);
 
         uri = host + str;
         name = Utils.namify(str);

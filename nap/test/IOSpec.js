@@ -18,7 +18,6 @@ function clog(msg, obj) {
 describe("IO", function () {
 
     it("should load the KBase", function() {
-        expect(KBase.topics).to.be.null;
         var p = KBase.initAsync();
         p.then(function() {
             expect(KBase.topics).not.to.be.null;
@@ -32,14 +31,12 @@ describe("IO", function () {
         expect(res).to.equal("All bot systems are go!");
     });
 
-
     it("command: help", function () {
         var res, msg;
         msg = Utils.makeMessageFromString("help");
         res = GBot.findAnyReply(msg);
         expect(res).to.include("try typing");
     });
-
 
     // // failing for now - need to stip down to the command
     it("command: test with extra words should be ignored", function () {
@@ -48,7 +45,6 @@ describe("IO", function () {
         res = GBot.findAnyReply(msg);
         expect(res).to.equal("All bot systems are go!");
     });
-
 
     it("command: wiki test", function () {
         var res, msg;

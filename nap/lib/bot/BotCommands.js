@@ -6,6 +6,7 @@ var GBot = require("../../lib/bot/GBot.js"),
     Utils = require("../../lib/utils/Utils"),
     AppConfig = require("../../config/AppConfig");
 
+var assert = require("chai").assert;
 
     // Rooms = require('../app/Rooms'),
     // RoomData = require('../../data/RoomData');
@@ -14,9 +15,9 @@ var GBot = require("../../lib/bot/GBot.js"),
 function clog(msg, obj) {
     Utils.clog("BotCommands>", msg, obj);
 }
-function tlog(p1, p2, p3, p4) {
-    Utils.tlog("BotCommands>", p1, p2, p3, p4);
-}
+// function tlog(p1, p2, p3, p4) {
+//     Utils.tlog("BotCommands>", p1, p2, p3, p4);
+// }
 
 
 // var contactBox = "\n if you'd like to help please [get in touch!](https://github.com/freecodecamp/freecodecamp) :thumbsup: ",
@@ -36,8 +37,9 @@ var BotCommands = {
             res = true;
         } else {
             res = false;
-            Utils.warn('not command', input);
-            tlog(`[ isCommand: ${input.keyword} ] one: ${one} | res ${res} ` );
+            Utils.warn('isCommand', 'not command', input);
+            Utils.warn('isCommand',
+                `[ isCommand: ${input.keyword} ] one: ${one} | res ${res} ` );
         }
         return res;
     },
@@ -48,21 +50,8 @@ var BotCommands = {
     },
 
 
-    // checkHelp: function (input) {
-    //     assert.isObject(input, "checkWiki expects an object");
-    //     var wiki, str;
-
-    //     wikiItem = this.checkWiki(input);
-    //     if (wikiItem) {
-    //         return wikiItem;
-    //     }
-    //     // else
-    //     str = "help for **" + input.topic + "**";
-    //     return str;
-    // },
-
     wiki: function(input, bot) {
-        var output = "", topicData, topicWords;
+        var output = "", topicData;
         debugger;
 
         topicData = KBase.getTopicData(input.params);
@@ -76,19 +65,7 @@ var BotCommands = {
             Utils.warn(`cant find topic for [ ${input.params} ]`);
             output = `no wiki entry for ${input.params}`;
         }
-
-        // tlog('wiki input', input);
-        // tlog('wiki output', output);
-
         return output;
-        // res = input.text.match(/^wiki (.*)/);
-        // if (res) {
-        //     input.topic = res[1];
-        //     input.cleanTopic = input.topic.replace(" ", "-").toLowerCase();
-        //     input.type = "wiki";
-        //     return input;
-        // }
-
     },
 
 
@@ -148,17 +125,8 @@ var BotCommands = {
         return str;
     },
 
-    // topic: function (input, bot) {
-    //     if (input.topic) {
-    //         return "/topic " + input.topic;
-    //     } else {
-    //         return "what topic do you want to talk about?"
-    //         bot.say("> type topics for a list of topics")
-    //     }
-    // },
-
     // gitter limits to first 10 lines or so
-    // DOME - pagination
+    // TODO - pagination
     topics: function (input, bot) {
         var str, shortList, list;
         str = "## topics\n";
@@ -184,15 +152,6 @@ var BotCommands = {
         clog("find", str);
         return (str);
     },
-
-    // search: function (input, bot) {
-    //     var str = topLine + wipHeader;
-    //     str += "## search for" + input.text;
-    //     str += "\n results will be here!";
-    //     str += contactBox;
-    //     return str;
-    // },
-
 
     commands: function (input, bot) {
         var str = "## commands:\n";
@@ -225,7 +184,15 @@ var BotCommands = {
 
     camperCount: function (input, bot) {
         return "WIP camperCount";
-    }
+    },
+
+    // search: function (input, bot) {
+    //     var str = topLine + wipHeader;
+    //     str += "## search for" + input.text;
+    //     str += "\n results will be here!";
+    //     str += contactBox;
+    //     return str;
+    // },
 
 };
 

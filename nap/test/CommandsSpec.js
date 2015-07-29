@@ -23,7 +23,6 @@ function checkInput(text) {
 describe("Commands", function () {
 
     it("should load the KBase", function() {
-        expect(KBase.topics).to.be.null;
         var p = KBase.initAsync();
         p.then(function() {
             expect(KBase.topics).not.to.be.null;
@@ -50,7 +49,10 @@ describe("Commands", function () {
 
 
     it("isCommand: menu true", function () {
-        var res = BotCommands.isCommand("menu");
+        var input = {
+            keyword: "menu"
+        }
+        var res = BotCommands.isCommand(input);
         expect(res).to.be.true;
     });
 

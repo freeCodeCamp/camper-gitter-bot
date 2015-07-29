@@ -8,29 +8,23 @@ var GBot = require("../lib/bot/GBot.js"),
 
 
 
-describe("GBot", function () {
+describe("Parser", function () {
 
 
     it("should find a thanks command", function () {
         GBot.init();
         var msg = Utils.messageMock("thanks @bob");
         var res = GBot.parseInput(msg);
-        expect(res.type).to.equal("thanks");
-    });
-
-    it("should parse a thanks command", function () {
-        var str, msg, input;
-        str = "thanks @bob";
-        msg = Utils.makeMessageFromString(str);
-        input = GBot.parseInput(msg);
-        expect(input.type).to.equal("thanks");
+        expect(res.keyword).to.equal("thanks");
+        expect(res.command).to.be.true;
     });
 
     it("should parse a thanks command with a hashtag", function () {
-        GBot.init();
-        var msg = Utils.makeMessageFromString("thanks @bob #tag");
-        var res = GBot.parseInput(msg);
-        expect(res.type).to.equal("thanks");
+        var str, msg, input;
+        str = "thanks @bob #hashtag";
+        msg = Utils.makeMessageFromString(str);
+        input = GBot.parseInput(msg);
+        expect(input.keyword).to.equal("thanks");
     });
 
 

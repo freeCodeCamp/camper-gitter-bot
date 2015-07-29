@@ -18,7 +18,6 @@ function clog(msg, obj) {
 describe("GBot", function () {
 
     it("should load the KBase", function() {
-        expect(KBase.topics).to.be.null;
         var p = KBase.initAsync();
         p.then(function() {
             expect(KBase.topics).not.to.be.null;
@@ -38,15 +37,16 @@ describe("GBot", function () {
         var msg, output;
         msg = Utils.makeMessageFromString("wiki bootstrap");
         output = GBot.parseInput(msg);
-        assert.propertyVal(output, "topic", "bootstrap");
-        assert.propertyVal(output, "type", "wiki");
+        assert.propertyVal(output, "keyword", "wiki");
+        assert.propertyVal(output, "params", "bootstrap");
     });
 
     it("should format non-help as false", function () {
         var msg, output;
         msg = Utils.makeMessageFromString("DONT bootstrap");
         output = GBot.parseInput(msg);
-        assert.propertyVal(output, "type", "basic");
+        // assert.propertyVal(output, "command", false);
+        expect(output).not.to.be.true;
     });
 
     it("should respond to wiki css", function () {
