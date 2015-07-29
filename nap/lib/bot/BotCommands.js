@@ -147,7 +147,7 @@ var BotCommands = {
         });
 
         var timedout = false;
-        request.setTimeout(250, function() {
+        request.setTimeout(1000, function() {
             clog("Request Timedout!");
             timedout = true;
         });

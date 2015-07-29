@@ -828,18 +828,6 @@
 		"side_bar_visible": true,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/config",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/data",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/app",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/bot",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/gitter",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/lib/utils",
-		"/Users/dc/dev/rikai/gitter/gitterbot/nap/test"
-	],
 	"file_history":
 	[
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/docs/TODO.txt",
@@ -1998,7 +1986,7 @@
 		],
 		"width": 602.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
