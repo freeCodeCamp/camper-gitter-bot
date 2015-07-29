@@ -10,8 +10,7 @@
     "cli-color": "",
     "node-gitter": "",
     "simple-node-logger": "",
-    "js-yaml":"",
-    "http-sync":""
+    "js-yaml":""
   },
   "devDependencies": {
     "mocha": "",
