@@ -1,15 +1,22 @@
 TODO
 
-
 find / choose from list
-fix help/choose first matching item
 
-if only one item return right away
+better search / help / find
+    choose first matching item?
+    if only one item return content right away
 
 
+thanks archive
+    read history of messages
+    tag
+    write to file?
+    send link to file?
 
 archiving messages?
 after basic thanks/karma system?
+
+karma code API call to FCC
 
 DM system
 

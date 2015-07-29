@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 var gitterHost = process.env.HOST || 'https://gitter.im';
 var request = require('request');
@@ -14,7 +14,7 @@ var GitterHelper = {
         };
 
         request(options, function(err, res, body) {
-            if (err) return cb(err);
+            if (err) {return cb(err); }
 
             if (res.statusCode === 200) {
                 cb(null, JSON.parse(body));
@@ -34,7 +34,15 @@ var GitterHelper = {
         this.fetch('/api/v1/user/' + user.id + '/rooms', token, function(err, rooms) {
             cb(err, rooms);
         });
+    },
+
+    getMessageHistory: function (room, cb) {
+        
     }
+
 };
+
+
+
 
 module.exports = GitterHelper;

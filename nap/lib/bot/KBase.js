@@ -1,5 +1,7 @@
 "use strict";
 
+var Settings = require('../../config/Settings');
+
 var fs = require("fs"),
     Utils = require('../utils/Utils');
 
@@ -51,7 +53,7 @@ var KBase = {
                     fname = fname.toLowerCase();
                     var topic = fname.replace(".md", "");
                     var data = fs.readFileSync(fpath, "utf8");
-                    data = KBase.processWikiData(data);
+                    data = KBase.trimData(data);
                     var blob = {
                         path: fpath,
                         topic: topic,
@@ -69,9 +71,12 @@ var KBase = {
     },
 
     // we only show the first para
-    processWikiData: function(data){
+    // and limit to 20 lines
+    trimData: function(data){
         var part = data.split("##")[0];
-        return part;
+        var subset = part.split('\n');
+        subset = subset.slice(0, Settings.MaxLines).join('\n');
+        return subset;
     },
 
     getTopicData: function(params) {

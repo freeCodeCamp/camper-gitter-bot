@@ -51,12 +51,13 @@ var BotCommands = {
 
 
     wiki: function(input, bot) {
-        var output = "", topicData;
+        var output = "", topicData, clipping;
         debugger;
 
         topicData = KBase.getTopicData(input.params);
         if (topicData) {
             output = `**${input.params}** wikiEntry\n`;
+            output += KBase.trimData(topicData.data);
             output += topicData.data + "\n";
             output += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)";
             output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";
@@ -69,8 +70,7 @@ var BotCommands = {
     },
 
 
-    thanks: function (input) {
-        // assert.isInstanceOf(input, String)
+    thanks: function (input, bot) {
         assert.isObject(input, "checkThanks expects an object");
         var mentions, output, fromUser, toUser;
 
