@@ -1,5 +1,18 @@
 # GitterBot for FCC
 
+## environment
+
+we're using the latest es6 so best to get an up to date environment.
+at the time of writing iojs was a bit ahead of node so:
+
+```bash
+# ubuntu
+sudo apt-get upgrade
+sudo apt-get install build-essential
+sudo npm install -g n
+sudo n io latest
+```
+
 to run the app you need to auth it with your gitter credentials
 see the `bin/credentials-example.sh` file
 
