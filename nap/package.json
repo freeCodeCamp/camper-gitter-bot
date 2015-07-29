@@ -11,7 +11,7 @@
     "node-gitter": "",
     "simple-node-logger": "",
     "js-yaml":"",
-    "sync-request":""
+    "urllib-sync":""
   },
   "devDependencies": {
     "mocha": "",

@@ -10,6 +10,8 @@ var GBot = require("../../lib/bot/GBot.js"),
     Bonfires = require("../app/Bonfires"),
     InputWrap = require("../bot/InputWrap");
 
+var request = require("urllib-sync").request;
+
 var newline = '\n';
 
     // Rooms = require('../app/Rooms'),
@@ -120,7 +122,39 @@ var BotCommands = {
     },
 
     about: function (input, bot) {
+        // var mentioned = InputWrap.mentioned(input);
+        var mentions, uri, str,res, them, blob, name;
+        mentions = input.message.model.mentions;
+        them = mentions[0];
+        if (!them) {
+            return "you need to ask about @someone!";
+        }
+        clog('them', them);
+        // name = "berkeleytrue";
+        name = them.screenName.toLowerCase();
+        uri = "http://beta.freecodecamp.com/api/users/about?username=" + name;
+        clog("uri", uri);
+        try {
+            res = request('GET', uri);
+        } catch (err) {
+            console.log('err', err);
+            return `unknown user: ${name}`;
+        }
+        blob = JSON.parse(res.getBody() );
+        clog("res", blob);
 
+        str = `
+----
+
+![${them}](https://avatars2.githubusercontent.com/${them}?&s=128) |## [${name}](http://www.freecodecamp.com/${them})
+------------- | -------------
+[github](${blob.about.github})  | bio: ${blob.about.bio}
+----
+        `;
+
+        return str;
+
+        // return "about " + mentioned[0];
     },
 
     thanks: function (input, bot) {
