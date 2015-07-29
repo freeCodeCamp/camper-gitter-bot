@@ -74,8 +74,9 @@ var KBase = {
         return part;
     },
 
-    getTopicData: function(name) {
-        var res;
+    getTopicData: function(params) {
+        var res, name;
+        name = Utils.asFileName(params);
 
         res = KBase.staticReplies[name];
         if (res) {
@@ -92,8 +93,11 @@ var KBase = {
                 // return KBase.topics[name];
             });
         } else{
-            // Utils.info("KB topics loaded ok");
-            return KBase.topics[name];
+            // TODO - better matching algorithm
+            // this has to be a perfect match
+            var match = KBase.topics[name];
+            // console.log(name, match);
+            return match;
         }
 
     },

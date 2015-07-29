@@ -1,5 +1,7 @@
 "use strict";
 
+var assert = require("chai").assert;
+
 var clc = require("cli-color");
 var AppConfig = require("../../config/AppConfig");
 // var winston = require("winston");
@@ -32,6 +34,23 @@ var Utils = {
         obj = obj || "";
         console.log(this.bright(where), this.dimmed(msg), obj);
         // winston.log(where, msg, obj);
+    },
+
+    // log during test
+    tlog: function () {
+        // p1 = p1 || "";
+        // p2 = p2 || "";
+        // p3 = p3 || "";
+        var args = Array.prototype.slice.call(arguments);
+
+        // Array.prototype.push.apply( args, arguments );
+        var p1 = args.shift();
+        var p2 = args.shift();
+        console.log('------');
+        console.log(this.bright(p1), this.dimmed(p2));
+        args.forEach(function(p) {
+            if (p) {console.log(p); }
+        });
     },
 
     warn: function (where, msg, obj) {
@@ -69,13 +88,18 @@ var Utils = {
         }
         str = str.toLowerCase();
         str = str.replace(".md", "");
-        str = str.replace(/([^a-z0-9áéíóúñü_@\-\s]|[\t\n\f\r\v\0])/gim, "");
+        str = str.replace(/([^a-z0-9áéíóúñü_@\-\s\?]|[\t\n\f\r\v\0])/gim, "");
         return str;
     },
 
     // display filenames replace the - with a space
     namify: function (str, opts) {
         str = str.replace(/-/g, " ");
+        return str;
+    },
+
+    asFileName: function (str) {
+        str = str.replace(/ /g, "-");
         return str;
     },
 
@@ -114,11 +138,20 @@ var Utils = {
         return message;
     },
 
-    splitParams: function (input) {
-        var words = input.text.split(" ");
-        input.command = words.shift();
-        input.params = words.join(" ");
-        return input;
+    splitParams: function (text) {
+        assert.isString(text);
+        var keyword, parts, params;
+
+        parts = text.split(" ");
+        keyword = parts.shift();
+        if (parts.length > 0) {
+            params = parts.join(" ");
+        }
+        var res = {
+            keyword: keyword,
+            params: params,
+        };
+        return res;
     }
 
 

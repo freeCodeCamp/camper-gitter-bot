@@ -28,6 +28,59 @@ var GBot = {
         BotCommands.init(this);
     },
 
+    getName: function () {
+        return AppConfig.botname;
+    },
+
+    say: function (text, room) {
+        room.send(text);
+    },
+
+    // main IO routine called from room listener
+    handleReply: function (message) {
+        clog(" in|", message.model.fromUser.username + "> " + message.model.text);
+        var output = this.findAnyReply(message);
+        clog("out| ", output);
+        message.room.send(output);
+        return (output);
+    },
+
+    // search all reply methods
+    // returns a string to send
+    // handleReply takes care of sending to chat system
+    findAnyReply: function (message) {
+        var input, output;
+        debugger;
+        input = this.parseInput(message);
+        if (input.command) {
+            output = BotCommands[input.keyword](input, this);
+        }
+        return output;
+    },
+
+    // turns raw text input into a json format
+    parseInput: function (message) {
+        var cleanText, input;
+
+        cleanText = message.model.text;
+        cleanText = Utils.sanitize(cleanText);
+
+        input = Utils.splitParams(cleanText);
+        input.message = message;
+        input.cleanText = cleanText;
+
+        if (BotCommands.isCommand(input)) {
+            input.command = true;
+        }
+
+        clog("input", input);
+        return input;
+    },
+
+
+    // ---------------- room related ----------------
+
+
     announce: function (opts) {
         this.scanRooms();
         this.joinRoom(opts, true);
@@ -49,168 +102,6 @@ var GBot = {
         });
         return false;
     },
-
-    getName: function () {
-        return AppConfig.botname;
-    },
-
-    say: function (text, room) {
-        room.send(text);
-    },
-
-
-    // when a new user comes into a room
-    // announce: function (opts) {
-    //     clog("Bot.announce", opts);
-
-    getAnnounceMessage: function (opts) {
-        var text = "----\n";
-        if (opts.who && opts.topic) {
-            text += "@" + opts.who + " has a question on\n";
-            text += "## " + opts.topic;
-        } else if (opts.topic) {
-            text += "a question on: **" + opts.topic + "**";
-        } else if (opts.who) {
-            text += "welcome @" + opts.who;
-        }
-        return text;
-    },
-
-    checkWiki: function (input) {
-        var str = "", topicData;
-        assert.isObject(input, "checkWiki expects an object");
-        clog("checkWiki", input);
-        debugger;
-
-        topicData = KBase.getTopicData(input.cleanTopic);
-        if (topicData) {
-            // clog("topic", topic);
-            // str += "## " + input.topic + "\n"
-            str = `**${input.topic}** wikiEntry\n`;
-            str += topicData.data + "\n";
-            // str += "----\n"
-            str += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)";
-            str += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";
-            str += " | [wikilink **" + topicData.topic + "**](" + AppConfig.wikiHost + topicData.topic + ")";
-            return str;
-        } else {
-            Utils.warn("cant find topic for ", input.cleanTopic, "input", input);
-            return null;
-        }
-
-    },
-
-    checkCommands: function (input) {
-        var keyword, cmd, cmds;
-
-        keyword = input.text.split(" ")[0];
-        cmds = BotCommands.cmdList.filter(function (c) {
-            return (c === keyword);
-        });
-        cmd = cmds[0];
-        if (cmd) {
-            input.type = "command";
-            input.command = cmd;
-            input.params = Utils.splitParams(input);
-        }
-        return input;
-    },
-
-    // checkHelp: function (input) {
-    //     assert.isObject(input, "checkWiki expects an object");
-    //     var wiki, str;
-
-    //     wikiItem = this.checkWiki(input);
-    //     if (wikiItem) {
-    //         return wikiItem;
-    //     }
-    //     // else
-    //     str = "help for **" + input.topic + "**";
-    //     return str;
-    // },
-
-    checkThanks: function (input) {
-        // assert.isInstanceOf(input, String)
-        assert.isObject(input, "checkThanks expects an object");
-        var mentions, output, fromUser, toUser;
-
-        clog("thanks input.message>", input.message);
-
-        mentions = input.message.model.mentions;
-        if (mentions) {
-            // TODO - build a list
-            toUser = "@" + mentions[0].screenName;
-        }
-        fromUser = "@" + input.message.model.fromUser.username;
-        output = fromUser + " sends karma to " + toUser;
-        output += "\n :thumbsup: :thumbsup: :thumbsup: :thumbsup: :thumbsup: :sparkles: :sparkles: ";
-        return output;
-    },
-
-    // turns raw text input into a json format
-    parseInput: function (message) {
-        var res, cleanText, input;
-
-        cleanText = message.model.text;
-        cleanText = cleanText.valueOf(); // get value so we avoid circular refs with input.msg
-        cleanText = Utils.sanitize(cleanText);
-
-        // TODO sanitize
-        input = {
-            text: cleanText,
-            message: message,
-            type: "basic"
-        };
-        // console.log("input", input)
-        // res = input.text.match(/(thanks|ty|thank you) \@(.*)/i)
-        res = input.text.match(/thanks @(.*)/i);
-        if (res) {
-            input.type = "thanks";
-            return input;
-        }
-        // console.log("============ check ", input.text)
-        // console.log("res", res)
-        // console.log("input", input)
-
-        res = input.text.match(/^wiki (.*)/);
-        if (res) {
-            input.topic = res[1];
-            input.cleanTopic = input.topic.replace(" ", "-").toLowerCase();
-            input.type = "wiki";
-            return input;
-        }
-
-        input = this.checkCommands(input);
-
-        clog("input", input);
-        return input;
-    },
-
-    // search all reply methods
-    // returns a string to send
-    // sendReply takes care of sending to chat system
-    findAnyReply: function (message) {
-        debugger;
-        var res, input;
-        input = this.parseInput(message);
-
-        switch (input.type) {
-            case "wiki":
-                res = this.checkWiki(input);
-                break;
-            case "thanks":
-                res = this.checkThanks(input);
-                break;
-            case "command":
-                res = BotCommands[input.command](input, this);
-                break;
-            default:
-                res = null;
-                // res = "no response";
-        }
-        return res;
-    },
-
 
     // checks if joined already, otherwise adds
     addToRoomList: function (room) {
@@ -242,6 +133,20 @@ var GBot = {
         return false;
     },
 
+
+    getAnnounceMessage: function (opts) {
+        var text = "----\n";
+        if (opts.who && opts.topic) {
+            text += "@" + opts.who + " has a question on\n";
+            text += "## " + opts.topic;
+        } else if (opts.topic) {
+            text += "a question on: **" + opts.topic + "**";
+        } else if (opts.who) {
+            text += "welcome @" + opts.who;
+        }
+        return text;
+    },
+
     // listen to a know room
     // does a check to see if not already joined according to internal data
     listenToRoom: function (room) {
@@ -265,16 +170,8 @@ var GBot = {
                 return;
             }
             message.room = room; // why don't gitter do this?
-            GBot.sendReply(message);
+            GBot.handleReply(message);
         });
-    },
-
-    sendReply: function (message) {
-        clog(" in|", message.model.fromUser.username + "> " + message.model.text);
-        var output = this.findAnyReply(message);
-        clog("out| ", output);
-        message.room.send(output);
-        return (output);
     },
 
     // this joins rooms contained in the data/RoomData.js file

@@ -1,3 +1,5 @@
+"use strict";
+
 var gitterHost = process.env.HOST || 'https://gitter.im';
 
 var _ = require("underscore");
@@ -11,13 +13,15 @@ function handleCallback(err, res) {
 }
 
 // FIXME - this gets overwritten when the web app logs in
-AppConfig = {
-    token: "c082087ee20ec81ae6b29e89cd0cafe523076e58",
-    roomId: "55b1a9030fc9f982beaac901",
-    user: {
-        id: '535b4f90fe5536b46433d746'
-    }
-}
+// AppConfig = {
+//     token: "c082087ee20ec81ae6b29e89cd0cafe523076e58",
+//     roomId: "55b1a9030fc9f982beaac901",
+//     user: {
+//         id: '535b4f90fe5536b46433d746'
+//     }
+// }
+
+var AppConfig = require("../../../config/AppConfig");
 
 
 // Gitter API client helper
@@ -35,11 +39,11 @@ var gitter = {
     },
 
     checkUser: function(user) {
-        if (user == '[') {
-            console.error("WTF user is [")
+        if (user === '[') {
+            console.error("WTF user is [");
             user = AppConfig.user;
         }
-        return(user);
+        return (user);
     },
 
     fetch: function(path, token, cb, opts) {
@@ -79,7 +83,7 @@ var gitter = {
         user = this.checkUser(user);
         token = this.stashToken(token);
         this.fetch('/api/v1/user/' + user.id + '/rooms', token, function(err, rooms) {
-            console.log("rooms", rooms);
+            // console.log("rooms", rooms);
             cb(err, rooms);
         });
     },

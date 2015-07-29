@@ -3,7 +3,9 @@
 
 var GBot = require("../../lib/bot/GBot.js"),
     KBase = require("../bot/KBase"),
-    Utils = require("../../lib/utils/Utils");
+    Utils = require("../../lib/utils/Utils"),
+    AppConfig = require("../../config/AppConfig");
+
 
     // Rooms = require('../app/Rooms'),
     // RoomData = require('../../data/RoomData');
@@ -12,6 +14,10 @@ var GBot = require("../../lib/bot/GBot.js"),
 function clog(msg, obj) {
     Utils.clog("BotCommands>", msg, obj);
 }
+function tlog(p1, p2, p3, p4) {
+    Utils.tlog("BotCommands>", p1, p2, p3, p4);
+}
+
 
 // var contactBox = "\n if you'd like to help please [get in touch!](https://github.com/freecodecamp/freecodecamp) :thumbsup: ",
 //     topLine = "----\n",
@@ -19,6 +25,91 @@ function clog(msg, obj) {
 
 
 var BotCommands = {
+
+    isCommand: function (input) {
+        var cmds, one, res;
+        cmds = BotCommands.cmdList.filter(function (c) {
+            return (c === input.keyword);
+        });
+        one = cmds[0];
+        if (one) {
+            res = true;
+        } else {
+            res = false;
+            Utils.warn('not command', input);
+            tlog(`[ isCommand: ${input.keyword} ] one: ${one} | res ${res} ` );
+        }
+        return res;
+    },
+
+    test: function (input, bot) {
+        var msg = "All bot systems are go!";
+        return msg;
+    },
+
+
+    // checkHelp: function (input) {
+    //     assert.isObject(input, "checkWiki expects an object");
+    //     var wiki, str;
+
+    //     wikiItem = this.checkWiki(input);
+    //     if (wikiItem) {
+    //         return wikiItem;
+    //     }
+    //     // else
+    //     str = "help for **" + input.topic + "**";
+    //     return str;
+    // },
+
+    wiki: function(input, bot) {
+        var output = "", topicData, topicWords;
+        debugger;
+
+        topicData = KBase.getTopicData(input.params);
+        if (topicData) {
+            output = `**${input.params}** wikiEntry\n`;
+            output += topicData.data + "\n";
+            output += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)";
+            output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";
+            output += " | [wikilink **" + topicData.topic + "**](" + AppConfig.wikiHost + topicData.topic + ")";
+        } else {
+            Utils.warn(`cant find topic for [ ${input.params} ]`);
+            output = `no wiki entry for ${input.params}`;
+        }
+
+        // tlog('wiki input', input);
+        // tlog('wiki output', output);
+
+        return output;
+        // res = input.text.match(/^wiki (.*)/);
+        // if (res) {
+        //     input.topic = res[1];
+        //     input.cleanTopic = input.topic.replace(" ", "-").toLowerCase();
+        //     input.type = "wiki";
+        //     return input;
+        // }
+
+    },
+
+
+    thanks: function (input) {
+        // assert.isInstanceOf(input, String)
+        assert.isObject(input, "checkThanks expects an object");
+        var mentions, output, fromUser, toUser;
+
+        clog("thanks input.message>", input.message);
+
+        mentions = input.message.model.mentions;
+        if (mentions) {
+            // TODO - build a list
+            toUser = "@" + mentions[0].screenName;
+        }
+        fromUser = "@" + input.message.model.fromUser.username;
+        output = fromUser + " sends karma to " + toUser;
+        output += "\n :thumbsup: :thumbsup: :thumbsup: :thumbsup: :thumbsup: :sparkles: :sparkles: ";
+        return output;
+    },
+
 
     init: function (bot) {
         // FIXME - this is sketchy storing references like a global
@@ -33,10 +124,6 @@ var BotCommands = {
         // return bot.findAnyReply(msg);
     },
 
-    test: function (input, bot) {
-        var msg = "All bot systems are go!";
-        return msg;
-    },
 
     menu: function (input, bot) {
         var msg = "type help for a list of things the bot can do";
@@ -80,8 +167,8 @@ var BotCommands = {
             return (Utils.linkify(t, "wiki"));
         });
         str += list.join("\n");
-        clog("shortList", shortList);
-        clog("topics", str);
+        // clog("shortList", shortList);
+        // clog("topics", str);
         // return "list"
         return str;
     },

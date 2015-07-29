@@ -1,10 +1,12 @@
+"use strict";
+
 var https = require('https');
 
 function listenToRoom(roomId, bot) {
     var token = process.env.GITTER_USER_TOKEN;
     var heartbeat = " \n";
 
-    console.log("listenToRoom", roomId)
+    console.log("listenToRoom", roomId);
 
     var options = {
         hostname: 'stream.gitter.im',
@@ -18,9 +20,9 @@ function listenToRoom(roomId, bot) {
 
     var req = https.request(options, function(res) {
         res.on('data', function(chunk) {
-            var msg = chunk.toString();
+            var blob, msg = chunk.toString();
             if (msg !== heartbeat) {
-                console.log('Message: ' + msg);
+                // console.log('Message: ' + msg);
                 blob = JSON.parse(msg);
                 blob.roomId = roomId;
                 bot.reply(blob);

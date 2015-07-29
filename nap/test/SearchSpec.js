@@ -20,11 +20,11 @@ describe("Search", function (){
         expect(res).to.match(/^find \*\*/);
     });
 
-    it("should have a find method that takes parameters", function() {
-        var msg = Utils.makeMessageFromString("find css");
-        var res = GBot.findAnyReply(msg);
-        expect(res).to.match(/^find \*\*css\*\*/);
-    });
+    // it("should have a find method that takes parameters", function() {
+    //     var msg = Utils.makeMessageFromString("find css");
+    //     var res = GBot.findAnyReply(msg);
+    //     expect(res).to.match(/^find \*\*css\*\*/);
+    // });
 
     it("should accept a find method ", function() {
 
