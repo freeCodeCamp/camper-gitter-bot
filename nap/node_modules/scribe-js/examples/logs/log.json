@@ -1,0 +1,1 @@
+{"name":"log","type":"log","colors":"white","tagsColors":"red","timeColors":["grey","underline"],"dateColors":["gray","bgMagenta"],"fileColors":"white","lineColors":["yellow","inverse"],"logInConsole":true,"alwaysTags":true,"alwaysLocation":false,"alwaysTime":false,"alwaysDate":false}

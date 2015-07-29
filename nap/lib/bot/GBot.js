@@ -77,27 +77,31 @@ var GBot = {
     },
 
     checkWiki: function (input) {
+        var str = "", topicData;
         assert.isObject(input, "checkWiki expects an object");
-        var topic, str = "";
         clog("checkWiki", input);
+        debugger;
 
-        topic = KBase.staticReplies[input.cleanTopic];
-        if (topic) {
+        topicData = KBase.getTopicData(input.cleanTopic);
+        if (topicData) {
             // clog("topic", topic);
             // str += "## " + input.topic + "\n"
-            str += topic.data + "\n";
+            str = `**${input.topic}** wikiEntry\n`;
+            str += topicData.data + "\n";
             // str += "----\n"
             str += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)";
-            str += " [PM CamperBot](" + AppConfig.topicDmUri(topic.topic) + ")";
-            str += " | [wikilink **" + topic.topic + "**](" + AppConfig.wikiHost + topic.topic + ")";
+            str += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";
+            str += " | [wikilink **" + topicData.topic + "**](" + AppConfig.wikiHost + topicData.topic + ")";
             return str;
+        } else {
+            Utils.warn("cant find topic for ", input.cleanTopic, "input", input);
+            return null;
         }
-        // else
-        return null;
+
     },
 
     checkCommands: function (input) {
-        var keyword, cmd, cmds, res;
+        var keyword, cmd, cmds;
 
         keyword = input.text.split(" ")[0];
         cmds = BotCommands.cmdList.filter(function (c) {
@@ -105,30 +109,29 @@ var GBot = {
         });
         cmd = cmds[0];
         if (cmd) {
-            input = Utils.splitParams(input);
-            res = BotCommands[cmd](input, this);
-            return res;
+            input.type = "command";
+            input.command = cmd;
+            input.params = Utils.splitParams(input);
         }
-        return false;
+        return input;
     },
 
-    checkHelp: function (input) {
-        assert.isObject(input, "checkHelp expects an object");
-        var wiki, str;
+    // checkHelp: function (input) {
+    //     assert.isObject(input, "checkWiki expects an object");
+    //     var wiki, str;
 
-        wiki = this.checkWiki(input);
-        if (wiki) {
-            return wiki;
-        }
-        // else
-        str = "help for **" + input.topic + "**";
-        return str;
-    },
+    //     wikiItem = this.checkWiki(input);
+    //     if (wikiItem) {
+    //         return wikiItem;
+    //     }
+    //     // else
+    //     str = "help for **" + input.topic + "**";
+    //     return str;
+    // },
 
     checkThanks: function (input) {
         // assert.isInstanceOf(input, String)
         assert.isObject(input, "checkThanks expects an object");
-        assert.isTrue(input.thanks);
         var mentions, output, fromUser, toUser;
 
         clog("thanks input.message>", input.message);
@@ -156,28 +159,28 @@ var GBot = {
         input = {
             text: cleanText,
             message: message,
-            help: false,
-            thanks: false
+            type: "basic"
         };
         // console.log("input", input)
         // res = input.text.match(/(thanks|ty|thank you) \@(.*)/i)
         res = input.text.match(/thanks @(.*)/i);
         if (res) {
-            input.thanks = true;
+            input.type = "thanks";
             return input;
         }
         // console.log("============ check ", input.text)
         // console.log("res", res)
         // console.log("input", input)
 
-        res = input.text.match(/^(help|wiki|check|hint|tip) (.*)/);
+        res = input.text.match(/^wiki (.*)/);
         if (res) {
-            input.topic = res[2];
+            input.topic = res[1];
             input.cleanTopic = input.topic.replace(" ", "-").toLowerCase();
-            input.help = true;
-            input.intent = res[1];
+            input.type = "wiki";
             return input;
         }
+
+        input = this.checkCommands(input);
 
         clog("input", input);
         return input;
@@ -185,20 +188,27 @@ var GBot = {
 
     // search all reply methods
     // returns a string to send
+    // sendReply takes care of sending to chat system
     findAnyReply: function (message) {
-        var res;
-        var input = this.parseInput(message);
+        debugger;
+        var res, input;
+        input = this.parseInput(message);
 
-        if (input.help) {
-            return this.checkHelp(input);
-        } else if (input.thanks) {
-            return this.checkThanks(input);
-        } else if (res = this.checkCommands(input)) {
-            return res;
+        switch (input.type) {
+            case "wiki":
+                res = this.checkWiki(input);
+                break;
+            case "thanks":
+                res = this.checkThanks(input);
+                break;
+            case "command":
+                res = BotCommands[input.command](input, this);
+                break;
+            default:
+                res = null;
+                // res = "no response";
         }
-        // else
-        return null;
-
+        return res;
     },
 
 

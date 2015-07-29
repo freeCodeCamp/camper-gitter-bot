@@ -1,26 +1,26 @@
 "use strict";
 
-var _ = require("underscore");
+// var _ = require("underscore");
 
-var RoomData = require('../../data/RoomData.js'),
-    Utils = require('../utils/Utils');
+var RoomData = require('../../data/RoomData.js');
 
 var Rooms = {
 
     findByTopic: function(topic) {
-        x+1;
 
         var rooms = RoomData.filter(function(rm) {
             var topics = rm.topics;
-            if (!topics) return false;
+            if (!topics) {
+                return false;
+            }
 
-            if (topics.indexOf(topic) != -1) {
+            if (topics.indexOf(topic) !== -1) {
                 return true;
             }
             return false;
-        })
+        });
 
-        return (this.checkRoom(rooms[0], 'findByTopic', topic))
+        return (this.checkRoom(rooms[0], 'findByTopic', topic));
     },
 
     // var rooms = GBot.roomList.filter(function(rm) {
@@ -35,24 +35,27 @@ var Rooms = {
 
     findByName: function(name) {
         var rooms = RoomData.filter( function(rm) {
-            return (rm.name == name);
-        })
-        return (this.checkRoom(rooms[0], 'findByName', name))
+            return (rm.name === name);
+        });
+        return (this.checkRoom(rooms[0], 'findByName', name));
     },
 
     names: function() {
         this.roomList = RoomData.map(function(room) {
-            return room.name
-        })
+            return room.name;
+        });
         return this.roomList;
     },
 
     checkRoom: function(room, how, tag) {
-        if (room) return room;
+        if (room) {
+            return room;
+        }
         // Utils.warn("Rooms", "failed", how, tag);
         return (RoomData.defaultRoom);  // careful, this is a property not a func
     }
 
 };
+
 
 module.exports = Rooms;

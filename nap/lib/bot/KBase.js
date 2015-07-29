@@ -4,11 +4,14 @@ var fs = require("fs"),
     Utils = require('../utils/Utils');
 
 function clog(msg, obj) {
-    Utils.clog("Kbase", msg, obj)
+    Utils.clog("Kbase", msg, obj);
 }
+
+var glob = require("glob");
 
 var KBase = {
     files: [],
+    topics: null,
 
     staticReplies: {
         ebn: "this is the ebn test response",
@@ -32,67 +35,79 @@ var KBase = {
     initAsync: function() {
         return new Promise(function (fulfill, reject) {
             // could also reject
-            var glob = require("glob"),
-                options = null,
+            var options = null,
                 kbpath = __dirname + "/../../data/*/*md";  // FIXME - works relative?
 
             // using glob for nested dirs
             glob(kbpath, options, function (err, files) {
                 // clog("files> ", files);
                 KBase.files = files;
-                KBase.topicList = []
+                KBase.topicList = [];
 
-                KBase.topics = {}
+                KBase.topics = {};
                 KBase.files.map(function(fpath) {
                     var arr = fpath.split("/");
                     var fname = arr[arr.length - 1];
                     fname = fname.toLowerCase();
                     var topic = fname.replace(".md", "");
-                    var data = fs.readFileSync(fpath, "utf8")
+                    var data = fs.readFileSync(fpath, "utf8");
                     data = KBase.processWikiData(data);
                     var blob = {
                         path: fpath,
                         topic: topic,
                         fname: fname,
                         data: data
-                    }
+                    };
                     KBase.topicList.push(topic);
                     KBase.topics[topic] = blob;
                     // clog("blob", blob);
                 });
-                clog("topicList", KBase.topicList);
+                // clog("topicList", KBase.topicList);
                 fulfill(KBase.topics);
-            });    
-        })
+            });
+        });
     },
 
     // we only show the first para
     processWikiData: function(data){
-        var part = data.split("##")[0]
+        var part = data.split("##")[0];
         return part;
     },
 
-    getTopic: function(name) {
+    getTopicData: function(name) {
+        var res;
+
+        res = KBase.staticReplies[name];
+        if (res) {
+            return (res);
+        }
+
+        // FIXME - this is only first time
         if (!KBase.topics) {
+            Utils.warn("loading kbase >");
             var p = KBase.initAsync();
-            p.then(function(res) {
-                return KBase.topics[name];
-            })
+            p.then(function() {
+                Utils.warn("< loaded");
+                KBase.getTopicData(name);  // dangerous
+                // return KBase.topics[name];
+            });
         } else{
+            // Utils.info("KB topics loaded ok");
             return KBase.topics[name];
         }
+
     },
 
     findTopics: function(keyword) {
         var shortList = KBase.topicList.filter(function(t){
-            return (t.indexOf(keyword) != -1)
-        })
-        if (shortList.length == 0) {
-            return "nothing found"
+            return (t.indexOf(keyword) !== -1);
+        });
+        if (shortList.length === 0) {
+            return "nothing found";
         }
         // else
         var findResults = "";
-        for (var i=0; i<shortList.length; i++) {
+        for (var i = 0; i < shortList.length; i++) {
             var item = shortList[i];
             var link = Utils.linkify(item, 'wiki');
             var line = `\n[${i}] ${link}`;
@@ -101,7 +116,7 @@ var KBase = {
         return findResults;
     }
 
-}
+};
 
 module.exports = KBase;
 

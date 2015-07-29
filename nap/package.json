@@ -8,7 +8,8 @@
     "underscore": "",
     "glob": "",
     "cli-color": "",
-    "node-gitter": ""
+    "node-gitter": "",
+    "simple-node-logger": ""
   },
   "devDependencies": {
     "mocha": "",

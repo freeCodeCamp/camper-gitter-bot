@@ -2,36 +2,38 @@
 "use strict";
 
 
-if ('function' !== typeof Map) throw new Error("ES6 is required; add --harmony");
 
-var express = require('express');
+if (typeof Map !== "function" ) {
+    throw new Error("ES6 is required; add --harmony");
+}
+
+var express = require("express");
 var port = process.env.PORT || 7000;
 var passport = require("./lib/gitter/passportModule");
 
 // other requires
-var AppConfig = require("./config/AppConfig"),
-    GBot = require("./lib/bot/GBot"),
-    Utils = require("./lib/utils/Utils"),
+var GBot = require("./lib/bot/GBot"),
     routes = require("./lib/app/routes.js");
 
-// Utils.cls();
 
+
+// Utils.cls();
 
 // Client OAuth configuration
 
 var app = express();
 
 // Middlewares
-app.set('view engine', 'jade');
-app.set('views', __dirname + '/views');
+app.set("view engine", "jade");
+app.set("views", __dirname + "/views");
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + "/public"));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.session({
-    secret: 'keyboard cat'
+    secret: "keyboard cat"
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -40,7 +42,7 @@ app.use(app.router);
 
 
 // gitter.currentUser().then(function(user) {
-//     console.log('You are logged in as:', user.username);
+//     console.log("You are logged in as:", user.username);
 // });
 
 
@@ -54,4 +56,4 @@ routes.init(app, GBot, passport);
 
 
 app.listen(port);
-console.log('Demo app running at http://localhost:' + port);
+console.log("Demo app running at http://localhost:" + port);

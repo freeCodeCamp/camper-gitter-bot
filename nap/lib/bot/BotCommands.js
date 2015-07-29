@@ -1,7 +1,5 @@
 /*jslint todo: true */
-
 "use strict";
-
 
 var GBot = require("../../lib/bot/GBot.js"),
     KBase = require("../bot/KBase"),
@@ -15,9 +13,9 @@ function clog(msg, obj) {
     Utils.clog("BotCommands>", msg, obj);
 }
 
-var contactBox = "\n if you'd like to help please [get in touch!](https://github.com/freecodecamp/freecodecamp) :thumbsup: ",
-    topLine = "----\n",
-    wipHeader = "\n work in progress!";
+// var contactBox = "\n if you'd like to help please [get in touch!](https://github.com/freecodecamp/freecodecamp) :thumbsup: ",
+//     topLine = "----\n",
+//     wipHeader = "\n work in progress!";
 
 
 var BotCommands = {
@@ -28,14 +26,19 @@ var BotCommands = {
         BotCommands.bot = bot;
     },
 
-    menu: function (input, bot) {
+    help: function (input, bot) {
         // input;
-        var msg = Utils.makeMessageFromString('help help');
+        var msg = Utils.makeMessageFromString("help help");
         return bot.findAnyReply(msg);
     },
 
     test: function (input, bot) {
         var msg = "All bot systems are go!";
+        return msg;
+    },
+
+    menu: function (input, bot) {
+        var msg = "type help for a list of things the bot can do";
         return msg;
     },
 
@@ -73,7 +76,7 @@ var BotCommands = {
         str = "## topics\n";
         shortList = KBase.topicList.slice(0, 10);
         list = shortList.map(function (t) {
-            return (Utils.linkify(t, 'wiki'));
+            return (Utils.linkify(t, "wiki"));
         });
         str += list.join("\n");
         clog("shortList", shortList);
@@ -88,7 +91,7 @@ var BotCommands = {
         bot.context = {
             state: "finding",
             commands: shortList.commands
-        }
+        };
         str += shortList;
         clog("find", str);
         return (str);
@@ -101,6 +104,7 @@ var BotCommands = {
     //     str += contactBox;
     //     return str;
     // },
+
 
     commands: function (input, bot) {
         var str = "## commands:\n";
@@ -115,19 +119,19 @@ var BotCommands = {
         return "rejoined";
     },
     music: function (input, bot) {
-        var str = "## Music!"
-        str += "\n http://plug.dj/freecodecamp"
-        return str
-    },
-
-    rickroll: function (input, bot) {
-        var fromUser = "@" + input.message.model.fromUser.username
-        var str = fromUser + " has a nice video"
-        str += "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        var str = "## Music!";
+        str += "\n http://plug.dj/freecodecamp";
         return str;
     },
 
-    'wiki-update': function (input, bot) {
+    rickroll: function (input, bot) {
+        var fromUser = "@" + input.message.model.fromUser.username;
+        var str = fromUser + " has a nice video";
+        str += "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        return str;
+    },
+
+    wikiUpdate: function (input, bot) {
         return "WIP wiki-update";
     },
 
@@ -135,11 +139,11 @@ var BotCommands = {
         return "WIP camperCount";
     }
 
-}
+};
 
 
 // setup aliases
-BotCommands.help = BotCommands.menu;
+// BotCommands.help = BotCommands.menu;
 BotCommands.hi = BotCommands.welcome;
 // BotCommands.bothelp = BotCommands.menu;
 BotCommands.hello = BotCommands.welcome;
