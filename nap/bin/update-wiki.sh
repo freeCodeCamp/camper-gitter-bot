@@ -19,5 +19,8 @@ cd ../..
 
 cd data/fcc.wiki
 git pull
-
 cd ../..
+
+
+cp data/kbase.wiki/*md data/wiki
+cp data/fcc.wiki/*md data/wiki

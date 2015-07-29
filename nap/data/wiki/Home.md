@@ -1,1 +1,1 @@
-Welcome to the bothelp kbase wiki!
+Welcome to the freecodecamp wiki!
