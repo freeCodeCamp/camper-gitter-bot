@@ -102,7 +102,7 @@ var BotCommands = {
         if (input.params) {
             return this.wiki(input, bot);
         } else {
-            var topicData = KBase.getTopicData("help");
+            var topicData = KBase.getTopicData("bothelp");
             return topicData.data;
         }
     },
