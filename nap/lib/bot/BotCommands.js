@@ -28,8 +28,9 @@ var BotCommands = {
 
     help: function (input, bot) {
         // input;
-        var msg = Utils.makeMessageFromString("help help");
-        return bot.findAnyReply(msg);
+        // var msg = Utils.makeMessageFromString("help help");
+        return "try typing wiki $topic or topics for a list";
+        // return bot.findAnyReply(msg);
     },
 
     test: function (input, bot) {
