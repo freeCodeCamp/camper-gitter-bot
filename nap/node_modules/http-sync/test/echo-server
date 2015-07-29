@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+'use strict';
+
+var http = require('http');
+
+var webPort = +process.argv[2];
+
+function respondJSON(req, res) {
+  var body = '';
+  req.setEncoding('utf8');
+  req.on('data', function(chunk) { body += chunk; });
+  req.on('end', function() {
+    res.end(JSON.stringify({
+      headers: req.headers,
+      method: req.method,
+      url: req.url,
+      body: body
+    }));
+  });
+}
+
+http.createServer(respondJSON).listen(webPort);
