@@ -6,7 +6,9 @@ var assert = require("chai").assert,
 var GBot = require("../lib/bot/GBot.js"),
     BotCommands = require("../lib/bot/BotCommands"),
     Utils = require("../lib/utils/Utils"),
-    KBase = require("../lib/bot/KBase.js");
+    KBase = require("../lib/bot/KBase.js"),
+    TestHelper = require('./TestHelper');
+
 
 function clog(msg, obj) {
     Utils.clog("KbaseSpec>", msg, obj);
@@ -60,6 +62,21 @@ describe("Commands", function () {
     it("isCommand: XXXX false", function () {
         var res = BotCommands.isCommand("XXXX");
         expect(res).to.be.false;
+    });
+
+
+    it("should show archives", function() {
+        var archive = BotCommands.archive(TestHelper.stubInput);
+        expect(archive).not.to.be.null;
+        expect(archive).to.include("Archives for ")
+    });
+
+
+    it("should show about @mention", function() {
+        var msg = "";
+        var archive = BotCommands.archive(TestHelper.stubInput);
+        expect(archive).not.to.be.null;
+        expect(archive).to.include("archive for ")
     });
 
 

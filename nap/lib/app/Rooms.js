@@ -2,7 +2,9 @@
 
 // var _ = require("underscore");
 
-var RoomData = require('../../data/RoomData.js');
+var RoomData = require('../../data/RoomData.js'),
+    Bonfires = require('./Bonfires'),
+    AppConfig = require('../../config/AppConfig');
 
 var Rooms = {
 
@@ -53,7 +55,15 @@ var Rooms = {
         }
         // Utils.warn("Rooms", "failed", how, tag);
         return (RoomData.defaultRoom);  // careful, this is a property not a func
-    }
+    },
+
+    // bonfireRooms: function() {
+    //     var list = Bonfires.data.challenges.map(function(item) {
+    //         var roomLink = item.dashedName();
+    //         return roomLink;
+    //     })
+    //     return(list);
+    // }
 
 };
 

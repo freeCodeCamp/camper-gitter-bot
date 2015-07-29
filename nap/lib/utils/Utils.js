@@ -3,6 +3,7 @@
 var assert = require("chai").assert;
 
 var clc = require("cli-color");
+var _ = require('lodash-node');
 var AppConfig = require("../../config/AppConfig");
 // var winston = require("winston");
 
@@ -147,9 +148,50 @@ var Utils = {
         }
         var res = {
             keyword: keyword,
-            params: params,
+            params: params
         };
         return res;
+    },
+
+    checkNotNull: function (item, msg) {
+        if (item) {
+            return true; // means OK
+        } else {
+            this.error(msg);
+            return false;
+        }
+    },
+
+    makeUrlList: function(items, where) {
+        var out = "";
+        if (!items) {
+            Utils.error("tried to makeUrlList for no items");
+            return;
+        }
+        out += items.map(function(one) {
+            var uri = "http://" + AppConfig[where] + one;
+            return `\n[${one}](${uri})`;
+        });
+        return out;
+    },
+
+    timeStamp: function(when, baseDate) {
+        var d1, timestamp, month;
+        baseDate = baseDate || new Date();
+        d1 = new Date();
+
+        switch(when) {
+            case 'yesterday':
+            default:
+                d1.setDate(baseDate.getDate() - 1);
+        }
+
+        month = (d1.getMonth() + 1);
+        month = _.padLeft(month, 2, '0');
+
+        timestamp = d1.getFullYear() + '/' + month + '/' + d1.getDate();
+        return timestamp;
+
     }
 
 

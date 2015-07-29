@@ -10,7 +10,8 @@ var AppConfig = require("../../config/AppConfig"),
     RoomData = require("../../data/RoomData"),
     Utils = require("../../lib/utils/Utils"),
     KBase = require("../../lib/bot/KBase"),
-    BotCommands = require("../../lib/bot/BotCommands");
+    BotCommands = require("../../lib/bot/BotCommands"),
+    Bonfires = require("../app/Bonfires");
 
 function clog(msg, obj) {
     Utils.clog("GBot>", msg, obj);
@@ -24,6 +25,7 @@ var GBot = {
         this.roomList = [];
         this.gitter = new Gitter(AppConfig.token);
         this.joinKnownRooms();
+        this.joinBonfireRooms();
         this.scanRooms();
         BotCommands.init(this);
     },
@@ -184,11 +186,27 @@ var GBot = {
             // clog("gitter.rooms", that.gitter.rooms);
             that.gitter.rooms.join(roomUrl, function (err, room) {
                 if (err) {
-                    console.warn("Not possible to join the room:", err, roomUrl);
+                    // Utils.warn("Not possible to join the room:", err, roomUrl);
                     return;
                 }
                 that.listenToRoom(room);
                 clog("joined> ", room.name);
+            });
+        });
+    },
+
+
+    joinBonfireRooms: function () {
+        var that = this;
+        Bonfires.allDashedNames().map(function (name) {
+            var roomUrl = AppConfig.botname + "/" + name;
+            // Utils.clog("bf room", roomUrl);
+            that.gitter.rooms.join(roomUrl, function (err, room) {
+                if (err) {
+                    // Utils.warn("Not possible to join the room:", err, roomUrl);
+                    return;
+                }
+                that.listenToRoom(room);
             });
         });
     },

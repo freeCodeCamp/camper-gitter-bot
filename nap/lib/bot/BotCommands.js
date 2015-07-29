@@ -1,12 +1,16 @@
 /*jslint todo: true */
 "use strict";
 
+var assert = require("chai").assert;
+
 var GBot = require("../../lib/bot/GBot.js"),
     KBase = require("../bot/KBase"),
     Utils = require("../../lib/utils/Utils"),
-    AppConfig = require("../../config/AppConfig");
+    AppConfig = require("../../config/AppConfig"),
+    Bonfires = require("../app/Bonfires"),
+    InputWrap = require("../bot/InputWrap");
 
-var assert = require("chai").assert;
+var newline = '\n';
 
     // Rooms = require('../app/Rooms'),
     // RoomData = require('../../data/RoomData');
@@ -15,6 +19,13 @@ var assert = require("chai").assert;
 function clog(msg, obj) {
     Utils.clog("BotCommands>", msg, obj);
 }
+
+function tlog(msg, obj) {
+    Utils.warn("BotCommands>", msg, obj);
+}
+
+
+
 // function tlog(p1, p2, p3, p4) {
 //     Utils.tlog("BotCommands>", p1, p2, p3, p4);
 // }
@@ -69,6 +80,48 @@ var BotCommands = {
         return output;
     },
 
+    // bonfire features
+    hint: function(input, bot) {
+        var str;
+        str = Bonfires.getHint(input);
+        return (str);
+    },
+
+    links: function(input, bot) {
+        var str;
+        str = Bonfires.getLinksFromInput(input);
+        return str;
+    },
+
+    seed: function(input, bot) {
+        var str;
+        str = Bonfires.getChallengeSeedFromInput(input);
+        return str;
+    },
+
+    archive: function(input, bot) {
+        var str, roomName, shortName, roomUri, timeStamp;
+        roomName = input.message.room.name;
+        shortName = InputWrap.roomShortName(input);
+
+        roomUri = AppConfig.gitterHost + roomName + "/archives/" ;
+        str = "Archives for **" + shortName + "**" + newline;
+        str += "\n- [All Time](" + roomUri + "all)";
+
+        timeStamp = Utils.timeStamp("yesterday");
+        str += "\n- [Yesterday](" + roomUri + timeStamp + ")";
+
+        // tlog(str);
+
+        return str;
+        // https://gitter.im/dcsan/botzy/archives/all
+        // date ; //# => Thu Mar 31 2011 11:14:50 GMT+0200 (CEST)        
+        // https://gitter.im/bothelp/GeneralChat/archives/2015/07/25
+    },
+
+    about: function (input, bot) {
+
+    },
 
     thanks: function (input, bot) {
         assert.isObject(input, "checkThanks expects an object");

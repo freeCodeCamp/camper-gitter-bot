@@ -15,7 +15,7 @@ var passport = require("./lib/gitter/passportModule");
 var GBot = require("./lib/bot/GBot"),
     routes = require("./lib/app/routes.js");
 
-
+var Bonfires = require('./lib/app/Bonfires');
 
 // Utils.cls();
 

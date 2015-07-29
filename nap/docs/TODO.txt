@@ -62,6 +62,8 @@ break up room data into a yaml file
 ------------
 Questions
 
+running mocha with iojs?
+
 Rooms, RoomData, - classnames?
 ES6 classes or prototypes?
 

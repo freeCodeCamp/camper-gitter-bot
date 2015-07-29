@@ -9,6 +9,7 @@ var assert = require("chai").assert;
 var AppConfig = require('../../config/AppConfig'),
     Rooms = require('../../lib/app/Rooms.js'),
     Utils = require('../../lib/utils/Utils'),
+    Bonfires = require('./Bonfires'),
     RoomData = require('../../data/RoomData.js');
 
 var GitterHelper = require('../../lib/gitter/GitterHelper')
@@ -102,6 +103,7 @@ var Router = {
                 who: AppConfig.who(req),
                 token: req.session.token,
                 rooms: RoomData,
+                bonfires: Bonfires.data.challenges,
                 topicDmUri: AppConfig.topicDmUri()
             });
         });

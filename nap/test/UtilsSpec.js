@@ -32,6 +32,13 @@ describe("Utils", function (){
         expect(res.keyword).to.equal("search");
     });
 
+    // FIXME - doesn't use the passed in date to base calcs off
+    // it("should get timestamp for yesterday", function() {
+    //     var baseDate = new Date('2010-10-20T00:00:00+05:30'); // for testing
+    //     var ts = Utils.timeStamp('yesterday', baseDate);
+    //     expect(ts).to.equal("2010/10/19");
+    // });
+
 
 });
 

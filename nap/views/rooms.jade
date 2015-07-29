@@ -24,3 +24,17 @@ block content
                 span /go?topic=#{topic}&who=#{who}
                 br
 
+    h2 Bonfire Rooms
+    .container-fluid
+        - each bonfire in bonfires
+            //- a.btn.btn-lg.btn-success(href="/go?room=#{bonfire.dashedName}&who=#{who}") #{bonfire.name} &nbsp;
+            .row
+                hr
+                .col-md-6
+                    a.btn.btn-lg.btn-success(href="https://gitter.im/bothelp/#{bonfire.dashedName}?who=#{who}") #{bonfire.name} &nbsp;
+                    p #{bonfire.description[0]}
+                .col-md-6
+                    a.btn.btn-default(href="/go?room=bothelp/#{bonfire.dashedName}?who=#{who}&topic=question") #{bonfire.name} &nbsp;
+                    p #{bonfire.dashedName}
+
+
