@@ -21,11 +21,12 @@ var commands = {
     },
 
     footer: function(topicData) {
-        var str, link = this.wikiLink(topicData);
-        // str = "\n----";
-        str += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)";
+        var link = this.wikiLink(topicData);
+        var str = ""
+        // str += "\n----";
+        str += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)  ";
         str += ` [edit the wiki](${link})\n`;
-        // output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";        
+        // output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";
         return str;
     },
 
@@ -43,7 +44,7 @@ var commands = {
         clog('topicData', topicData);
         var link = this.wikiLink(topicData);
         if (topicData) {
-            output = `### [${input.params}](${link})\n`;
+            output = `## [${input.params}](${link})\n`;
             output += topicData.shortData;
         } else {
             Utils.warn(`cant find topic for [ ${input.params} ]`);
