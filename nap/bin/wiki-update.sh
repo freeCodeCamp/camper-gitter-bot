@@ -7,7 +7,7 @@
 # git clone --recursive
 # git clone --recurse-submodules
 
-set -x
+# set -x
 
 ## DONT update submodules
 # http://stackoverflow.com/questions/5828324/update-git-submodule-to-latest-commit-on-origin
