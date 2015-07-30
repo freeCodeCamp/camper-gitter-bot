@@ -10,7 +10,6 @@ var GBot = require("../lib/bot/GBot.js"),
 
 describe("Parser", function () {
 
-
     it("should find a thanks command", function () {
         GBot.init();
         var msg = Utils.messageMock("thanks @bob");

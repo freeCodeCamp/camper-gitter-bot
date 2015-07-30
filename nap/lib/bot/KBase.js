@@ -1,9 +1,11 @@
 "use strict";
 
 var Settings = require('../../config/Settings');
+var TextLib = require('../utils/TextLib');
 
 var fs = require("fs"),
-    Utils = require('../utils/Utils');
+    Utils = require('../utils/Utils'),
+    TextLib = require('../utils/TextLib');
 
 function clog(msg, obj) {
     Utils.clog("Kbase", msg, obj);
@@ -53,7 +55,7 @@ var KBase = {
                     fname = fname.toLowerCase();
                     var topic = fname.replace(".md", "");
                     var data = fs.readFileSync(fpath, "utf8");
-                    data = KBase.trimData(data);
+                    data = TextLib.trimLines(data);
                     var blob = {
                         path: fpath,
                         topic: topic,
@@ -65,18 +67,9 @@ var KBase = {
                     // clog("blob", blob);
                 });
                 // clog("topicList", KBase.topicList);
-                fulfill(KBase.topics);
             });
+            fulfill(KBase.topics);
         });
-    },
-
-    // we only show the first para
-    // and limit to 20 lines
-    trimData: function(data){
-        var part = data.split("##")[0];
-        var subset = part.split('\n');
-        subset = subset.slice(0, Settings.MaxLines).join('\n');
-        return subset;
     },
 
     getTopicData: function(params) {

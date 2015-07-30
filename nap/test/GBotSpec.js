@@ -3,9 +3,10 @@
 var assert = require("chai").assert,
     expect = require("chai").expect;
 
-var GBot = require("../lib/bot/GBot.js"),
+var GBot = require("../lib/bot/GBot"),
     Utils = require("../lib/utils/Utils"),
-    KBase = require("../lib/bot/KBase.js");
+    KBase = require("../lib/bot/KBase"),
+    KBase = require("../config/AppConfig");
 
 function clog(msg, obj) {
     Utils.clog("KbaseSpec>", msg, obj);
@@ -31,6 +32,12 @@ describe("GBot", function () {
 
     it("should have a name", function () {
         assert.equal(GBot.getName(), "bothelp");
+    });
+
+    it("should not reply to itself", function () {
+        var mainBot = AppConfig.mainBot;
+        var flag = GBot.isBot(mainBot);
+        expect(flag).to.be.true;
     });
 
     it("should parseInput wiki xxxx", function () {

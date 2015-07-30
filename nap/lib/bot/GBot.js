@@ -151,8 +151,9 @@ var GBot = {
 
     // dont reply to bots
     isBot: function(who) {
-        for (bot of AppConfig.botlist) {
+        for (var bot of AppConfig.botlist) {
             if (who === bot) {
+                Utils.warn("GBot", "isBot!");
                 return true;
             }
         }
@@ -177,7 +178,7 @@ var GBot = {
                 return;
             }
 
-            if (this.isBot(message.model.fromUser.username)) {
+            if (GBot.isBot(message.model.fromUser.username)) {
                 // console.warn("skip reply to bot");
                 return;
             }

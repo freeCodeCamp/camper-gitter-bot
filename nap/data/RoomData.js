@@ -10,6 +10,19 @@
 var RoomData = [
     // 1st room is the default if we can't find anything else
 
+
+    {
+        title: "bothelp",
+        name: "camperbot/testing",
+        topics: ["chitchat", "bots", "bot-development", "camperbot"]
+    },
+
+    {
+        title: "bothelp",
+        name: "camperbot/bonfires",
+        topics: ["bonfires", "hello-bonfires"]
+    },
+
     {
         title: "bothelp",
         name: "bothelp",
@@ -28,29 +41,29 @@ var RoomData = [
         topics: ["general", "intros"]
     },
 
-    {
-        title: "JS-Basics",
-        name: "bothelp/JS-Basics",
-        topics: ['objects', 'functions', 'prototype']
-    },
+    // {
+    //     title: "JS-Basics",
+    //     name: "bothelp/JS-Basics",
+    //     topics: ['objects', 'functions', 'prototype']
+    // },
 
-    {
-        title: "Frontend",
-        name: "bothelp/Frontend",
-        topics: ["css", "bootstrap", "html"]
-    },
+    // {
+    //     title: "Frontend",
+    //     name: "bothelp/Frontend",
+    //     topics: ["css", "bootstrap", "html"]
+    // },
 
-    {
-        title: "Testing",
-        name: "bothelp/Testing",
-        topics: ["chai", "TDD", "assert"]
-    },
+    // {
+    //     title: "Testing",
+    //     name: "bothelp/Testing",
+    //     topics: ["chai", "TDD", "assert"]
+    // },
 
-    {
-        title: "RegEx",
-        name: "bothelp/RegEx",
-        topics: ["regex", "strings"]
-    },
+    // {
+    //     title: "RegEx",
+    //     name: "bothelp/RegEx",
+    //     topics: ["regex", "strings"]
+    // },
 
     {
         title: "Bonfires",

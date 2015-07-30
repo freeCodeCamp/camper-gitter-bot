@@ -41,11 +41,6 @@ app.use(app.router);
 
 
 
-// gitter.currentUser().then(function(user) {
-//     console.log("You are logged in as:", user.username);
-// });
-
-
 GBot.init();
 routes.init(app, GBot, passport);
 

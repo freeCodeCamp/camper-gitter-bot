@@ -8,8 +8,8 @@
 // DONT require this as it creates a circular dependency
 // var Utils = require("../lib/utils/Utils");
 
-
 var AppConfig = {
+    appHost: process.env.BOT_APP_HOST || "http://localhost:7000",
     roomId: "55b1a9030fc9f982beaac901", // botzy
     clientId: process.env.GITTER_APP_KEY,
     token: process.env.GITTER_USER_TOKEN,
@@ -19,7 +19,6 @@ var AppConfig = {
     mainBot: "camperbot",
     webuser: "dcsan",
     dmLink: "https://gitter.im/bothelp",
-    appHost: "http://localhost:7000",
     wikiHost: "https://github.com/freecodecamp/freecodecamp/wiki/",
     gitterHost: "https://gitter.im/",
     mdn: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/",

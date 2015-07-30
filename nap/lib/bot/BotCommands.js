@@ -6,6 +6,7 @@ var assert = require("chai").assert;
 var GBot = require("../../lib/bot/GBot.js"),
     KBase = require("../bot/KBase"),
     Utils = require("../../lib/utils/Utils"),
+    TextLib = require("../../lib/utils/TextLib"),
     AppConfig = require("../../config/AppConfig"),
     Bonfires = require("../app/Bonfires"),
     InputWrap = require("../bot/InputWrap");
@@ -67,13 +68,14 @@ var BotCommands = {
 
 
     wiki: function(input, bot) {
-        var output = "", topicData, clipping;
+        var output = "", topicData;
         debugger;
 
         topicData = KBase.getTopicData(input.params);
+        clog('topicData', topicData);
         if (topicData) {
             output = `**${input.params}** wikiEntry\n`;
-            output += KBase.trimData(topicData.data);
+            output += TextLib.trimLines(topicData.data);
             output += topicData.data + "\n";
             output += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)";
             output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";

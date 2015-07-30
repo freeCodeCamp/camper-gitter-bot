@@ -111,4 +111,9 @@ var gitter = {
 };
 
 
+gitter.currentUser().then(function(user) {
+    console.log("---- You are logged in as:", user.username);
+});
+
+
 module.exports = gitter;

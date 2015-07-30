@@ -23,7 +23,7 @@ describe("AppConfig", function () {
     it("should make a topicDmUri", function () {
         var topicDmUri, expUri;
         topicDmUri = AppConfig.topicDmUri();
-        expUri = AppConfig.appHost + "/go?dm=y&room=bothelp";
+        expUri = AppConfig.appHost + "/go?dm=y&room=camperbot";
 
         expect(topicDmUri).to.equal(expUri);
     });
