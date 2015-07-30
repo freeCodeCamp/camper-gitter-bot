@@ -2,12 +2,19 @@
 
 var http = require('http');
 
+var AppConfig = require("../../config/AppConfig");
+
 var HttpWrap = {
 
-    getApi: function(endpoint, callback) {
+    getApi: function(apiPath, callback) {
 
-        console.log("getApi", endpoint);
-        return http.get(endpoint, function(response) {
+        var endPoint = {
+            host: AppConfig.apiServer,
+            path: apiPath
+        };
+
+        console.log("getApi", endPoint);
+        return http.get(endPoint, function(response) {
             // Continuously update stream with data
             var body = '';
             response.on('data', function(d) {

@@ -20,10 +20,18 @@ var TextLib = require("./TextLib.js");
 
 var Utils = {
 
-    bright: clc.xterm(237).bgXterm(195),
-    dimmed: clc.xterm(232).bgXterm(253),
-    warning: clc.xterm(232).bgXterm(215),
-    errorColors: clc.xterm(232).bgXterm(196),
+    cols: {
+        // error: clc.red.bold,
+        error: clc.bgRedBright.white.bold,
+        warn: clc.black.bgYellow.bold,
+        info: clc.black.cyanBright,
+        notice: clc.blue,
+        bright: clc.xterm(237).bgXterm(195),
+        dimmed: clc.xterm(232).bgXterm(253),
+        warning: clc.xterm(232).bgXterm(215),
+        errorColors: clc.xterm(232).bgRedBright,
+    },
+
     logLevel: 10,  // default
 
     // this can't run strict
@@ -36,7 +44,7 @@ var Utils = {
             return;
         }
         obj = obj || "";
-        console.log(this.bright(where), this.dimmed(msg), obj);
+        console.log(this.cols.info(where), this.cols.info(msg), obj);
         // winston.log(where, msg, obj);
     },
 
@@ -51,7 +59,7 @@ var Utils = {
         var p1 = args.shift();
         var p2 = args.shift();
         console.log('------');
-        console.log(this.bright(p1), this.dimmed(p2));
+        console.log(this.cols.bright(p1), this.cols.dimmed(p2));
         args.forEach(function(p) {
             if (p) {console.log(p); }
         });
@@ -63,7 +71,7 @@ var Utils = {
             return;
         }
         obj = obj || "";
-        console.log(this.warning(where), this.warning(msg), obj);
+        console.log(this.cols.warn(where), this.cols.warn(msg), obj);
     },
 
     error: function (where, msg, obj) {
@@ -71,7 +79,7 @@ var Utils = {
             return;
         }
         obj = obj || "";
-        console.log(this.warning(where), this.dimmed(msg), obj);
+        console.log(this.cols.error(where), this.cols.error(msg), obj);
     },
 
     // used for tests

@@ -62,6 +62,19 @@ var AppConfig = {
 // calculated items
 AppConfig.dmLink = "https://gitter.im/" + AppConfig.botname;
 
+var serverEnv = process.env.SERVER_ENV || "beta";
+
+var envConfigs = {
+    apiServer: {
+        beta: "beta.freecodecamp.com",
+        prod: "freecodecamp.com"
+    }
+
+};
+
+AppConfig.apiServer = envConfigs.apiServer[serverEnv];
+
+console.log("AppConfig", AppConfig);
 
 module.exports = AppConfig;
 

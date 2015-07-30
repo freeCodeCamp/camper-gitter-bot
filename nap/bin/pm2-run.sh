@@ -8,6 +8,8 @@ GITTER_USER_TOKEN=${GITTER_USER_TOKEN} \
     LOG_LEVEL=10 \
     BOT_APP_HOST=bot.freecodecamp.com \
     PORT=7891 \
+    SERVER_ENV=prod
+    BOTNAME=camperbot \
     pm2 start app.js --name bot --interpreter iojs
 
     # iojs app.js

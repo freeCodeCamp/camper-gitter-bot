@@ -20,6 +20,13 @@ var clog = require('../../utils/clog.js');
 
 var showInfo = function(input, bot, blob) {
     Utils.clog('about', "showInfo", blob);
+
+    if (blob.error) {
+        bot.say("user not found", input);
+        Utils.error("about", "user not found", input);
+        return;
+    }
+
     var username = blob.about.username;
     var about = blob.about;
 
@@ -33,7 +40,7 @@ var showInfo = function(input, bot, blob) {
     var str = `
 ![${username}](https://avatars2.githubusercontent.com/${username}?&s=64) | [${username}](http://www.freecodecamp.com/${username})
 -------------                       | -------------
-${about.browniePoints} :star:       | bio: ${bio}
+:star: ${about.browniePoints}       | bio: ${bio}
 
 `;
     bot.say(str, input);
@@ -42,7 +49,7 @@ ${about.browniePoints} :star:       | bio: ${bio}
 
 var about = function(input, bot) {
     // var mentioned = InputWrap.mentioned(input);
-    var mentions, uri, str, res, them, blob, name, endpoint;
+    var mentions, them, name;
 
     clog("input---------");
     // console.log(JSON.stringify(input));
@@ -55,17 +62,10 @@ var about = function(input, bot) {
     clog('them', them);
     // name = "berkeleytrue";
     name = them.screenName.toLowerCase();
-    uri = "http://beta.freecodecamp.com/api/users/about?username=" + name;
-    clog("uri", uri);
 
-    endpoint = {
-        host: 'beta.freecodecamp.com',
-        port: 80, //443 if protocol = https
-        path: '/api/users/about?username=' + name
-    };
-
-    HttpWrap.getApi(endpoint, function(blob) {
-        showInfo(input, bot, blob);
+    var apiPath = '/api/users/about?username=' + name;
+    HttpWrap.getApi(apiPath, function(apiRes) {
+        showInfo(input, bot, apiRes);
     });
 
 

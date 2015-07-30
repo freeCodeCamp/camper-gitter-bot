@@ -11,6 +11,7 @@ GITTER_USER_TOKEN=${GITTER_USER_TOKEN} \
     PORT=7891 \
     BOT_APP_HOST=bot.freecodecamp.com \
     BOTNAME=bothelp \
+    SERVER_ENV=beta \
     nodemon -x iojs app.js
 
     # nodemon --harmony app.js
