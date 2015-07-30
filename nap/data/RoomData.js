@@ -1,5 +1,9 @@
 "use strict";
 
+// TODO - move to lib/ dir?
+
+var AppConfig = require('../config/AppConfig');
+
 // var Bonfires = require('../lib/app/Bonfires');
 
 // from the webapp
@@ -7,114 +11,140 @@
 // we find a matching room here with that topic
 // and redirect them
 
-var RoomData = [
-    // 1st room is the default if we can't find anything else
+var RoomData,
+    listenRoom;
 
-
-    {
-        title: "bothelp",
-        name: "camperbot/testing",
-        topics: ["chitchat", "bots", "bot-development", "camperbot"]
-    },
-
-    {
-        title: "bothelp",
-        name: "camperbot/bonfires",
-        topics: ["bonfires", "hello-bonfires"]
-    },
-
-    {
-        title: "bothelp",
-        name: "bothelp",
-        topics: ["chitchat", "dm"]
-    },
-
-    {
-        title: "Botdiscussion",
-        name: "dcsan/botzy",
-        topics: ['bots', 'fcc', 'teaching']
-    },
-
-    {
-        title: "GeneralChat",
-        name: "bothelp/GeneralChat",
-        topics: ["general", "intros"]
-    },
-
-    // {
-    //     title: "JS-Basics",
-    //     name: "bothelp/JS-Basics",
-    //     topics: ['objects', 'functions', 'prototype']
-    // },
-
-    // {
-    //     title: "Frontend",
-    //     name: "bothelp/Frontend",
-    //     topics: ["css", "bootstrap", "html"]
-    // },
-
-    // {
-    //     title: "Testing",
-    //     name: "bothelp/Testing",
-    //     topics: ["chai", "TDD", "assert"]
-    // },
-
-    // {
-    //     title: "RegEx",
-    //     name: "bothelp/RegEx",
-    //     topics: ["regex", "strings"]
-    // },
-
-    {
-        title: "Bonfires",
-        name: "bothelp/Bonfires",
-        topics: ["bonfires",
-            "Pair Program on Bonfires",
-            "Meet Bonfire",
-            "Reverse a String",
-            "Factorialize a Number",
-            // "Check for Palindromes",
-            // "Find the Longest Word in a String",
-            // "Title Case a Sentence",
-            // "Return Largest Numbers in Arrays",
-            // "Confirm the Ending",
-            // "Repeat a string repeat a string",
-            // "Truncate a string",
-            // "Chunky Monkey",
-            // "Slasher Flick",
-            // "Mutations",
-            // "Falsey Bouncer",
-            // "Where art thou",
-            // "Seek and Destroy",
-            // "Where do I belong",
-            // "Sum All Numbers in a Range",
-            // "Diff Two Arrays",
-            // "Roman Numeral Converter",
-            // "Search and Replace",
-            // "Pig Latin",
-            // "DNA Pairing",
-            // "Missing letters",
-            // "Boo who",
-            // "Sorted Union",
-            // "Convert HTML Entities",
-            // "Spinal Tap Case",
-            // "Sum All Odd Fibonacci Numbers",
-            // "Sum All Primes",
-            // "Smallest Common Multiple",
-            // "Finders Keepers",
-            // "Drop it",
-            // "Steamroller",
-            // "Binary Agents",
-            // "Everything Be True",
-            // "Arguments Optional"
-        ]
-    }
-
+// TODO - read this from the JSON file
+var bonfireTopics = [
+    "bonfires",
+    "Pair Program on Bonfires",
+    "Meet Bonfire",
+    "Reverse a String",
+    "Factorialize a Number",
+    "Check for Palindromes",
+    "Find the Longest Word in a String",
+    "Title Case a Sentence",
+    "Return Largest Numbers in Arrays",
+    "Confirm the Ending",
+    "Repeat a string repeat a string",
+    "Truncate a string",
+    "Chunky Monkey",
+    "Slasher Flick",
+    "Mutations",
+    "Falsey Bouncer",
+    "Where art thou",
+    "Seek and Destroy",
+    "Where do I belong",
+    "Sum All Numbers in a Range",
+    "Diff Two Arrays",
+    "Roman Numeral Converter",
+    "Search and Replace",
+    "Pig Latin",
+    "DNA Pairing",
+    "Missing letters",
+    "Boo who",
+    "Sorted Union",
+    "Convert HTML Entities",
+    "Spinal Tap Case",
+    "Sum All Odd Fibonacci Numbers",
+    "Sum All Primes",
+    "Smallest Common Multiple",
+    "Finders Keepers",
+    "Drop it",
+    "Steamroller",
+    "Binary Agents",
+    "Everything Be True",
+    "Arguments Optional"
 ];
+
+
+var BotRoomData = {
+
+    // developer bot
+    bothelp: [
+        {
+            title: "bothelp",
+            name: "camperbot/testing",
+            topics: ["chitchat", "bots", "bot-development", "camperbot"]
+        },
+
+        {
+            title: "bothelp",
+            name: "camperbot/bonfires",
+            topics: bonfireTopics
+        },
+
+        {
+            title: "dev2",
+            name: "bothelp/dev2",
+            topics: ["bonfires", "hello-bonfires"]
+        },
+
+        {
+            title: "bothelp",
+            name: "bothelp",
+            topics: ["chitchat", "dm"]
+        },
+
+        {
+            title: "Botdiscussion",
+            name: "dcsan/botzy",
+            topics: ['bots', 'fcc', 'teaching']
+        },
+
+        {
+            title: "GeneralChat",
+            name: "bothelp/GeneralChat",
+            topics: ["general", "intros"]
+        }
+    ],
+
+    camperbot: [
+
+        {
+            title: "Help Bonfires",
+            name: "camperbot/HelpBonfires",
+            topics: bonfireTopics
+        },
+
+        {
+            title: "Help Bonfires",
+            name: "camperbot/HelpZiplines",
+            topics: ["bonfires", "hello-bonfires"]
+        },
+
+        {
+            title: "Help Bonfires",
+            name: "camperbot/testing",
+            topics: ["bonfires", "hello-bonfires", "testing"]
+        }
+
+    ]
+
+};
+
+
+
+
+// filter rooms to listen to if a cmd line arg was passed in
+// for development
+var botname = AppConfig.botname;
+
+console.log("loading RoomData for " + botname);
+
+RoomData = BotRoomData[botname];
+
+// if (listenRoom) {
+//     RoomData = AllRoomData.filter(function(rm) {
+//         return (rm.name === listenRoom);
+//     });
+//     console.log("LISTEN_ROOM only:", RoomData);
+// } else {
+//     RoomData = AllRoomData;
+// }
 
 // alias
 RoomData.defaultRoom = RoomData[0];
 
 // console.log("RoomData", RoomData);
-
 module.exports = RoomData;

@@ -63,7 +63,8 @@ var BotCommands = {
     },
 
     test: function (input, bot) {
-        var msg = "All bot systems are go!";
+        var msg = "All bot systems are go!  \n";
+        msg += this.version();
         return msg;
     },
 

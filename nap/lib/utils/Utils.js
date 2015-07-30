@@ -104,7 +104,9 @@ var Utils = {
     },
 
     asFileName: function (str) {
-        str = str.replace(/ /g, "-");
+        if (str) {
+            str = str.replace(/ /g, "-");
+        }
         return str;
     },
 

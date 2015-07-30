@@ -60,7 +60,8 @@ var KBase = {
                         path: fpath,
                         topic: topic,
                         fname: fname,
-                        data: data
+                        data: data,
+                        shortData: TextLib.trimLines(data)
                     };
                     KBase.topicList.push(topic);
                     KBase.topics[topic] = blob;

@@ -8,6 +8,7 @@ GITTER_USER_TOKEN=${GITTER_USER_TOKEN} \
     LOG_LEVEL=10 \
     BOT_APP_HOST=bot.freecodecamp.com \
     PORT=7891 \
+    BOTNAME=camperbot \
     iojs app.js
 
     # node --harmony app.js

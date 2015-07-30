@@ -10,6 +10,7 @@ GITTER_USER_TOKEN=${GITTER_USER_TOKEN} \
     LOG_LEVEL=10 \
     PORT=7891 \
     BOT_APP_HOST=bot.freecodecamp.com \
+    BOTNAME=bothelp \
     nodemon -x iojs app.js
 
     # nodemon --harmony app.js

@@ -16,26 +16,41 @@ var KBase = require("../../bot/KBase"),
 
 var commands = {
 
+    wikiLink: function(topicData) {
+        return (AppConfig.wikiHost + topicData.topic);
+    },
+
+    footer: function(topicData) {
+        var str, link = this.wikiLink(topicData);
+        // str = "\n----";
+        str += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)";
+        str += ` [edit the wiki](${link})\n`;
+        // output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";        
+        return str;
+    },
+
     wiki: function(input, bot) {
         var output = "", topicData;
-        debugger;
-
+        // debugger;
+        if (!input.params) {
+            output = "usage:\n"
+            output += "    `wiki $topic`   info on that topic\n";
+            output += "    `topics`    for a list of topics\n";
+            return output;
+        }
+        // else
         topicData = KBase.getTopicData(input.params);
         clog('topicData', topicData);
+        var link = this.wikiLink(topicData);
         if (topicData) {
-            var wikilink = AppConfig.wikiHost + topicData.topic;
-            // output += " | [wikilink **" + topicData.topic + "**](" +  +  + ")";
-            output = `### [${input.params}](${wikilink})\n`;
-            output += TextLib.trimLines(topicData.data);
-            output += "\n----"
-            output += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)";
-            output += ` [edit the wiki](${wikilink})\n`;
-            // output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";
-            
+            output = `### [${input.params}](${link})\n`;
+            output += topicData.shortData;
         } else {
             Utils.warn(`cant find topic for [ ${input.params} ]`);
             output = `no wiki entry for ${input.params}`;
         }
+
+        output += this.footer(topicData);
         return output;
     }
 };

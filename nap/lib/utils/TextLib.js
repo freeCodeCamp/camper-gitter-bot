@@ -11,7 +11,7 @@ var TextLib = {
     // and limit to 20 lines
     trimLines: function(data, lines){
         lines = lines || Settings.MAX_WIKI_LINES;
-        var part = data.split("##")[0];
+        var part = data.split("## ")[0];
         var subset = part.split('\n');
         subset = subset.slice(0, lines).join('\n');
         return subset;

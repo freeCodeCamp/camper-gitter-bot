@@ -10,19 +10,18 @@
 
 var AppConfig = {
     appHost: process.env.BOT_APP_HOST || "http://localhost:7000",
-    roomId: "55b1a9030fc9f982beaac901", // botzy
+    botname: process.env.BOTNAME || "bothelp",
     clientId: process.env.GITTER_APP_KEY,
     token: process.env.GITTER_USER_TOKEN,
+    roomId: "55b1a9030fc9f982beaac901", // default room botzy
     org: "bothelp",
     testUser: "bothelp",
     botlist: ["bothelp", "camperbot"],
-    mainBot: "camperbot",
     webuser: "dcsan",
-    dmLink: "https://gitter.im/bothelp",
     wikiHost: "https://github.com/freecodecamp/freecodecamp/wiki/",
     gitterHost: "https://gitter.im/",
     mdn: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/",
-    botVersion: "0.0.1",
+    botVersion: "0.0.2",
 
     // TODO cleanup
     currentBot: function() {
@@ -59,6 +58,10 @@ var AppConfig = {
     }
 
 };
+
+// calculated items
+AppConfig.dmLink = "https://gitter.im/" + AppConfig.botname;
+
 
 module.exports = AppConfig;
 
