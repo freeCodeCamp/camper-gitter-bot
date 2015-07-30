@@ -40,7 +40,7 @@ var showInfo = function(input, bot, blob) {
     var str = `
 ![${username}](https://avatars2.githubusercontent.com/${username}?&s=64) | [${username}](http://www.freecodecamp.com/${username})
 -------------                       | -------------
-:star: ${about.browniePoints}       | bio: ${bio}
+:star: ${about.browniePoints}       | ${bio}
 
 `;
     bot.say(str, input);
