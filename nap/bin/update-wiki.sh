@@ -7,6 +7,7 @@
 # git clone --recursive
 # git clone --recurse-submodules
 
+set -x
 
 git submodule update --init --recursive
 git submodule foreach git fetch
@@ -14,11 +15,11 @@ git fetch --recurse-submodules
 git submodule update
 
 cd data/kbase.wiki
-git pull
+git pull origin master
 cd ../..
 
 cd data/fcc.wiki
-git pull
+git pull origin master
 cd ../..
 
 
