@@ -1,5 +1,4 @@
-# for
-The `for` command iterates through a list of items.
+The javascript `for` command iterates through a list of items.
 
 ```js
 for (var i = 0; i < 9; i++) {

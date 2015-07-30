@@ -1,9 +1,8 @@
-# Loops
 Javascript has a few different ways to control flow, otherwise known as loops
 
-- for
-- while
-- until
+- [[for|js-for]]
+- [[while|js-while]]
+- [[until|js-until]]
 
 you can type `js for` or `js while` to get more info on any of these.
 
@@ -15,4 +14,3 @@ you can type `js for` or `js while` to get more info on any of these.
 > related: for, while, for-each, for-of, for-in
 
 > advanced: comprehensions, iterators
-

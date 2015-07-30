@@ -1,5 +1,3 @@
-# Promises
-
 A new feature of ES6 to help with async programming.
 
 ## syntax
