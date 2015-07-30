@@ -1,20 +1,15 @@
 "use strict";
 
-function clog(msg, obj) {
-    Utils.clog("BotCommands>", msg, obj);
-}
-
-function tlog(msg, obj) {
-    Utils.warn("BotCommands>", msg, obj);
-}
 
 var GBot = require("../../../lib/bot/GBot.js"),
     KBase = require("../../bot/KBase"),
     Utils = require("../../../lib/utils/Utils"),
     AppConfig = require("../../../config/AppConfig"),
-    HttpWrap = require("../../../lib/utils/Utils");
+    HttpWrap = require("../../../lib/utils/HttpWrap");
 
-// response:
+var clog = require('../../utils/clog.js');
+
+// response format:
 // {
 //     "about": {
 //         "username": "berkeleytrue",
@@ -23,16 +18,34 @@ var GBot = require("../../../lib/bot/GBot.js"),
 //     }
 // }
 
-var showInfo = function(blob) {
-    clog("userInfo", blob);
+var showInfo = function(input, bot, blob) {
+    Utils.clog('about', "showInfo", blob);
+    var username = blob.about.username;
+    var about = blob.about;
+
+    // var bioData = `
+    // bio: ${about.bio}
+    // [github](${about.github})
+    // BPs: ${about.browniePoints} `;
+
+    var bio = about.bio || "no bio set";
+
+    var str = `
+![${username}](https://avatars2.githubusercontent.com/${username}?&s=64) | [${username}](http://www.freecodecamp.com/${username})
+-------------                       | -------------
+${about.browniePoints} :star:       | bio: ${bio}
+
+`;
+    bot.say(str, input);
 };
+
 
 var about = function(input, bot) {
     // var mentioned = InputWrap.mentioned(input);
     var mentions, uri, str, res, them, blob, name, endpoint;
 
     clog("input---------");
-    console.log(JSON.stringify(input));
+    // console.log(JSON.stringify(input));
 
     mentions = input.message.model.mentions;
     them = mentions[0];
@@ -45,17 +58,16 @@ var about = function(input, bot) {
     uri = "http://beta.freecodecamp.com/api/users/about?username=" + name;
     clog("uri", uri);
 
-    bot.say("getting info", input.message.room);
-
     endpoint = {
         host: 'beta.freecodecamp.com',
         port: 80, //443 if protocol = https
         path: '/api/users/about?username=' + name
     };
 
-    HttpWrap.getApi(endpoint, showInfo);
+    HttpWrap.getApi(endpoint, function(blob) {
+        showInfo(input, bot, blob);
+    });
 
-    return "...";
 
     // return "about " + mentioned[0];
 

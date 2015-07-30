@@ -12,31 +12,36 @@ var GBot = require("../../../lib/bot/GBot.js"),
 
 var newline = '\n';
 
+var clog = require('../../utils/clog.js');
 
-function clog(msg, obj) {
-    Utils.clog("BotCommands>", msg, obj);
-}
+clog("clog from thanks");
 
-function tlog(msg, obj) {
-    Utils.warn("BotCommands>", msg, obj);
-}
+// function clog(msg, obj) {
+//     Utils.clog("BotCommands>", msg, obj);
+// }
 
-var thanks = function (input, bot) {
-    assert.isObject(input, "checkThanks expects an object");
-    var mentions, output, fromUser, toUser;
+// function tlog(msg, obj) {
+//     Utils.warn("BotCommands>", msg, obj);
+// }
 
-    clog("thanks input.message>", input.message);
+var commands = {
+    thanks: function (input, bot) {
+        assert.isObject(input, "checkThanks expects an object");
+        var mentions, output, fromUser, toUser;
 
-    mentions = input.message.model.mentions;
-    if (mentions) {
-        // TODO - build a list
-        toUser = "@" + mentions[0].screenName;
+        clog("thanks input.message>", input.message);
+
+        mentions = input.message.model.mentions;
+        if (mentions) {
+            // TODO - build a list
+            toUser = "@" + mentions[0].screenName;
+        }
+        fromUser = "@" + input.message.model.fromUser.username;
+        output = fromUser + " sends karma to " + toUser;
+        output += "\n :thumbsup: :thumbsup: :thumbsup: :thumbsup: :thumbsup: :sparkles: :sparkles: ";
+        return output;
     }
-    fromUser = "@" + input.message.model.fromUser.username;
-    output = fromUser + " sends karma to " + toUser;
-    output += "\n :thumbsup: :thumbsup: :thumbsup: :thumbsup: :thumbsup: :sparkles: :sparkles: ";
-    return output;
 };
 
-module.exports = thanks;
+module.exports = commands;
 

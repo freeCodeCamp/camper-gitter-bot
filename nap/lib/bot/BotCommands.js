@@ -179,7 +179,7 @@ var BotCommands = {
     },
 
     commands: function (input, bot) {
-        var str = "## commands:\n";
+        var str = "## commands:\n- ";
         str += BotCommands.cmdList.join("\n- ");
         return str;
     },
@@ -224,9 +224,11 @@ var BotCommands = {
 BotCommands.about = require("./cmds/about");
 BotCommands.thanks = require("./cmds/thanks");
 
-var wiki = require("./cmds/wiki");
+// TODO - iterate and read all files in /cmds
+var wiki = require("./cmds/wiki"),
+    thanks = require("./cmds/thanks");
 
-_.merge(BotCommands, wiki);
+_.merge(BotCommands, wiki, thanks);
 
 // Object.assign(BotCommands, wiki);
 
@@ -245,5 +247,7 @@ BotCommands.archives = BotCommands.archive;
 
 // TODO - some of these should be filtered/as private
 BotCommands.cmdList = Object.keys(BotCommands);
+
+clog(BotCommands.cmdList);
 
 module.exports = BotCommands;

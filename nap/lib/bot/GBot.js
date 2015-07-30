@@ -2,7 +2,7 @@
 
 
 
-var assert = require("chai").assert;
+var expect = require("chai").expect;
 var Gitter = require("node-gitter"),
     GitterHelper = require("../../lib/gitter/GitterHelper");
 
@@ -34,7 +34,10 @@ var GBot = {
         return AppConfig.botlist[0];
     },
 
-    say: function (text, room) {
+    say: function (text, input) {
+        expect(input.message).to.exist;
+        expect(input.message.room).to.exist;
+        var room = input.message.room;
         room.send(text);
     },
 
