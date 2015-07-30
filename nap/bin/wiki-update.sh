@@ -33,3 +33,5 @@ cp data/kbase.wiki/*md data/wiki
 cp data/fcc.wiki/*md data/wiki
 
 git commit -am "Pulled down update to submodules and merged"
+git pull 
+git push
