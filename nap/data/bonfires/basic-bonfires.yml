@@ -3,7 +3,7 @@
   order: 0.007
   challenges: 
     - 
-      id: "bd7139d8c441eddfaeb5bdef"
+      id: bd7139d8c441eddfaeb5bdef
       name: "Waypoint: Pair Program on Bonfires"
       dashedName: "waypoint-pair-program-on-bonfires"
       difficulty: 0.44

@@ -27,8 +27,6 @@ function tlog(msg, obj) {
     Utils.warn("BotCommands>", msg, obj);
 }
 
-
-
 // function tlog(p1, p2, p3, p4) {
 //     Utils.tlog("BotCommands>", p1, p2, p3, p4);
 // }
@@ -56,6 +54,10 @@ var BotCommands = {
                 `[ isCommand: ${input.keyword} ] one: ${one} | res ${res} ` );
         }
         return res;
+    },
+
+    version: function(){
+        return "botVersion: " + AppConfig.botVersion;
     },
 
     test: function (input, bot) {
@@ -122,23 +124,6 @@ var BotCommands = {
         // https://gitter.im/bothelp/GeneralChat/archives/2015/07/25
     },
 
-
-    thanks: function (input, bot) {
-        assert.isObject(input, "checkThanks expects an object");
-        var mentions, output, fromUser, toUser;
-
-        clog("thanks input.message>", input.message);
-
-        mentions = input.message.model.mentions;
-        if (mentions) {
-            // TODO - build a list
-            toUser = "@" + mentions[0].screenName;
-        }
-        fromUser = "@" + input.message.model.fromUser.username;
-        output = fromUser + " sends karma to " + toUser;
-        output += "\n :thumbsup: :thumbsup: :thumbsup: :thumbsup: :thumbsup: :sparkles: :sparkles: ";
-        return output;
-    },
 
 
     init: function (bot) {
@@ -255,6 +240,9 @@ var BotCommands = {
 
 };
 
+BotCommands.about = require("./cmds/about");
+BotCommands.thanks = require("./cmds/thanks");
+
 
 // setup aliases
 // BotCommands.help = BotCommands.menu;
@@ -262,6 +250,9 @@ BotCommands.hi = BotCommands.welcome;
 // BotCommands.bothelp = BotCommands.menu;
 BotCommands.hello = BotCommands.welcome;
 BotCommands.index = BotCommands.topics;
+
+BotCommands.log = BotCommands.archive;
+BotCommands.archives = BotCommands.archive;
 
 // BotCommands['@bothelp hi'] = BotCommands.menu;
 

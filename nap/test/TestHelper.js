@@ -1,6 +1,48 @@
 "use strict";
 
 var TestHelper = {
+    aboutInput: { 
+        keyword: 'about',
+          params: '@bothelp ',
+          message: 
+           { operation: 'create',
+             model: 
+              { id: '55b95acb5bc8dc88744243ff',
+                text: 'about @bothelp ',
+                html: 'about <span data-link-type="mention" data-screen-name="bothelp" class="mention">@bothelp</span> ',
+                sent: '2015-07-29T22:59:23.187Z',
+                editedAt: null,
+                fromUser: [Object],
+                unread: true,
+                readBy: 0,
+                urls: [],
+                mentions: [Object],
+                issues: [],
+                meta: {},
+                v: 1 },
+             room: 
+              { path: '/rooms',
+                id: '55b3d5780fc9f982beaaf7f4',
+                name: 'bothelp/GeneralChat',
+                topic: ' testing',
+                uri: 'bothelp/GeneralChat',
+                oneToOne: false,
+                userCount: 5,
+                unreadItems: 100,
+                mentions: 27,
+                lastAccessTime: '2015-07-29T14:41:04.820Z',
+                lurk: false,
+                url: '/bothelp/GeneralChat',
+                githubType: 'USER_CHANNEL',
+                security: 'PUBLIC',
+                noindex: false,
+                v: 1,
+                client: [Object],
+                faye: [Object],
+                _events: [Object] } },
+          cleanText: 'about @bothelp ',
+          command: true 
+        },
 
     stubInput: {
         keyword: 'hint',

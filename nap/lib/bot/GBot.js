@@ -31,7 +31,7 @@ var GBot = {
     },
 
     getName: function () {
-        return AppConfig.botname;
+        return AppConfig.botlist[0];
     },
 
     say: function (text, room) {
@@ -149,6 +149,16 @@ var GBot = {
         return text;
     },
 
+    // dont reply to bots
+    isBot: function(who) {
+        for (bot of AppConfig.botlist) {
+            if (who === bot) {
+                return true;
+            }
+        }
+        return false;
+    },
+
     // listen to a know room
     // does a check to see if not already joined according to internal data
     listenToRoom: function (room) {
@@ -167,7 +177,7 @@ var GBot = {
                 return;
             }
 
-            if (message.model.fromUser.username === AppConfig.botname) {
+            if (this.isBot(message.model.fromUser.username)) {
                 // console.warn("skip reply to bot");
                 return;
             }
@@ -199,7 +209,7 @@ var GBot = {
     joinBonfireRooms: function () {
         var that = this;
         Bonfires.allDashedNames().map(function (name) {
-            var roomUrl = AppConfig.botname + "/" + name;
+            var roomUrl = AppConfig.currentBot() + "/" + name;
             // Utils.clog("bf room", roomUrl);
             that.gitter.rooms.join(roomUrl, function (err, room) {
                 if (err) {

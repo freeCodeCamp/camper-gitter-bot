@@ -15,13 +15,20 @@ var AppConfig = {
     token: process.env.GITTER_USER_TOKEN,
     org: "bothelp",
     testUser: "bothelp",
-    botname: "bothelp",
+    botlist: ["bothelp", "camperbot"],
+    mainBot: "camperbot",
     webuser: "dcsan",
     dmLink: "https://gitter.im/bothelp",
     appHost: "http://localhost:7000",
     wikiHost: "https://github.com/freecodecamp/freecodecamp/wiki/",
     gitterHost: "https://gitter.im/",
     mdn: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/",
+    botVersion: "0.0.1",
+
+    // TODO cleanup
+    currentBot: function() {
+        return this.mainBot;
+    },
 
     who: function(req) {
         var who;
@@ -45,7 +52,7 @@ var AppConfig = {
     },
 
     topicDmUri: function(topic) {
-        var uri = this.appHost + "/go?dm=y&room=" + this.botname;
+        var uri = this.appHost + "/go?dm=y&room=" + this.mainBot;
         if (topic) {
             uri += "&topic=" + topic;
         }

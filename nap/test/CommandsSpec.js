@@ -73,11 +73,20 @@ describe("Commands", function () {
 
 
     it("should show about @mention", function() {
-        var msg = "";
-        var archive = BotCommands.archive(TestHelper.stubInput);
+        var input = TestHelper.stubInput;
+        input.keyword = "about"
+        var archive = BotCommands.about();
         expect(archive).not.to.be.null;
         expect(archive).to.include("archive for ")
     });
+
+    // it("should show about @mention", function() {
+    //     var msg = "";
+    //     var archive = BotCommands.archive(TestHelper.stubInput);
+    //     expect(archive).not.to.be.null;
+    //     expect(archive).to.include("archive for ")
+    // });
+
 
 
 });
