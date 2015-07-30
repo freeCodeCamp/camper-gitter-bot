@@ -17,16 +17,17 @@ set -x
 # git submodule foreach git fetch
 # git fetch --recurse-submodules
 
-cd data/kbase.wiki
-git checkout master
-git pull origin master
-cd ../..
+# cd data/kbase.wiki
+# git checkout master
+# git pull origin master
+# cd ../..
 
 cd data/fcc.wiki
 git pull origin master
 git checkout master
 cd ../..
 
+rm data/wiki/*
 
 cp data/kbase.wiki/*md data/wiki
 cp data/fcc.wiki/*md data/wiki
