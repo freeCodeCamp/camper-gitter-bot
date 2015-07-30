@@ -2,6 +2,7 @@
 "use strict";
 
 var assert = require("chai").assert;
+var _ = require("lodash");
 
 var GBot = require("../../lib/bot/GBot.js"),
     KBase = require("../bot/KBase"),
@@ -66,27 +67,6 @@ var BotCommands = {
         return msg;
     },
 
-
-    wiki: function(input, bot) {
-        var output = "", topicData;
-        debugger;
-
-        topicData = KBase.getTopicData(input.params);
-        clog('topicData', topicData);
-        if (topicData) {
-            output = `**${input.params}** wikiEntry\n`;
-            output += TextLib.trimLines(topicData.data);
-            output += topicData.data + "\n";
-            output += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)";
-            output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";
-            output += " | [wikilink **" + topicData.topic + "**](" + AppConfig.wikiHost + topicData.topic + ")";
-        } else {
-            Utils.warn(`cant find topic for [ ${input.params} ]`);
-            output = `no wiki entry for ${input.params}`;
-        }
-        return output;
-    },
-
     // bonfire features
     hint: function(input, bot) {
         var str;
@@ -126,14 +106,13 @@ var BotCommands = {
         // https://gitter.im/bothelp/GeneralChat/archives/2015/07/25
     },
 
-
-
     init: function (bot) {
         // FIXME - this is sketchy storing references like a global
         // called from the bot where we don't always have an instance
         BotCommands.bot = bot;
     },
 
+    // help on its own we return `help bothelp`
     help: function (input, bot) {
         // input;
         // var msg = Utils.makeMessageFromString("help help");
@@ -146,7 +125,6 @@ var BotCommands = {
             return topicData.data;
         }
     },
-
 
     menu: function (input, bot) {
         var msg = "type help for a list of things the bot can do";
@@ -244,6 +222,12 @@ var BotCommands = {
 
 BotCommands.about = require("./cmds/about");
 BotCommands.thanks = require("./cmds/thanks");
+
+var wiki = require("./cmds/wiki");
+
+_.merge(BotCommands, wiki);
+
+// Object.assign(BotCommands, wiki);
 
 
 // setup aliases
