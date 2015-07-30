@@ -1,5 +1,11 @@
 TODO
 
+test 'wiki' function
+debug double contents
+
+about
+
+
 find / choose from list
 
 better search / help / find
