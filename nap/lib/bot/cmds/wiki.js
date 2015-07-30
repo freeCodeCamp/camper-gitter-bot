@@ -16,16 +16,19 @@ var KBase = require("../../bot/KBase"),
 
 var commands = {
 
-    wikiLink: function(topicData) {
-        return (AppConfig.wikiHost + topicData.topic);
+    wikiLink: function(params) {
+        if (!params) { return ""; }
+        var link = Utils.linkify(params, "wiki");
+        return link;
     },
 
-    footer: function(topicData) {
-        var link = this.wikiLink(topicData);
-        var str = ""
+    footer: function(params) {
+        var link = this.wikiLink(params);
+        var str = "";
         // str += "\n----";
         str += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)  ";
-        str += ` [edit the wiki](${link})\n`;
+        str += "FCC wiki  [" + link + " ]";
+        // str += ` [edit the wiki](${link})\n`;
         // output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";
         return str;
     },
@@ -34,7 +37,7 @@ var commands = {
         var output = "", topicData;
         // debugger;
         if (!input.params) {
-            output = "usage:\n"
+            output = "usage:\n";
             output += "    `wiki $topic`   info on that topic\n";
             output += "    `topics`    for a list of topics\n";
             return output;
@@ -42,16 +45,16 @@ var commands = {
         // else
         topicData = KBase.getTopicData(input.params);
         clog('topicData', topicData);
-        var link = this.wikiLink(topicData);
         if (topicData) {
-            output = `## [${input.params}](${link})\n`;
+            var link = this.wikiLink(input.params);
+            output = `## ${link}\n`;
             output += topicData.shortData;
         } else {
-            Utils.warn(`cant find topic for [ ${input.params} ]`);
-            output = `no wiki entry for ${input.params}`;
+            Utils.warn("wiki.js", "cant find topic for", input.params);
+            output = "no wiki entry for: `" + input.params + "`";
         }
 
-        output += this.footer(topicData);
+        output += this.footer(input.params);
         return output;
     }
 };
