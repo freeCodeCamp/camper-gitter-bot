@@ -1,6 +1,6 @@
 # bin/update-wiki.sh
 
-source bin/credentials-dc.sh
+source bin/credentials-bothelp.sh
 
 set -x
 

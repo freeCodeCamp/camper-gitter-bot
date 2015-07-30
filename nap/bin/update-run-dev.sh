@@ -1,3 +1,3 @@
 # 
 bin/update-wiki.sh
-bin/run.sh
+bin/run-dev-bothelp.sh
