@@ -114,7 +114,7 @@ var BotRoomData = {
         {
             title: "Help Bonfires",
             name: "camperbot/testing",
-            topics: bonfireTopics
+            topics: ["testing", "bots"]
         },
 
         {
