@@ -93,7 +93,7 @@ var envConfigs = {
     },
     prod: {
         appHost: "http://bot.freecodecamp.com",
-        apiServer: "freecodecamp.com",
+        apiServer: "beta.freecodecamp.com",
         appRedirectUrl: "http://bot.freecodecamp.com/login/callback",
         botname: "camperbot"
     }
