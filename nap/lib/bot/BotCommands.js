@@ -211,13 +211,17 @@ var BotCommands = {
         return "WIP camperCount";
     },
 
-    // search: function (input, bot) {
-    //     var str = topLine + wipHeader;
-    //     str += "## search for" + input.text;
-    //     str += "\n results will be here!";
-    //     str += contactBox;
-    //     return str;
-    // },
+    search: function (input, bot) {
+
+        var data = KBase.search(input.params);
+        return "searching for " + data;
+
+        // var str = topLine + wipHeader;
+        // str += "## search for" + input.text;
+        // str += "\n results will be here!";
+        // str += contactBox;
+        return str;
+    },
 
 };
 

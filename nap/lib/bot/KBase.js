@@ -1,6 +1,5 @@
 "use strict";
 
-var Settings = require('../../config/Settings');
 var TextLib = require('../utils/TextLib');
 
 var fs = require("fs"),
@@ -12,6 +11,19 @@ function clog(msg, obj) {
 }
 
 var glob = require("glob");
+
+// topicNameList - list of individual topic keywords eg "chai-cheat"
+// topics    - Hash full data of all topics 
+
+//  example topic:
+//  
+  // 'js-for':
+  //  { path: '/Users/dc/dev/fcc/gitterbot/nap/data/wiki/js-for.md',
+  //    topic: 'js-for',
+  //    fname: 'js-for.md',
+  //    data: 'The javascript `for` command iterates through a list of items.\n\n```js\nfor (var i = 0; i < 9; i++) {\n   console.log(i);\n   // more statements\n}\n```\n\n----',
+  //    shortData: 'The javascript `for` command iterates through a list of items.\n\n```js\nfor (var i = 0; i < 9; i++) {\n   console.log(i);\n   // more statements\n}\n```\n\n----' },
+
 
 var KBase = {
     files: [],
@@ -46,7 +58,7 @@ var KBase = {
             glob(kbpath, options, function (err, files) {
                 // clog("files> ", files);
                 KBase.files = files;
-                KBase.topicList = [];
+                KBase.topicNameList = [];
 
                 KBase.topics = {};
                 KBase.files.map(function(fpath) {
@@ -63,11 +75,11 @@ var KBase = {
                         data: data,
                         shortData: TextLib.trimLines(data)
                     };
-                    KBase.topicList.push(topic);
+                    KBase.topicNameList.push(topic);
                     KBase.topics[topic] = blob;
                     // clog("blob", blob);
                 });
-                // clog("topicList", KBase.topicList);
+                // clog("topicNameList", KBase.topicNameList);
             });
             fulfill(KBase.topics);
         });
@@ -102,7 +114,7 @@ var KBase = {
     },
 
     findTopics: function(keyword) {
-        var shortList = KBase.topicList.filter(function(t){
+        var shortList = KBase.topicNameList.filter(function(t){
             return (t.indexOf(keyword) !== -1);
         });
         if (shortList.length === 0) {
@@ -117,6 +129,12 @@ var KBase = {
             findResults += line;
         }
         return findResults;
+    },
+
+    search: function(keyword) {
+        // TODO implement search
+        console.log(KBase.topics);
+        return "results from kbase";
     }
 
 };

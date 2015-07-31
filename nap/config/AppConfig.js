@@ -22,6 +22,8 @@ var AppConfig = {
     gitterHost: "https://gitter.im/",
     mdn: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/",
     botVersion: "0.0.2",
+    MAX_WIKI_LINES: 10,
+
 
     // TODO cleanup
     currentBot: function() {
