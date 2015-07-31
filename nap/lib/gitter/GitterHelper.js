@@ -46,3 +46,4 @@ var GitterHelper = {
 
 
 module.exports = GitterHelper;
+

@@ -828,6 +828,10 @@
 		"side_bar_visible": true,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/Users/dc/dev/fcc/gitterbot/nap"
+	],
 	"file_history":
 	[
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/docs/TODO.txt",
@@ -961,7 +965,7 @@
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -1379,11 +1383,6 @@
 			"sheets":
 			[
 			]
-		},
-		{
-			"sheets":
-			[
-			]
 		}
 	],
 	"incremental_find":
@@ -1403,18 +1402,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.435182446593,
 			1.0
 		],
 		"rows":
@@ -1436,7 +1428,7 @@
 	"project": "nap.sublime-project",
 	"replace":
 	{
-		"height": 64.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1986,7 +1978,7 @@
 		],
 		"width": 602.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},

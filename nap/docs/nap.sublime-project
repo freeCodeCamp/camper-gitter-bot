@@ -1,8 +1,18 @@
 {
-	"folders":
-	[
-		{
-			"path": "/Users/dc/dev/rikai/gitter/gitterbot/nap"
-		}
-	]
+    "folders":
+    [
+        {
+            "follow_symlinks": true,
+            "path": "../app"
+        },
+
+        {
+            "follow_symlinks": true,
+            "path": "..",
+            "folder_exclude_patterns": ["node_modules"]            
+        }
+
+    ]
+
 }
+

@@ -1,8 +1,8 @@
 "use strict";
 
-var assert = require("chai").assert;
+// var assert = require("chai").assert;
 
-// FIXME - this seems a bit hacky? 
+// FIXME - this seems a bit hacky?
 // should be a passed in object?
 // but needed for tests too so want this class self contained
 
@@ -12,10 +12,10 @@ var AppConfig = require('../../config/AppConfig'),
     Bonfires = require('./Bonfires'),
     RoomData = require('../../data/RoomData.js');
 
-var GitterHelper = require('../../lib/gitter/GitterHelper')
+var GitterHelper = require('../../lib/gitter/GitterHelper');
 
 function clog(msg, obj) {
-    Utils.clog("Routes>", msg, obj)
+    Utils.clog("Routes>", msg, obj);
 }
 
 
@@ -23,10 +23,10 @@ var Router = {
 
     // query can include a room or a topic
     findRedirect: function(query) {
-        assert.isObject(query);
+        Utils.isObject(query);
         query.org = AppConfig.getOrg();
 
-        if(query.dm=='y') {
+        if(query.dm === 'y') {
             query.room = query.room || AppConfig.botname;
         }
 
@@ -35,13 +35,13 @@ var Router = {
             query.roomObj = {
                 title: query.room,
                 name: query.room
-            }
+            };
         } else if (query.topic) {
             query.roomObj = Rooms.findByTopic(query.topic);
         }
-        assert.isObject(query.roomObj);
+        Utils.isObject(query.roomObj, "could not find room object");
         query.url = "https://gitter.im/" + query.roomObj.name;
-        clog('query', query);
+        clog('findRedirect:', query);
         return query;
     },
 
@@ -60,7 +60,7 @@ var Router = {
                 who = AppConfig.who(req),
                 redir = that.findRedirect(req.query);
 
-            gbot.announce(redir)
+            gbot.announce(redir);
             res.redirect(redir.url);
 
         });
@@ -133,6 +133,8 @@ var Router = {
 
 
     }
-}
+};
 
 module.exports = Router;
+
+

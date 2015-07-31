@@ -35,8 +35,8 @@ describe("GBot", function () {
     });
 
     it("should not reply to itself", function () {
-        var mainBot = AppConfig.mainBot;
-        var flag = GBot.isBot(mainBot);
+        var botname = AppConfig.botname;
+        var flag = GBot.isBot(botname);
         expect(flag).to.be.true;
     });
 

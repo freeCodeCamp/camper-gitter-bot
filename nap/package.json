@@ -5,6 +5,8 @@
     "request": "~2.27.0",
     "express": "~3.4.4",
     "jade": "~0.35.0",
+    "passport": "~0.2.0",
+    "passport-oauth2": "~1.1.1",    
     "lodash-node": "",
     "glob": "",
     "cli-color": "",

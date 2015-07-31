@@ -2,7 +2,7 @@
 "use strict";
 
 var assert = require("chai").assert;
-var _ = require("lodash");
+var _ = require("lodash-node");
 
 var GBot = require("../../lib/bot/GBot.js"),
     KBase = require("../bot/KBase"),

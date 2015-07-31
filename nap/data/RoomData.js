@@ -69,7 +69,7 @@ var BotRoomData = {
         },
 
         {
-            title: "bothelp",
+            title: "HelpBonfires",
             name: "camperbot/HelpBonfires",
             topics: bonfireTopics
         },
@@ -110,19 +110,13 @@ var BotRoomData = {
         {
             title: "Help Bonfires",
             name: "camperbot/testing",
-            topics: ["bonfires", "hello-bonfires", "testing"]
-        },
-
-        {
-            title: "Help Bonfires",
-            name: "camperbot/HelpBonfires",
             topics: bonfireTopics
         },
 
         {
             title: "Help ZipLines",
             name: "camperbot/HelpZiplines",
-            topics: ["bonfires", "hello-bonfires"]
+            topics: ["ziplines"]
         }
 
     ]

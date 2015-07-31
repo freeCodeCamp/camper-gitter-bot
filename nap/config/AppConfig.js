@@ -8,9 +8,10 @@
 // DONT require this as it creates a circular dependency
 // var Utils = require("../lib/utils/Utils");
 
+var _ = require("lodash-node");
+
 var AppConfig = {
     appHost: process.env.BOT_APP_HOST || "http://localhost:7000",
-    botname: process.env.BOTNAME || "bothelp",
     clientId: process.env.GITTER_APP_KEY,
     token: process.env.GITTER_USER_TOKEN,
     roomId: "55b1a9030fc9f982beaac901", // default room botzy
@@ -27,7 +28,7 @@ var AppConfig = {
 
     // TODO cleanup
     currentBot: function() {
-        return this.mainBot;
+        return AppConfig.botname;
     },
 
     who: function(req) {
@@ -52,7 +53,7 @@ var AppConfig = {
     },
 
     topicDmUri: function(topic) {
-        var uri = this.appHost + "/go?dm=y&room=" + this.mainBot;
+        var uri = AppConfig.appHost + "/go?dm=y&room=" + AppConfig.botname;
         if (topic) {
             uri += "&topic=" + topic;
         }
@@ -67,14 +68,33 @@ AppConfig.dmLink = "https://gitter.im/" + AppConfig.botname;
 var serverEnv = process.env.SERVER_ENV || "beta";
 
 var envConfigs = {
-    apiServer: {
-        beta: "beta.freecodecamp.com",
-        prod: "freecodecamp.com"
+    local: {
+        apiServer: "beta.freecodecamp.com",
+        appRedirectUrl: "http://localhost:7891/login/callback",
+        botname: "bothelp"
+    },
+    beta: {
+        apiServer: "beta.freecodecamp.com",
+        appRedirectUrl: "http://localhost:7891/login/callback",
+        botname: "bothelp"
+    },
+    prod: {
+        apiServer: "freecodecamp.com",
+        appRedirectUrl: "http://bot.freecodecamp.com/login/callback",
+        botname: "camperbot"
     }
-
 };
 
-AppConfig.apiServer = envConfigs.apiServer[serverEnv];
+// AppConfig.apiServer = envConfigs.apiServer[serverEnv];
+
+var thisConfig = envConfigs[serverEnv];
+if (!thisConfig) {
+    var msg = ("cant find env:", serverEnv);
+    console.error(msg);
+    throw (msg);
+}
+
+_.merge(AppConfig, thisConfig);
 
 console.log("AppConfig", AppConfig);
 

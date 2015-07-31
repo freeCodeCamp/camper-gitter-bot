@@ -87,12 +87,16 @@ var GBot = {
 
 
     announce: function (opts) {
+        clog("announce", opts);
         this.scanRooms();
+        Utils.clog("announce -->", opts);
         this.joinRoom(opts, true);
+        Utils.clog("announce <ok", opts);
     },
 
     joinRoom: function (opts) {
         var roomUrl = opts.roomObj.name;
+        debugger;
         GBot.gitter.rooms.join(roomUrl, function (err, room) {
             if (err) {
                 console.warn("Not possible to join the room: ", err, roomUrl);
@@ -130,9 +134,9 @@ var GBot = {
         var checks = this.roomList.filter(function (rm) {
             return (rm.name === room.name);
         });
-        var checkOne = checks[0];
-        if (checkOne) {
-            Utils.warning("GBot", "hasAlreadyJoined:", checkOne);
+        var oneRoom = checks[0];
+        if (oneRoom) {
+            Utils.warn("GBot", "hasAlreadyJoined:", oneRoom.url);
             return true;
         }
         return false;
@@ -172,7 +176,10 @@ var GBot = {
             return;
         }
 
+        Utils.clog("listenToRoom ->", room);
         var chats = room.streaming().chatMessages();
+        Utils.clog("listenToRoom ok:", room);
+
         // The 'chatMessages' event is emitted on each new message
         chats.on("chatMessages", function (message) {
             // clog('message> ', message.model.text);

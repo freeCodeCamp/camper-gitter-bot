@@ -125,13 +125,13 @@ var Utils = {
 
         switch (where) {
             case 'gitter':
-                host = AppConfig.gitterHost + AppConfig.mainbot;
+                host = AppConfig.gitterHost + AppConfig.botname;
                 break;
             case 'wiki':
                 host = AppConfig.wikiHost;
                 break;
             default:
-                host = AppConfig.wikiHost + AppConfig.mainbot;
+                host = AppConfig.wikiHost + AppConfig.botname;
         }
 
         uri = host + str;
@@ -171,6 +171,18 @@ var Utils = {
             return true; // means OK
         } else {
             this.error(msg);
+            return false;
+        }
+    },
+
+    isObject: function (obj, errmsg) {
+        errmsg = errmsg || "not an object";
+        return true;
+
+        if (typeof obj === Object) {
+            return true; // means OK
+        } else {
+            this.error(errmsg, obj);
             return false;
         }
     },
