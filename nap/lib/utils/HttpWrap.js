@@ -9,7 +9,8 @@ var AppConfig = require("../../config/AppConfig"),
 var HttpWrap = {
 
     options: {
-        host: AppConfig.apiServer
+        host: AppConfig.apiServer,
+        timeout: 5000
     },
 
     getApi: function(apiPath, callback) {
