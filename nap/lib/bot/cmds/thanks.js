@@ -33,7 +33,7 @@ var showInfo = function(input, bot, blob) {
     if (blob.error) {
         var msg = ":frowning: " + blob.error.message;
         bot.say(msg, input.message.room);
-        Utils.error("thanks", blob.error.message, input);
+        Utils.warn("thanks>", blob.error.message, input);
         return false;
     }
 

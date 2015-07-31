@@ -32,33 +32,42 @@ var HttpWrap = {
             });
         };
 
-        http.request(this.options, handleResponse).end();
-
-    },
-
-    XgetApi1: function(apiPath, callback) {
-
-        var endPoint = {
-            host: AppConfig.apiServer,
-            path: apiPath
+        var handleTimeout = function(err) {
+            Utils.error("HttpWrap", "timeout", err);
         };
 
-        console.log("getApi", endPoint);
-        return http.get(endPoint, function(response) {
-            // Continuously update stream with data
-            var body = '';
-            response.on('data', function(d) {
-                body += d;
-            });
-            response.on('end', function() {
+        // var request = http.request(options);
+        // request.setTimeout(30000, onProblem);
+        // request.on('error', onProblem);
 
-                // Data reception is done, do whatever with it!
-                var parsed = JSON.parse(body);
-                callback(parsed);
-            });
-        });
+        var request = http.request(this.options, handleResponse).end();
+        // request.setTimeout(50, handleTimeout);
 
     }
+
+    // XgetApi1: function(apiPath, callback) {
+
+    //     var endPoint = {
+    //         host: AppConfig.apiServer,
+    //         path: apiPath
+    //     };
+
+    //     console.log("getApi", endPoint);
+    //     return http.get(endPoint, function(response) {
+    //         // Continuously update stream with data
+    //         var body = '';
+    //         response.on('data', function(d) {
+    //             body += d;
+    //         });
+    //         response.on('end', function() {
+
+    //             // Data reception is done, do whatever with it!
+    //             var parsed = JSON.parse(body);
+    //             callback(parsed);
+    //         });
+    //     });
+
+    // }
 
 };
 

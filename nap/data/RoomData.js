@@ -123,6 +123,13 @@ var BotRoomData = {
             title: "Botdiscussion",
             name: "dcsan/botzy",
             topics: ['bots', 'fcc', 'teaching']
+        },
+
+        {
+            title: "CoreTeam",
+            name: "FreeCodeCamp/CoreTeam",
+            private: true,
+            topics: ['bots', 'fcc']
         }
 
     ]

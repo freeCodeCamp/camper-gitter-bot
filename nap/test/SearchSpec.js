@@ -4,7 +4,9 @@
 var expect = require("chai").expect;
 
 var GBot = require("../lib/bot/GBot.js"),
-    Utils = require('../lib/utils/Utils');
+    Utils = require('../lib/utils/Utils'),
+    TestHelper = require('./TestHelper');
+
     // KBase = require("../lib/bot/KBase.js");
 
 // function clog(msg, obj) {
@@ -15,13 +17,13 @@ var GBot = require("../lib/bot/GBot.js"),
 describe("Search", function (){
 
     it("should have a find method", function() {
-        var msg = TestHelper.makeMessageFromString("find");
+        var msg = TestHelper.makeMessageFromString("find XXX");
         var res = GBot.findAnyReply(msg);
         expect(res).to.match(/^find \*\*/);
     });
 
     // it("should have a find method that takes parameters", function() {
-    //     var msg = TestHelper.makeMessageFromString("find css");
+    //     var msg = TestHelper.makeInputFromString("find css");
     //     var res = GBot.findAnyReply(msg);
     //     expect(res).to.match(/^find \*\*css\*\*/);
     // });

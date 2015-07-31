@@ -34,7 +34,12 @@ var GBot = {
 
     say: function(text, room) {
         Utils.hasProperty(room, 'path', 'expected room object'); // did we get a room
-        room.send(text);
+        try {
+            room.send(text);
+        } catch (err) {
+            Utils.warn("GBot.say>", "failed", err);
+            Utils.warn("GBot.say>", "room", room);
+        }
     },
 
     // main IO routine called from room listener
@@ -61,6 +66,7 @@ var GBot = {
 
     // turns raw text input into a json format
     parseInput: function(message) {
+        Utils.hasProperty(message, 'model');
         var cleanText, input;
 
         cleanText = message.model.text;

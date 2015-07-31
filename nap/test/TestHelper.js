@@ -18,7 +18,10 @@ var TestHelper = {
                 unread: true,
                 readBy: 0,
                 urls: [],
-                mentions: [Object],
+                mentions: [
+                    {screenName: 'mentionedUserOne'},
+                    {screenName: 'mentionedUserTwo'}
+                ],
                 issues: [],
                 meta: {},
                 v: 1
@@ -109,7 +112,7 @@ var TestHelper = {
     // used for tests
     // and also strings to commands
     // https://developer.gitter.im/docs/messages-resource
-    // makeMessageFromString: function (text) {
+    // makeInputFromString: function (text) {
     //     var message = {};
     //     var model = {
     //         text: text
@@ -118,16 +121,18 @@ var TestHelper = {
     //     return message;
     // },
 
-    makeMessageFromString: function (text) {
-        var message = TestHelper.aboutInput;
-        console.log("message.model.text >", message);
-        message.model.text = text;
-        // var message = this.makeMessageFromString(text);
-
-        message.model.fromUser = {
+    makeInputFromString: function (text) {
+        var input = TestHelper.aboutInput;
+        input.message.model.text = text;
+        input.message.model.fromUser = {
             username: "testuser"
         };
-        return message;
+        return input;
+    },
+
+    makeMessageFromString: function (text) {
+        var input = TestHelper.makeInputFromString(text);
+        return input.message;
     }
 
 
@@ -136,3 +141,4 @@ var TestHelper = {
 
 
 module.exports = TestHelper;
+

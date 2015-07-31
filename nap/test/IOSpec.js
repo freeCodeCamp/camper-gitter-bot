@@ -5,6 +5,7 @@ var assert = require("chai").assert,
 
 var GBot = require("../lib/bot/GBot.js"),
     Utils = require("../lib/utils/Utils"),
+    TestHelper = require("./TestHelper"),
     KBase = require("../lib/bot/KBase.js");
 
 function clog(msg, obj) {
@@ -24,26 +25,11 @@ describe("IO", function () {
         });
     });
 
-    it("command: test", function () {
-        var res, msg;
-        msg = TestHelper.makeMessageFromString("test");
-        res = GBot.findAnyReply(msg);
-        expect(res).to.include("All bot systems are go!");
-    });
-
     it("command: help", function () {
         var res, msg;
         msg = TestHelper.makeMessageFromString("help");
         res = GBot.findAnyReply(msg);
         expect(res).to.include("Hi this is CamperBot");
-    });
-
-    // // failing for now - need to stip down to the command
-    it("command: test with extra words should be ignored", function () {
-        var res, msg;
-        msg = TestHelper.makeMessageFromString("test with some other stuff");
-        res = GBot.findAnyReply(msg);
-        expect(res).to.be.null;
     });
 
 });

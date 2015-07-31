@@ -4,7 +4,8 @@ var assert = require("chai").assert,
     expect = require("chai").expect;
 
 var GBot = require("../lib/bot/GBot.js"),
-    Utils = require("../lib/utils/Utils");
+    Utils = require("../lib/utils/Utils"),
+    TestHelper = require("./TestHelper");
 
 
 
@@ -12,7 +13,7 @@ describe("Parser", function () {
 
     it("should find a thanks command", function () {
         GBot.init();
-        var msg = Utils.messageMock("thanks @bob");
+        var msg = TestHelper.makeMessageFromString("thanks @bob");
         var res = GBot.parseInput(msg);
         expect(res.keyword).to.equal("thanks");
         expect(res.command).to.be.true;

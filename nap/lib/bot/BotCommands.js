@@ -125,7 +125,7 @@ var BotCommands = {
     // help on its own we return `help bothelp`
     help: function (input, bot) {
         // input;
-        // var msg = TestHelper.makeMessageFromString("help help");
+        // var msg = TestHelper.makeInputFromString("help help");
         // return "try this: `wiki $topic` or topics for a list";
         // return bot.findAnyReply(msg);
         if (input.params) {
@@ -145,6 +145,9 @@ var BotCommands = {
     rooms: function (input, bot) {
         var uri, link, str, roomNames;
         roomNames = bot.roomList.map(function (rm) {
+            if (rm.private) {
+                return null;
+            }
             uri = "https://gitter.im/" + rm.name;
             link = "\n- [" + rm.name + "](" + uri + ")  ";
             return link;

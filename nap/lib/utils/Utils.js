@@ -17,8 +17,11 @@ var TextLib = require("./TextLib.js");
 
 // check if we're in test mode
 // console.log("Utils", "argv", process.argv);
-// 
 
+
+var LOG_LEVEL_ERROR = 2,
+    LOG_LEVEL_WARN = 3,
+    LOG_LEVEL_INFO = 5;
 
 var Utils = {
 
@@ -42,7 +45,7 @@ var Utils = {
     // },
 
     clog: function (where, msg, obj) {
-        if (this.logLevel < 3) {
+        if (this.logLevel < LOG_LEVEL_INFO) {
             return;
         }
         obj = obj || "";
@@ -68,7 +71,7 @@ var Utils = {
     },
 
     warn: function (where, msg, obj) {
-        if (this.logLevel < 2) {
+        if (this.logLevel < LOG_LEVEL_WARN) {
             // console.log("skipping warn this.logLevel", this.logLevel);
             return;
         }
@@ -76,11 +79,28 @@ var Utils = {
         console.warn(this.cols.warn(where), this.cols.warn(msg), obj);
     },
 
+    stackTrace: function() {
+        var err = new Error();
+        console.log(err);
+        return err.stack;
+    },
+
+    stackLines: function(from, to) {
+        var err = new Error();
+        console.log(err);
+        var lines = err.stack.split('\n');
+        return lines.slice(from, to).join('\n');
+    },
+
     error: function (where, msg, obj) {
-        if (this.logLevel < 1) {
+        if (this.logLevel < LOG_LEVEL_ERROR) {
             return;
         }
         obj = obj || "";
+        // var callerName = arguments.callee.caller ? arguments.callee.caller.name : "global";
+        var lastLine = this.stackLines(3, 10);
+
+        where = "ERROR: " + lastLine + "\n / " + where;
         console.error(this.cols.error(where), this.cols.error(msg), obj);
     },
 
@@ -129,7 +149,7 @@ var Utils = {
         uri = host + path;
         name = Utils.namify(text);
         link = `[${name}](${uri})`;
-        console.log("Utils.linkify args>", path, where, text);
+        // console.log("Utils.linkify args>", path, where, text);
         Utils.clog("Utils.linkify>", "link", link);
         return link;
     },

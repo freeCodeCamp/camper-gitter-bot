@@ -42,17 +42,17 @@ describe("GBot", function () {
     });
 
     it("should parseInput wiki xxxx", function () {
-        var msg, output;
-        msg = TestHelper.makeMessageFromString("wiki bootstrap");
-        output = GBot.parseInput(msg);
+        var input, output;
+        input = TestHelper.makeInputFromString("wiki bootstrap");
+        output = GBot.parseInput(input.message);
         assert.propertyVal(output, "keyword", "wiki");
         assert.propertyVal(output, "params", "bootstrap");
     });
 
     it("should format non-help as false", function () {
-        var msg, output;
-        msg = TestHelper.makeMessageFromString("DONT bootstrap");
-        output = GBot.parseInput(msg);
+        var output,
+            message = TestHelper.makeMessageFromString("DONT bootstrap");
+        output = GBot.parseInput(message);
         // assert.propertyVal(output, "command", false);
         expect(output).not.to.be.true;
     });
