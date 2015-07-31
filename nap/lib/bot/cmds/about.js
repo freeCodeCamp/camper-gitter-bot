@@ -22,7 +22,7 @@ var showInfo = function(input, bot, blob) {
     Utils.clog('about', "showInfo", blob);
 
     if (blob.error) {
-        bot.say("user not found", input.room);
+        bot.say("user not found", input.message.room);
         Utils.error("about", "user not found", input);
         return;
     }
@@ -43,7 +43,7 @@ var showInfo = function(input, bot, blob) {
 :star: ${about.browniePoints}       | ${bio}
 
 `;
-    bot.say(str, input.room);
+    bot.say(str, input.message.room);
 };
 
 

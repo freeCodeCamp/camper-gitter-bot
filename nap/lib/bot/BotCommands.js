@@ -243,9 +243,9 @@ _.merge(BotCommands, wiki, thanks);
 
 // Object.assign(BotCommands, wiki);
 
+BotCommands.explain = BotCommands.wiki;
 
 // setup aliases
-// BotCommands.help = BotCommands.menu;
 BotCommands.hi = BotCommands.welcome;
 // BotCommands.bothelp = BotCommands.menu;
 // BotCommands.hello = BotCommands.welcome;

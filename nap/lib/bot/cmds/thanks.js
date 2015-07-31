@@ -32,7 +32,7 @@ var showInfo = function(input, bot, blob) {
 
     if (blob.error) {
         var msg = ":frowning: " + blob.error.message;
-        bot.say(msg, input.room);
+        bot.say(msg, input.message.room);
         Utils.error("thanks", blob.error.message, input);
         return false;
     }
@@ -47,7 +47,7 @@ var showInfo = function(input, bot, blob) {
 :star: ${about.browniePoints}       | ${bio}
 
 `;
-    bot.say(str, input.room);
+    bot.say(str, input.message.room);
 };
 
 

@@ -1,8 +1,6 @@
 "use strict";
 
 
-
-var expect = require("chai").expect;
 var Gitter = require("node-gitter"),
     GitterHelper = require("../../lib/gitter/GitterHelper");
 
@@ -19,7 +17,7 @@ function clog(msg, obj) {
 
 var GBot = {
 
-    init: function () {
+    init: function() {
         // TODO refresh and add oneToOne rooms
         KBase.initAsync();
         this.roomList = [];
@@ -30,17 +28,17 @@ var GBot = {
         BotCommands.init(this);
     },
 
-    getName: function () {
+    getName: function() {
         return AppConfig.botlist[0];
     },
 
-    say: function (text, room) {
-        Utils.hasProperty(room, 'path');  // did we get a room
+    say: function(text, room) {
+        Utils.hasProperty(room, 'path', 'expected room object'); // did we get a room
         room.send(text);
     },
 
     // main IO routine called from room listener
-    handleReply: function (message) {
+    handleReply: function(message) {
         clog(" in|", message.model.fromUser.username + "> " + message.model.text);
         var output = this.findAnyReply(message);
         clog("out| ", output);
@@ -52,7 +50,7 @@ var GBot = {
     // search all reply methods
     // returns a string to send
     // handleReply takes care of sending to chat system
-    findAnyReply: function (message) {
+    findAnyReply: function(message) {
         var input, output;
         input = this.parseInput(message);
         if (input.command) {
@@ -62,7 +60,7 @@ var GBot = {
     },
 
     // turns raw text input into a json format
-    parseInput: function (message) {
+    parseInput: function(message) {
         var cleanText, input;
 
         cleanText = message.model.text;
@@ -84,7 +82,7 @@ var GBot = {
     // ---------------- room related ----------------
 
 
-    announce: function (opts) {
+    announce: function(opts) {
         clog("announce", opts);
         this.scanRooms();
         Utils.clog("announce -->", opts);
@@ -92,10 +90,10 @@ var GBot = {
         Utils.clog("announce <ok", opts);
     },
 
-    joinRoom: function (opts) {
+    joinRoom: function(opts) {
         var roomUrl = opts.roomObj.name;
         debugger;
-        GBot.gitter.rooms.join(roomUrl, function (err, room) {
+        GBot.gitter.rooms.join(roomUrl, function(err, room) {
             if (err) {
                 console.warn("Not possible to join the room: ", err, roomUrl);
                 return null; // check - will this add nulls to the list of rooms?
@@ -111,7 +109,7 @@ var GBot = {
     },
 
     // checks if joined already, otherwise adds
-    addToRoomList: function (room) {
+    addToRoomList: function(room) {
         // check for dupes
         this.roomList = this.roomList || [];
         if (this.hasAlreadyJoined(room, this.roomList)) {
@@ -128,8 +126,8 @@ var GBot = {
     // see https://github.com/gitterHQ/node-gitter/issues/15
     // note this is only the bots internal tracking
     // it has no concept if the gitter API/state already thinks you're joined/listening
-    hasAlreadyJoined: function (room) {
-        var checks = this.roomList.filter(function (rm) {
+    hasAlreadyJoined: function(room) {
+        var checks = this.roomList.filter(function(rm) {
             return (rm.name === room.name);
         });
         var oneRoom = checks[0];
@@ -141,7 +139,7 @@ var GBot = {
     },
 
 
-    getAnnounceMessage: function (opts) {
+    getAnnounceMessage: function(opts) {
         var text = "----\n";
         if (opts.who && opts.topic) {
             text += "@" + opts.who + " has a question on\n";
@@ -167,19 +165,19 @@ var GBot = {
 
     // listen to a know room
     // does a check to see if not already joined according to internal data
-    listenToRoom: function (room) {
+    listenToRoom: function(room) {
         // gitter.rooms.find(room.id).then(function (room) {
 
         if (this.addToRoomList(room) === false) {
             return;
         }
 
-        Utils.clog("listenToRoom ->", room);
+        // Utils.clog("listenToRoom ->", room);
         var chats = room.streaming().chatMessages();
-        Utils.clog("listenToRoom ok:", room);
+        Utils.clog("listenToRoom ok:", room.name);
 
         // The 'chatMessages' event is emitted on each new message
-        chats.on("chatMessages", function (message) {
+        chats.on("chatMessages", function(message) {
             // clog('message> ', message.model.text);
             if (message.operation !== "create") {
                 // console.log("skip msg reply", msg);
@@ -197,13 +195,13 @@ var GBot = {
 
     // this joins rooms contained in the data/RoomData.js file
     // ie a set of bot specific discussion rooms
-    joinKnownRooms: function () {
+    joinKnownRooms: function() {
         var that = this;
-        RoomData.map(function (oneRoomData) {
+        RoomData.map(function(oneRoomData) {
             var roomUrl = oneRoomData.name;
             // console.log("oneRoomData", oneRoomData);
             // clog("gitter.rooms", that.gitter.rooms);
-            that.gitter.rooms.join(roomUrl, function (err, room) {
+            that.gitter.rooms.join(roomUrl, function(err, room) {
                 if (err) {
                     // Utils.warn("Not possible to join the room:", err, roomUrl);
                     return;
@@ -215,12 +213,12 @@ var GBot = {
     },
 
 
-    joinBonfireRooms: function () {
+    joinBonfireRooms: function() {
         var that = this;
-        Bonfires.allDashedNames().map(function (name) {
+        Bonfires.allDashedNames().map(function(name) {
             var roomUrl = AppConfig.currentBot() + "/" + name;
             // Utils.clog("bf room", roomUrl);
-            that.gitter.rooms.join(roomUrl, function (err, room) {
+            that.gitter.rooms.join(roomUrl, function(err, room) {
                 if (err) {
                     // Utils.warn("Not possible to join the room:", err, roomUrl);
                     return;
@@ -236,7 +234,7 @@ var GBot = {
     // when a user DMs the bot
     // as I can't see an event the bot would get to know about that
     // so its kind of like "polling" and currently only called from the webUI
-    scanRooms: function (user, token) {
+    scanRooms: function(user, token) {
         user = user || this.gitter.currentUser();
         token = token || AppConfig.token;
 
@@ -244,36 +242,34 @@ var GBot = {
         clog("token", token);
         var that = this;
 
-        GitterHelper.fetchRooms(user, token, function (err, rooms) {
+        GitterHelper.fetchRooms(user, token, function(err, rooms) {
             if (err) {
-                Utils.error("GBot", "fetchRooms", rooms);
+                Utils.error("GBot", "fetchRooms", err);
             }
-            clog("scanRooms.rooms", rooms);
             if (!rooms) {
                 Utils.warn("cant scanRooms");
                 return;
             }
             // else
-            rooms.map(function (room) {
+            clog("scanRooms.rooms", rooms);
+            rooms.map(function(room) {
                 if (room.oneToOne) {
                     clog("oneToOne", room.name);
-                        that.gitter.rooms.find(room.id).then(function (roomObj) {
-                        that.listenToRoom(roomObj);
-                    });
+                    that.gitter.rooms.find(room.id)
+                        .then(function(roomObj) {
+                            that.listenToRoom(roomObj);
+                        });
                 }
             });
         });
-        // GBot.gitter.rooms.find().then(function (rooms) {
-        //     clog("found rooms", rooms)
-        // })
     },
 
     // FIXME doesnt work for some reason >.<
     // needs different type of token?
-    updateRooms: function () {
+    updateRooms: function() {
         GBot.gitter.currentUser()
-            .then(function (user) {
-                var list = user.rooms(function (err, obj) {
+            .then(function(user) {
+                var list = user.rooms(function(err, obj) {
                     clog("rooms", err, obj);
                 });
                 clog("user", user);
@@ -285,4 +281,5 @@ var GBot = {
 };
 
 module.exports = GBot;
+
 

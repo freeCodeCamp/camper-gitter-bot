@@ -219,10 +219,12 @@ var Utils = {
 
     },
 
-    hasProperty: function(obj, prop) {
-        if (obj.prop) {
+    hasProperty: function(obj, prop, msg) {
+        if (obj && obj.hasOwnProperty(prop)) {
             return true;
         }
+        msg = msg || "ERROR";
+        Utils.error(msg);
         Utils.error("missing property", prop, obj);
         return false;
     }

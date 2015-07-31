@@ -26,8 +26,8 @@ var commands = {
         var link = this.wikiLink(params);
         var str = "";
         // str += "\n----";
-        str += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)  ";
-        str += "FCC wiki  [" + link + " ]";
+        // str += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)  ";
+        str += "\n\nFCC wiki > [" + link + " ] :pencil: ";
         // str += ` [edit the wiki](${link})\n`;
         // output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";
         return str;
@@ -47,14 +47,16 @@ var commands = {
         clog('topicData', topicData);
         if (topicData) {
             var link = this.wikiLink(input.params);
-            output = `## ${link}\n`;
+            output = `## :pencil: ${link} \n`;
             output += topicData.shortData;
         } else {
             Utils.warn("wiki.js", "cant find topic for", input.params);
             output = "no wiki entry for: `" + input.params + "`";
+            output += "\nwhy not create one?";
+            output += "\n:pencil: " + this.wikiLink(input.params);
         }
 
-        output += this.footer(input.params);
+        // output += this.footer(input.params);
         return output;
     }
 };
