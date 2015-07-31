@@ -1,9 +1,15 @@
 TODO
 
-test 'wiki' function
-debug double contents
+-   setup prod env
+-   bonfire content
 
-about
+
+
+X   test 'wiki' function
+X   debug double contents
+X   about
+
+
 
 
 find / choose from list
