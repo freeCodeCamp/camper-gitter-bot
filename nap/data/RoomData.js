@@ -65,11 +65,13 @@ var BotRoomData = {
         {
             title: "bothelp",
             name: "bothelp/testing",
+            icon: "question",
             topics: ["chitchat", "bots", "bot-development", "camperbot"]
         },
 
         {
             title: "HelpBonfires",
+            icon: "fire",
             name: "bothelp/HelpBonfires",
             topics: bonfireTopics
         },
@@ -90,7 +92,15 @@ var BotRoomData = {
             title: "GeneralChat",
             name: "bothelp/GeneralChat",
             topics: ["general", "intros"]
+        },
+
+        {
+            title: "PrivateRoomTest",
+            private: true,
+            name: "bothelp/PrivateRoomTest",
+            topics: ["general", "intros"]
         }
+
     ],
 
     camperbot: [

@@ -25,15 +25,21 @@ var clog = require('../../utils/clog.js');
 //     Utils.warn("BotCommands>", msg, obj);
 // }
 
-
+function cleanMessage(message) {
+    if (message.match(/^count not/)) {
+        // fix typo
+        return "Couldn't find that user at FCC :frowning: \nCheck their github ID matches their FCC ID!"
+    }
+    return message;
+}
 
 var showInfo = function(input, bot, blob) {
     Utils.clog('thanks', "showInfo", blob);
 
     if (blob.error) {
-        var msg = ":frowning: " + blob.error.message;
-        bot.say(msg, input.message.room);
-        Utils.warn("thanks>", blob.error.message, input);
+        var message = cleanMessage(blob.error.message);
+        bot.say(message, input.message.room);
+        Utils.warn("WARN @thanks>", blob.error.message, input);
         return false;
     }
 

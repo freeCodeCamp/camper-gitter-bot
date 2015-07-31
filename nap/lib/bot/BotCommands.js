@@ -10,7 +10,9 @@ var GBot = require("../../lib/bot/GBot.js"),
     TextLib = require("../../lib/utils/TextLib"),
     AppConfig = require("../../config/AppConfig"),
     Bonfires = require("../app/Bonfires"),
-    InputWrap = require("../bot/InputWrap");
+    InputWrap = require("../bot/InputWrap"),
+    RoomData = require("../../data/RoomData");
+
 
 // var httpSync = require('http-sync');
 
@@ -143,16 +145,20 @@ var BotCommands = {
 
     // TODO - sort alphabetically
     rooms: function (input, bot) {
-        var uri, link, str, roomNames;
-        roomNames = bot.roomList.map(function (rm) {
+        var uri, link, str, roomNames, icon;
+        var baseList = RoomData.rooms();   // bot.roomList doesnt show private / meta data
+        roomNames = baseList.map(function (rm) {
+            clog("room", rm);
             if (rm.private) {
-                return null;
+                return "----";
+            } else {
+                uri = "https://gitter.im/" + rm.name;
+                icon = ":" + (rm.icon || "speech_balloon") + ":";
+                link = "\n " + icon + " [" + rm.name + "](" + uri + ")";
+                return link;
             }
-            uri = "https://gitter.im/" + rm.name;
-            link = "\n- [" + rm.name + "](" + uri + ")  ";
-            return link;
         });
-        str = "## rooms" + roomNames;
+        str = "## rooms" + roomNames.join(" ");
         return str;
     },
 
