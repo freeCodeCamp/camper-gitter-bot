@@ -17,3 +17,6 @@ PORT=7891 \
     # iojs app.js
     # node --harmony app.js
     # nodemon -x iojs app.js
+
+pm2 list
+pm2 logs all
