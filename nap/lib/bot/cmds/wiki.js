@@ -33,29 +33,35 @@ var commands = {
         return str;
     },
 
+    wikiUsage: function() {
+        // return 
+        var output = "usage:\n";
+        output += "    `wiki $topic`   info on that topic\n";
+        output += "    `topics`    for a list of topics\n";
+        return output;
+    },
+
+    wikiCantFind: function(input) {
+        Utils.warn("wiki.js", "cant find topic for", input.params);
+        var output = "no wiki entry for: `" + input.params + "`";
+        output += "\nwhy not create one?";
+        output += "\n:pencil: " + this.wikiLink(input.params);
+        return output;
+    },
+
     wiki: function(input, bot) {
         var output = "", topicData;
         // debugger;
-        if (!input.params) {
-            output = "usage:\n";
-            output += "    `wiki $topic`   info on that topic\n";
-            output += "    `topics`    for a list of topics\n";
-            return output;
-        }
+        if (!input.params) { return this.wikiUsage(); }
         // else
         topicData = KBase.getTopicData(input.params);
-        clog('topicData', topicData);
-        if (topicData) {
-            var link = this.wikiLink(input.params);
-            output = `## :pencil: ${link} \n`;
-            output += topicData.shortData;
-        } else {
-            Utils.warn("wiki.js", "cant find topic for", input.params);
-            output = "no wiki entry for: `" + input.params + "`";
-            output += "\nwhy not create one?";
-            output += "\n:pencil: " + this.wikiLink(input.params);
-        }
+        if (!topicData) { return this.wikiCantFind(input); }
 
+        // else OK
+
+        var link = Utils.linkify(input.params, "wiki");
+        output = `## :pencil: ${link} \n`;
+        output += topicData.shortData;
         // output += this.footer(input.params);
         return output;
     }

@@ -15,7 +15,7 @@ var newline = '\n';
 
 var clog = require('../../utils/clog.js');
 
-clog("clog from thanks");
+// clog("clog from thanks");
 
 // function clog(msg, obj) {
 //     Utils.clog("BotCommands>", msg, obj);

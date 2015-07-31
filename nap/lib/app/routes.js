@@ -102,7 +102,7 @@ var Router = {
                 user: req.user,
                 who: AppConfig.who(req),
                 token: req.session.token,
-                rooms: RoomData,
+                rooms: RoomData.rooms(),
                 bonfires: Bonfires.data.challenges,
                 topicDmUri: AppConfig.topicDmUri()
             });

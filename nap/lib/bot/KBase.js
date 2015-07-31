@@ -85,7 +85,7 @@ var KBase = {
         });
     },
 
-    getTopicData: function(params) {
+    getTopicData: function(params, recursing) {
         var res, name;
         name = Utils.asFileName(params);
 
@@ -100,7 +100,11 @@ var KBase = {
             var p = KBase.initAsync();
             p.then(function() {
                 Utils.warn("< loaded");
-                KBase.getTopicData(name);  // dangerous
+                if (recursing) {
+                    // panic. couldn't load so don't go into a crazy loop
+                    throw new Error("KBase couldn't load, quitting");
+                }
+                KBase.getTopicData(name, true);  // dangerous
                 // return KBase.topics[name];
             });
         } else{

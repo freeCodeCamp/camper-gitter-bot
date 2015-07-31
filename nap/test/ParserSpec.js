@@ -21,7 +21,7 @@ describe("Parser", function () {
     it("should parse a thanks command with a hashtag", function () {
         var str, msg, input;
         str = "thanks @bob #hashtag";
-        msg = Utils.makeMessageFromString(str);
+        msg = TestHelper.makeMessageFromString(str);
         input = GBot.parseInput(msg);
         expect(input.keyword).to.equal("thanks");
     });

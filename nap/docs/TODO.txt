@@ -1,6 +1,12 @@
 TODO
 
--   setup prod env
+X   setup prod env
+
+
+fixi wiki links
+
+
+
 -   bonfire content
 
 

@@ -125,7 +125,7 @@ var BotCommands = {
     // help on its own we return `help bothelp`
     help: function (input, bot) {
         // input;
-        // var msg = Utils.makeMessageFromString("help help");
+        // var msg = TestHelper.makeMessageFromString("help help");
         // return "try this: `wiki $topic` or topics for a list";
         // return bot.findAnyReply(msg);
         if (input.params) {

@@ -28,4 +28,9 @@ describe("AppConfig", function () {
         expect(topicDmUri).to.equal(expUri);
     });
 
+    it("should setup the botname", function() {
+        var bn = AppConfig.getBotName();
+        expect(bn).to.equal("bothelp", "the botname was:" + bn);
+    });
+
 });

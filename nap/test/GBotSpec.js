@@ -3,17 +3,15 @@
 var assert = require("chai").assert,
     expect = require("chai").expect;
 
-var GBot = require("../lib/bot/GBot"),
+var AppConfig = require("../config/AppConfig"),
+    GBot = require("../lib/bot/GBot"),
     Utils = require("../lib/utils/Utils"),
-    KBase = require("../lib/bot/KBase"),
-    AppConfig = require("../config/AppConfig");
+    TestHelper = require("./TestHelper"),
+    KBase = require("../lib/bot/KBase");
 
 function clog(msg, obj) {
     Utils.clog("KbaseSpec>", msg, obj);
 }
-
-
-        // "no-unused-expressions": [0]
 
 
 describe("GBot", function () {
@@ -35,14 +33,17 @@ describe("GBot", function () {
     });
 
     it("should not reply to itself", function () {
-        var botname = AppConfig.botname;
+        var botname = AppConfig.getBotName();
         var flag = GBot.isBot(botname);
+        if (!flag) {
+            Utils.error('GBotSpec', "botname: [" + botname + " ]");
+        }
         expect(flag).to.be.true;
     });
 
     it("should parseInput wiki xxxx", function () {
         var msg, output;
-        msg = Utils.makeMessageFromString("wiki bootstrap");
+        msg = TestHelper.makeMessageFromString("wiki bootstrap");
         output = GBot.parseInput(msg);
         assert.propertyVal(output, "keyword", "wiki");
         assert.propertyVal(output, "params", "bootstrap");
@@ -50,7 +51,7 @@ describe("GBot", function () {
 
     it("should format non-help as false", function () {
         var msg, output;
-        msg = Utils.makeMessageFromString("DONT bootstrap");
+        msg = TestHelper.makeMessageFromString("DONT bootstrap");
         output = GBot.parseInput(msg);
         // assert.propertyVal(output, "command", false);
         expect(output).not.to.be.true;
@@ -59,16 +60,16 @@ describe("GBot", function () {
     it("should respond to wiki css", function () {
         var msg, res;
         GBot.init();
-        msg = Utils.makeMessageFromString("wiki css");
+        msg = TestHelper.makeMessageFromString("wiki css");
         res = GBot.findAnyReply(msg);
         expect(res).to.contain('## :pencil: [css]');
     });
 
-    it("should have a test response", function () {
+    it("should have a botstatus response", function () {
         var msg, res;
-        msg = Utils.makeMessageFromString("test");
+        msg = TestHelper.makeMessageFromString("botstatus");
         res = GBot.findAnyReply(msg);
-        expect(res).to.include("All bot systems are go!");
+        expect(res).to.include("All bot systems are go!", "test message was: " + res);
     });
 
     it("should have wiki bootstrap content", function () {
@@ -82,7 +83,7 @@ describe("GBot", function () {
 
     it("should have a menu command", function () {
         var msg, res;
-        msg = Utils.makeMessageFromString("menu");
+        msg = TestHelper.makeMessageFromString("menu");
         res = GBot.findAnyReply(msg);
         expect(res).to.contain("type help for a list");
         // assert.match(help, /Help with/ );
@@ -90,7 +91,7 @@ describe("GBot", function () {
 
     it("should have a topics command", function () {
         var msg, res;
-        msg = Utils.makeMessageFromString("topics");
+        msg = TestHelper.makeMessageFromString("topics");
         res = GBot.findAnyReply(msg);
         assert.match(res, /^## topics/i);
     });
@@ -98,15 +99,15 @@ describe("GBot", function () {
     it("should have a rejoin command", function () {
         var msg, res;
         GBot.init();
-        msg = Utils.makeMessageFromString("rejoin");
+        msg = TestHelper.makeMessageFromString("rejoin");
         res = GBot.findAnyReply(msg);
         assert.equal(res, "rejoined");
     });
 
 
-    it("should send a thanks karm reply", function () {
+    it("should send a thanks karma reply", function () {
         var msg, res;
-        msg = Utils.messageMock("thanks @bob");
+        msg = TestHelper.makeMessageFromString("thanks @bob");
         res = GBot.findAnyReply(msg);
         // console.log("thanks msg> ", res);
         assert.match(res, /^@testuser sends karma to/ );

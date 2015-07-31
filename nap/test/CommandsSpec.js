@@ -16,7 +16,7 @@ function clog(msg, obj) {
 
 function checkInput(text) {
     var msg, res;
-    msg = Utils.makeMessageFromString(text);
+    msg = TestHelper.makeMessageFromString(text);
     res = GBot.parseInput(msg);
     return (res);
 }

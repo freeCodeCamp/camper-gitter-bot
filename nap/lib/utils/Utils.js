@@ -17,6 +17,8 @@ var TextLib = require("./TextLib.js");
 
 // check if we're in test mode
 // console.log("Utils", "argv", process.argv);
+// 
+
 
 var Utils = {
 
@@ -71,7 +73,7 @@ var Utils = {
             return;
         }
         obj = obj || "";
-        console.log(this.cols.warn(where), this.cols.warn(msg), obj);
+        console.warn(this.cols.warn(where), this.cols.warn(msg), obj);
     },
 
     error: function (where, msg, obj) {
@@ -79,20 +81,9 @@ var Utils = {
             return;
         }
         obj = obj || "";
-        console.log(this.cols.error(where), this.cols.error(msg), obj);
+        console.error(this.cols.error(where), this.cols.error(msg), obj);
     },
 
-    // used for tests
-    // and also strings to commands
-    // https://developer.gitter.im/docs/messages-resource
-    makeMessageFromString: function (text) {
-        var message = {};
-        var model = {
-            text: text
-        };
-        message.model = model;
-        return message;
-    },
 
     sanitize: function (str, opts) {
         if (opts && opts.spaces) {
@@ -118,10 +109,13 @@ var Utils = {
         return str;
     },
 
-    linkify: function (str, where) {
+    // text is optional if we want URL to be different from displayed text
+    linkify: function (path, where, text) {
         var host, link, uri, name;
 
-        str = str.replace("?", "%3F");  // not URL encoded
+        where = where || "wiki";
+        text = text || path;
+        path = path.replace("?", "%3F");  // not URL encoded
 
         switch (where) {
             case 'gitter':
@@ -130,24 +124,14 @@ var Utils = {
             case 'wiki':
                 host = AppConfig.wikiHost;
                 break;
-            default:
-                host = AppConfig.wikiHost + AppConfig.getBotName();
         }
 
-        uri = host + str;
-        name = Utils.namify(str);
+        uri = host + path;
+        name = Utils.namify(text);
         link = `[${name}](${uri})`;
-        Utils.clog("link", link);
+        console.log("Utils.linkify args>", path, where, text);
+        Utils.clog("Utils.linkify>", "link", link);
         return link;
-    },
-
-    messageMock: function (text) {
-        var message = this.makeMessageFromString(text);
-
-        message.model.fromUser = {
-            username: "testuser"
-        };
-        return message;
     },
 
     splitParams: function (text) {
@@ -170,7 +154,7 @@ var Utils = {
         if (item) {
             return true; // means OK
         } else {
-            this.error(msg);
+            Utils.error(msg);
             return false;
         }
     },
@@ -236,6 +220,10 @@ var Utils = {
 
 
 };
+
+function clog() {
+    Utils.clog.call("Utils", arguments);
+}
 
 Utils.logLevel = parseInt(process.env.LOG_LEVEL || 4);
 

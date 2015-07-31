@@ -41,7 +41,7 @@ describe("TextLib", function () {
     it("should load the Wiki", function() {
         var p = KBase.initAsync();
         p.then(function() {
-            console.log("topics", KBase.topics);
+            // console.log("topics", KBase.topics);
             // console.log("wiki loaded");
             expect(KBase.topics).not.to.be.null;
         });

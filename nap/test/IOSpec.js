@@ -26,14 +26,14 @@ describe("IO", function () {
 
     it("command: test", function () {
         var res, msg;
-        msg = Utils.makeMessageFromString("test");
+        msg = TestHelper.makeMessageFromString("test");
         res = GBot.findAnyReply(msg);
         expect(res).to.include("All bot systems are go!");
     });
 
     it("command: help", function () {
         var res, msg;
-        msg = Utils.makeMessageFromString("help");
+        msg = TestHelper.makeMessageFromString("help");
         res = GBot.findAnyReply(msg);
         expect(res).to.include("Hi this is CamperBot");
     });
@@ -41,7 +41,7 @@ describe("IO", function () {
     // // failing for now - need to stip down to the command
     it("command: test with extra words should be ignored", function () {
         var res, msg;
-        msg = Utils.makeMessageFromString("test with some other stuff");
+        msg = TestHelper.makeMessageFromString("test with some other stuff");
         res = GBot.findAnyReply(msg);
         expect(res).to.be.null;
     });

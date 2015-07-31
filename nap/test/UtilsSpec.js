@@ -32,6 +32,14 @@ describe("Utils", function (){
         expect(res.keyword).to.equal("search");
     });
 
+
+    it("should make a wikilink", function() {
+        var res = Utils.linkify("SomePageName");
+        expect(res).to.equal('[SomePageName](https://github.com/freecodecamp/freecodecamp/wiki/SomePageName)');
+        expect(res).to.match(/\[SomePageName\].*/);
+    });
+
+
     // FIXME - doesn't use the passed in date to base calcs off
     // it("should get timestamp for yesterday", function() {
     //     var baseDate = new Date('2010-10-20T00:00:00+05:30'); // for testing

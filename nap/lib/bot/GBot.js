@@ -86,27 +86,27 @@ var GBot = {
         clog("announce", opts);
         // this.scanRooms();
         // Utils.clog("announce -->", opts);
-        // this.joinRoom(opts, true);
+        this.joinRoom(opts, true);
         // Utils.clog("announce <ok", opts);
     },
 
-    // joinRoom: function(opts) {
-    //     var roomUrl = opts.roomObj.name;
-    //     debugger;
-    //     GBot.gitter.rooms.join(roomUrl, function(err, room) {
-    //         if (err) {
-    //             console.warn("Not possible to join the room: ", err, roomUrl);
-    //             return null; // check - will this add nulls to the list of rooms?
-    //         }
-    //         GBot.roomList.push(room);
-    //         GBot.listenToRoom(room);
-    //         var text = GBot.getAnnounceMessage(opts);
-    //         GBot.say(text, room);
-    //         clog("joined> ", room.uri);
-    //         return room;
-    //     });
-    //     return false;
-    // },
+    joinRoom: function(opts, announceFlag) {
+        var roomUrl = opts.roomObj.name;
+
+        GBot.gitter.rooms.join(roomUrl, function(err, room) {
+            if (err) {
+                console.warn("Not possible to join the room: ", err, roomUrl);
+                // return null; // check - will this add nulls to the list of rooms?
+            }
+            GBot.roomList.push(room);
+            GBot.listenToRoom(room);
+            var text = GBot.getAnnounceMessage(opts);
+            GBot.say(text, room);
+            clog("joined> ", room.uri);
+            return room;
+        });
+        return false;
+    },
 
     // checks if joined already, otherwise adds
     addToRoomList: function(room) {
@@ -199,7 +199,7 @@ var GBot = {
         clog("botname on rooms", AppConfig.getBotName() );
         RoomData.rooms().map(function(oneRoomData) {
             var roomUrl = oneRoomData.name;
-            clog("oneRoomData", oneRoomData);
+            // clog("oneRoomData", oneRoomData);
             // clog("gitter.rooms", that.gitter.rooms);
             that.gitter.rooms.join(roomUrl, function(err, room) {
                 if (err) {

@@ -8,11 +8,13 @@ var TestHelper = {
             operation: 'create',
             model: {
                 id: '55b95acb5bc8dc88744243ff',
-                text: 'about @bothelp ',
+                text: 'about @bothelp',
                 html: 'about <span data-link-type="mention" data-screen-name="bothelp" class="mention">@bothelp</span> ',
                 sent: '2015-07-29T22:59:23.187Z',
                 editedAt: null,
-                fromUser: [Object],
+                fromUser: {
+                    username: "testuser"
+                },
                 unread: true,
                 readBy: 0,
                 urls: [],
@@ -102,7 +104,32 @@ var TestHelper = {
         };
         // clog(input);
         return input;
+    },
+
+    // used for tests
+    // and also strings to commands
+    // https://developer.gitter.im/docs/messages-resource
+    // makeMessageFromString: function (text) {
+    //     var message = {};
+    //     var model = {
+    //         text: text
+    //     };
+    //     message.model = model;
+    //     return message;
+    // },
+
+    makeMessageFromString: function (text) {
+        var message = TestHelper.aboutInput;
+        console.log("message.model.text >", message);
+        message.model.text = text;
+        // var message = this.makeMessageFromString(text);
+
+        message.model.fromUser = {
+            username: "testuser"
+        };
+        return message;
     }
+
 
 };
 
