@@ -18,7 +18,7 @@ var commands = {
 
     wikiLink: function(params) {
         if (!params) { return ""; }
-        var link = Utils.linkify(params, "wiki", (":pencil: " + params) );
+        var link = Utils.linkify(params, "wiki" );
         return link;
     },
 
@@ -27,8 +27,8 @@ var commands = {
         var str = "";
         // str += "\n----";
         // str += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)  ";
-        str += "\n\nFCC wiki > [" + link + " ] :pencil: ";
-        // str += ` [edit the wiki](${link})\n`;
+        // str += "\n\nFCC wiki > [" + link + " ] :pencil: ";
+        str += `\n:pencil: [read more on the FCC wiki](${link})\n`;
         // output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";
         return str;
     },
