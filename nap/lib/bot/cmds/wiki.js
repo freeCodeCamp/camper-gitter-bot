@@ -18,7 +18,7 @@ var commands = {
 
     wikiLink: function(params) {
         if (!params) { return ""; }
-        var link = Utils.linkify(params, "wiki");
+        var link = Utils.linkify(params, "wiki", (":pencil: " + params) );
         return link;
     },
 
@@ -34,7 +34,7 @@ var commands = {
     },
 
     wikiUsage: function() {
-        // return 
+        // return
         var output = "usage:\n";
         output += "    `wiki $topic`   info on that topic\n";
         output += "    `topics`    for a list of topics\n";
@@ -45,7 +45,7 @@ var commands = {
         Utils.warn("wiki.js", "cant find topic for", input.params);
         var output = "no wiki entry for: `" + input.params + "`";
         output += "\nwhy not create one?";
-        output += "\n:pencil: " + this.wikiLink(input.params);
+        output += "\n" + this.wikiLink(input.params);
         return output;
     },
 

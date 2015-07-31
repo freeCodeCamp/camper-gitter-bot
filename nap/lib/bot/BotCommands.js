@@ -71,6 +71,7 @@ var BotCommands = {
         var msg = "All bot systems are go!  \n";
         msg += this.version() + "\n";
         msg += this.botenv();
+        // msg += AppConfig.getBotName()
         return msg;
     },
 
@@ -166,12 +167,6 @@ var BotCommands = {
         return str;
     },
 
-    welcome: function (input, bot) {
-        var str = "## welcome " + input.message.model.fromUser.username;
-        str += "\n type `help` for some things the bot can do.";
-        return str;
-    },
-
     // gitter limits to first 10 lines or so
     // TODO - pagination
     topics: function (input, bot) {
@@ -236,12 +231,17 @@ var BotCommands = {
     search: function (input, bot) {
 
         var data = KBase.search(input.params);
-        return "searching for " + data;
-
+        var str = "searching for " + data;
         // var str = topLine + wipHeader;
         // str += "## search for" + input.text;
         // str += "\n results will be here!";
         // str += contactBox;
+        return str;
+    },
+
+    welcome: function (input, bot) {
+        var str = "## welcome " + input.message.model.fromUser.username;
+        str += "\n type `help` for some things the bot can do.";
         return str;
     },
 

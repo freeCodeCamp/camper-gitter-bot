@@ -105,7 +105,15 @@ var BotRoomData = {
             private: true,
             name: "bothelp/PrivateRoomTest",
             topics: ["general", "intros"]
+        },
+
+        {
+            title: "EdaanDemo",
+            name: "egetzel/demo",
+            private: true,
+            topics: ['egdemo']
         }
+
 
     ],
 
@@ -158,7 +166,7 @@ var BotRoomData = {
             name: "FreeCodeCamp/CoreTeam",
             private: true,
             topics: ['bots', 'fcc']
-        }
+        },
 
     ]
 
