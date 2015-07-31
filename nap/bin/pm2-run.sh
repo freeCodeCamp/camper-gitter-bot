@@ -14,7 +14,7 @@ GITTER_APP_KEY=${GITTER_APP_KEY} \
 GITTER_APP_SECRET=${GITTER_APP_SECRET} \
 LOG_LEVEL=10 \
 PORT=7891 \
-    pm2 start app.js --name bot --interpreter iojs
+    pm2 start --name bot --interpreter iojs  app.js
 
     # iojs app.js
     # node --harmony app.js

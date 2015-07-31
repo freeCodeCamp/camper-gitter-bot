@@ -125,13 +125,13 @@ var Utils = {
 
         switch (where) {
             case 'gitter':
-                host = AppConfig.gitterHost + AppConfig.botname;
+                host = AppConfig.gitterHost + AppConfig.getBotName();
                 break;
             case 'wiki':
                 host = AppConfig.wikiHost;
                 break;
             default:
-                host = AppConfig.wikiHost + AppConfig.botname;
+                host = AppConfig.wikiHost + AppConfig.getBotName();
         }
 
         uri = host + str;

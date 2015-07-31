@@ -10,7 +10,7 @@ var AppConfig = require('../../config/AppConfig'),
     Rooms = require('../../lib/app/Rooms.js'),
     Utils = require('../../lib/utils/Utils'),
     Bonfires = require('./Bonfires'),
-    RoomData = require('../../data/RoomData.js');
+    RoomData = require('../../data/RoomData');
 
 var GitterHelper = require('../../lib/gitter/GitterHelper');
 
@@ -27,7 +27,7 @@ var Router = {
         query.org = AppConfig.getOrg();
 
         if(query.dm === 'y') {
-            query.room = query.room || AppConfig.botname;
+            query.room = query.room || AppConfig.getBotName();
         }
 
         if (query.room) {

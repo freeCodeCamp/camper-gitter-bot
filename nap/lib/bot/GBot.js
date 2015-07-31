@@ -84,29 +84,29 @@ var GBot = {
 
     announce: function(opts) {
         clog("announce", opts);
-        this.scanRooms();
-        Utils.clog("announce -->", opts);
-        this.joinRoom(opts, true);
-        Utils.clog("announce <ok", opts);
+        // this.scanRooms();
+        // Utils.clog("announce -->", opts);
+        // this.joinRoom(opts, true);
+        // Utils.clog("announce <ok", opts);
     },
 
-    joinRoom: function(opts) {
-        var roomUrl = opts.roomObj.name;
-        debugger;
-        GBot.gitter.rooms.join(roomUrl, function(err, room) {
-            if (err) {
-                console.warn("Not possible to join the room: ", err, roomUrl);
-                return null; // check - will this add nulls to the list of rooms?
-            }
-            GBot.roomList.push(room);
-            GBot.listenToRoom(room);
-            var text = GBot.getAnnounceMessage(opts);
-            GBot.say(text, room);
-            clog("joined> ", room.uri);
-            return room;
-        });
-        return false;
-    },
+    // joinRoom: function(opts) {
+    //     var roomUrl = opts.roomObj.name;
+    //     debugger;
+    //     GBot.gitter.rooms.join(roomUrl, function(err, room) {
+    //         if (err) {
+    //             console.warn("Not possible to join the room: ", err, roomUrl);
+    //             return null; // check - will this add nulls to the list of rooms?
+    //         }
+    //         GBot.roomList.push(room);
+    //         GBot.listenToRoom(room);
+    //         var text = GBot.getAnnounceMessage(opts);
+    //         GBot.say(text, room);
+    //         clog("joined> ", room.uri);
+    //         return room;
+    //     });
+    //     return false;
+    // },
 
     // checks if joined already, otherwise adds
     addToRoomList: function(room) {
@@ -137,7 +137,6 @@ var GBot = {
         }
         return false;
     },
-
 
     getAnnounceMessage: function(opts) {
         var text = "----\n";
@@ -197,9 +196,10 @@ var GBot = {
     // ie a set of bot specific discussion rooms
     joinKnownRooms: function() {
         var that = this;
-        RoomData.map(function(oneRoomData) {
+        clog("botname on rooms", AppConfig.getBotName() );
+        RoomData.rooms().map(function(oneRoomData) {
             var roomUrl = oneRoomData.name;
-            // console.log("oneRoomData", oneRoomData);
+            clog("oneRoomData", oneRoomData);
             // clog("gitter.rooms", that.gitter.rooms);
             that.gitter.rooms.join(roomUrl, function(err, room) {
                 if (err) {
@@ -216,7 +216,7 @@ var GBot = {
     joinBonfireRooms: function() {
         var that = this;
         Bonfires.allDashedNames().map(function(name) {
-            var roomUrl = AppConfig.currentBot() + "/" + name;
+            var roomUrl = AppConfig.getBotName() + "/" + name;
             // Utils.clog("bf room", roomUrl);
             that.gitter.rooms.join(roomUrl, function(err, room) {
                 if (err) {

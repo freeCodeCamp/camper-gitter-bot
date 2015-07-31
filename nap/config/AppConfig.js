@@ -10,8 +10,9 @@
 
 var _ = require("lodash-node");
 
+var Utils = require("../lib/utils/Utils");
+
 var AppConfig = {
-    appHost: process.env.BOT_APP_HOST || "http://localhost:7000",
     clientId: process.env.GITTER_APP_KEY,
     token: process.env.GITTER_USER_TOKEN,
     roomId: "55b1a9030fc9f982beaac901", // default room botzy
@@ -22,12 +23,19 @@ var AppConfig = {
     wikiHost: "https://github.com/freecodecamp/freecodecamp/wiki/",
     gitterHost: "https://gitter.im/",
     mdn: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/",
-    botVersion: "0.0.2",
+    botVersion: "0.0.3",
     MAX_WIKI_LINES: 10,
 
 
     // TODO cleanup
-    currentBot: function() {
+    // use as a function so it can be set at startup
+    // before other code calls it at runtime
+    getBotName: function() {
+        if (!AppConfig.botname) {
+            Utils.error("tried to call botname before it was set");
+            return "ERROR_BOTNAME"; // or crash?
+        }
+        // Utils.warn("getBotName()", AppConfig.botname );
         return AppConfig.botname;
     },
 
@@ -62,29 +70,29 @@ var AppConfig = {
 
 };
 
-// calculated items
-AppConfig.dmLink = "https://gitter.im/" + AppConfig.botname;
-
-var serverEnv = process.env.SERVER_ENV || "beta";
 
 var envConfigs = {
     test: {
+        appHost: "http://localhost:7000",
         apiServer: "beta.freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
         botname: "bothelp"
     },
 
     local: {
+        appHost: "http://localhost:7000",
         apiServer: "beta.freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
         botname: "bothelp"
     },
     beta: {
+        appHost: "http://localhost:7000",
         apiServer: "beta.freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
         botname: "bothelp"
     },
     prod: {
+        appHost: "http://bot.freecodecamp.com",
         apiServer: "freecodecamp.com",
         appRedirectUrl: "http://bot.freecodecamp.com/login/callback",
         botname: "camperbot"
@@ -92,6 +100,10 @@ var envConfigs = {
 };
 
 // AppConfig.apiServer = envConfigs.apiServer[serverEnv];
+
+
+var serverEnv = process.env.SERVER_ENV;
+AppConfig.serverEnv = serverEnv;
 
 var thisConfig = envConfigs[serverEnv];
 if (!thisConfig) {
@@ -101,6 +113,9 @@ if (!thisConfig) {
 }
 
 _.merge(AppConfig, thisConfig);
+
+// calculated items
+AppConfig.dmLink = "https://gitter.im/" + AppConfig.botname;
 
 console.log("AppConfig", AppConfig);
 

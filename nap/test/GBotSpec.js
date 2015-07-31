@@ -61,7 +61,7 @@ describe("GBot", function () {
         GBot.init();
         msg = Utils.makeMessageFromString("wiki css");
         res = GBot.findAnyReply(msg);
-        expect(res).to.contain('## [css]');
+        expect(res).to.contain('## :pencil: [css]');
     });
 
     it("should have a test response", function () {

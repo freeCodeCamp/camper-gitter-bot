@@ -11,8 +11,8 @@ var AppConfig = require('../config/AppConfig');
 // we find a matching room here with that topic
 // and redirect them
 
-var RoomData,
-    listenRoom;
+var RoomData;
+
 
 // TODO - read this from the JSON file
 var bonfireTopics = [
@@ -87,12 +87,6 @@ var BotRoomData = {
         },
 
         {
-            title: "Botdiscussion",
-            name: "dcsan/botzy",
-            topics: ['bots', 'fcc', 'teaching']
-        },
-
-        {
             title: "GeneralChat",
             name: "bothelp/GeneralChat",
             topics: ["general", "intros"]
@@ -114,37 +108,43 @@ var BotRoomData = {
         },
 
         {
+            title: "Help Bonfires",
+            name: "camperbot/HelpBonfires",
+            topics: bonfireTopics
+        },
+
+        {
             title: "Help ZipLines",
             name: "camperbot/HelpZiplines",
             topics: ["ziplines"]
+        },
+
+        {
+            title: "Botdiscussion",
+            name: "dcsan/botzy",
+            topics: ['bots', 'fcc', 'teaching']
         }
 
     ]
 
 };
 
+var botname = null;
+
+RoomData = {
+    rooms: function() {
+        botname = botname || AppConfig.getBotName();
+        return BotRoomData[botname];
+    },
+
+    defaultRoom: function() {
+        return RoomData.rooms().rooms[0];
+    }
+
+};
 
 
 
-// filter rooms to listen to if a cmd line arg was passed in
-// for development
-var botname = AppConfig.botname;
 
-console.log("loading RoomData for " + botname);
-
-RoomData = BotRoomData[botname];
-
-// if (listenRoom) {
-//     RoomData = AllRoomData.filter(function(rm) {
-//         return (rm.name === listenRoom);
-//     });
-//     console.log("LISTEN_ROOM only:", RoomData);
-// } else {
-//     RoomData = AllRoomData;
-// }
-
-// alias
-RoomData.defaultRoom = RoomData[0];
-
-// console.log("RoomData", RoomData);
 module.exports = RoomData;
+

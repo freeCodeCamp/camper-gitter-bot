@@ -1,16 +1,15 @@
+
+
+
 source bin/credentials-camperbot.sh
 
 set -x
 
+SERVER_ENV=prod \
+BOT_APP_HOST=bot.freecodecamp.com \
 GITTER_USER_TOKEN=${GITTER_USER_TOKEN} \
 GITTER_APP_KEY=${GITTER_APP_KEY} \
 GITTER_APP_SECRET=${GITTER_APP_SECRET} \
 LOG_LEVEL=10 \
-BOT_APP_HOST=bot.freecodecamp.com \
 PORT=7891 \
-BOTNAME=camperbot \
     nodemon -x iojs app.js
-
-    # iojs app.js
-    # node --harmony app.js
-    # nodemon -x iojs app.js

@@ -2,7 +2,7 @@
 
 // var _ = require("underscore");
 
-var RoomData = require('../../data/RoomData.js'),
+var RoomData = require('../../data/RoomData'),
     Bonfires = require('./Bonfires'),
     AppConfig = require('../../config/AppConfig');
 
@@ -10,7 +10,7 @@ var Rooms = {
 
     findByTopic: function(topic) {
 
-        var rooms = RoomData.filter(function(rm) {
+        var rooms = RoomData.rooms().filter(function(rm) {
             var topics = rm.topics;
             if (!topics) {
                 return false;
@@ -36,14 +36,14 @@ var Rooms = {
     // })
 
     findByName: function(name) {
-        var rooms = RoomData.filter( function(rm) {
+        var rooms = RoomData.rooms().filter( function(rm) {
             return (rm.name === name);
         });
         return (this.checkRoom(rooms[0], 'findByName', name));
     },
 
     names: function() {
-        this.roomList = RoomData.map(function(room) {
+        this.roomList = RoomData.rooms().map(function(room) {
             return room.name;
         });
         return this.roomList;
