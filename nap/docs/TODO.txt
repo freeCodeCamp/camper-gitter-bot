@@ -3,11 +3,9 @@ TODO
 X   setup prod env
 
 
-fixi wiki links
+-   bonfire content test
 
-
-
--   bonfire content
+setup rooms for launch
 
 
 
