@@ -94,6 +94,12 @@ var BotRoomData = {
             topics: ["general", "intros"]
         },
 
+        // {
+        //     title: "DataScience",
+        //     name: "FreeCodeCamp/DataScience",
+        //     topics: ["general", "DataScience"]
+        // },
+
         {
             title: "PrivateRoomTest",
             private: true,
@@ -112,6 +118,12 @@ var BotRoomData = {
         },
 
         {
+            title: "DataScience",
+            name: "FreeCodeCamp/DataScience",
+            topics: ["general", "DataScience"]
+        },
+
+        {
             title: "Help Bonfires",
             name: "camperbot/testing",
             topics: ["testing", "bots"]
@@ -120,6 +132,12 @@ var BotRoomData = {
         {
             title: "Help Bonfires",
             name: "camperbot/HelpBonfires",
+            topics: bonfireTopics
+        },
+
+        {
+            title: "SanFrancisco",
+            name: "FreeCodeCamp/SanFrancisco",
             topics: bonfireTopics
         },
 

@@ -114,7 +114,7 @@ var BotCommands = {
 
         return str;
         // https://gitter.im/dcsan/botzy/archives/all
-        // date ; //# => Thu Mar 31 2011 11:14:50 GMT+0200 (CEST)        
+        // date ; //# => Thu Mar 31 2011 11:14:50 GMT+0200 (CEST)
         // https://gitter.im/bothelp/GeneralChat/archives/2015/07/25
     },
 
@@ -147,6 +147,10 @@ var BotCommands = {
     rooms: function (input, bot) {
         var uri, link, str, roomNames, icon;
         var baseList = RoomData.rooms();   // bot.roomList doesnt show private / meta data
+
+        // https://gitter.im/FreeCodeCamp
+        str = "## rooms\nSee all the FreeCodeCamp rooms at [gitter.im/FreeCodeCamp](https://gitter.im/FreeCodeCamp)\n"
+
         roomNames = baseList.map(function (rm) {
             clog("room", rm);
             if (rm.private) {
@@ -158,7 +162,7 @@ var BotCommands = {
                 return link;
             }
         });
-        str = "## rooms" + roomNames.join(" ");
+        str += roomNames.join(" ");
         return str;
     },
 
