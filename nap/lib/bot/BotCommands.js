@@ -223,6 +223,10 @@ var BotCommands = {
         return str;
     },
 
+    hello: function(input, bot) {
+        return (this.welcome(input, bot) );
+    }
+
 };
 
 BotCommands.about = require("./cmds/about");
@@ -241,7 +245,7 @@ _.merge(BotCommands, wiki, thanks);
 // BotCommands.help = BotCommands.menu;
 BotCommands.hi = BotCommands.welcome;
 // BotCommands.bothelp = BotCommands.menu;
-BotCommands.hello = BotCommands.welcome;
+// BotCommands.hello = BotCommands.welcome;
 BotCommands.index = BotCommands.topics;
 
 BotCommands.log = BotCommands.archive;
