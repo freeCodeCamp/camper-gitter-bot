@@ -23,15 +23,17 @@
 # cd ../..
 
 cd data/fcc.wiki
-git pull origin master
+git fetch
 git checkout master
+git pull origin master
 cd ../..
 
 rm data/wiki/*
 
-cp data/kbase.wiki/*md data/wiki
+
 cp data/fcc.wiki/*md data/wiki
 
-git commit -am "Pulled down update to submodules and merged"
+git add data/wiki
+git commit -am "wiki update and merge"
 git pull 
 git push
