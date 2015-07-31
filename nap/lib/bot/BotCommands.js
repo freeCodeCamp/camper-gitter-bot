@@ -1,6 +1,8 @@
 /*jslint todo: true */
 "use strict";
 
+var LOGTHIS = false;
+
 var assert = require("chai").assert;
 var _ = require("lodash-node");
 
@@ -53,9 +55,11 @@ var BotCommands = {
             res = true;
         } else {
             res = false;
-            Utils.warn('isCommand', 'not command', input);
-            Utils.warn('isCommand',
-                `[ isCommand: ${input.keyword} ] one: ${one} | res ${res} ` );
+            if (LOGTHIS) {
+                Utils.warn('isCommand', 'not command', input);
+                Utils.warn('isCommand',
+                    `[ isCommand: ${input.keyword} ] one: ${one} | res ${res} ` );
+            }
         }
         return res;
     },

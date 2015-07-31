@@ -80,7 +80,7 @@ var GBot = {
             input.command = true;
         }
 
-        clog("input", input);
+        // clog("input", message.model.text);
         return input;
     },
 
