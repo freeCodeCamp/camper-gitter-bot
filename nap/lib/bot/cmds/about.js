@@ -53,7 +53,8 @@ var about = function(input, bot) {
 
     clog("input---------");
     // console.log(JSON.stringify(input));
-
+    debugger;
+    
     mentions = input.message.model.mentions;
     them = mentions[0];
     if (!them) {

@@ -53,7 +53,7 @@ describe("Commands", function () {
     it("isCommand: menu true", function () {
         var input = {
             keyword: "menu"
-        }
+        };
         var res = BotCommands.isCommand(input);
         expect(res).to.be.true;
     });
@@ -68,16 +68,16 @@ describe("Commands", function () {
     it("should show archives", function() {
         var archive = BotCommands.archive(TestHelper.stubInput);
         expect(archive).not.to.be.null;
-        expect(archive).to.include("Archives for ")
+        expect(archive).to.include("Archives for ");
     });
 
 
-    it("should show about @mention", function() {
+    it("should show archive", function() {
         var input = TestHelper.stubInput;
-        input.keyword = "about"
-        var archive = BotCommands.about();
-        expect(archive).not.to.be.null;
-        expect(archive).to.include("archive for ")
+        input.keyword = "archive";
+        var res = BotCommands.archive(input);
+        expect(res).not.to.be.null;
+        expect(res).to.include("Archives for");
     });
 
     // it("should show about @mention", function() {

@@ -68,6 +68,12 @@ AppConfig.dmLink = "https://gitter.im/" + AppConfig.botname;
 var serverEnv = process.env.SERVER_ENV || "beta";
 
 var envConfigs = {
+    test: {
+        apiServer: "beta.freecodecamp.com",
+        appRedirectUrl: "http://localhost:7891/login/callback",
+        botname: "bothelp"
+    },
+
     local: {
         apiServer: "beta.freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
