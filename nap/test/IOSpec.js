@@ -28,36 +28,22 @@ describe("IO", function () {
         var res, msg;
         msg = Utils.makeMessageFromString("test");
         res = GBot.findAnyReply(msg);
-        expect(res).to.equal("All bot systems are go!");
+        expect(res).to.include("All bot systems are go!");
     });
 
     it("command: help", function () {
         var res, msg;
         msg = Utils.makeMessageFromString("help");
         res = GBot.findAnyReply(msg);
-        expect(res).to.include("try typing");
+        expect(res).to.include("Hi this is CamperBot");
     });
 
     // // failing for now - need to stip down to the command
     it("command: test with extra words should be ignored", function () {
         var res, msg;
-        msg = Utils.makeMessageFromString("test stuff");
+        msg = Utils.makeMessageFromString("test with some other stuff");
         res = GBot.findAnyReply(msg);
-        expect(res).to.equal("All bot systems are go!");
-    });
-
-    it("command: wiki test", function () {
-        var res, msg;
-        msg = Utils.makeMessageFromString("wiki css");
-        res = GBot.findAnyReply(msg);
-        expect(res).to.include("**css** wikiEntry\n# Cascading");
-    });
-
-    it("wiki command with param: chai assert", function () {
-        var res, msg;
-        msg = Utils.makeMessageFromString("wiki chai assert");
-        res = GBot.findAnyReply(msg);
-        expect(res).to.include("**chai assert** wikiEntry\n# ");
+        expect(res).to.be.null;
     });
 
 });

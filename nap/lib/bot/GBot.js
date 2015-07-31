@@ -34,10 +34,8 @@ var GBot = {
         return AppConfig.botlist[0];
     },
 
-    say: function (text, input) {
-        expect(input.message).to.exist;
-        expect(input.message.room).to.exist;
-        var room = input.message.room;
+    say: function (text, room) {
+        Utils.hasProperty(room, 'path');  // did we get a room
         room.send(text);
     },
 
@@ -46,7 +44,8 @@ var GBot = {
         clog(" in|", message.model.fromUser.username + "> " + message.model.text);
         var output = this.findAnyReply(message);
         clog("out| ", output);
-        message.room.send(output);
+        this.say(output, message.room);
+        // message.room.send(output);
         return (output);
     },
 
@@ -55,7 +54,6 @@ var GBot = {
     // handleReply takes care of sending to chat system
     findAnyReply: function (message) {
         var input, output;
-        debugger;
         input = this.parseInput(message);
         if (input.command) {
             output = BotCommands[input.keyword](input, this);

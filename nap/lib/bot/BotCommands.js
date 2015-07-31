@@ -63,6 +63,9 @@ var BotCommands = {
     },
 
     test: function (input, bot) {
+        if (input.params) {
+            return null;    // dont response if they type test something as its probly just chat
+        }
         var msg = "All bot systems are go!  \n";
         msg += this.version();
         return msg;
@@ -155,7 +158,7 @@ var BotCommands = {
     topics: function (input, bot) {
         var str, shortList, list;
         str = "## topics\n";
-        shortList = KBase.topicList.slice(0, 10);
+        shortList = KBase.topicNameList.slice(0, 10);
         list = shortList.map(function (t) {
             return (Utils.linkify(t, "wiki"));
         });

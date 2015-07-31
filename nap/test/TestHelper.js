@@ -1,13 +1,13 @@
 "use strict";
 
 var TestHelper = {
-    aboutInput: { 
+    aboutInput: {
         keyword: 'about',
-          params: '@bothelp ',
-          message: 
-           { operation: 'create',
-             model: 
-              { id: '55b95acb5bc8dc88744243ff',
+        params: '@bothelp ',
+        message: {
+            operation: 'create',
+            model: {
+                id: '55b95acb5bc8dc88744243ff',
                 text: 'about @bothelp ',
                 html: 'about <span data-link-type="mention" data-screen-name="bothelp" class="mention">@bothelp</span> ',
                 sent: '2015-07-29T22:59:23.187Z',
@@ -19,9 +19,10 @@ var TestHelper = {
                 mentions: [Object],
                 issues: [],
                 meta: {},
-                v: 1 },
-             room: 
-              { path: '/rooms',
+                v: 1
+            },
+            room: {
+                path: '/rooms',
                 id: '55b3d5780fc9f982beaaf7f4',
                 name: 'bothelp/GeneralChat',
                 topic: ' testing',
@@ -39,10 +40,12 @@ var TestHelper = {
                 v: 1,
                 client: [Object],
                 faye: [Object],
-                _events: [Object] } },
-          cleanText: 'about @bothelp ',
-          command: true 
+                _events: [Object]
+            }
         },
+        cleanText: 'about @bothelp ',
+        command: true
+    },
 
     stubInput: {
         keyword: 'hint',
@@ -105,6 +108,4 @@ var TestHelper = {
 
 
 
-
 module.exports = TestHelper;
-

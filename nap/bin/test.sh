@@ -22,3 +22,6 @@ GITTER_APP_SECRET=${GITTER_APP_SECRET} \
 LOG_LEVEL=10 \
 PORT=7891 \     
     mocha -w --harmony --sort $1
+
+
+# --inline-diffs 

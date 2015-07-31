@@ -6,7 +6,7 @@ var assert = require("chai").assert,
 var GBot = require("../lib/bot/GBot"),
     Utils = require("../lib/utils/Utils"),
     KBase = require("../lib/bot/KBase"),
-    KBase = require("../config/AppConfig");
+    AppConfig = require("../config/AppConfig");
 
 function clog(msg, obj) {
     Utils.clog("KbaseSpec>", msg, obj);
@@ -61,14 +61,14 @@ describe("GBot", function () {
         GBot.init();
         msg = Utils.makeMessageFromString("wiki css");
         res = GBot.findAnyReply(msg);
-        expect(res).to.contain('**css** wikiEntry');
+        expect(res).to.contain('## [css]');
     });
 
     it("should have a test response", function () {
         var msg, res;
         msg = Utils.makeMessageFromString("test");
         res = GBot.findAnyReply(msg);
-        expect(res).to.equal("All bot systems are go!");
+        expect(res).to.include("All bot systems are go!");
     });
 
     it("should have wiki bootstrap content", function () {

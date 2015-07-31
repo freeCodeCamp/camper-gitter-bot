@@ -14,15 +14,16 @@ describe("Rooms", function(){
     // })
 
     it("should find a room for objects topic", function() {
-        var room = Rooms.findByTopic("objects");
+        var room = Rooms.findByTopic("bonfires");
         // console.log("topic", topic);
-        expect(room.name).to.equal("bothelp/JS-Basics");
-    })
+        expect(room.name).to.equal("bothelp/HelpBonfires");
+    });
 
     it("should find a room by name", function() {
-        var room = Rooms.findByName("bothelp/JS-Basics");
-        expect(room.name).to.equal("bothelp/JS-Basics");
-        expect(room.title).to.equal("JS-Basics");
-    })
+        var room = Rooms.findByName("bothelp/HelpBonfires");
+        expect(room.title).to.equal("HelpBonfires");
+        expect(room.name).to.equal("bothelp/HelpBonfires");
+    });
 
 });
+

@@ -64,24 +64,24 @@ var BotRoomData = {
     bothelp: [
         {
             title: "bothelp",
-            name: "camperbot/testing",
+            name: "bothelp/testing",
             topics: ["chitchat", "bots", "bot-development", "camperbot"]
         },
 
         {
             title: "HelpBonfires",
-            name: "camperbot/HelpBonfires",
+            name: "bothelp/HelpBonfires",
             topics: bonfireTopics
         },
 
         {
             title: "dev2",
             name: "bothelp/dev2",
-            topics: ["bonfires", "hello-bonfires"]
+            topics: ["dev2"]
         },
 
         {
-            title: "bothelp",
+            title: "bothelpDM",
             name: "bothelp",
             topics: ["chitchat", "dm"]
         },

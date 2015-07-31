@@ -217,7 +217,20 @@ var Utils = {
         timestamp = d1.getFullYear() + '/' + month + '/' + d1.getDate();
         return timestamp;
 
+    },
+
+    hasProperty: function(obj, prop) {
+        if (obj.prop) {
+            return true;
+        }
+        Utils.error("missing property", prop, obj);
+        return false;
     }
+
+    // checkPrototype: function(obj, expected) {
+    //     Utils.clog("Utils.checkPrototype", obj, expected);
+    //     console.log("proto", obj.prototype);
+    // }
 
 
 };
