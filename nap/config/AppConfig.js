@@ -109,7 +109,6 @@ var thisConfig = envConfigs[serverEnv];
 if (!thisConfig) {
     var msg = ("cant find env:", serverEnv);
     console.error(msg);
-    throw (msg);
 }
 
 _.merge(AppConfig, thisConfig);

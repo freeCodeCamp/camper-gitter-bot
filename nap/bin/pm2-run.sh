@@ -6,9 +6,7 @@ source bin/credentials-camperbot.sh
 
 set -x
 
-SERVER_ENV=prod
-BOTNAME=camperbot \
-BOT_APP_HOST=bot.freecodecamp.com \
+SERVER_ENV=prod \
 GITTER_USER_TOKEN=${GITTER_USER_TOKEN} \
 GITTER_APP_KEY=${GITTER_APP_KEY} \
 GITTER_APP_SECRET=${GITTER_APP_SECRET} \
