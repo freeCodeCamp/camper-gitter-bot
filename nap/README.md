@@ -9,19 +9,25 @@ at the time of writing iojs was a bit ahead of node so:
 # ubuntu
 sudo apt-get upgrade
 sudo apt-get install build-essential
+```
+on the mac you may not need to do that, but update npm to be sure.
+
+We use n to manage iojs installation:
+```
 sudo npm install -g n
 sudo n io latest
 ```
 
-to run the app you need to auth it with your gitter credentials
+To run the app you need to auth it with your gitter credentials
 see the `bin/credentials-example.sh` file
 
-create a copy of that
-and then from the root of the app 
+create a copy of that and then from the root of the app run:
 
     $ bin/run.sh
 
 there are other commands in `bin` for running tests with the right config files etc
 
-based on this spec
-https://docs.google.com/document/d/1ThkBj7CuLoNY0M4g6dTgdD1ENysbQEXbnlLXIKm3lOM/edit
+to run the tests with the right configs
+
+    $ bin/test.sh
+
