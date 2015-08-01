@@ -147,8 +147,11 @@ var BotCommands = {
         if (input.params) {
             return this.wiki(input, bot);
         } else {
-            var topicData = KBase.getTopicData("camperbot");
-            return topicData.data;
+            var keyword = "camperbot";
+            var topicData = KBase.getTopicData(keyword);
+            var str = topicData.data;
+            str += this.wikiFooter(keyword);
+            return (str);
         }
     },
 

@@ -22,7 +22,7 @@ var commands = {
     //     return link;
     // },
 
-    footer: function(params) {
+    wikiFooter: function(params) {
         var text = ("read more about " + params + " on the FCC Wiki");
         var link = Utils.linkify(params, "wiki", text );
         var str = "";
@@ -64,7 +64,7 @@ var commands = {
         var link = Utils.linkify(input.params, "wiki");
         output = `## :pencil: ${link} \n`;
         output += topicData.shortData;
-        output += this.footer(input.params);
+        output += this.wikiFooter(input.params);
         return output;
     }
 };
