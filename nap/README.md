@@ -34,7 +34,7 @@ see the `bin/credentials-example.sh` file
 
 create a copy of that and then from the root of the app run:
 
-    $ bin/run.sh
+    $ bin/run-dev-bothelp.sh
 
 there are other commands in `bin` for running tests with the right config files etc
 
