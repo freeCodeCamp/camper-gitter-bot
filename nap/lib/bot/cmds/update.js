@@ -27,19 +27,20 @@ var commands = {
             // env:_.extend(process.env, { PATH: process.env.PATH + ':/usr/local/bin' })
         });
 
+        // these throw errors if you're already on a branch
         cmd.stdout.on('data', function (data) {
-            bot.say("data:" + data, input.message.room);
-            console.log('stdout: ' + data);
+            bot.say("data: " + data, input.message.room);
+            // console.log('stdout: ' + data);
         });
 
         cmd.stderr.on('data', function (data) {
             console.log('stderr: ' + data);
-            bot.say("error: " + data, input.message.room);
+            // bot.say("error: " + data, input.message.room);
         });
 
         cmd.on('close', function (code) {
             KBase.initAsync();
-            bot.say("done " + code, input.message.room);
+            bot.say("done code: " + code, input.message.room);
             // console.log('child process exited with code ' + code);
         });
 
