@@ -134,7 +134,7 @@ var BotRoomData = {
         },
 
         {
-            title: "Help Bonfires",
+            title: "Testing",
             name: "camperbot/testing",
             topics: ["testing", "bots"]
         },
@@ -164,7 +164,7 @@ var BotRoomData = {
         },
 
         {
-            title: "Botdiscussion",
+            title: "Bhubaneswar",
             name: "FreeCodeCamp/Bhubaneswar",
             topics: ['regex']
         },
