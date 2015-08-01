@@ -51,6 +51,15 @@ But then we just copy it and commit it back to the main app as submodules are na
 
 # System Overview
 
+- RoomData.js
+
+The list of rooms your bot is going to join.
+This needs to be changed so you would only join your own rooms, otherwise developers will get into a situation where everyone is joining the same rooms and the bots go crazy talking to each other!
+
+- BotCommands.js
+This is where you add things that the bot can do. Some commands are broken into separate files such as `thanks` and `about`.
+
+
 Sorry that these docs are very lightweight right now.
 To understand the system some basic places to look.
 
