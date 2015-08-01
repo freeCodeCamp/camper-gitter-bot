@@ -1,12 +1,18 @@
-Hi this is **[CamperBot](https://github.com/FreeCodeCamp/freecodecamp/wiki/camperbot)**! I can assist you in this chatroom :smile: 
+Hi this is **[CamperBot](https://github.com/FreeCodeCamp/freecodecamp/wiki/camperbot)**! 
+I can assist you in this chatroom :smile: 
 
-Basic commands:
+### Basic commands:
 - ``find TOPIC``  find all entries about topic. ex: `find js`
 - `wiki TOPIC` show contents of topic page
 - `thanks @username`  send karmapoints to another user
 - `about @username`   shows info on that user
 
-:unlock: see the [wiki](https://github.com/FreeCodeCamp/freecodecamp/wiki/camperbot) for more commands!
+### example commands
+```
+find js
+wiki js ternary
+rollem    # secret sauce
+```
 
 ## more commands
 - `topics` selected pages from the wiki
@@ -19,10 +25,6 @@ Have a look at Tickets with [help wanted](https://github.com/dcsan/gitterbot/iss
 ### [https://github.com/dcsan/gitterbot](https://github.com/dcsan/gitterbot)
 Fork it and have fun!
 
-## Developer chatroom
-Join us on the repo chatroom to discuss new features  
-https://gitter.im/dcsan/gitterbot
-
 ## Roadmap
 In future, we're planning 
 - Bonfire step-by-step tutorials will be available via chat and from the camperbot
@@ -30,4 +32,9 @@ In future, we're planning
 - a scripting language and natural language processing
 Get involved and let us know what you'd like to see next!
 
+## Developer chatroom
+Join us on the repo chatroom to discuss new features. Perhaps we can pair up to work on the bot 2.0!
+https://gitter.im/dcsan/gitterbot
+
 ![enjoy](https://avatars1.githubusercontent.com/camperbot?&s=100) *< Happy Camping! >*
+
