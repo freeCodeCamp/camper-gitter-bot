@@ -235,7 +235,7 @@ var Utils = {
     },
 
     betaFooter: function() {
-        return "\n > note feature is linked to our beta site, so it may not have all users til we go live with the new release.";
+        return "\n----\n > note feature is linked to our beta site, so it may not have all users til we go live with the new release.";
     }
 
 
