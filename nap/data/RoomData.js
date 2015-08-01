@@ -139,6 +139,18 @@ var BotRoomData = {
             topics: ["testing", "bots"]
         },
 
+        {
+            title: "CamperBot DevTeam",
+            name: "camperbot/devteam",
+            topics: ["devteam"]
+        },
+
+        {
+            title: "Main RepoRoom",
+            name: "dcsan/gitterbot",
+            topics: ["testing", "bots"]
+        },
+
         // {
         //     title: "Help Bonfires",
         //     name: "camperbot/HelpBonfires",
