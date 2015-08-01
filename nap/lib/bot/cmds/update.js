@@ -6,7 +6,7 @@ var spawn = require('child_process').spawn;
 
 // var _ = require('underscore'); // for some utility goodness
 // var GBot = require("../../../lib/bot/GBot.js"),
-//     KBase = require("../../bot/KBase"),
+var    KBase = require("../../bot/KBase");
 //     Utils = require("../../../lib/utils/Utils"),
 //     AppConfig = require("../../../config/AppConfig"),
 //     HttpWrap = require("../../../lib/utils/HttpWrap");
@@ -37,6 +37,7 @@ var commands = {
         });
 
         cmd.on('close', function (code) {
+            KBase.initAsync();
             bot.say("done", input.message.room);
             // console.log('child process exited with code ' + code);
         });
