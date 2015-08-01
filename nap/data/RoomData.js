@@ -163,11 +163,11 @@ var BotRoomData = {
             topics: ['regex']
         },
 
-        {
-            title: "HelpBonfires",
-            name: "FreeCodeCamp/HelpBonfires",
-            topics: bonfireTopics
-        },
+        // {
+        //     title: "HelpBonfires",
+        //     name: "FreeCodeCamp/HelpBonfires",
+        //     topics: bonfireTopics
+        // },
 
         // {
         //     title: "MainHelp",
