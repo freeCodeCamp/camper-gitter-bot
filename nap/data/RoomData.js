@@ -95,6 +95,12 @@ var BotRoomData = {
             topics: ["general", "intros"]
         },
 
+        {
+            title: "LocalDev",
+            name: "camperbot/localdev",
+            topics: ["general", "intros"]
+        },
+
         // {
         //     title: "DataScience",
         //     name: "FreeCodeCamp/DataScience",
