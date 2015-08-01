@@ -62,6 +62,7 @@ var BotRoomData = {
 
     // developer bot
     bothelp: [
+
         {
             title: "bothelp",
             name: "bothelp/testing",
@@ -138,11 +139,11 @@ var BotRoomData = {
             topics: ["testing", "bots"]
         },
 
-        {
-            title: "Help Bonfires",
-            name: "camperbot/HelpBonfires",
-            topics: bonfireTopics
-        },
+        // {
+        //     title: "Help Bonfires",
+        //     name: "camperbot/HelpBonfires",
+        //     topics: bonfireTopics
+        // },
 
         {
             title: "SanFrancisco",
@@ -174,6 +175,18 @@ var BotRoomData = {
             private: true,
             topics: ['bots', 'fcc']
         },
+
+        {
+            title: "CoreTeam",
+            name: "FreeCodeCamp/HelpBonfires",
+            topics: bonfireTopics
+        },
+
+        // {
+        //     title: "CoreTeam",
+        //     name: "FreeCodeCamp/HelpXX",
+        //     topics: ['bots', 'fcc']
+        // },
 
     ]
 
