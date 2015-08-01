@@ -128,15 +128,15 @@ var BotRoomData = {
         },
 
         {
-            title: "DataScience",
-            name: "FreeCodeCamp/DataScience",
-            topics: ["general", "DataScience"]
+            title: "Camperbot Bonfires",
+            name: "camperbot/testing",
+            topics: ["testing", "bots"]
         },
 
         {
-            title: "Help Bonfires",
-            name: "camperbot/testing",
-            topics: ["testing", "bots"]
+            title: "DataScience",
+            name: "FreeCodeCamp/DataScience",
+            topics: ["general", "DataScience"]
         },
 
         // {
@@ -159,21 +159,8 @@ var BotRoomData = {
 
         {
             title: "Botdiscussion",
-            name: "dcsan/botzy",
-            topics: ['bots', 'fcc', 'teaching']
-        },
-
-        {
-            title: "Botdiscussion",
             name: "FreeCodeCamp/Bhubaneswar",
             topics: ['regex']
-        },
-
-        {
-            title: "CoreTeam",
-            name: "FreeCodeCamp/CoreTeam",
-            private: true,
-            topics: ['bots', 'fcc']
         },
 
         {
