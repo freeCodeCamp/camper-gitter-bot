@@ -75,6 +75,7 @@ var BotCommands = {
         var msg = "All bot systems are go!  \n";
         msg += this.version() + "\n";
         msg += this.botenv();
+        // clog("BotCommands.bot", this.bot);
         // msg += AppConfig.getBotName()
         return msg;
     },
@@ -129,8 +130,16 @@ var BotCommands = {
         BotCommands.bot = bot;
     },
 
+    tooNoisy: function (input, bot) {
+        // if this.room.name 
+        return false;
+    },
+
     // help on its own we return `help bothelp`
     help: function (input, bot) {
+        if (this.tooNoisy(input, bot)) {
+            return null;
+        }
         // input;
         // var msg = TestHelper.makeInputFromString("help help");
         // return "try this: `wiki $topic` or topics for a list";
@@ -244,9 +253,12 @@ var BotCommands = {
     },
 
     welcome: function (input, bot) {
-        var str = "## welcome to FreeCodeCamp @" + input.message.model.fromUser.username + "!";
+        var str;
+        if (input.params && input.params.match(/world/i)) {
+            str = "## welcome to FreeCodeCamp @" + input.message.model.fromUser.username + "!";
+            return str;
+        }
         // str += "\n type `help` for some things the bot can do.";
-        return str;
     },
 
     hello: function(input, bot) {

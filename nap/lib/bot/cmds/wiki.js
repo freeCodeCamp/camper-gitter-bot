@@ -16,19 +16,20 @@ var KBase = require("../../bot/KBase"),
 
 var commands = {
 
-    wikiLink: function(params) {
-        if (!params) { return ""; }
-        var link = Utils.linkify(params, "wiki" );
-        return link;
-    },
+    // wikiLink: function(params) {
+    //     if (!params) { return ""; }
+    //     var link = Utils.linkify(params, "wiki" );
+    //     return link;
+    // },
 
     footer: function(params) {
-        var link = this.wikiLink(params);
+        var text = ("read more about " + params + " on the FCC Wiki");
+        var link = Utils.linkify(params, "wiki", text );
         var str = "";
         // str += "\n----";
         // str += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)  ";
         // str += "\n\nFCC wiki > [" + link + " ] :pencil: ";
-        str += `\n:pencil: [read more on the FCC wiki](${link})\n`;
+        str += "\n:pencil: " + link;
         // output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";
         return str;
     },
@@ -45,7 +46,7 @@ var commands = {
         Utils.warn("wiki.js", "cant find topic for", input.params);
         var output = "no wiki entry for: `" + input.params + "`";
         output += "\nwhy not :pencil: ";
-        output += this.wikiLink(input.params, "wiki", "create one?");
+        output += Utils.linkify(input.params, "wiki", "create one?");
         output += "\n you could also try typing `find " + input.params + "`";
         return output;
     },
@@ -63,7 +64,7 @@ var commands = {
         var link = Utils.linkify(input.params, "wiki");
         output = `## :pencil: ${link} \n`;
         output += topicData.shortData;
-        // output += this.footer(input.params);
+        output += this.footer(input.params);
         return output;
     }
 };

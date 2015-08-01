@@ -73,6 +73,7 @@ var GBot = {
         cleanText = Utils.sanitize(cleanText);
 
         input = Utils.splitParams(cleanText);
+        input = this.cleanInput(input);
         input.message = message;
         input.cleanText = cleanText;
 
@@ -84,6 +85,13 @@ var GBot = {
         return input;
     },
 
+    cleanInput: function(input) {
+        // 'bot' keyword is an object = bad things happen when called as a command
+        if (input.keyword == 'bot') {
+            input.keyword = 'help';
+        }
+        return input;
+    },
 
     // ---------------- room related ----------------
 

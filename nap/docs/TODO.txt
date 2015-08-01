@@ -1,11 +1,10 @@
 TODO
 
-
-
 X   setup prod env
 
-
 -   bonfire content test
+
+
 
 setup rooms for launch
 
