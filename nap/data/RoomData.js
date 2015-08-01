@@ -1,5 +1,8 @@
 "use strict";
 
+// This file needs to be edited to comment out
+// rooms you want to join
+
 // TODO - move to lib/ dir?
 
 var AppConfig = require('../config/AppConfig');
@@ -115,7 +118,6 @@ var BotRoomData = {
             topics: ['egdemo']
         }
 
-
     ],
 
     camperbot: [
@@ -139,12 +141,6 @@ var BotRoomData = {
             topics: ["general", "DataScience"]
         },
 
-        // {
-        //     title: "Help Bonfires",
-        //     name: "camperbot/HelpBonfires",
-        //     topics: bonfireTopics
-        // },
-
         {
             title: "SanFrancisco",
             name: "FreeCodeCamp/SanFrancisco",
@@ -161,6 +157,12 @@ var BotRoomData = {
             title: "Botdiscussion",
             name: "FreeCodeCamp/Bhubaneswar",
             topics: ['regex']
+        },
+
+        {
+            title: "Help Bonfires",
+            name: "camperbot/HelpBonfires",
+            topics: bonfireTopics
         },
 
         // {

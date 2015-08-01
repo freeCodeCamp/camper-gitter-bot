@@ -1,12 +1,10 @@
+"use strict";
+
 /* jshint -W097 */
 /*jslint node: true */
 /*global require, module, process, console  __dirname */
 
-
-"use strict";
-
-// DONT require this as it creates a circular dependency
-// var Utils = require("../lib/utils/Utils");
+var _ = require("lodash-node");
 
 
 var envConfigs = {
@@ -36,9 +34,6 @@ var envConfigs = {
         botname: "camperbot"
     }
 };
-
-var _ = require("lodash-node");
-
 
 
 var AppConfig = {

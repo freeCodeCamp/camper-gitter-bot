@@ -51,12 +51,12 @@ But then we just copy it and commit it back to the main app as submodules are na
 
 # System Overview
 
-- RoomData.js
-
+### RoomData.js
 The list of rooms your bot is going to join.
+Very starting your own bot, create a test room to enter and debug with.
 This needs to be changed so you would only join your own rooms, otherwise developers will get into a situation where everyone is joining the same rooms and the bots go crazy talking to each other!
 
-- BotCommands.js
+### BotCommands.js
 This is where you add things that the bot can do. Some commands are broken into separate files such as `thanks` and `about`.
 
 
