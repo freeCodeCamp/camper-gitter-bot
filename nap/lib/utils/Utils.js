@@ -232,7 +232,12 @@ var Utils = {
         Utils.error(msg);
         Utils.error("missing property", prop, obj);
         return false;
+    },
+
+    betaFooter: function() {
+        return "\n > note feature is linked to our beta site, so it may not have all users til we go live with the new release.";
     }
+
 
     // checkPrototype: function(obj, expected) {
     //     Utils.clog("Utils.checkPrototype", obj, expected);

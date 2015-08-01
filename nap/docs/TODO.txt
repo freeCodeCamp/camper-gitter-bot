@@ -1,20 +1,14 @@
 TODO
 
 X   setup prod env
-
--   bonfire content test
-
-
-
 setup rooms for launch
 
 
+-   bonfire content test
 
 X   test 'wiki' function
 X   debug double contents
 X   about
-
-
 
 
 find / choose from list

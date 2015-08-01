@@ -163,6 +163,12 @@ var BotRoomData = {
         },
 
         {
+            title: "Botdiscussion",
+            name: "FreeCodeCamp/Bhubaneswar",
+            topics: ['regex']
+        },
+
+        {
             title: "CoreTeam",
             name: "FreeCodeCamp/CoreTeam",
             private: true,

@@ -18,11 +18,16 @@ var clog = require('../../utils/clog.js');
 //     }
 // }
 
+
+// TODO - merge this with the 'thanks' function, as that also shows user info.
+
 var showInfo = function(input, bot, blob) {
     Utils.clog('about', "showInfo", blob);
 
     if (blob.error) {
-        bot.say("user not found", input.message.room);
+        var msg = "user not found";
+        msg += Utils.betaFooter();
+        bot.say(msg, input.message.room);
         Utils.error("about", "user not found", input);
         return;
     }
@@ -43,6 +48,7 @@ var showInfo = function(input, bot, blob) {
 :star: ${about.browniePoints}       | ${bio}
 
 `;
+    str += Utils.betaFooter();
     bot.say(str, input.message.room);
 };
 
