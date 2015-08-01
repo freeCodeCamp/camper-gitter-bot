@@ -116,7 +116,7 @@ var GBot = {
             GBot.listenToRoom(room);
             var text = GBot.getAnnounceMessage(opts);
             GBot.say(text, room);
-            clog("joined> ", room.uri);
+            // clog("joined> ", room.uri);
             return room;
         });
         return false;
@@ -130,7 +130,7 @@ var GBot = {
             return false;
         }
 
-        clog("addToRoomList", room.name);
+        // clog("addToRoomList>", room.name);
         this.roomList.push(room);
         return true;
     },
@@ -187,7 +187,7 @@ var GBot = {
 
         // Utils.clog("listenToRoom ->", room);
         var chats = room.streaming().chatMessages();
-        Utils.clog("listenToRoom ok:", room.name);
+        // clog("listenToRoom ok:", room.name);
 
         // The 'chatMessages' event is emitted on each new message
         chats.on("chatMessages", function(message) {

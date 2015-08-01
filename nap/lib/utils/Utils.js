@@ -98,10 +98,11 @@ var Utils = {
         }
         obj = obj || "";
         // var callerName = arguments.callee.caller ? arguments.callee.caller.name : "global";
-        var lastLine = this.stackLines(3, 10);
-
-        where = "ERROR: " + lastLine + "\n / " + where;
         console.error(this.cols.error(where), this.cols.error(msg), obj);
+
+        var stackLines = this.stackLines(3, 10);
+        where = "ERROR: " + stackLines + "\n / " + where;
+        console.log(stackLines);
     },
 
 
