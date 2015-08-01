@@ -122,6 +122,7 @@ var BotRoomData = {
         {
             title: "Botdiscussion",
             name: "dcsan/botzy",
+            private: true,
             topics: ['bots', 'fcc', 'teaching']
         },
 
@@ -146,7 +147,7 @@ var BotRoomData = {
         {
             title: "SanFrancisco",
             name: "FreeCodeCamp/SanFrancisco",
-            topics: bonfireTopics
+            topics: ["sf", "crazy rents" ]
         },
 
         {
