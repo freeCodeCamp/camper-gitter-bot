@@ -1,5 +1,6 @@
 Hi this is **[CamperBot](https://github.com/FreeCodeCamp/freecodecamp/wiki/camperbot)**! I can assist you in this chatroom :smile: 
 
+Basic commands:
 - ``find TOPIC``  find all entries about topic. ex: `find js`
 - `wiki TOPIC` show contents of topic page
 - `thanks @username`  send karmapoints to another user
@@ -19,6 +20,14 @@ Have a look at Tickets with [help wanted](https://github.com/dcsan/gitterbot/iss
 Fork it and have fun!
 
 ## Developer chatroom
+Join us on the repo chatroom to discuss new features  
+https://gitter.im/dcsan/gitterbot
 
+## Roadmap
+In future, we're planning 
+- Bonfire step-by-step tutorials will be available via chat and from the camperbot
+- realtime tagging and searching of chats by topic
+- a scripting language and natural language processing
+Get involved and let us know what you'd like to see next!
 
 ![enjoy](https://avatars1.githubusercontent.com/camperbot?&s=100) *< Happy Camping! >*
