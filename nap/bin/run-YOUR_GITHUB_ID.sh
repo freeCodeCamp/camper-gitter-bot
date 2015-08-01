@@ -2,8 +2,8 @@
 
 # bin/update-wiki.sh
 
-# source bin/credentials-YOUR_GITHUB_ID.sh
-source bin/credentials-bothelp.sh
+source bin/credentials-YOUR_GITHUB_ID.sh
+# source bin/credentials-bothelp.sh
 
 set -x
 

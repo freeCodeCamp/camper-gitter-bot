@@ -65,10 +65,10 @@ var BotRoomData = {
 
     // this controls which rooms you can access
     YOUR_GITHUB_ID: [
-
+        // change this to be a room your user is already in
         {
             title: "bothelp",
-            name: "YOUR_GITHUB_USERNAME/testing",
+            name: "YOUR_GITHUB_ID/testing",
             icon: "question",
             topics: ["chitchat", "bots", "bot-development", "camperbot"]
         },
