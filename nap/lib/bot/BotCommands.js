@@ -147,7 +147,7 @@ var BotCommands = {
         if (input.params) {
             return this.wiki(input, bot);
         } else {
-            var topicData = KBase.getTopicData("bothelp");
+            var topicData = KBase.getTopicData("camperbot");
             return topicData.data;
         }
     },

@@ -258,7 +258,7 @@ var GBot = {
 
         GitterHelper.fetchRooms(user, token, function(err, rooms) {
             if (err) {
-                Utils.error("GBot", "fetchRooms", err);
+                Utils.warn("GBot", "fetchRooms", err);
             }
             if (!rooms) {
                 Utils.warn("cant scanRooms");
