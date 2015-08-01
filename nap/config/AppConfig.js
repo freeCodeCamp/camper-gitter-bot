@@ -52,7 +52,7 @@ var AppConfig = {
     wikiHost: "https://github.com/freecodecamp/freecodecamp/wiki/",
     gitterHost: "https://gitter.im/",
     mdn: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/",
-    botVersion: "0.0.3",
+    botVersion: "0.0.4",
     MAX_WIKI_LINES: 40,
 
     init: function() {

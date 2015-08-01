@@ -158,12 +158,6 @@ var BotRoomData = {
         },
 
         {
-            title: "Botdiscussion",
-            name: "dcsan/botzy",
-            topics: ['bots', 'fcc', 'teaching']
-        },
-
-        {
             title: "Bhubaneswar",
             name: "FreeCodeCamp/Bhubaneswar",
             topics: ['regex']
