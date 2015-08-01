@@ -1,8 +1,8 @@
 /*jshint globalstrict:true, trailing:false, unused:true, node:true */
 "use strict";
 
-var clc = require("cli-color");
-process.stdout.write(clc.erase.screen);
+// var clc = require("cli-color");
+// process.stdout.write(clc.erase.screen);
 
 
 if (typeof Map !== "function" ) {

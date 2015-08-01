@@ -63,6 +63,25 @@ var bonfireTopics = [
 
 var BotRoomData = {
 
+    // this controls which rooms you can access
+    YOUR_GITHUB_ID: [
+
+        {
+            title: "bothelp",
+            name: "YOUR_GITHUB_USERNAME/testing",
+            icon: "question",
+            topics: ["chitchat", "bots", "bot-development", "camperbot"]
+        },
+
+        {
+            title: "bothelp",
+            name: "bothelp/testing",
+            icon: "question",
+            topics: ["chitchat", "bots", "bot-development", "camperbot"]
+        },
+
+    ],
+
     // developer bot
     bothelp: [
 

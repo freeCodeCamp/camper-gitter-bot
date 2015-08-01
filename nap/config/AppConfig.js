@@ -8,6 +8,13 @@ var _ = require("lodash-node");
 
 
 var envConfigs = {
+    YOUR_GITHUB_ID: {
+        appHost: "http://localhost:7000",
+        apiServer: "beta.freecodecamp.com",
+        appRedirectUrl: "http://localhost:7891/login/callback",
+        botname: "YOUR_GITHUB_ID"
+    },
+
     test: {
         appHost: "http://localhost:7000",
         apiServer: "beta.freecodecamp.com",
@@ -122,7 +129,7 @@ AppConfig.init();
 // calculated items
 
 
-// console.log("AppConfig", AppConfig);
+console.log("AppConfig", AppConfig);
 
 module.exports = AppConfig;
 
