@@ -289,6 +289,7 @@ BotCommands.hi = BotCommands.welcome;
 // BotCommands.bothelp = BotCommands.menu;
 // BotCommands.hello = BotCommands.welcome;
 BotCommands.index = BotCommands.topics;
+BotCommands.thank = BotCommands.thanks;
 
 BotCommands.log = BotCommands.archive;
 BotCommands.archives = BotCommands.archive;
