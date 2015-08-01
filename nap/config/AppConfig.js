@@ -53,7 +53,7 @@ var AppConfig = {
     gitterHost: "https://gitter.im/",
     mdn: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/",
     botVersion: "0.0.3",
-    MAX_WIKI_LINES: 10,
+    MAX_WIKI_LINES: 40,
 
     init: function() {
         var serverEnv = process.env.SERVER_ENV;

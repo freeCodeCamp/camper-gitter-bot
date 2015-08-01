@@ -217,9 +217,9 @@ var BotCommands = {
         return str;
     },
 
-    rickroll: function (input, bot) {
+    rollem: function (input, bot) {
         var fromUser = "@" + input.message.model.fromUser.username;
-        var str = fromUser + " has a nice video";
+        var str = fromUser + " says enjoy!";
         str += "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
         return str;
     },
@@ -244,8 +244,8 @@ var BotCommands = {
     },
 
     welcome: function (input, bot) {
-        var str = "## welcome " + input.message.model.fromUser.username;
-        str += "\n type `help` for some things the bot can do.";
+        var str = "## welcome to FreeCodeCamp @" + input.message.model.fromUser.username + "!";
+        // str += "\n type `help` for some things the bot can do.";
         return str;
     },
 
@@ -267,6 +267,7 @@ _.merge(BotCommands, wiki, thanks);
 // Object.assign(BotCommands, wiki);
 
 BotCommands.explain = BotCommands.wiki;
+BotCommands.bot = BotCommands.wiki;
 
 // setup aliases
 BotCommands.hi = BotCommands.welcome;

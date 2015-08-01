@@ -44,8 +44,9 @@ var commands = {
     wikiCantFind: function(input) {
         Utils.warn("wiki.js", "cant find topic for", input.params);
         var output = "no wiki entry for: `" + input.params + "`";
-        output += "\nwhy not create one?";
-        output += "\n" + this.wikiLink(input.params);
+        output += "\nwhy not :pencil: ";
+        output += this.wikiLink(input.params, "wiki", "create one?");
+        output += "\n you could also try typing `find " + input.params + "`";
         return output;
     },
 
