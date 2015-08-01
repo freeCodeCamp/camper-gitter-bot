@@ -6,13 +6,13 @@
 
 APPDIR=/home/freecodecamp/www/gitterbot/nap
 
-alias rgit=/usr/bin/git
+GITPATH=/usr/bin/git
 
 
 cd $APPDIR/data/fcc.wiki
-rgit fetch
-rgit checkout master
-rgit pull origin master
+$GITPATH fetch
+$GITPATH checkout master
+$GITPATH pull origin master
 cd $APPDIR
 
 rm $APPDIR/data/wiki/*
