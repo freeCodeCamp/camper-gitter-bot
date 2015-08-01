@@ -177,14 +177,20 @@ var BotRoomData = {
         },
 
         {
-            title: "CoreTeam",
+            title: "HelpBonfires",
             name: "FreeCodeCamp/HelpBonfires",
             topics: bonfireTopics
         },
 
         // {
-        //     title: "CoreTeam",
-        //     name: "FreeCodeCamp/HelpXX",
+        //     title: "MainHelp",
+        //     name: "FreeCodeCamp/Help",
+        //     topics: ['bots', 'fcc']
+        // },
+
+        // {
+        //     title: "MainHelp",
+        //     name: "FreeCodeCamp/FreeCodeCamp",
         //     topics: ['bots', 'fcc']
         // },
 

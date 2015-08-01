@@ -29,7 +29,7 @@ describe("IO", function () {
         var res, msg;
         msg = TestHelper.makeMessageFromString("help");
         res = GBot.findAnyReply(msg);
-        expect(res).to.include("Hi this is CamperBot");
+        expect(res).to.include("Hi this is **[CamperBot]");
     });
 
 });

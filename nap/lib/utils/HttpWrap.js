@@ -27,7 +27,7 @@ var HttpWrap = {
 
             //the whole response has been recieved, so we just print it out here
             response.on('end', function () {
-                Utils.clog('', 'res', str);
+                // Utils.clog('HttpWrap>', 'res>', str);
                 var blob = JSON.parse(str);
                 callback(blob);
             });

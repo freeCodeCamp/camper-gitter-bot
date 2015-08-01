@@ -27,7 +27,7 @@ describe("HttpWrap", function () {
         var name = "berkeleytrue";
         var apiPath = '/api/users/about?username=' + name;
         HttpWrap.getApi(apiPath, function(apiResult) {
-            console.log(apiResult);
+            // console.log(apiResult);
             expect(apiResult.about.username).to.equal("berkeleytrue");
             expect(apiResult.about.github).to.equal("http://github.com/BerkeleyTrue");
             // expect(apiResult.about.bio).to.include("something");
