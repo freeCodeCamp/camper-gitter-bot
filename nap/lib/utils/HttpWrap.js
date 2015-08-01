@@ -10,10 +10,14 @@ var HttpWrap = {
 
     options: {
         host: AppConfig.apiServer,
-        timeout: 5000
+        timeout: 5000,
+        debug: false
     },
 
     getApi: function(apiPath, callback) {
+
+        var body = { data: JSON.stringify(body) }
+        this.options.body = body;
 
         this.options.path = apiPath;
 

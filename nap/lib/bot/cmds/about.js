@@ -16,6 +16,7 @@ var clog = require('../../utils/clog.js');
 //         "bio": "Cyber Wizard @ http://r3dm.com, Camp Counselor @ freecodecamp.com",
 //         "github": "http://github.com/BerkeleyTrue"
 //     }
+//     debug: "XXX"
 // }
 
 
