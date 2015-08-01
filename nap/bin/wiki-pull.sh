@@ -1,4 +1,6 @@
 # pull down wiki files
+# don't commit them back
+# just used on prod server
 
 cd data/fcc.wiki
 git fetch
@@ -10,8 +12,4 @@ rm data/wiki/*
 
 cp data/fcc.wiki/*md data/wiki
 
-git add data/wiki
-git commit -am "wiki update and merge"
-git fetch 
-git push -u
 

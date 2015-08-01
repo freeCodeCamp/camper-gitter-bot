@@ -236,10 +236,6 @@ var BotCommands = {
         return str;
     },
 
-    wikiUpdate: function (input, bot) {
-        return "WIP wiki-update";
-    },
-
     camperCount: function (input, bot) {
         return "WIP camperCount";
     },
@@ -275,9 +271,11 @@ BotCommands.thanks = require("./cmds/thanks");
 
 // TODO - iterate and read all files in /cmds
 var wiki = require("./cmds/wiki"),
-    thanks = require("./cmds/thanks");
+    thanks = require("./cmds/thanks"),
+    update = require("./cmds/update");
 
-_.merge(BotCommands, wiki, thanks);
+_.merge(BotCommands, wiki, thanks, update);
+
 
 // Object.assign(BotCommands, wiki);
 
