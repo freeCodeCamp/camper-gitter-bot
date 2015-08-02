@@ -8,6 +8,9 @@ var Utils = require('../../lib/utils/Utils'),
 
 var newline = '\n';
 
+// https://raw.githubusercontent.com/FreeCodeCamp/freecodecamp/staging/seed/challenges/basic-bonfires.json
+// https://github.com/FreeCodeCamp/freecodecamp/blob/staging/seed/challenges/basic-bonfires.json
+
 var Bonfires = {
     data: null,
 
@@ -17,11 +20,24 @@ var Bonfires = {
         }
         // Get document, or throw exception on error
         try {
-            this.data = yaml.safeLoad(fs.readFileSync('./data/bonfires/basic-bonfires.yml', 'utf8'));
+            // this.data = yaml.safeLoad(fs.readFileSync('./data/bonfires/basic-bonfires.yml', 'utf8'));
+            this.raw = fs.readFileSync('./data/seed/challenges/basic-bonfires.json', 'utf8');
+            this.data = JSON.parse(this.raw);
+            // this.data = Utils.toMarkdown(this.data);
+            // Utils.log("bonfires", this.data);
         } catch (e) {
             Utils.error("can't load bonfire data", e);
         }
+
         return this;  // chainable
+    },
+
+    toMarkdown: function(data) {
+        this.data.challenges = this.data.challenges.map(function(item) {
+            item.description = item.description.map(function(desc) {
+                return Utils.toMarkdown(desc);
+            });
+        });
     },
 
     allDashedNames: function() {
@@ -42,12 +58,29 @@ var Bonfires = {
     },
 
     findBonfire: function(bfName) {
+        var lcName, flag;
+        bfName = Utils.sanitize(bfName).toLowerCase();
+        Utils.clog("bfName", bfName);
         var bfs = this.data.challenges.filter(function (item) {
-            return (item.dashedName === bfName);
+            // return (item.dashedName === bfName);
+            Utils.clog('item', item);
+            lcName = Utils.sanitize(item.name.toLowerCase());
+            flag = (lcName.includes(bfName));
+            // Utils.clog(lcName, bfName);
+            return flag;
         });
         var bf = bfs[0];
-        Utils.checkNotNull(bf, `cant find bonfire for ${bfName}`);
-        return bf;
+        if (!bf) {
+            Utils.warn("cant find bonfire for " + bfName);
+            return null;
+        } else {
+            return bf;
+        }
+    },
+
+    getDescription: function(bonfire) {
+        var desc = bonfire.description.join('\n');
+        return desc;
     },
 
     fromInput: function(input) {
@@ -58,6 +91,21 @@ var Bonfires = {
         return (bf);
     },
 
+    getNextHint: function(bonfire) {
+        var hint, hintNum;
+        hintNum = bonfire.currentHint || 0;
+        hint = bonfire.description[hintNum];
+        if (hint) {
+            hint = "`[" + hintNum + "]` " + hint;
+            bonfire.currentHint = hintNum + 1;
+            return hint;
+        } else {
+            bonfire.currentHint = 0;
+            return "no more hints! Let's start again.";
+        }
+    },
+
+    // from input
     getHint: function(input, num) {
         num = num || 0;
         var output, bf, roomName;
@@ -75,9 +123,14 @@ var Bonfires = {
         return output;
     },
 
+    getLinks: function(bonfire) {
+        var output = "links for " + bonfire.name;
+        output += Utils.makeUrlList(bonfire.MDNlinks, 'mdn');
+        return output;
+    },
+
     getLinksFromInput: function(input) {
-        var output, bf, roomName;
-        roomName = InputWrap.roomShortName(input);
+        var bf;
         bf = Bonfires.fromInput(input);
 
         if (!bf || !bf.MDNlinks) {
@@ -85,12 +138,15 @@ var Bonfires = {
             Utils.error("Bonfires>", msg, bf);
             return msg;
         }
+        return this.getLinks(bf);
+    },
 
-        // console.log(bf)
-        // return bf.MDNlinks;
-
-        output = "links for " + roomName + newline;
-        output += Utils.makeUrlList(bf.MDNlinks, 'mdn');
+    getSeed: function(bonfire) {
+        var output, seed;
+        seed = bonfire.challengeSeed.join("\n");
+        output = "```js " + newline;
+        output += seed;
+        output += "```";
         return output;
     },
 

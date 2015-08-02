@@ -4,6 +4,8 @@
 
 var AppConfig = require('../../config/AppConfig');
 
+// var toMarkdown = require('to-markdown');
+
 
 var TextLib = {
 
@@ -15,6 +17,14 @@ var TextLib = {
         var subset = part.split('\n');
         subset = subset.slice(0, lines).join('\n');
         return subset;
+    },
+
+    toMarkdown: function(data) {
+        return toMarkdown(data);
+    },
+
+    mdLink: function(text, uri) {
+        return "[" + text + "](" + uri + ")";
     }
 
 };

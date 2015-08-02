@@ -155,7 +155,7 @@ var Utils = {
 
         uri = host + path;
         name = Utils.namify(text);
-        link = `[${name}](${uri})`;
+        link = "[" +name + "](" + uri + ")";
         // console.log("Utils.linkify args>", path, where, text);
         Utils.clog("Utils.linkify>", "link", link);
         return link;
@@ -202,11 +202,11 @@ var Utils = {
         var out = "";
         if (!items) {
             Utils.error("tried to makeUrlList for no items");
-            return;
+            return "";
         }
         out += items.map(function(one) {
             var uri = "http://" + AppConfig[where] + one;
-            return `\n[${one}](${uri})`;
+            return "\n[" + one + "](" + uri + ")";
         });
         return out;
     },

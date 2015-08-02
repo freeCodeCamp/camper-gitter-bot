@@ -129,7 +129,7 @@ var KBase = {
         for (var i = 0; i < shortList.length; i++) {
             var item = shortList[i];
             var link = Utils.linkify(item, 'wiki');
-            var line = `\n[${i}] ${link}`;
+            var line = "\n[" + i + "] " + link;
             findResults += line;
         }
         return findResults;

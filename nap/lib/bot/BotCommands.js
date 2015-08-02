@@ -4,6 +4,7 @@
 var LOGTHIS = false;
 
 var assert = require("chai").assert;
+
 var _ = require("lodash-node");
 
 var GBot = require("../../lib/bot/GBot.js"),
@@ -11,7 +12,6 @@ var GBot = require("../../lib/bot/GBot.js"),
     Utils = require("../../lib/utils/Utils"),
     TextLib = require("../../lib/utils/TextLib"),
     AppConfig = require("../../config/AppConfig"),
-    Bonfires = require("../app/Bonfires"),
     InputWrap = require("../bot/InputWrap"),
     RoomData = require("../../data/RoomData");
 
@@ -94,25 +94,6 @@ var BotCommands = {
 
     botenv: function(input, bot) {
         var str = "env: " + AppConfig.serverEnv;
-        return str;
-    },
-
-    // bonfire features
-    hint: function(input, bot) {
-        var str;
-        str = Bonfires.getHint(input);
-        return (str);
-    },
-
-    links: function(input, bot) {
-        var str;
-        str = Bonfires.getLinksFromInput(input);
-        return str;
-    },
-
-    seed: function(input, bot) {
-        var str;
-        str = Bonfires.getChallengeSeedFromInput(input);
         return str;
     },
 
@@ -284,9 +265,11 @@ BotCommands.thanks = require("./cmds/thanks");
 // TODO - iterate and read all files in /cmds
 var wiki = require("./cmds/wiki"),
     thanks = require("./cmds/thanks"),
-    update = require("./cmds/update");
+    update = require("./cmds/update"),
+    bonfire = require("./cmds/bonfire");
 
-_.merge(BotCommands, wiki, thanks, update);
+
+_.merge(BotCommands, wiki, thanks, update, bonfire);
 
 
 // Object.assign(BotCommands, wiki);
