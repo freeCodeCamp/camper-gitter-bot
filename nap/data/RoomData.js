@@ -115,13 +115,11 @@ var BotRoomData = {
         {
             title: "bothelpDM",
             name: "bothelp",
-            topics: ["chitchat", "dm"]
         },
 
         {
             title: "GeneralChat",
             name: "bothelp/GeneralChat",
-            topics: ["general", "intros"]
         },
 
         // {
@@ -148,6 +146,7 @@ var BotRoomData = {
 
     camperbot: [
 
+        // dev rooms
         {
             title: "Botdiscussion",
             name: "dcsan/botzy",
@@ -156,13 +155,18 @@ var BotRoomData = {
         },
 
         {
-            title: "Camperbot Bonfires",
-            name: "camperbot/testing",
-            topics: ["testing", "bots"]
+            name: "dcsan/gitterbot",
         },
 
         {
-            title: "DataScience",
+            name: "camperbot/devteam",
+        },
+
+        {
+            name: "camperbot/testing",
+        },
+
+        {
             name: "FreeCodeCamp/DataScience",
             topics: ["general", "DataScience"]
         },
@@ -180,14 +184,8 @@ var BotRoomData = {
         },
 
         {
-            title: "Botdiscussion",
-            name: "FreeCodeCamp/Bhubaneswar",
-            topics: ['regex']
-        },
-
-        {
             title: "Help Bonfires",
-            name: "camperbot/HelpBonfires",
+            name: "FreeCodeCamp/HelpBonfires",
             topics: bonfireTopics
         },
 
