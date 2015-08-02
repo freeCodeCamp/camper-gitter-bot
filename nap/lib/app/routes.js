@@ -97,7 +97,7 @@ var Router = {
 
 
         app.get('/rooms', function(req, res) {
-            // console.log("that", that);
+            console.log("req.user", req.user);
             res.render('rooms', {
                 user: req.user,
                 who: AppConfig.who(req),

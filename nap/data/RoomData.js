@@ -1,5 +1,8 @@
 "use strict";
 
+// This file needs to be edited to comment out
+// rooms you want to join
+
 // TODO - move to lib/ dir?
 
 var AppConfig = require('../config/AppConfig');
@@ -60,6 +63,34 @@ var bonfireTopics = [
 
 var BotRoomData = {
 
+    // this controls which rooms you can access
+    YOUR_GITHUB_ID: [
+        // change this to be a room your user is already in
+        {
+            title: "bothelp",
+            name: "YOUR_GITHUB_ID/testing",
+            icon: "question",
+            topics: ["chitchat", "bots", "bot-development", "camperbot"]
+        },
+
+        {
+            title: "bothelp",
+            name: "bothelp/testing",
+            icon: "question",
+            topics: ["chitchat", "bots", "bot-development", "camperbot"]
+        }
+    ],
+
+    // this is the demobot that ships with the app
+    demobot: [
+        {
+            title: "demobot",
+            name: "demobot/test",
+            icon: "star",
+            topics: ["getting started"]
+        }
+    ],
+
     // developer bot
     bothelp: [
 
@@ -95,12 +126,6 @@ var BotRoomData = {
             topics: ["general", "intros"]
         },
 
-        {
-            title: "LocalDev",
-            name: "camperbot/localdev",
-            topics: ["general", "intros"]
-        },
-
         // {
         //     title: "DataScience",
         //     name: "FreeCodeCamp/DataScience",
@@ -121,7 +146,6 @@ var BotRoomData = {
             topics: ['egdemo']
         }
 
-
     ],
 
     camperbot: [
@@ -134,34 +158,16 @@ var BotRoomData = {
         },
 
         {
-            title: "DataScience",
-            name: "FreeCodeCamp/DataScience",
-            topics: ["general", "DataScience"]
-        },
-
-        {
-            title: "Testing",
+            title: "Camperbot Bonfires",
             name: "camperbot/testing",
             topics: ["testing", "bots"]
         },
 
         {
-            title: "CamperBot DevTeam",
-            name: "camperbot/devteam",
-            topics: ["devteam"]
+            title: "DataScience",
+            name: "FreeCodeCamp/DataScience",
+            topics: ["general", "DataScience"]
         },
-
-        {
-            title: "Main RepoRoom",
-            name: "dcsan/gitterbot",
-            topics: ["testing", "bots"]
-        },
-
-        // {
-        //     title: "Help Bonfires",
-        //     name: "camperbot/HelpBonfires",
-        //     topics: bonfireTopics
-        // },
 
         {
             title: "SanFrancisco",
@@ -176,23 +182,22 @@ var BotRoomData = {
         },
 
         {
-            title: "Bhubaneswar",
+            title: "Botdiscussion",
             name: "FreeCodeCamp/Bhubaneswar",
             topics: ['regex']
         },
 
         {
-            title: "CoreTeam",
-            name: "FreeCodeCamp/CoreTeam",
-            private: true,
-            topics: ['bots', 'fcc']
-        },
-
-        {
-            title: "HelpBonfires",
-            name: "FreeCodeCamp/HelpBonfires",
+            title: "Help Bonfires",
+            name: "camperbot/HelpBonfires",
             topics: bonfireTopics
         },
+
+        // {
+        //     title: "HelpBonfires",
+        //     name: "FreeCodeCamp/HelpBonfires",
+        //     topics: bonfireTopics
+        // },
 
         // {
         //     title: "MainHelp",
