@@ -57,7 +57,10 @@ var commands = {
         if (!input.params) { return this.wikiUsage(); }
         // else
         topicData = KBase.getTopicData(input.params);
-        if (!topicData) { return this.wikiCantFind(input); }
+        if (!topicData || !topicData.topic) {
+            Utils.warn("cant find topic for ", input.params);
+            return this.wikiCantFind(input);
+        }
 
         // else OK
         Utils.log('topicData', topicData);
