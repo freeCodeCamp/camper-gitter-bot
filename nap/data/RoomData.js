@@ -78,8 +78,17 @@ var BotRoomData = {
             name: "bothelp/testing",
             icon: "question",
             topics: ["chitchat", "bots", "bot-development", "camperbot"]
-        },
+        }
+    ],
 
+    // this is the demobot that ships with the app
+    demobot: [
+        {
+            title: "demobot",
+            name: "demobot/test",
+            icon: "star",
+            topics: ["getting started"]
+        }
     ],
 
     // developer bot

@@ -8,7 +8,16 @@ var _ = require("lodash-node");
 
 
 var envConfigs = {
+
+    // replace this with your own ID
     YOUR_GITHUB_ID: {
+        appHost: "http://localhost:7000",
+        apiServer: "beta.freecodecamp.com",
+        appRedirectUrl: "http://localhost:7891/login/callback",
+        botname: "YOUR_GITHUB_ID"
+    },
+
+    demobot: {
         appHost: "http://localhost:7000",
         apiServer: "beta.freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
@@ -46,11 +55,13 @@ var envConfigs = {
 var AppConfig = {
     clientId: process.env.GITTER_APP_KEY,
     token: process.env.GITTER_USER_TOKEN,
+    botname: null,
     roomId: "55b1a9030fc9f982beaac901", // default room botzy
     org: "bothelp",
     testUser: "bothelp",
-    botlist: ["bothelp", "camperbot"],
-    webuser: "dcsan",
+    // so bot doesnt get in a loop replying itself
+    botlist: ["bothelp", "camperbot", "YOUR_GITHUB_ID", "demobot"],
+    webuser: "webuser",
     wikiHost: "https://github.com/freecodecamp/freecodecamp/wiki/",
     gitterHost: "https://gitter.im/",
     mdn: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/",
@@ -64,15 +75,28 @@ var AppConfig = {
 
         var thisConfig = envConfigs[serverEnv];
         if (!thisConfig) {
-            var msg = ("FATAL ERROR! cant find env: " + serverEnv);
+            var msg = ("FATAL ERROR! cant find serverEnv: " + serverEnv);
             console.error(msg);
             throw new Error(msg);
         }
         _.merge(AppConfig, thisConfig);
+        this.showConfig();
+    },
+
+    showConfig: function() {
+        // console.log("AppConfig");
+        console.log("AppConfig");
+        Object.keys(AppConfig)
+        .sort()
+        .forEach(function(v, i) {
+            if (typeof AppConfig[v] !== 'function') {
+                console.log("\t", v, ":\t\t", AppConfig[v]);
+            }
+        });
     },
 
     warn: function(msg, obj) {
-        console.error("AppConfig", msg, obj);
+        console.warn("WARN> AppConfig", msg, obj);
     },
 
     // TODO cleanup
@@ -81,9 +105,9 @@ var AppConfig = {
     getBotName: function() {
         if (!AppConfig.botname) {
             AppConfig.init();
+            this.warn("getBotName()", AppConfig.botname );
             console.log("tried to call botname before it was set");
         }
-        // this.warn("getBotName()", AppConfig.botname );
         return AppConfig.botname;
     },
 
