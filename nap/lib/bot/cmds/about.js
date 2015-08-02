@@ -26,10 +26,10 @@ var showInfo = function(input, bot, blob) {
     Utils.clog('about', "showInfo", blob);
 
     if (blob.error) {
-        var msg = "user not found";
+        var msg = ":frowning: user not found. Maybe they're not registed on the beta site?\n";
         msg += Utils.betaFooter();
         bot.say(msg, input.message.room);
-        Utils.error("about", "user not found", input);
+        Utils.warn("about>", "user not found>", input);
         return;
     }
 

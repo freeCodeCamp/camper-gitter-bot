@@ -109,7 +109,8 @@ var BotRoomData = {
         },
 
         {
-            name: "camperbot/localdev",
+            title: "camperbot/localdev",
+            name: "camperbot/localdev"
         },
 
         {
