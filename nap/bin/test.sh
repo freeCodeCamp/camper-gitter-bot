@@ -1,4 +1,4 @@
-source bin/credentials-bothelp.sh
+source bin/credentials-demobot.sh
 
 set -x
 

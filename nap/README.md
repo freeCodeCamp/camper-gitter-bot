@@ -4,9 +4,12 @@ Join us in Gitter to discuss!
 https://gitter.im/dcsan/gitterbot
 
 ## checking out
-we use git submodules for some wiki data, so use:
+ideally fork the project first on github and clone your fork.
 
-    git clone
+    git clone git@github.com:dcsan/gitterbot.git
+
+we use git submodules for some wiki data
+
     git submodule init
     git submodule update
 
@@ -14,66 +17,43 @@ we use git submodules for some wiki data, so use:
 ## environment
 
 we're using the latest es6 so best to get an up to date environment.
-at the time of writing iojs was a bit ahead of node so:
+at the time of writing iojs was a bit ahead of node.
 
 ```bash
 # ubuntu
 sudo apt-get upgrade
 sudo apt-get install build-essential
 ```
-on the mac you may not need to do that, but update npm to be sure.
 
-We use n to manage iojs installation:
+we're using n to update node [article](http://davidwalsh.name/upgrade-nodejs)
+We use n to manage iojs and node:
 ```
 sudo npm install -g n
 sudo n io latest
+iojs -v  
+    // should be at least v2.4.0
 ```
 
-# Setting up login credentials
+# Run the app in 'demobot' mode
 
-Apologies as this is a bit unclean right now. Ping me in the [chatroom](https://gitter.im/dcsan/gitterbot) if you get stuck.
+    cd nap
+    bin/run-demobot.sh
 
-You'll need to get a gitter.im token to use for your bot.
-create a new app here
-https://developer.gitter.im/apps
+That's it! The app should be running at [http://localhost:7891](http://localhost:7891)
 
-Now make a copy of the `bin/credentials-example` file.
-Save it as credentials-YOUR_GITHUB_ID
-and fill in the fields.
+You can now visit your gitterbot via Gitter at [https://gitter.im/demobot/test](https://gitter.im/demobot/test)
 
-Look in the file data/RoomData.js
+But! This is using shared credentials, so you may find yourself in a chatroom with other people using the same IDs.
 
-```js
-var BotRoomData = {
+So to setup this up and use your own gitter login info, edit the file
 
-    // this controls which rooms you can access
-    YOUR_GITHUB_ID: [
-        // change this to be a room your user is already in
-        {
-            title: "bothelp",
-            name: "YOUR_GITHUB_ID/testing",
-            icon: "question",
-            topics: ["chitchat", "bots", "bot-development", "camperbot"]
-        },
-```
+    bin/credentials-demobot.sh
 
-once that's setup you should be able to run the app from this script
+get your own API keys for gitter from:
+[https://developer.gitter.im/apps](https://developer.gitter.im/apps)
 
-    $ bin/run-YOUR_GITHUB_ID.sh
 
-Then access your new room in the web browser
-
-        http://gitter.im/YOUR_GITHUB_ID/testing
-
-Of course in all this, you should change YOUR_GITHUB_ID to your actual github ID!
-(Or better, make a separate github account for purposes of testing the bot)
-
-You can see in this commit as I tagged the areas which needed changing to make this generic.
-https://github.com/dcsan/gitterbot/commit/4af309c3a068d35207ca6be150446e1e059e85cd
-
-When you start the server the default is to run on port 7891
-You don't have to deploy this server anywhere - it will connect to gitter.im 
-
+There are some more detailed docs in docs/credentials.md on how to configure more details
 
 
 # Running tests
@@ -91,17 +71,24 @@ But then we just copy it and commit it back to the main app as submodules are na
     bin/wiki-update.sh
 
 
+
 # System Overview
 
-### RoomData.js
+### data/RoomData.js
 The list of rooms your bot is going to join.
 Very starting your own bot, create a test room to enter and debug with.
 This needs to be changed so you would only join your own rooms, otherwise developers will get into a situation where everyone is joining the same rooms and the bots go crazy talking to each other!
 
-### BotCommands.js
-This is where you add things that the bot can do. Some commands are broken into separate files such as `thanks` and `about`.
+### lib/bot/BotCommands.js
+This is where you add things that the bot can do. Some commands are broken into separate files such as `cmds/thanks` and `cmds/about`.
+Each command gets a `input` which is a blob of data including what the user entered, and a bot instance.
+
+### KBase.js
+The Knowledge base. This is an interface to all the data in the wiki.
 
 
-Sorry that these docs are very lightweight right now.
-To understand the system some basic places to look.
+
+# Chat to us!
+
+Ping me @dcsan in the [gitterbot chatroom](https://gitter.im/dcsan/gitterbot) if you get stuck.
 

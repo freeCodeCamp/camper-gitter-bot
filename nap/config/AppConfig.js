@@ -11,43 +11,43 @@ var envConfigs = {
 
     // replace this with your own ID
     YOUR_GITHUB_ID: {
+        botname: "YOUR_GITHUB_ID",
         appHost: "http://localhost:7000",
         apiServer: "beta.freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
-        botname: "YOUR_GITHUB_ID"
     },
 
     demobot: {
+        botname: "demobot",
         appHost: "http://localhost:7000",
         apiServer: "beta.freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
-        botname: "YOUR_GITHUB_ID"
     },
 
     test: {
+        botname: "bothelp",
         appHost: "http://localhost:7000",
         apiServer: "beta.freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
-        botname: "bothelp"
     },
 
     local: {
+        botname: "bothelp",
         appHost: "http://localhost:7000",
         apiServer: "beta.freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
-        botname: "bothelp"
     },
     beta: {
+        botname: "bothelp",
         appHost: "http://localhost:7000",
         apiServer: "beta.freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
-        botname: "bothelp"
     },
     prod: {
+        botname: "camperbot",
         appHost: "http://bot.freecodecamp.com",
         apiServer: "beta.freecodecamp.com",
         appRedirectUrl: "http://bot.freecodecamp.com/login/callback",
-        botname: "camperbot"
     }
 };
 
@@ -152,8 +152,7 @@ AppConfig.init();
 
 // calculated items
 
-
-console.log("AppConfig", AppConfig);
+// console.log("AppConfig", AppConfig);
 
 module.exports = AppConfig;
 

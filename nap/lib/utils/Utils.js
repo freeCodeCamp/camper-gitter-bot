@@ -44,6 +44,11 @@ var Utils = {
     //     process.stdout.write('\033c');  // cls
     // },
 
+    log: function(msg, obj) {
+        var where = this.stackLines(2, 2);
+        Utils.clog(where, msg, obj);
+    },
+
     clog: function (where, msg, obj) {
         if (this.logLevel < LOG_LEVEL_INFO) {
             return;
