@@ -1,9 +1,11 @@
 > Steps to format your code for pasting in the chat room.
 
 ### Inline code
-\``<paste code here>`\`
+This an inline \``<paste code here>`\` code formatting.
 
 **^**single backtick at *start* and *end* around the *inline code*.
+
+&nbsp;
 
 ### Code Block
 \`\`\` ⇦ Type 3 backticks, then press `[shift + enter ⏎]`
