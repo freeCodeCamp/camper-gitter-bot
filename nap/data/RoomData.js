@@ -190,6 +190,14 @@ var BotRoomData = {
             topics: bonfireTopics
         },
 
+
+        {
+            title: "CoreTeam",
+            name: "FreeCodeCamp/CoreTeam",
+            private: true,
+            topics: bonfireTopics
+        },
+
         // {
         //     title: "HelpBonfires",
         //     name: "FreeCodeCamp/HelpBonfires",
