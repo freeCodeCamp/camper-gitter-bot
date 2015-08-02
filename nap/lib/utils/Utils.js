@@ -45,7 +45,7 @@ var Utils = {
     // },
 
     log: function(msg, obj) {
-        var where = this.stackLines(2, 2);
+        var where = this.stackLines(3, 4);
         Utils.clog(where, msg, obj);
     },
 
@@ -54,7 +54,8 @@ var Utils = {
             return;
         }
         obj = obj || "";
-        console.log(this.cols.info(where), this.cols.info(msg), obj);
+        console.log(this.cols.info(where) );
+        console.log(this.cols.info(msg), obj);
         // winston.log(where, msg, obj);
     },
 
@@ -92,7 +93,7 @@ var Utils = {
 
     stackLines: function(from, to) {
         var err = new Error();
-        console.log(err);
+        // console.log(err);
         var lines = err.stack.split('\n');
         return lines.slice(from, to).join('\n');
     },

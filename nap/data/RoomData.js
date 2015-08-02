@@ -109,9 +109,7 @@ var BotRoomData = {
         },
 
         {
-            title: "dev2",
-            name: "bothelp/dev2",
-            topics: ["dev2"]
+            name: "camperbot/localdev",
         },
 
         {

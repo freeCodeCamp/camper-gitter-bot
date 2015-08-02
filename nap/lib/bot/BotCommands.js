@@ -64,19 +64,31 @@ var BotCommands = {
         return res;
     },
 
-    version: function(){
+    cbot: function(input, bot) {
+        switch (input.params) {
+            case 'version':
+                return this.botversion(input, bot);
+
+            case 'status':
+                Utils.log("input", input);
+                var status = this.botstatus(input, bot);
+                Utils.clog('status', status);
+                return status;
+
+            default:
+                return "you called?";
+        }
+    },
+
+    botversion: function(){
         return "botVersion: " + AppConfig.botVersion;
     },
 
     botstatus: function (input, bot) {
-        if (input.params) {
-            return null;    // dont response if they type test something as its probly just chat
-        }
         var msg = "All bot systems are go!  \n";
-        msg += this.version() + "\n";
-        msg += this.botenv();
-        // clog("BotCommands.bot", this.bot);
-        // msg += AppConfig.getBotName()
+        msg += this.botversion() + newline;
+        msg += this.botenv() + newline;
+        msg += "botname: " + AppConfig.getBotName() + newline;
         return msg;
     },
 
