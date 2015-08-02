@@ -2,10 +2,10 @@
 
 
 var TextLib = require("../../../lib/utils/TextLib"),
-    Bonfires = require("../../../lib/app/Bonfires");
+    Bonfires = require("../../../lib/app/Bonfires"),
     // GBot = require("../../../lib/bot/GBot.js"),
     // KBase = require("../../bot/KBase"),
-    // Utils = require("../../../lib/utils/Utils"),
+    Utils = require("../../../lib/utils/Utils");
     // HttpWrap = require("../../../lib/utils/HttpWrap")
 
 
@@ -14,15 +14,20 @@ var newline = "\n";
 var commands = {
 
     fixed: {
-        infoFooter: "\n- `bonfire info` for more info " +
+        footer: "\n>  for more info: `bf details` `bf links` `bf script` `bf wiki` `bf spoiler`",
+        menu: "\n- `bonfire info` for more info " +
             "\n- `bonfire links` " +
             "\n- `bonfire script` for the script" +
             "\n- `bonfire spoiler` for some clues on how to solve it" +
             "\n- `bonfire wiki` for related info from the wiki ",
         askName: "give the name of the bonfire and I'll try to look it up!",
         setName: "Set a bonfire to talk about with `bonfire name`",
+        comingSoon: "Coming Soon! We're working on it!",
         reminder: function(name) {
             return "we're talking about bonfire :fire: " + name;
+        },
+        cantFind: function(name) {
+            return "can't find a bonfire called " + name;
         }
     },
 
@@ -38,7 +43,7 @@ var commands = {
         var params = input.params;
 
         switch (params) {
-            case null:
+            case undefined:
                 if (this.currentBonfire) {
                     return this.fixed.reminder(this.currentBonfire.name);
                 } else {
@@ -48,40 +53,71 @@ var commands = {
 
             case 'info':
                 return this.bonfireInfo();
+            case 'details':
+                return this.bonfireDetails();
             case 'links':
                 return this.bonfireLinks();
             case 'spoiler':
                 return this.bonfireHint();
             case 'script':
                 return this.bonfireScript();
+            case 'wiki':
+                return this.fixed.comingSoon;
+
             default:
+                Utils.log('params [' + params + ']');
                 var bonfire = Bonfires.findBonfire(params);
                 if (bonfire) {
                     this.currentBonfire = bonfire;
                     return this.bonfireInfo(bonfire);
                 } else {
                     // TODO - only send this messsage if at the start of a line
-                    return "can't find a bonfire called " + params;
+                    return this.fixed.cantFind(params);
                 }
         }
     },
 
-    bonfireInfo: function() {
+    bonfireHeader: function() {
         var res = this.checkHasBonfire();
         if (res !== true) {
             return res;
         }
 
-        var str = "Let's talk about \n ## :fire:";
+        var str = "## :fire:";
         str += TextLib.mdLink(
             this.currentBonfire.name,
             "www.freecodecamp.com/challenges/" + this.currentBonfire.dashedName
         );
-        if (this.bonfire.description) {
-            str += newline + this.bonfire.description[0];
-        }
-        str += newline + this.fixed.infoFooter;
         return str;
+    },
+
+    bonfireInfo: function() {
+        var str = this.bonfireHeader() + newline;
+        str += this.bonfireScript() + newline;
+        str += this.bonfireDescription(1) + newline;
+        str += newline + this.fixed.footer;
+        return str;
+    },
+
+    bonfireDetails: function() {
+        var res = this.checkHasBonfire();
+        if (res !== true) { return res; }
+
+        var str = this.bonfireHeader();
+        str += newline + this.bonfireScript();
+        str += newline + this.bonfireDescription();
+        str += newline + this.bonfireLinks();
+        str += newline + this.fixed.menu;
+        return str;
+    },
+
+    bonfireDescription: function(lines) {
+        if (lines) {
+            var desc = this.currentBonfire.description.slice(0,lines);
+        } else {
+            desc = this.currentBonfire.description;
+        }
+        return desc.join('\n');
     },
 
     // bonfire features

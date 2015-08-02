@@ -124,8 +124,9 @@ var Bonfires = {
     },
 
     getLinks: function(bonfire) {
-        var output = "links for " + bonfire.name;
-        output += Utils.makeUrlList(bonfire.MDNlinks, 'mdn');
+        // FIXME - change to actual links see
+        // https://github.com/dcsan/gitterbot/issues/45
+        var output = Utils.makeUrlList(bonfire.MDNlinks, 'mdn');
         return output;
     },
 
