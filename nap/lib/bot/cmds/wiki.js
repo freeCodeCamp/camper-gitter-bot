@@ -60,11 +60,11 @@ var commands = {
         if (!topicData) { return this.wikiCantFind(input); }
 
         // else OK
-
-        var link = Utils.linkify(input.params, "wiki");
+        Utils.log('topicData', topicData);
+        var link = Utils.linkify(topicData.topic, "wiki");
         output = `## :pencil: ${link} \n`;
         output += topicData.shortData;
-        output += this.wikiFooter(input.params);
+        output += this.wikiFooter(topicData.topic);
         return output;
     }
 };

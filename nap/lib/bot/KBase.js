@@ -110,14 +110,26 @@ var KBase = {
         } else{
             // TODO - better matching algorithm
             // this has to be a perfect match
-            var match = KBase.topics[name];
+            var topicName = this.findMatchingTopicName(params);
+            var fileName = Utils.asFileName(topicName);
+            var match = KBase.topics[fileName];
             // console.log(name, match);
             return match;
         }
 
     },
 
+    // TODO - handle lists or single items
+    findMatchingTopicName: function(keyword) {
+        var topicNames = KBase.topicNameList.filter(function(t){
+            return (t.indexOf(keyword) !== -1);
+        });
+        var oneName = topicNames[0];
+        return oneName;
+    },
+
     findTopics: function(keyword) {
+        // TODO - refac and use function above
         var shortList = KBase.topicNameList.filter(function(t){
             return (t.indexOf(keyword) !== -1);
         });
