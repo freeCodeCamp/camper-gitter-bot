@@ -63,7 +63,7 @@ var Bonfires = {
         Utils.clog("bfName", bfName);
         var bfs = this.data.challenges.filter(function (item) {
             // return (item.dashedName === bfName);
-            Utils.clog('item', item);
+            // Utils.clog('item', item);
             lcName = Utils.sanitize(item.name.toLowerCase());
             flag = (lcName.includes(bfName));
             // Utils.clog(lcName, bfName);

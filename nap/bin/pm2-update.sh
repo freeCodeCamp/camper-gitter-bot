@@ -1,4 +1,4 @@
 
 set -x
 
-git pull && pm2 restart all && pm2 logs
+git pull && pm2 restart all && pm2 logs > 

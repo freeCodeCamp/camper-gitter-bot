@@ -1,0 +1,1 @@
+this file keeps the directory even if contents are ignored
