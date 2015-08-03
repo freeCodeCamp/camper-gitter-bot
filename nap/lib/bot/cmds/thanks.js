@@ -27,11 +27,11 @@ var clog = require('../../utils/clog.js');
 
 
 function cleanMessage(message) {
-    if (message.match(/^count not/)) {
+    return "Couldn't find that user at FCC :frowning: \nCheck their github ID matches their FCC ID!";
+    //if (message.match(/^count not/)) {
         // fix typo
-        return "Couldn't find that user at FCC :frowning: \nCheck their github ID matches their FCC ID!";
-    }
-    return message;
+    //}
+    //return message;
 }
 
 var showInfo = function(input, bot, blob) {
@@ -40,7 +40,7 @@ var showInfo = function(input, bot, blob) {
     if (blob.error) {
         var message = cleanMessage(blob.error.message);
         message += Utils.betaFooter();
-        bot.say(message, input.message.room);
+        //bot.say(message, input.message.room);
         Utils.warn("WARN @thanks>", blob.error.message, input);
         return false;
     }
@@ -72,8 +72,8 @@ var commands = {
             toUser = mentions[0].screenName.toLowerCase();
         }
         fromUser = input.message.model.fromUser.username.toLowerCase();
-        output = `@${fromUser} sends karma to @${toUser}`;
-        output += "\n :thumbsup: :thumbsup: :thumbsup: :thumbsup: :thumbsup: :sparkles: :sparkles: ";
+        output = "> " + fromUser + " sends karma to " + toUser;
+        output += " :thumbsup: :sparkles: :sparkles: ";
 
         var apiPath = `/api/users/give-brownie-points?receiver=${toUser}&giver=${fromUser}`;
         HttpWrap.getApi(apiPath, function(apiRes) {

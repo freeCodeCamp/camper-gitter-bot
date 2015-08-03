@@ -3,11 +3,15 @@ TODO
 bugfix 'unauthorized user' message
     volume feature
 
-cant do same message twice
+disable same message twice
 
-test out in main chat
+test out in main chat?
 
-cobrowsing panel
+co-browsing panel
+
+step through Luis lesson
+
+/more command
 
 hook in chatbot engine
 
