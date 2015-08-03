@@ -1,3 +1,5 @@
+require('dotenv').load();
+
 "use strict";
 
 var passport = require('passport');
@@ -10,7 +12,7 @@ var clientSecret = process.env.GITTER_APP_SECRET;
 var request = require('request');
 var express = require('express');
 
-var GitterHelper = require('./GitterHelper')
+var GitterHelper = require('./GitterHelper');
 
 var opts = {
     authorizationURL: gitterHost + '/login/oauth/authorize',

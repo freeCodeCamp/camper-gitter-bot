@@ -2,20 +2,22 @@
   "name": "gitter-demo-app",
   "version": "0.0.1",
   "dependencies": {
-    "request": "~2.27.0",
+    "cli-color": "",
+    "dotenv": "^1.2.0",
     "express": "~3.4.4",
+    "glob": "",
     "jade": "~0.35.0",
+    "js-yaml": "",
+    "lodash-node": "",
+    "node-gitter": "",
     "passport": "~0.2.0",
     "passport-oauth2": "~1.1.1",
-    "lodash-node": "",
-    "glob": "",
-    "cli-color": "",
-    "node-gitter": "",
-    "simple-node-logger": "",
-    "js-yaml":""
+    "request": "~2.27.0",
+    "simple-node-logger": ""
   },
   "devDependencies": {
     "mocha": "",
+    "nodemon": "~1.0.15",
     "chai": "",
     "chai-as-promised": ""
   },
