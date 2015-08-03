@@ -65,8 +65,9 @@ var AppConfig = {
     wikiHost: "https://github.com/freecodecamp/freecodecamp/wiki/",
     gitterHost: "https://gitter.im/",
     mdn: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/",
-    botVersion: "0.0.4d",
+    botVersion: "0.0.5b",
     MAX_WIKI_LINES: 40,
+    botNoiseLevel: 1,
 
     init: function() {
         var serverEnv = process.env.SERVER_ENV;

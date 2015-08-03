@@ -67,10 +67,11 @@ var Utils = {
         var args = Array.prototype.slice.call(arguments);
 
         // Array.prototype.push.apply( args, arguments );
-        var p1 = args.shift();
-        var p2 = args.shift();
+        var p1 = args.shift() || "_";
+        var p2 = args.shift() || "_";
+        var p3 = args.shift() || "_";
         console.log('------');
-        console.log(this.cols.bright(p1), this.cols.dimmed(p2));
+        console.log(this.cols.bright(p1), p2, p3);
         args.forEach(function(p) {
             if (p) {console.log(p); }
         });

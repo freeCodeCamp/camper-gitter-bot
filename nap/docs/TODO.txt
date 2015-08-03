@@ -1,15 +1,23 @@
 TODO
 
-X   setup prod env
-setup rooms for launch
+bugfix 'unauthorized user' message
+    volume feature
+
+cant do same message twice
+
+test out in main chat
+
+cobrowsing panel
+
+hook in chatbot engine
+
+'scan' and listen for mentions / send a link?
+redirect to the bonfire help room
+
+lesson tips read from the wiki?
 
 
--   bonfire content test
-
-X   test 'wiki' function
-X   debug double contents
-X   about
-
+------
 
 find / choose from list
 

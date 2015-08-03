@@ -11,6 +11,8 @@ var AppConfig = require("../../config/AppConfig"),
     BotCommands = require("../../lib/bot/BotCommands"),
     Bonfires = require("../app/Bonfires");
 
+var RoomMessages = require("../../data/rooms/RoomMessages");
+
 function clog(msg, obj) {
     Utils.clog("GBot>", msg, obj);
 }
@@ -60,6 +62,8 @@ var GBot = {
         input = this.parseInput(message);
         if (input.command) {
             output = BotCommands[input.keyword](input, this);
+        } else {
+            output = RoomMessages.scanInput(input, input.message.room.name, AppConfig.botNoiseLevel);
         }
         return output;
     },

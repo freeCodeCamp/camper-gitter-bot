@@ -14,7 +14,7 @@ var newline = "\n";
 var commands = {
 
     fixed: {
-        footer: "\n>  for more info: `bf details` `bf links` `bf script` `bf wiki` `bf spoiler`",
+        footer: "\n\n> for more info: `bf details` `bf links` `bf script` `bf wiki` `bf spoiler`",
         menu: "\n- `bonfire info` for more info " +
             "\n- `bonfire links` " +
             "\n- `bonfire script` for the script" +
@@ -23,6 +23,7 @@ var commands = {
         askName: "give the name of the bonfire and I'll try to look it up!",
         setName: "Set a bonfire to talk about with `bonfire name`",
         comingSoon: "Coming Soon! We're working on it!",
+        nameHint:    "no, type part of the name of the bonfire! eg `bonfire roman` ",
         reminder: function(name) {
             return "we're talking about bonfire :fire: " + name;
         },
@@ -63,6 +64,8 @@ var commands = {
                 return this.bonfireScript();
             case 'wiki':
                 return this.fixed.comingSoon;
+            case 'name':
+                return this.fixed.nameHint;
 
             default:
                 Utils.log('params [' + params + ']');
@@ -88,6 +91,7 @@ var commands = {
             this.currentBonfire.name,
             "www.freecodecamp.com/challenges/" + this.currentBonfire.dashedName
         );
+        str += " :link:";
         return str;
     },
 
@@ -107,6 +111,7 @@ var commands = {
         str += newline + this.bonfireScript();
         str += newline + this.bonfireDescription();
         str += newline + this.bonfireLinks();
+        str += newline + '\n-----\n';
         str += newline + this.fixed.menu;
         return str;
     },

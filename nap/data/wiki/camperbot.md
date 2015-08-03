@@ -8,7 +8,7 @@ Hi this is **[CamperBot](https://github.com/FreeCodeCamp/freecodecamp/wiki/campe
 - `update`     pulls wiki edits asap
 - `bonfire BFNAME` info on a bonfire
 
-:unlock:[the power of camperbot!](https://github.com/FreeCodeCamp/freecodecamp/wiki/camperbot)
+:unlock: CamperBot info and tips [the power of camperbot!](https://github.com/FreeCodeCamp/freecodecamp/wiki/camperbot)
 
 ## example commands
 ```
@@ -30,6 +30,10 @@ https://gitter.im/FreeCodeCamp/HelpBonfires
 - `archives` show history
 - `music` link to FCC Plug rooms
 - `twitch` show the twitch feed
+
+## Content for the wiki
+Feel free to make new pages, an example entry is here:
+https://github.com/FreeCodeCamp/freecodecamp/wiki/example
 
 ## Source repo
 ### [https://github.com/dcsan/gitterbot](https://github.com/dcsan/gitterbot)
