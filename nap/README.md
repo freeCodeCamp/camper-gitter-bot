@@ -4,6 +4,7 @@ Join us in Gitter to discuss!
 https://gitter.im/dcsan/gitterbot
 
 ## checking out
+lets go!
 ideally fork the project first on github and clone your fork.
 
     git clone git@github.com:dcsan/gitterbot.git
@@ -91,4 +92,3 @@ The Knowledge base. This is an interface to all the data in the wiki.
 # Chat to us!
 
 Ping me @dcsan in the [gitterbot chatroom](https://gitter.im/dcsan/gitterbot) if you get stuck.
-
