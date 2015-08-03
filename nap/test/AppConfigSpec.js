@@ -6,6 +6,7 @@
 
 var expect = require("chai").expect;
 
+console.log("--------------- testrun AppConfig ---------------");
 
 var AppConfig = require("../config/AppConfig");
 

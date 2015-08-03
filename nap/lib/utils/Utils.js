@@ -70,7 +70,8 @@ var Utils = {
         var p1 = args.shift() || "_";
         var p2 = args.shift() || "_";
         var p3 = args.shift() || "_";
-        console.log('------');
+        var line = this.stackLines(3, 4);
+        //console.log('------' + line);
         console.log(this.cols.bright(p1), p2, p3);
         args.forEach(function(p) {
             if (p) {console.log(p); }
@@ -134,6 +135,7 @@ var Utils = {
         if (str) {
             str = str.replace(/ /g, "-");
         }
+        str = str.toLowerCase();
         return str;
     },
 

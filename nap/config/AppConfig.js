@@ -81,7 +81,7 @@ var AppConfig = {
             throw new Error(msg);
         }
         _.merge(AppConfig, thisConfig);
-        this.showConfig();
+        //this.showConfig();
     },
 
     showConfig: function() {

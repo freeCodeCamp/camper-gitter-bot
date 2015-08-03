@@ -19,7 +19,7 @@ describe("RoomMessages", function(){
         var chat = "you gotta holler i say";
         var input = TestHelper.makeInputFromString(chat);
         var msg = RoomMessages.scanInput(input, "camperbot/testing", 0);
-        expect(msg).to.equal(false);
+        expect(msg).to.equal(null);
     });
 
 

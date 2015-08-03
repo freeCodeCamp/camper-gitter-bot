@@ -19,10 +19,7 @@ function clog(msg, obj) {
 describe("IO", function () {
 
     it("should load the KBase", function() {
-        var p = KBase.initAsync();
-        p.then(function() {
-            expect(KBase.topics).not.to.be.null;
-        });
+        var p = KBase.initSync();
     });
 
     it("command: help", function () {

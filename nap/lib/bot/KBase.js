@@ -3,29 +3,27 @@
 var TextLib = require('../utils/TextLib');
 
 var fs = require("fs"),
-    Utils = require('../utils/Utils'),
-    TextLib = require('../utils/TextLib');
+    path = require("path"),
+    Utils = require('../utils/Utils');
 
-function clog(msg, obj) {
-    Utils.clog("Kbase", msg, obj);
-}
-
-var glob = require("glob");
+//var glob = require("glob");
 
 // topicNameList - list of individual topic keywords eg "chai-cheat"
-// topics    - Hash full data of all topics 
+// topics    - Hash full data of all topics
 
 //  example topic:
-//  
-  // 'js-for':
-  //  { path: '/Users/dc/dev/fcc/gitterbot/nap/data/wiki/js-for.md',
-  //    topic: 'js-for',
-  //    fname: 'js-for.md',
-  //    data: 'The javascript `for` command iterates through a list of items.\n\n```js\nfor (var i = 0; i < 9; i++) {\n   console.log(i);\n   // more statements\n}\n```\n\n----',
-  //    shortData: 'The javascript `for` command iterates through a list of items.\n\n```js\nfor (var i = 0; i < 9; i++) {\n   console.log(i);\n   // more statements\n}\n```\n\n----' },
+//
+// 'js-for':
+//  { path: '/Users/dc/dev/fcc/gitterbot/nap/data/wiki/js-for.md',
+//    topic: 'js-for',
+//    fname: 'js-for.md',
+//    data: 'The javascript `for` command iterates through a list of items.\n\n```js\nfor (var i = 0; i < 9; i++) {\n   console.log(i);\n   // more statements\n}\n```\n\n----',
+//    shortData: 'The javascript `for` command iterates through a list of items.\n\n```js\nfor (var i = 0; i < 9; i++) {\n   console.log(i);\n   // more statements\n}\n```\n\n----' },
 
 
-var KBase = {
+var KBase;
+
+KBase = {
     files: [],
     topics: null,
 
@@ -47,99 +45,79 @@ var KBase = {
         star: "> some stuff here quoted \n\n[vote](http://www.freecodecamp.com/field-guide/all-articles)\n" + "> another one here \n[vote](http://www.freecodecamp.com/field-guide/all-articles)"
     },
 
-    // has to be a promise so we can then.run tests after its fulfilled
-    initAsync: function() {
-        return new Promise(function (fulfill, reject) {
-            // could also reject
-            var options = null,
-                kbpath = __dirname + "/../../data/wiki/*md";  // FIXME - works relative?
 
-            // using glob for nested dirs
-            glob(kbpath, options, function (err, files) {
-                // clog("files> ", files);
-                KBase.files = files;
-                KBase.topicNameList = [];
+    initSync: function (forceReload) {
+        //forceReload = forceReload || false;
+        var wikiDataDir = path.join(__dirname, "/../../data/wiki");  // FIXME - works relative?
 
-                KBase.topics = {};
-                KBase.files.map(function(fpath) {
-                    var arr = fpath.split("/");
-                    var fname = arr[arr.length - 1];
-                    fname = fname.toLowerCase();
-                    var topic = fname.replace(".md", "");
-                    var data = fs.readFileSync(fpath, "utf8");
-                    data = TextLib.trimLines(data);
-                    var blob = {
-                        path: fpath,
-                        topic: topic,
-                        fname: fname,
-                        data: data,
-                        shortData: TextLib.trimLines(data)
-                    };
-                    KBase.topicNameList.push(topic);
-                    KBase.topics[topic] = blob;
-                    // clog("blob", blob);
-                });
-                // clog("topicNameList", KBase.topicNameList);
-            });
-            fulfill(KBase.topics);
+        KBase.allData = [];
+        fs.readdirSync(wikiDataDir).forEach(function (name) {
+            //console.log("reading", name);
+            if (!name.includes(".md")) {
+                //console.log("skipping " + name);
+            } else {
+                var filePath = path.join(wikiDataDir, name);
+                var arr = filePath.split("/");
+                var fileName = arr[arr.length - 1];
+                fileName = fileName.toLowerCase();
+                var topicName = fileName.replace(".md", "");
+                var data = fs.readFileSync(filePath, "utf8");
+                var blob = {
+                    path: filePath,
+                    topicName: topicName,
+                    fileName: fileName,
+                    data: data,
+                    shortData: TextLib.trimLines(data),
+                    dashedName: TextLib.dashedName(topicName)
+                };
+                KBase.allData.push(blob);
+            }
         });
+        Utils.clog("loaded KBase items:", KBase.allData.length);
+        return KBase.allData;
     },
 
-    getBonfireHints: function(bfName) {
+    getWikiHints: function (bfName) {
         var topicData = this.getTopicData(bfName);
         if (topicData) {
-            Utils.tlog()
+            var wikiHints = topicData.data.split("##");
+            Utils.tlog('loaded hints for', bfName);
+            return wikiHints;
+        } else {
+            return null;
         }
-
-        Utils.tlog(bfName, topicData);
     },
 
-    getTopicData: function(params, recursing) {
-        var res, name;
-        name = Utils.asFileName(params);
+    getTopicData: function (params, recursing) {
+        var res, kb = this;
+        var searchDashName = TextLib.dashedName(params);
 
-        res = KBase.staticReplies[name];
+        res = KBase.staticReplies[searchDashName];
         if (res) {
             return (res);
         }
+        if (!KBase.allData) {
+            KBase.initSync();
+        } else {
 
-        // FIXME - this is only first time
-        if (!KBase.topics) {
-            Utils.warn("loading kbase >");
-            var p = KBase.initAsync();
-            p.then(function() {
-                Utils.warn("< loaded");
-                if (recursing) {
-                    // panic. couldn't load so don't go into a crazy loop
-                    throw new Error("KBase couldn't load, quitting");
-                }
-                KBase.getTopicData(name, true);  // dangerous
-                // return KBase.topics[name];
+            //Utils.tlog('kb.topics', kb.topics);
+            var topicData = kb.allData.filter(function (t) {
+                return (t.dashedName.includes(searchDashName));
             });
-        } else{
-            // TODO - better matching algorithm
-            // this has to be a perfect match
-            var topicName = this.findMatchingTopicName(params);
-            var fileName = Utils.asFileName(topicName);
-            var match = KBase.topics[fileName];
-            // console.log(name, match);
-            return match;
+            if (topicData) {
+                return topicData[0];
+            } else {
+                Utils.warn("KBase", 'cant find topicData for', params);
+                Utils.warn("Kbase", "allData", KBase.allData);
+                return null;
+            }
         }
 
     },
 
-    // TODO - handle lists or single items
-    findMatchingTopicName: function(keyword) {
-        var topicNames = KBase.topicNameList.filter(function(t){
-            return (t.indexOf(keyword) !== -1);
-        });
-        var oneName = topicNames[0];
-        return oneName;
-    },
-
-    findTopics: function(keyword) {
+    findTopics: function (keyword) {
         // TODO - refac and use function above
-        var shortList = KBase.topicNameList.filter(function(t){
+        var shortList = KBase.topicNameList.filter(function (t) {
             return (t.indexOf(keyword) !== -1);
         });
         if (shortList.length === 0) {
@@ -154,63 +132,75 @@ var KBase = {
             findResults += line;
         }
         return findResults;
-    },
-
-    search: function(keyword) {
-        // TODO implement search
-        console.log(KBase.topics);
-        return "results from kbase";
     }
 
+    // TODO - move to a flat array and filter it
+    //findMatchingTopicName: function(keyword) {
+    //    keyword = Utils.asFileName(keyword);
+    //    var topicNames = KBase.topicNameList.filter(function(t){
+    //        var flag = (t.indexOf(keyword) !== -1);
+    //        return flag;
+    //    });
+    //    var oneName = topicNames[0];
+    //    return oneName;
+    //},
+
+    //search: function(keyword) {
+    //    // TODO implement search
+    //    console.log(KBase.allData);
+    //    return "results from KBase";
+    //}
+
 };
+
+
+KBase.initSync();
 
 module.exports = KBase;
 
 
-
-
 // older version wrapping a promise around core code didn't work
 
-    // init: function(callback) {
+// init: function(callback) {
 
-    //     var glob = require("glob"),
-    //         options = null,
-    //         kbpath = __dirname + "/../../data/kbase.wiki/*md";  // FIXME - works relative?
+//     var glob = require("glob"),
+//         options = null,
+//         kbpath = __dirname + "/../../data/KBase.wiki/*md";  // FIXME - works relative?
 
-    //     // using glob for nested dirs
-    //     glob(kbpath, options, function (err, files) {
-    //         // clog("files> ", files);
-    //         KBase.files = files;
+//     // using glob for nested dirs
+//     glob(kbpath, options, function (err, files) {
+//         // clog("files> ", files);
+//         KBase.files = files;
 
-    //         KBase.topics = {}
-    //         KBase.files.map(function(fpath) {
-    //             arr = fpath.split("/");
-    //             fname = arr[arr.length - 1];
-    //             topic = fname.replace(".md", "");
-    //             blob = {
-    //                 path: fpath,
-    //                 topic: topic,
-    //                 fname: fname,
-    //                 data: fs.readFileSync(fpath, "utf8")
-    //             }
-    //             KBase.topics[topic] = blob;
-    //             // clog("blob", blob);
-    //         });
-    //         // clog("topics", KBase.topics);
-    //         if (callback) {
-    //             callback(null, KBase.topics);
-    //         }
-    //     });
-    //     clog("done KB init");
-    // },
+//         KBase.allData = {}
+//         KBase.files.map(function(fpath) {
+//             arr = fpath.split("/");
+//             fname = arr[arr.length - 1];
+//             topic = fname.replace(".md", "");
+//             blob = {
+//                 path: fpath,
+//                 topic: topic,
+//                 fname: fname,
+//                 data: fs.readFileSync(fpath, "utf8")
+//             }
+//             KBase.allData[topic] = blob;
+//             // clog("blob", blob);
+//         });
+//         // clog("topics", KBase.allData);
+//         if (callback) {
+//             callback(null, KBase.allData);
+//         }
+//     });
+//     clog("done KB init");
+// },
 
-    // initPromiseWrap: function() {
-    //     return new Promise(function (fulfill, reject) {
-    //         KBase.init(function(err, res) {
-    //             clog("Kbase fulfilled", res)
-    //             fulfill(res);
-    //         })
-    //     })
-    //     // could also reject
-    // },
+// initPromiseWrap: function() {
+//     return new Promise(function (fulfill, reject) {
+//         KBase.init(function(err, res) {
+//             clog("KBase fulfilled", res)
+//             fulfill(res);
+//         })
+//     })
+//     // could also reject
+// },
 

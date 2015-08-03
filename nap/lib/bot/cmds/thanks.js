@@ -41,7 +41,7 @@ var showInfo = function(input, bot, blob) {
         var message = cleanMessage(blob.error.message);
         message += Utils.betaFooter();
         //bot.say(message, input.message.room);
-        Utils.warn("WARN @thanks>", blob.error.message, input);
+        Utils.warn("WARN @thanks>", blob.error.message);
         return false;
     }
 
@@ -64,7 +64,7 @@ var commands = {
         assert.isObject(input, "checkThanks expects an object");
         var mentions, output, fromUser, toUser;
 
-        clog("thanks input.message>", input.message);
+        //clog("thanks input.message>", input.message);
 
         mentions = input.message.model.mentions;
         if (mentions) {

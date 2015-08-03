@@ -4,12 +4,38 @@ var yaml = require('js-yaml');
 var fs = require('fs');
 
 var Utils = require('../../lib/utils/Utils'),
-    InputWrap = require('../../lib/bot/InputWrap');
+    InputWrap = require('../../lib/bot/InputWrap'),
+    KBase = require('../../lib/bot/KBase'),
+    TextLib = require('../../lib/utils/TextLib');
+
 
 var newline = '\n';
 
 // https://raw.githubusercontent.com/FreeCodeCamp/freecodecamp/staging/seed/challenges/basic-bonfires.json
 // https://github.com/FreeCodeCamp/freecodecamp/blob/staging/seed/challenges/basic-bonfires.json
+
+// based on original json format from FCC
+/*
+    "id": "bd7139d8c441eddfaeb5bdef",
+    "name": "Waypoint: Pair Program on Bonfires",
+    "dashedName": "waypoint-pair-program-on-bonfires",
+    "difficulty": 0.44,
+    "challengeSeed": ["119657641"],
+    "description": [],
+    "challengeType": 2,
+    "tests": [],
+    "nameCn": "",
+    "descriptionCn": [],
+    "nameFr": "",
+    "descriptionFr": [],
+    "nameRu": "",
+    "descriptionRu": [],
+    "nameEs": "",
+    "descriptionEs": [],
+    "namePt": "",
+    "descriptionPt": []
+*/
+
 
 var Bonfires;
 
@@ -30,14 +56,23 @@ Bonfires = {
         } catch (e) {
             Utils.error("can't load bonfire data", e);
         }
-
         return this;  // chainable
     },
 
     loadWikiHints: function () {
-        this.data.challenges.map(function (bf) {
-            bf.wikiHints = KBase.findBonfireHints(bf.name);
+        var testBf = this.findBonfire('Bonfire Factorialize a Number');
+        //Utils.tlog("-- Bonfires.loadWikiHints start / WikiHints >", testBf.wikiHints);
+        this.data.challenges = this.data.challenges.map(function (bf) {
+            var wikiHints = KBase.getWikiHints(bf.dashedName);
+            if (wikiHints) {
+                bf.wikiHints = wikiHints;
+                //Utils.tlog('bf.wikihints found', bf);
+            } else {
+                //Utils.tlog("bf.wikiHints not found", bf.dashedName);
+            }
+            return bf;
         });
+        //Utils.tlog("Bonfires.loadWikiHints end / WikiHints >", testBf.wikiHints);
     },
 
     toMarkdown: function (data) {
@@ -67,14 +102,10 @@ Bonfires = {
 
     findBonfire: function (bfName) {
         var lcName, flag;
-        bfName = Utils.sanitize(bfName).toLowerCase();
-        Utils.clog("bfName", bfName);
+        bfName = TextLib.dashedName(bfName);
         var bfs = this.data.challenges.filter(function (item) {
-            // return (item.dashedName === bfName);
-            // Utils.clog('item', item);
-            lcName = Utils.sanitize(item.name.toLowerCase());
-            flag = (lcName.includes(bfName));
-            // Utils.clog(lcName, bfName);
+            flag = (item.dashedName.includes(bfName));
+            //Utils.tlog(item.dashedName, bfName);
             return flag;
         });
         var bf = bfs[0];
@@ -180,12 +211,16 @@ Bonfires = {
         output += seed;
         output += "```";
         return output;
-    }
+    },
 
 
 };
 
+// ideally KBase should be loaded first,
+// though in theory it will load itself before data is needed ...?
+
 Bonfires.load();
+Bonfires.loadWikiHints();
 
 module.exports = Bonfires;
 

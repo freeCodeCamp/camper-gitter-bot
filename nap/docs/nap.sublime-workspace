@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"bonfireH",
+				"bonfireHint(input, bot)	bonfire.js"
+			],
+			[
+				"bon",
+				"bonfireHeader()	bonfire.js"
+			],
+			[
+				"bonfire",
+				"bonfireScript(input, bot)	bonfire.js"
+			],
+			[
+				"undefined",
+				"undefined"
+			],
+			[
+				"TEST",
+				"TEST_BF_NAME	BonfiresSpec.js"
+			],
+			[
+				"TE",
+				"TEST_BF_NAME	BonfiresSpec.js"
+			],
+			[
+				"hint",
+				"hintNum"
+			],
+			[
 				"hasPro",
 				"hasProperty(name, obj)	hasProperty.js"
 			],
@@ -486,34 +514,6 @@
 			[
 				"re",
 				"reply"
-			],
-			[
-				"retu",
-				"return"
-			],
-			[
-				"rep",
-				"replyObj"
-			],
-			[
-				"mail",
-				"mailurl"
-			],
-			[
-				"tr",
-				"trigger"
-			],
-			[
-				"mes",
-				"messageData"
-			],
-			[
-				"last",
-				"lastReply"
-			],
-			[
-				"mess",
-				"messageObject"
 			]
 		]
 	},
@@ -601,7 +601,7 @@
 		[
 			[
 				"java",
-				"Format: Javascript"
+				"Set Syntax: JavaScript Next"
 			],
 			[
 				"form",
@@ -831,54 +831,82 @@
 	"expanded_folders":
 	[
 		"/Users/dc/dev/fcc/gitterbot/nap",
-		"/Users/dc/dev/fcc/gitterbot/nap/bin",
 		"/Users/dc/dev/fcc/gitterbot/nap/data",
+		"/Users/dc/dev/fcc/gitterbot/nap/data/rooms",
+		"/Users/dc/dev/fcc/gitterbot/nap/data/seed",
+		"/Users/dc/dev/fcc/gitterbot/nap/data/seed/challenges",
 		"/Users/dc/dev/fcc/gitterbot/nap/lib",
-		"/Users/dc/dev/fcc/gitterbot/nap/lib/utils",
+		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot",
+		"/Users/dc/dev/fcc/gitterbot/nap/logs",
 		"/Users/dc/dev/fcc/gitterbot/nap/test"
 	],
 	"file_history":
 	[
-		"/Users/dc/dev/fcc/gitterbot/nap/bin/wiki-update.sh",
-		"/Users/dc/dev/fcc/gitterbot/nap/bin/pm2-update.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/data/rooms/RoomMessages.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/test/RoomMessagesSpec.js",
 		"/Users/dc/dev/fcc/gitterbot/nap/data/RoomData.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot/BotCommands.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/lib/utils/HttpWrap.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/test/HttpWrapSpec.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot/cmds/thanks.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/docs/TODO.txt",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/pm2-update.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/logs/README.md",
 		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot/GBot.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/lib/app/Bonfires.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/test/BonfiresSpec.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot/KBase.js",
 		"/Users/dc/dev/fcc/gitterbot/nap/lib/utils/Utils.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot/cmds/wiki.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/deploy.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/test/TestHelper.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot/cmds/bonfire.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/lib/utils/TextLib.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/package.json",
+		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot/BotCommands.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/data/seed/challenges/basic-bonfires.json",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/run-bothelp.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/app.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot/cmds/about.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/lib/utils/HttpWrap.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/config/AppConfig.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/credentials-bothelp.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/.gitignore",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/credentials-demobot.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/docs/credentials.md",
+		"/Users/dc/dev/fcc/gitterbot/nap/README.md",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/test.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/step-debug.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/run-demobot.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/lib/utils/clog.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/lib/app/routes.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/views/rooms.jade",
+		"/Users/dc/dev/fcc/gitterbot/docs/bonfires/where-art-thou.js",
+		"/Users/dc/dev/fcc/gitterbot/docs/bonfires/seek-and-destroy.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot/cmds/update.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/wiki-pull.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/force-update.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/wiki-pull-prod.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot/cmds/thanks.js",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/run-dev-bothelp.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/run-YOUR_GITHUB_ID.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/credentials-example.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/credentials-dc.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/bin/wiki-update.sh",
+		"/Users/dc/dev/fcc/gitterbot/nap/test/HttpWrapSpec.js",
 		"/Users/dc/dev/fcc/gitterbot/nap/test/SearchSpec.js",
 		"/Users/dc/dev/fcc/gitterbot/nap/test/WikiSpec.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot/cmds/wiki.js",
 		"/Users/dc/dev/fcc/gitterbot/nap/test/IOSpec.js",
 		"/Users/dc/dev/fcc/gitterbot/nap/test/ParserSpec.js",
 		"/Users/dc/dev/fcc/gitterbot/nap/test/GBotSpec.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/test/TestHelper.js",
 		"/Users/dc/dev/fcc/gitterbot/nap/test/CommandsSpec.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/config/AppConfig.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/bin/test.sh",
 		"/Users/dc/dev/fcc/gitterbot/nap/test/TextLibSpec.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot/KBase.js",
 		"/Users/dc/dev/fcc/gitterbot/nap/test/AppConfigSpec.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/bin/run-dev-bothelp.sh",
 		"/Users/dc/dev/fcc/gitterbot/nap/bin/pm2-run.sh",
 		"/Users/dc/dev/fcc/gitterbot/nap/lib/app/Rooms.js",
 		"/Users/dc/dev/fcc/gitterbot/nap/test/UtilsSpec.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/docs/TODO.txt",
-		"/Users/dc/dev/fcc/gitterbot/nap/lib/app/routes.js",
 		"/Users/dc/dev/fcc/gitterbot/nap/bin/camperbot-run.sh",
 		"/Users/dc/dev/fcc/gitterbot/nap/test/RoomsSpec.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/lib/bot/cmds/about.js",
 		"/Users/dc/dev/fcc/gitterbot/nap/lib/vendor/meteor/Match.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/app.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/views/rooms.jade",
-		"/Users/dc/dev/fcc/gitterbot/nap/package.json",
-		"/Users/dc/dev/fcc/gitterbot/nap/bin/credentials-example.sh",
 		"/Users/dc/dev/fcc/gitterbot/nap/bin/debug.sh",
 		"/Users/dc/dev/fcc/gitterbot/nap/lib/gitter/restApi.js",
 		"/Users/dc/dev/fcc/gitterbot/nap/lib/gitter/GitterHelper.js",
-		"/Users/dc/dev/fcc/gitterbot/nap/bin/step-debug.sh",
 		"/Users/dc/dev/fcc/gitterbot/nap/docs/nap.sublime-project",
 		"/Users/dc/dev/shumi/chatU/docs/chatU.sublime-project",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/docs/TODO.txt",
@@ -941,32 +969,7 @@
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/views/layout.jade",
 		"/Users/dc/dev/rikai/gitter/gitterbot/oauth/views/home.jade",
 		"/Users/dc/dev/rikai/gitter/gitterbot/nap/test/tester.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/hugit/hubot-scripts.json",
-		"/Users/dc/dev/rikai/gitter/gitterbot/hugit/scripts/example.coffee",
-		"/Users/dc/dev/rikai/gitter/gitterbot/hugit/bin/hubot",
-		"/Users/dc/dev/rikai/gitter/gitterbot/views/home.jade",
-		"/Users/dc/dev/rikai/gitter/gitterbot/app.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/lib/bot/bot.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/lib/gitter/restApi.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/lib/gitter/passportInit.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/bin/debug.sh",
-		"/Users/dc/dev/rikai/gitter/gitterbot/lib/gitter/passportLogin.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/lib/gitter/streamApi.js",
-		"/Users/dc/dev/rikai/gitter/gitterbot/bin/post.sh",
-		"/Users/dc/dev/rikai/gitter/gitterbot/package.json",
-		"/Users/dc/dev/rikai/gitter/gitterbot/lib/streamApi.js",
-		"/Users/dc/dev/rikai/gitter/xxx/app.js",
-		"/Users/dc/dev/rikai/gitterbot/views/home.jade",
-		"/Users/dc/dev/rikai/gitter-demo-app/views/home.jade",
-		"/Users/dc/dev/rikai/gitter-demo-app/bin/post.sh",
-		"/Users/dc/dev/rikai/gitter-demo-app/app.js",
-		"/Users/dc/dev/rikai/gitter-demo-app/bin/run.sh",
-		"/Users/dc/dev/rikai/gitter-demo-app/bin/.gitignore",
-		"/Users/dc/Google Drive/mtgs/quincy-01.txt",
-		"/Users/dc/Google Drive/rikai/bizdev/summary.txt",
-		"/Users/dc/Google Drive/mtgs/jacob-ATT.txt",
-		"/Users/dc/dev/shumi/chatU/app/both/appRoutes.coffee",
-		"/Users/dc/dev/shumi/chatU/app/packages/streamer/lib/MsgParser.coffee"
+		"/Users/dc/dev/rikai/gitter/gitterbot/hugit/hubot-scripts.json"
 	],
 	"find":
 	{
@@ -1112,6 +1115,28 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"cons",
+			"bonfireHeader",
+			"Utils",
+			"`",
+			"<a href",
+			"data/bonfires/basic-bonfires.js",
+			"bonfire",
+			"parseIn",
+			"status",
+			"stackLines",
+			"botname",
+			"envConfigs",
+			"dcsan",
+			"rooms",
+			"showConfig",
+			"botname",
+			"function where(collection, source) {\n  var arr = [];\n  // What's in a name?\n  k = Object.keys(source)[0]; // since we know only one \n  v = source[k];\n  console.log(\"match for:\", k, v);\n  var arr = collection.filter(function(a){\n    console.log(a);\n    return (a[k] === v);\n  });\n  return arr;\n}\n",
+			"ls.",
+			"wikiU",
+			"botzy",
+			"footer",
+			"help",
 			"rooms",
 			"RoomData",
 			"joinKnownRooms",
@@ -1217,29 +1242,7 @@
 			"cleanTopic",
 			"hasAlreadyJoined",
 			"alreadyJoined",
-			"botComm",
-			"BotComm",
-			"isRoomInList",
-			"listenToRoom",
-			"joinKnownRooms",
-			"scanRooms",
-			"listenToRoom",
-			"addToRoomList",
-			"listenTo",
-			"RoomData",
-			"roomIsInList",
-			"RoomData",
-			"gbot",
-			"scanRooms",
-			"sendReply",
-			"GBot.sendReply",
-			"sendReply",
-			"this.gitter",
-			"joinRoom",
-			"announce",
-			"input",
-			"console.log",
-			"AppConfig"
+			"botComm"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1247,6 +1250,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"cmd.",
 			"makeMessageFromString",
 			"input",
 			"makeInputFromString",
@@ -1373,8 +1377,7 @@
 			"userCards",
 			"SERVER_ENV",
 			"SERVERENV",
-			"botPlayer",
-			"botEditor"
+			"botPlayer"
 		],
 		"reverse": false,
 		"show_context": false,
@@ -1384,11 +1387,6 @@
 	},
 	"groups":
 	[
-		{
-			"sheets":
-			[
-			]
-		},
 		{
 			"sheets":
 			[
@@ -1412,18 +1410,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.738049470926,
 			1.0
 		],
 		"rows":
@@ -1455,24 +1446,180 @@
 		"selected_items":
 		[
 			[
+				"tod",
+				"nap/docs/TODO.txt"
+			],
+			[
+				"gb",
+				"nap/lib/bot/GBot.js"
+			],
+			[
 				"pm2",
 				"nap/bin/pm2-update.sh"
 			],
 			[
-				"wiki",
-				"nap/bin/wiki-update.sh"
+				"bonfi",
+				"nap/lib/app/Bonfires.js"
 			],
 			[
-				"botco",
-				"nap/lib/bot/BotCommands.js"
+				"kba",
+				"nap/lib/bot/KBase.js"
 			],
 			[
 				"roomd",
 				"nap/data/RoomData.js"
 			],
 			[
+				"uti",
+				"nap/lib/utils/Utils.js"
+			],
+			[
+				"wiki",
+				"nap/lib/bot/cmds/wiki.js"
+			],
+			[
+				"depl",
+				"nap/bin/deploy.sh"
+			],
+			[
+				"deplo",
+				"nap/bin/deploy.sh"
+			],
+			[
+				"gbo",
+				"nap/lib/bot/GBot.js"
+			],
+			[
+				"test",
+				"nap/test/TestHelper.js"
+			],
+			[
+				"bonf",
+				"nap/lib/app/Bonfires.js"
+			],
+			[
+				"kbas",
+				"nap/lib/bot/KBase.js"
+			],
+			[
+				"util",
+				"nap/lib/utils/Utils.js"
+			],
+			[
+				"run",
+				"nap/bin/run-bothelp.sh"
+			],
+			[
+				"pack",
+				"nap/package.json"
+			],
+			[
+				"text",
+				"nap/lib/utils/TextLib.js"
+			],
+			[
+				"basic",
+				"nap/data/seed/challenges/basic-bonfires.json"
+			],
+			[
+				"bon",
+				"nap/data/seed/challenges/basic-bonfires.json"
+			],
+			[
+				"botco",
+				"nap/lib/bot/BotCommands.js"
+			],
+			[
+				"app.",
+				"nap/app.js"
+			],
+			[
+				"about",
+				"nap/lib/bot/cmds/about.js"
+			],
+			[
+				"utils",
+				"nap/lib/utils/Utils.js"
+			],
+			[
+				"room",
+				"nap/data/RoomData.js"
+			],
+			[
 				"http",
 				"nap/lib/utils/HttpWrap.js"
+			],
+			[
+				"appc",
+				"nap/config/AppConfig.js"
+			],
+			[
+				"both",
+				"nap/bin/credentials-bothelp.sh"
+			],
+			[
+				"botc",
+				"nap/lib/bot/BotCommands.js"
+			],
+			[
+				"demob",
+				"nap/bin/credentials-demobot.sh"
+			],
+			[
+				"read",
+				"nap/README.md"
+			],
+			[
+				"crebo",
+				"nap/bin/credentials-bothelp.sh"
+			],
+			[
+				"step",
+				"nap/bin/step-debug.sh"
+			],
+			[
+				"rooms.",
+				"nap/views/rooms.jade"
+			],
+			[
+				"route",
+				"nap/lib/app/routes.js"
+			],
+			[
+				"cred",
+				"nap/bin/credentials-demobot.sh"
+			],
+			[
+				"appcon",
+				"nap/config/AppConfig.js"
+			],
+			[
+				"update.",
+				"nap/lib/bot/cmds/update.js"
+			],
+			[
+				"forc",
+				"nap/bin/force-update.sh"
+			],
+			[
+				"",
+				"nap/lib/bot/BotCommands.js"
+			],
+			[
+				"tha",
+				"nap/lib/bot/cmds/thanks.js"
+			],
+			[
+				"abo",
+				"nap/lib/bot/cmds/about.js"
+			],
+			[
+				"than",
+				"nap/lib/bot/cmds/thanks.js"
+			],
+			[
+				"app",
+				"nap/app.js"
 			],
 			[
 				"httw",
@@ -1483,24 +1630,12 @@
 				"nap/test/HttpWrapSpec.js"
 			],
 			[
-				"than",
-				"nap/lib/bot/cmds/thanks.js"
-			],
-			[
-				"gb",
-				"nap/lib/bot/GBot.js"
-			],
-			[
 				"romd",
 				"nap/data/RoomData.js"
 			],
 			[
 				"botcom",
 				"nap/lib/bot/BotCommands.js"
-			],
-			[
-				"utils",
-				"nap/lib/utils/Utils.js"
 			],
 			[
 				"thanks",
@@ -1539,10 +1674,6 @@
 				"nap/test/TestHelper.js"
 			],
 			[
-				"room",
-				"nap/data/RoomData.js"
-			],
-			[
 				"botcomm",
 				"nap/lib/bot/BotCommands.js"
 			],
@@ -1555,32 +1686,16 @@
 				"nap/lib/bot/GBot.js"
 			],
 			[
-				"botc",
-				"nap/lib/bot/BotCommands.js"
-			],
-			[
 				"gbtosp",
 				"nap/test/GBotSpec.js"
-			],
-			[
-				"gbo",
-				"nap/lib/bot/GBot.js"
 			],
 			[
 				"tes",
 				"nap/bin/test.sh"
 			],
 			[
-				"appc",
-				"nap/config/AppConfig.js"
-			],
-			[
 				"p2",
 				"nap/bin/pm2-run.sh"
-			],
-			[
-				"run",
-				"nap/bin/run-dev-bothelp.sh"
 			],
 			[
 				"tes.",
@@ -1591,24 +1706,12 @@
 				"nap/test/AppConfigSpec.js"
 			],
 			[
-				"kba",
-				"nap/lib/bot/KBase.js"
-			],
-			[
 				"thank",
 				"nap/lib/bot/cmds/thanks.js"
 			],
 			[
 				"rooms",
 				"nap/lib/app/Rooms.js"
-			],
-			[
-				"appcon",
-				"nap/config/AppConfig.js"
-			],
-			[
-				"util",
-				"nap/lib/utils/Utils.js"
 			],
 			[
 				"to",
@@ -1619,10 +1722,6 @@
 				"nap/config/AppConfig.js"
 			],
 			[
-				"route",
-				"nap/lib/app/routes.js"
-			],
-			[
 				"cur",
 				"nap/bin/camperbot-run.sh"
 			],
@@ -1631,28 +1730,12 @@
 				"nap/bin/camperbot-run.sh"
 			],
 			[
-				"about",
-				"nap/lib/bot/cmds/about.js"
-			],
-			[
-				"app.",
-				"nap/app.js"
-			],
-			[
-				"test",
-				"nap/bin/test.sh"
-			],
-			[
 				"ios",
 				"nap/test/IOSpec.js"
 			],
 			[
 				"roos",
 				"nap/test/RoomsSpec.js"
-			],
-			[
-				"kbas",
-				"nap/lib/bot/KBase.js"
 			],
 			[
 				"comma",
@@ -1691,24 +1774,8 @@
 				"nap/lib/gitter/GitterHelper.js"
 			],
 			[
-				"step",
-				"nap/bin/step-debug.sh"
-			],
-			[
 				"reg",
 				"test/RegexSpec.js"
-			],
-			[
-				"tod",
-				"docs/TODO.txt"
-			],
-			[
-				"",
-				".eslintrc"
-			],
-			[
-				"uti",
-				"lib/utils/Utils.js"
 			],
 			[
 				"rege",
@@ -1721,10 +1788,6 @@
 			[
 				"upd",
 				"bin/update-wiki.sh"
-			],
-			[
-				"cred",
-				"bin/credentials.sh"
 			],
 			[
 				"bots",
@@ -1765,10 +1828,6 @@
 			[
 				"botsp",
 				"test/BotSpec.js"
-			],
-			[
-				"app",
-				"app.js"
 			],
 			[
 				"pas",
@@ -1897,74 +1956,6 @@
 			[
 				"stre",
 				"app/packages/streamer/client/stream/stream.coffee"
-			],
-			[
-				"cha",
-				"app/client/widgets/cha.jade"
-			],
-			[
-				"magn",
-				"app/client/widgets/magnets.coffee"
-			],
-			[
-				"prod",
-				"app/private/config/prod.json"
-			],
-			[
-				"dclib",
-				"app/packages/dclib/lib/dclib.coffee"
-			],
-			[
-				"in.",
-				"app/client/in/in.coffee"
-			],
-			[
-				"dclib.",
-				"package-dev/dclib/lib/dclib.coffee"
-			],
-			[
-				"cha.",
-				"app/client/widgets/cha.jade"
-			],
-			[
-				"continue",
-				"app/client/widgets/continue.jade"
-			],
-			[
-				"pause.ja",
-				"app/packages/streamer/client/adminResponseWidgets/continue.jade"
-			],
-			[
-				"magne",
-				"app/client/widgets/magnets.jade"
-			],
-			[
-				"in.c",
-				"app/client/in/in.coffee"
-			],
-			[
-				"pcwr",
-				"app/client/in/pcWrapper.jade"
-			],
-			[
-				"stream.st",
-				"app/packages/streamer/client/stream/stream.styl"
-			],
-			[
-				".pac",
-				"app/packages/npm-container/.npm/package/node_modules/google-spreadsheet/package.json"
-			],
-			[
-				"gameo",
-				"app/packages/mpgames/client/gameOver/gameOver.coffee"
-			],
-			[
-				"monke",
-				"package-dev/dclib/lib/monkeyPatch.coffee"
-			],
-			[
-				"images",
-				"app/client/widgets/images.jade"
 			]
 		],
 		"width": 0.0
@@ -2003,7 +1994,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 208.0,
+	"side_bar_width": 216.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

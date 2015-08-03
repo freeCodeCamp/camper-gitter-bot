@@ -21,7 +21,7 @@ var GBot = {
 
     init: function() {
         // TODO refresh and add oneToOne rooms
-        KBase.initAsync();
+        KBase.initSync();
         this.roomList = [];
         this.gitter = new Gitter(AppConfig.token);
         this.joinKnownRooms();

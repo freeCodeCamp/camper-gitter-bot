@@ -4,11 +4,13 @@
 var assert = require("chai").assert,
     expect = require("chai").expect;
 
+//this should go before other stuff
+var KBase = require("../lib/bot/KBase.js");
+
 var Bonfires = require("../lib/app/Bonfires.js"),
     InputWrap = require('../lib/bot/InputWrap'),
     Utils = require("../lib/utils/Utils"),
     TestHelper = require("./TestHelper"),
-    KBase = require("../lib/bot/KBase.js"),
     GBot  = require("../lib/bot/GBot.js");
 
 var TestHelper = require('./TestHelper');
@@ -23,7 +25,8 @@ function clog(msg, obj) {
 }
 
 var TESTROOMNAME = 'bonfire-factorialize-a-number',
-    TEST_BF_NAME = "bonfire factorialize a number";
+    TEST_BF_NAME = "bonfire factorialize a number",
+    TEST_BF_TITLE = "Bonfire Factorialize a Number";
 
 function getOneBf(roomName) {
     roomName = roomName || TESTROOMNAME;
@@ -32,6 +35,7 @@ function getOneBf(roomName) {
     return bf;
 }
 
+// sets a bonfire as active inside the current chat
 function activateBonfire() {
     var message = TestHelper.makeMessageFromString("bonfire " + TEST_BF_NAME);
     var res = GBot.findAnyReply(message);
@@ -40,6 +44,10 @@ function activateBonfire() {
 
 
 describe("Bonfires", function() {
+
+    it("should prep the KBase", function() {
+        KBase.initSync();
+    }),
 
     it("should load the Bonfires", function() {
         var d = Bonfires.load();
@@ -68,7 +76,7 @@ describe("Bonfires", function() {
     });
 
     it("should find links for a bf", function() {
-        var bf = Bonfires.findBonfire(TEST_BF_NAME)
+        var bf = Bonfires.findBonfire(TEST_BF_NAME);
         var links = Bonfires.getLinks(bf);
         expect(links).not.to.be.null;
         expect(links).to.include("links:")
@@ -98,11 +106,18 @@ describe("Bonfires", function() {
         expect(res).to.include("```js \nfunction");
     });
 
-    it("should find wiki hints for bonfires", function() {
+    it("should find raw wiki hints for bonfire from KBase", function() {
         var bfName = "Bonfire Factorialize a Number";
-        var hints = KBase.findBonfireHints(bfName);
+        var hints = KBase.getWikiHints(bfName);
         expect(hints).to.be.instanceOf(Array);
     });
+
+    it("loaded should have wikiHints linked to bonfire object", function() {
+        var bf = Bonfires.findBonfire(TEST_BF_TITLE);
+        //Utils.tlog('bf returned to spec', bf);
+        expect(bf.wikiHints).to.be.instanceOf(Array);
+    });
+
 
 
 });

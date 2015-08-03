@@ -2,8 +2,9 @@
 "use strict";
 
 // var clc = require("cli-color");
-// process.stdout.write(clc.erase.screen);
+//process.stdout.write(clc.erase.screen);
 
+console.log("--------------- startup ------------------")
 
 if (typeof Map !== "function" ) {
     throw new Error("ES6 is required; add --harmony");
@@ -17,6 +18,8 @@ var passport = require("./lib/gitter/passportModule");
 var GBot = require("./lib/bot/GBot"),
     routes = require("./lib/app/routes.js");
 
+//should be loaded before Bonfires for wikihints
+var KBase = require('./lib/bot/KBase');
 var Bonfires = require('./lib/app/Bonfires');
 
 // Utils.cls();

@@ -10,7 +10,7 @@ var SharedMessages = {
         word: 'bonfire',
             // text: "> we have bonfire specific chatroom here [FreeCodeCamp/HelpBonfires](https://gitter.im/FreeCodeCamp/HelpBonfires)",
             text: "> type `bonfire name` to get some info on that bonfire here",
-            chance: 0.5
+            chance: 0.2
     },
     meteorChat: {
         word: 'meteor',

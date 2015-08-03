@@ -7,6 +7,8 @@ var GBot = require("../lib/bot/GBot.js"),
     Utils = require('../lib/utils/Utils'),
     TestHelper = require('./TestHelper');
 
+var KBase = require("../lib/bot/Kbase");
+
     // KBase = require("../lib/bot/KBase.js");
 
 // function clog(msg, obj) {
@@ -17,6 +19,7 @@ var GBot = require("../lib/bot/GBot.js"),
 describe("Search", function (){
 
     it("should have a find method", function() {
+        KBase.initSync();
         var msg = TestHelper.makeMessageFromString("find XXX");
         var res = GBot.findAnyReply(msg);
         expect(res).to.match(/^find \*\*/);
@@ -28,9 +31,9 @@ describe("Search", function (){
     //     expect(res).to.match(/^find \*\*css\*\*/);
     // });
 
-    it("should accept a find method ", function() {
-
-    });
+    //it("should accept a find method ", function() {
+    //
+    //});
 
 });
 
