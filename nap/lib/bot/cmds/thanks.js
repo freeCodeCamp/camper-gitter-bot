@@ -78,12 +78,13 @@ var commands = {
           console.log(namesList);
           toUserMessage = namesList.join(", ").toLowerCase();
 
+            var options = {method: 'POST'};
           for (var i=0; i < namesList.length; i++) {
             console.log(namesList);
             console.log(namesList[i]);
             toUser = namesList[i];
             var apiPath = `/api/users/give-brownie-points?receiver=${toUser}&giver=${fromUser}`;
-            HttpWrap.getApi(apiPath, function(apiRes) {
+            HttpWrap.getApi(apiPath, options, function(apiRes) {
                 showInfo(input, bot, apiRes);
             });
           }
