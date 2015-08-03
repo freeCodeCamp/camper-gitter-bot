@@ -1,16 +1,18 @@
 TODO
 
-    volume feature
+    step through Luis lesson (wikihints)
+    allow users to add hints to bonfires?
+    co-browsing panel
+
     advanced/other bonfires data
     disable same message twice
+    volume feature
 
-co-browsing panel
-test out in main chat?
+    test out in main chat?
 
 X bugfix 'unauthorized user' message
 
 
-step through Luis lesson
 
 /more command
 

@@ -65,7 +65,9 @@ var RoomMessages = {
         var msgList = checkList.filter(function(item) {
             if(!item) { return null; }
             var flag = (chat.includes(item.word));
-            Utils.clog(chat, item.word, "flag:" + flag);
+            if(flag) {
+                Utils.clog(chat, item.word, "flag:" + flag);
+            }
             return flag;
         });
         if (msgList.length > 0) {
@@ -73,6 +75,7 @@ var RoomMessages = {
             //Utils.log('msgList', msgList);
             res = _.sample(msgList);
             if (Math.random() < (res.chance || 1)) {
+                Utils.clog("scanInput out>", res.word);
                 return res.text;
             }
         } else {

@@ -60,6 +60,7 @@ commands = {
             case 'links':
                 return this.bonfireLinks();
             case 'spoiler':
+            case 'n':
                 return this.bonfireHint();
             case 'script':
                 return this.bonfireScript();

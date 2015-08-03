@@ -1,6 +1,6 @@
 "use strict";
 
-var yaml = require('js-yaml');
+//var yaml = require('js-yaml');
 var fs = require('fs');
 
 var Utils = require('../../lib/utils/Utils'),
@@ -60,11 +60,11 @@ Bonfires = {
     },
 
     loadWikiHints: function () {
-        var testBf = this.findBonfire('Bonfire Factorialize a Number');
         //Utils.tlog("-- Bonfires.loadWikiHints start / WikiHints >", testBf.wikiHints);
         this.data.challenges = this.data.challenges.map(function (bf) {
             var wikiHints = KBase.getWikiHints(bf.dashedName);
             if (wikiHints) {
+                bf.description.concat(wikiHints);
                 bf.wikiHints = wikiHints;
                 //Utils.tlog('bf.wikihints found', bf);
             } else {
@@ -101,7 +101,7 @@ Bonfires = {
     },
 
     findBonfire: function (bfName) {
-        var lcName, flag;
+        var flag;
         bfName = TextLib.dashedName(bfName);
         var bfs = this.data.challenges.filter(function (item) {
             flag = (item.dashedName.includes(bfName));
@@ -134,8 +134,6 @@ Bonfires = {
         var hint, hintNum;
         hintNum = bonfire.currentHint || 0;
         hint = bonfire.description[hintNum];
-
-        bonfire.prepare();
 
         if (hint) {
             hint = "`[" + hintNum + "]` " + hint;
@@ -195,8 +193,8 @@ Bonfires = {
     },
 
     getChallengeSeedFromInput: function (input) {
-        var output, bf, roomName, seed;
-        roomName = InputWrap.roomShortName(input);
+        var output, bf, seed;
+        //var roomName = InputWrap.roomShortName(input);
         bf = Bonfires.fromInput(input);
 
         if (!bf || !bf.challengeSeed) {
@@ -211,7 +209,7 @@ Bonfires = {
         output += seed;
         output += "```";
         return output;
-    },
+    }
 
 
 };
