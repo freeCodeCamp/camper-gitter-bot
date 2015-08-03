@@ -30,7 +30,7 @@ var commands = {
         // str += "\n![bothelp](https://avatars1.githubusercontent.com/bothelp?v=3&s=16)  ";
         // str += "\n\nFCC wiki > [" + link + " ] :pencil: ";
         str += "\n:pencil: " + link;
-        // output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.topic) + ")";
+        // output += " [PM CamperBot](" + AppConfig.topicDmUri(topicData.dashedName) + ")";
         return str;
     },
 
@@ -58,17 +58,17 @@ var commands = {
         if (!input.params) { return this.wikiUsage(); }
         // else
         topicData = KBase.getTopicData(input.params);
-        if (!topicData || !topicData.topic) {
+        if (!topicData) {
             Utils.warn("cant find topic for ", input.params);
             return this.wikiCantFind(input);
         }
 
         // else OK
         Utils.log('topicData', topicData);
-        var link = Utils.linkify(topicData.topic, "wiki");
+        var link = Utils.linkify(topicData.dashedName, "wiki", topicData.displayName + " [edit]");
         output = `## :pencil: ${link} \n`;
         output += topicData.shortData;
-        output += this.wikiFooter(topicData.topic);
+        output += this.wikiFooter(topicData.dashedName);
         return output;
     }
 };

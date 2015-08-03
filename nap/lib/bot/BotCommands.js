@@ -142,7 +142,7 @@ var BotCommands = {
         } else {
             var keyword = "camperbot";
             var topicData = KBase.getTopicData(keyword);
-            var str = topicData.data;
+            var str = topicData.shortData;
             str += this.wikiFooter(keyword);
             return (str);
         }
@@ -193,8 +193,9 @@ var BotCommands = {
     },
 
     find: function (input, bot) {
-        var str = `find **${input.params}**\n`;
-        var shortList = KBase.findTopics(input.params);
+        debugger;
+        var str = "find **" + input.params + "**\n";
+        var shortList = KBase.getTopicsAsList(input.params);
         bot.context = {
             state: "finding",
             commands: shortList.commands

@@ -68,6 +68,12 @@ describe("Commands", function () {
         expect(archive).to.include("Archives for ");
     });
 
+    it("should have a find command", function() {
+        var input = TestHelper.makeInputFromString("find css");
+        var res = BotCommands.find(input, {} );
+        expect(res).to.include("find ***");
+    });
+
 
     it("should show archive", function() {
         var input = TestHelper.stubInput;

@@ -64,7 +64,7 @@ KBase = {
                 var data = fs.readFileSync(filePath, "utf8");
                 var blob = {
                     path: filePath,
-                    topicName: topicName,
+                    displayName: Utils.namify(topicName),
                     fileName: fileName,
                     data: data,
                     shortData: TextLib.trimLines(data),
@@ -101,11 +101,11 @@ KBase = {
         } else {
 
             //Utils.tlog('kb.topics', kb.topics);
-            var topicData = kb.allData.filter(function (t) {
+            var shortList = kb.allData.filter(function (t) {
                 return (t.dashedName.includes(searchDashName));
             });
-            if (topicData) {
-                return topicData[0];
+            if (shortList) {
+                return shortList[0];
             } else {
                 Utils.warn("KBase", 'cant find topicData for', params);
                 Utils.warn("Kbase", "allData", KBase.allData);
@@ -115,19 +115,27 @@ KBase = {
 
     },
 
-    findTopics: function (keyword) {
+    getTopics: function (keyword) {
         // TODO - refac and use function above
-        var shortList = KBase.topicNameList.filter(function (t) {
-            return (t.indexOf(keyword) !== -1);
+        var searchDashName = TextLib.dashedName(keyword);
+        var shortList = this.allData.filter(function (t) {
+            return (t.dashedName.includes(searchDashName));
         });
+        return shortList;
+    },
+
+    //    return topics as markdown links
+    getTopicsAsList: function(keyword) {
+        var shortList = this.getTopics(keyword);
         if (shortList.length === 0) {
             return "nothing found";
         }
         // else
+        Utils.log("shortList", shortList);
         var findResults = "";
         for (var i = 0; i < shortList.length; i++) {
-            var item = shortList[i];
-            var link = Utils.linkify(item, 'wiki');
+            var topicData = shortList[i];
+            var link = Utils.linkify(topicData.dashedName, 'wiki', topicData.displayName);
             var line = "\n[" + i + "] " + link;
             findResults += line;
         }

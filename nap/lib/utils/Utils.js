@@ -113,7 +113,8 @@ var Utils = {
         console.log(stackLines);
     },
 
-
+    // move to TextLib
+    // does ~same as dashedName() method so remove this one
     sanitize: function (str, opts) {
         if (opts && opts.spaces) {
             str = str.replace(/\s/g, "-");
