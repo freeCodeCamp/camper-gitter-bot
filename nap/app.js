@@ -4,6 +4,8 @@
 // var clc = require("cli-color");
 //process.stdout.write(clc.erase.screen);
 
+require('dotenv').load();
+
 console.log("--------------- startup ------------------")
 
 if (typeof Map !== "function" ) {

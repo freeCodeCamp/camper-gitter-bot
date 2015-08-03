@@ -1,5 +1,3 @@
-require('dotenv').load();
-
 "use strict";
 
 var passport = require('passport');
