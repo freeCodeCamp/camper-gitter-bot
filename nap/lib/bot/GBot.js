@@ -45,6 +45,7 @@ var GBot = {
     },
 
     // main IO routine called from room listener
+    // TODO - add roomName info for the logs
     handleReply: function(message) {
         clog(" in|", message.model.fromUser.username + "> " + message.model.text);
         var output = this.findAnyReply(message);

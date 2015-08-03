@@ -1,6 +1,7 @@
 "use strict";
 
 var http = require('http');
+var _ = require('lodash-node');
 
 var AppConfig = require("../../config/AppConfig"),
     Utils = require("./Utils");
@@ -8,18 +9,19 @@ var AppConfig = require("../../config/AppConfig"),
 
 var HttpWrap = {
 
-    options: {
+    defaultOptions: {
         host: AppConfig.apiServer,
         timeout: 5000,
         debug: false
     },
 
-    getApi: function(apiPath, callback) {
+    callApi: function(apiPath, options, callback) {
 
-        var body = { data: JSON.stringify(body) }
-        this.options.body = body;
+        var body = { data: JSON.stringify(body) };
+        this.defaultOptions.body = body;
+        _.merge(this.defaultOptions, options);
 
-        this.options.path = apiPath;
+        this.defaultOptions.path = apiPath;
 
         var handleResponse = function(response) {
             var str = '';
@@ -45,7 +47,7 @@ var HttpWrap = {
         // request.setTimeout(30000, onProblem);
         // request.on('error', onProblem);
 
-        var request = http.request(this.options, handleResponse).end();
+        var request = http.request(this.defaultOptions, handleResponse).end();
         // request.setTimeout(50, handleTimeout);
 
     }

@@ -76,7 +76,8 @@ var commands = {
         output += " :thumbsup: :sparkles: :sparkles: ";
 
         var apiPath = `/api/users/give-brownie-points?receiver=${toUser}&giver=${fromUser}`;
-        HttpWrap.getApi(apiPath, function(apiRes) {
+        var options = { method: 'POST' };
+        HttpWrap.callApi(apiPath, options, function(apiRes) {
             showInfo(input, bot, apiRes);
         });
 

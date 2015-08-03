@@ -72,7 +72,8 @@ var about = function(input, bot) {
     name = them.screenName.toLowerCase();
 
     var apiPath = '/api/users/about?username=' + name;
-    HttpWrap.getApi(apiPath, function(apiRes) {
+    var options = {method: 'GET'};
+    HttpWrap.callApi(apiPath, options, function(apiRes) {
         showInfo(input, bot, apiRes);
     });
 
