@@ -58,6 +58,11 @@ var showInfo = function(input, bot, blob) {
     bot.say(str, input.message.room);
 };
 
+var bpCallback = function (apiRes, options) {
+    Utils.clog("bpCallback", "options", options);
+    showInfo(options.input, options.bot, apiRes);
+};
+
 
 var commands = {
     thanks: function (input, bot) {
@@ -69,29 +74,32 @@ var commands = {
         mentions = input.message.model.mentions;
         if (mentions) {
             // TODO - build a list
-          console.log(mentions);
-          var namesList = mentions.map(function(m) {
-              console.log(m.screenName);
-              return m.screenName;
-          });
-
-          console.log(namesList);
-          toUserMessage = namesList.join(", ").toLowerCase();
-
-            var options = {method: 'POST'};
-          for (var i=0; i < namesList.length; i++) {
-            console.log(namesList);
-            console.log(namesList[i]);
-            toUser = namesList[i];
-            var apiPath = `/api/users/give-brownie-points?receiver=${toUser}&giver=${fromUser}`;
-            HttpWrap.getApi(apiPath, options, function(apiRes) {
-                showInfo(input, bot, apiRes);
+            console.log(mentions);
+            var namesList = mentions.map(function (m) {
+                console.log(m.screenName);
+                return m.screenName;
             });
-          }
+
+            console.log(namesList);
+            toUserMessage = namesList.join(", ").toLowerCase();
+
+            var options = {
+                method: 'POST',
+                input: input,
+                bot: bot
+            };
+
+            for (var i = 0; i < namesList.length; i++) {
+                Utils.log('names', namesList);
+                Utils.log('firstName', namesList[i]);
+                toUser = namesList[i];
+                var apiPath = "/api/users/give-brownie-points?receiver=" + toUser + "&giver=" + fromUser;
+                HttpWrap.callApi(apiPath, options, bpCallback);
+            }
         }
 
         fromUser = input.message.model.fromUser.username.toLowerCase();
-        output = "> " + fromUser + " sends karma to " + toUserMessage;
+        output = "> " + fromUser + " sends brownie points to " + toUserMessage;
         output += " :thumbsup: :sparkles: :sparkles: ";
         return output;
     }

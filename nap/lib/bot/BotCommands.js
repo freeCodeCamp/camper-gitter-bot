@@ -256,6 +256,14 @@ var BotCommands = {
 
     hello: function(input, bot) {
         return (this.welcome(input, bot) );
+    },
+
+    //DEMO how to add a new 
+    bob: function(input, bot) {
+        console.log("bob input>", input.params);
+        console.log("from>", input.message.model.fromUser);
+        console.log("mentions>", input.message.model.mentions);
+        return("this is bob @dcsan");
     }
 
 };

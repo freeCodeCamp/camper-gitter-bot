@@ -26,7 +26,7 @@ describe("HttpWrap", function () {
         // var bot = "dummyBot";
         var name = "berkeleytrue";
         var apiPath = '/api/users/about?username=' + name;
-        HttpWrap.getApi(apiPath, function(apiResult) {
+        HttpWrap.callApi(apiPath, function(apiResult) {
             // console.log(apiResult);
             expect(apiResult.about.username).to.equal("berkeleytrue");
             expect(apiResult.about.github).to.equal("http://github.com/BerkeleyTrue");
