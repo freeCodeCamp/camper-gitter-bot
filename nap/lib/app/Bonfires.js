@@ -11,10 +11,12 @@ var newline = '\n';
 // https://raw.githubusercontent.com/FreeCodeCamp/freecodecamp/staging/seed/challenges/basic-bonfires.json
 // https://github.com/FreeCodeCamp/freecodecamp/blob/staging/seed/challenges/basic-bonfires.json
 
-var Bonfires = {
+var Bonfires;
+
+Bonfires = {
     data: null,
 
-    load: function() {
+    load: function () {
         if (this.data) {
             return this.data;
         }
@@ -32,24 +34,30 @@ var Bonfires = {
         return this;  // chainable
     },
 
-    toMarkdown: function(data) {
-        this.data.challenges = this.data.challenges.map(function(item) {
-            item.description = item.description.map(function(desc) {
+    loadWikiHints: function () {
+        this.data.challenges.map(function (bf) {
+            bf.wikiHints = KBase.findBonfireHints(bf.name);
+        });
+    },
+
+    toMarkdown: function (data) {
+        this.data.challenges = this.data.challenges.map(function (item) {
+            item.description = item.description.map(function (desc) {
                 return Utils.toMarkdown(desc);
             });
         });
     },
 
-    allDashedNames: function() {
+    allDashedNames: function () {
         return this.fieldList('dashedName');
     },
 
-    allNames: function() {
+    allNames: function () {
         return this.fieldList('name');
     },
 
-    fieldList: function(field) {
-        var list = this.data.challenges.map(function(item) {
+    fieldList: function (field) {
+        var list = this.data.challenges.map(function (item) {
             // console.log(item);
             // console.log('-----------');
             return item[field];
@@ -57,7 +65,7 @@ var Bonfires = {
         return list;
     },
 
-    findBonfire: function(bfName) {
+    findBonfire: function (bfName) {
         var lcName, flag;
         bfName = Utils.sanitize(bfName).toLowerCase();
         Utils.clog("bfName", bfName);
@@ -78,23 +86,26 @@ var Bonfires = {
         }
     },
 
-    getDescription: function(bonfire) {
+    getDescription: function (bonfire) {
         var desc = bonfire.description.join('\n');
         return desc;
     },
 
-    fromInput: function(input) {
+    fromInput: function (input) {
         var roomName, bf;
         roomName = InputWrap.roomShortName(input);
         bf = this.findBonfire(roomName);
-        Utils.checkNotNull(bf, `cant find bonfire for ${roomName}`);
+        Utils.checkNotNull(bf, 'cant find bonfire for ' + roomName );
         return (bf);
     },
 
-    getNextHint: function(bonfire) {
+    getNextHint: function (bonfire) {
         var hint, hintNum;
         hintNum = bonfire.currentHint || 0;
         hint = bonfire.description[hintNum];
+
+        bonfire.prepare();
+
         if (hint) {
             hint = "`[" + hintNum + "]` " + hint;
             bonfire.currentHint = hintNum + 1;
@@ -106,7 +117,7 @@ var Bonfires = {
     },
 
     // from input
-    getHint: function(input, num) {
+    getHint: function (input, num) {
         num = num || 0;
         var output, bf, roomName;
         roomName = InputWrap.roomShortName(input);
@@ -123,14 +134,14 @@ var Bonfires = {
         return output;
     },
 
-    getLinks: function(bonfire) {
+    getLinks: function (bonfire) {
         // FIXME - change to actual links see
         // https://github.com/dcsan/gitterbot/issues/45
         var output = Utils.makeUrlList(bonfire.MDNlinks, 'mdn');
         return output;
     },
 
-    getLinksFromInput: function(input) {
+    getLinksFromInput: function (input) {
         var bf;
         bf = Bonfires.fromInput(input);
 
@@ -142,7 +153,7 @@ var Bonfires = {
         return this.getLinks(bf);
     },
 
-    getSeed: function(bonfire) {
+    getSeed: function (bonfire) {
         var output, seed;
         seed = bonfire.challengeSeed.join("\n");
         output = "```js " + newline;
@@ -151,7 +162,7 @@ var Bonfires = {
         return output;
     },
 
-    getChallengeSeedFromInput: function(input) {
+    getChallengeSeedFromInput: function (input) {
         var output, bf, roomName, seed;
         roomName = InputWrap.roomShortName(input);
         bf = Bonfires.fromInput(input);

@@ -3,7 +3,7 @@
 
 var TextLib = require("../../../lib/utils/TextLib"),
     Bonfires = require("../../../lib/app/Bonfires"),
-    // GBot = require("../../../lib/bot/GBot.js"),
+     BotCommands = require("../../../lib/bot/BotCommands"),
     // KBase = require("../../bot/KBase"),
     Utils = require("../../../lib/utils/Utils");
     // HttpWrap = require("../../../lib/utils/HttpWrap")
@@ -11,28 +11,29 @@ var TextLib = require("../../../lib/utils/TextLib"),
 
 var newline = "\n";
 
-var commands = {
+var commands;
+commands = {
 
     fixed: {
         footer: "\n\n> for more info: `bf details` `bf links` `bf script` `bf wiki` `bf spoiler`",
         menu: "\n- `bonfire info` for more info " +
-            "\n- `bonfire links` " +
-            "\n- `bonfire script` for the script" +
-            "\n- `bonfire spoiler` for some clues on how to solve it" +
-            "\n- `bonfire wiki` for related info from the wiki ",
+        "\n- `bonfire links` " +
+        "\n- `bonfire script` for the script" +
+        "\n- `bonfire spoiler` for some clues on how to solve it" +
+        "\n- `bonfire wiki` for related info from the wiki ",
         askName: "give the name of the bonfire and I'll try to look it up!",
         setName: "Set a bonfire to talk about with `bonfire name`",
         comingSoon: "Coming Soon! We're working on it!",
-        nameHint:    "no, type part of the name of the bonfire! eg `bonfire roman` ",
-        reminder: function(name) {
+        nameHint: "no, type part of the name of the bonfire! eg `bonfire roman` ",
+        reminder: function (name) {
             return "we're talking about bonfire :fire: " + name;
         },
-        cantFind: function(name) {
+        cantFind: function (name) {
             return "can't find a bonfire called " + name;
         }
     },
 
-    checkHasBonfire: function() {
+    checkHasBonfire: function () {
         if (!this.currentBonfire) {
             return this.fixed.setName;
         } else {
@@ -40,7 +41,7 @@ var commands = {
         }
     },
 
-    bonfire: function(input, bot, blob) {
+    bonfire: function (input, bot, blob) {
         var params = input.params;
 
         switch (params) {
@@ -63,7 +64,7 @@ var commands = {
             case 'script':
                 return this.bonfireScript();
             case 'wiki':
-                return this.fixed.comingSoon;
+                return this.bonfireWiki(input, bot, blob);
             case 'name':
                 return this.fixed.nameHint;
 
@@ -80,7 +81,7 @@ var commands = {
         }
     },
 
-    bonfireHeader: function() {
+    bonfireHeader: function () {
         var res = this.checkHasBonfire();
         if (res !== true) {
             return res;
@@ -95,7 +96,7 @@ var commands = {
         return str;
     },
 
-    bonfireInfo: function() {
+    bonfireInfo: function () {
         var str = this.bonfireHeader() + newline;
         str += this.bonfireScript() + newline;
         str += this.bonfireDescription(1) + newline;
@@ -103,9 +104,11 @@ var commands = {
         return str;
     },
 
-    bonfireDetails: function() {
+    bonfireDetails: function () {
         var res = this.checkHasBonfire();
-        if (res !== true) { return res; }
+        if (res !== true) {
+            return res;
+        }
 
         var str = this.bonfireHeader();
         str += newline + this.bonfireScript();
@@ -116,9 +119,9 @@ var commands = {
         return str;
     },
 
-    bonfireDescription: function(lines) {
+    bonfireDescription: function (lines) {
         if (lines) {
-            var desc = this.currentBonfire.description.slice(0,lines);
+            var desc = this.currentBonfire.description.slice(0, lines);
         } else {
             desc = this.currentBonfire.description;
         }
@@ -126,23 +129,45 @@ var commands = {
     },
 
     // bonfire features
-    bonfireHint: function(input, bot) {
+    bonfireHint: function (input, bot) {
         var res = this.checkHasBonfire();
-        if (res !== true) { return res; }
+        if (res !== true) {
+            return res;
+        }
         return Bonfires.getNextHint(this.currentBonfire);
     },
 
-    bonfireLinks: function(input, bot) {
+    bonfireLinks: function (input, bot) {
         var res = this.checkHasBonfire();
-        if (res !== true) { return res; }
+        if (res !== true) {
+            return res;
+        }
         return Bonfires.getLinks(this.currentBonfire);
     },
 
-    bonfireScript: function(input, bot) {
+    bonfireScript: function (input, bot) {
         var res = this.checkHasBonfire();
-        if (res !== true) { return res; }
+        if (res !== true) {
+            return res;
+        }
         return Bonfires.getSeed(this.currentBonfire);
     },
+
+    more: function (input, bot) {
+        if (input.params) {
+            return;  // random user input matched more ...
+        }
+        this.bonfireHint(input, bot);
+    },
+
+    bonfireWiki: function (input, bot, blob) {
+        if (!this.currentBonfire) {
+            return null;
+        } else {
+            input.params = this.currentBonfire.name;
+            //return(BotCommands.wiki(input, bot));
+        }
+    }
 
 };
 

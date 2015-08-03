@@ -102,6 +102,14 @@ describe("Bonfires", function() {
         expect(res).to.include("```js \nfunction");
     });
 
+    it("should find wiki hints for bonfires", function() {
+        var bfName = ""
+
+        var message = TestHelper.makeMessageFromString("bonfire links");
+        var res = GBot.findAnyReply(message);
+        expect(res).to.include("links for");
+    });
+
 
 });
 

@@ -85,6 +85,11 @@ var KBase = {
         });
     },
 
+    findBonfireHints: function(bfName) {
+        var topicData = this.getTopicData(bfName);
+        Utils.tlog('topicData', topicData);
+    },
+
     getTopicData: function(params, recursing) {
         var res, name;
         name = Utils.asFileName(params);

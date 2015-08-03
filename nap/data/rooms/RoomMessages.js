@@ -15,7 +15,7 @@ var SharedMessages = {
     meteorChat: {
         word: 'meteor',
             text: "> we have a meteor channel here: [camperbot/meteorJS](https://gitter.im/camperbot/meteorJS)",
-            chance: 0.2
+            chance: 1
     }
 };
 
@@ -65,7 +65,7 @@ var RoomMessages = {
         var msgList = checkList.filter(function(item) {
             if(!item) { return null; }
             var flag = (chat.includes(item.word));
-            Utils.tlog(chat, item.word, "flag:" + flag);
+            Utils.clog(chat, item.word, "flag:" + flag);
             return flag;
         });
         if (msgList.length > 0) {
