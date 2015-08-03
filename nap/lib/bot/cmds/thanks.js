@@ -72,7 +72,7 @@ var commands = {
             toUser = mentions[0].screenName.toLowerCase();
         }
         fromUser = input.message.model.fromUser.username.toLowerCase();
-        output = "> " + fromUser + " sends karma to " + toUser;
+        output = "> " + fromUser + " sends brownie points to " + toUser;
         output += " :thumbsup: :sparkles: :sparkles: ";
 
         var apiPath = `/api/users/give-brownie-points?receiver=${toUser}&giver=${fromUser}`;
