@@ -87,8 +87,41 @@ Each command gets a `input` which is a blob of data including what the user ente
 ### KBase.js
 The Knowledge base. This is an interface to all the data in the wiki.
 
+### How commands are called
+
+In GBot.js
+
+        if (input.command) {
+            // this looks up a command and calls it
+            output = BotCommands[input.keyword](input, this);
+        } else {
+
+BotCommands is a list of functions, eg
+
+    BotCommands.thanks = function() { ... }
+
+where `input.keyword` is `thanks` then
+
+`BotCommands[input.keyword]` is like saying `BotCommands.thanks()`
+
+so then the params get also added in `(input, this)` so its
+
+
+    BotCommands[input.keyword](input, this);
+    //becomes
+    BotCommands.thanks(input, bot);
+
+All of the botCommands expect these two params eg in thanks.js
+
+    var commands = {
+        thanks: function (input, bot) {
+
 
 
 # Chat to us!
 
 Ping me @dcsan in the [gitterbot chatroom](https://gitter.im/dcsan/gitterbot) if you get stuck.
+
+
+
+

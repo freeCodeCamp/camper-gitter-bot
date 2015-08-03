@@ -62,6 +62,7 @@ var GBot = {
         var input, output;
         input = this.parseInput(message);
         if (input.command) {
+            // this looks up a command and calls it
             output = BotCommands[input.keyword](input, this);
         } else {
             output = RoomMessages.scanInput(input, input.message.room.name, AppConfig.botNoiseLevel);
@@ -85,6 +86,12 @@ var GBot = {
         if (BotCommands.isCommand(input)) {
             input.command = true;
         }
+
+        // check for regex based commands
+        // if message.test( /.*thanks.*/ )
+        // ... input.command = true;
+        //      input.keyword = "thanks"
+
 
         // clog("input", message.model.text);
         return input;
