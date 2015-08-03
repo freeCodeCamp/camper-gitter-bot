@@ -1,13 +1,14 @@
 TODO
 
-bugfix 'unauthorized user' message
     volume feature
-
-disable same message twice
-
-test out in main chat?
+    advanced/other bonfires data
+    disable same message twice
 
 co-browsing panel
+test out in main chat?
+
+X bugfix 'unauthorized user' message
+
 
 step through Luis lesson
 

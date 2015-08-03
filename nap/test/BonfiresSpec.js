@@ -71,31 +71,27 @@ describe("Bonfires", function() {
         var bf = Bonfires.findBonfire(TEST_BF_NAME)
         var links = Bonfires.getLinks(bf);
         expect(links).not.to.be.null;
-        expect(links).to.include("links for ")
+        expect(links).to.include("links:")
     });
 
     it("should respond to bonfire info", function() {
         var res = activateBonfire();
-        expect(res).to.include("Let's talk about");
-
         var message = TestHelper.makeMessageFromString("bonfire info");
         var res = GBot.findAnyReply(message);
-        expect(res).to.include("Let's talk about");
+        expect(res).to.include("## :fire:[Bonfire");
     });
 
-    it("should respond to bonfire links", function() {
+    it("should find bf from Input and have links", function() {
         var res = activateBonfire();
-        expect(res).to.include("Let's talk about");
-
         var message = TestHelper.makeMessageFromString("bonfire links");
         var res = GBot.findAnyReply(message);
-        expect(res).to.include("links for");
+        expect(res).to.include("links:");
     });
 
 
     it("should respond to bonfire script", function() {
         var res = activateBonfire();
-        expect(res).to.include("Let's talk about");
+        //expect(res).to.include("Let's talk about");
 
         var message = TestHelper.makeMessageFromString("bonfire script");
         var res = GBot.findAnyReply(message);
@@ -103,11 +99,9 @@ describe("Bonfires", function() {
     });
 
     it("should find wiki hints for bonfires", function() {
-        var bfName = ""
-
-        var message = TestHelper.makeMessageFromString("bonfire links");
-        var res = GBot.findAnyReply(message);
-        expect(res).to.include("links for");
+        var bfName = "Bonfire Factorialize a Number";
+        var hints = KBase.findBonfireHints(bfName);
+        expect(hints).to.be.instanceOf(Array);
     });
 
 
