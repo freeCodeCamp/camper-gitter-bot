@@ -62,27 +62,38 @@ var showInfo = function(input, bot, blob) {
 var commands = {
     thanks: function (input, bot) {
         assert.isObject(input, "checkThanks expects an object");
-        var mentions, output, fromUser, toUser;
+        var mentions, output, fromUser, toUser, toUserMessage;
 
         //clog("thanks input.message>", input.message);
 
         mentions = input.message.model.mentions;
         if (mentions) {
             // TODO - build a list
-            toUser = mentions[0].screenName.toLowerCase();
+          console.log(mentions);
+          var namesList = mentions.map(function(m) {
+              console.log(m.screenName);
+              return m.screenName;
+          });
+
+          console.log(namesList);
+          toUserMessage = namesList.join(", ").toLowerCase();
+
+          for (var i=0; i < namesList.length; i++) {
+            console.log(namesList);
+            console.log(namesList[i]);
+            toUser = namesList[i];
+            var apiPath = `/api/users/give-brownie-points?receiver=${toUser}&giver=${fromUser}`;
+            HttpWrap.getApi(apiPath, function(apiRes) {
+                showInfo(input, bot, apiRes);
+            });
+          }
         }
+
         fromUser = input.message.model.fromUser.username.toLowerCase();
-        output = "> " + fromUser + " sends karma to " + toUser;
+        output = "> " + fromUser + " sends karma to " + toUserMessage;
         output += " :thumbsup: :sparkles: :sparkles: ";
-
-        var apiPath = `/api/users/give-brownie-points?receiver=${toUser}&giver=${fromUser}`;
-        HttpWrap.getApi(apiPath, function(apiRes) {
-            showInfo(input, bot, apiRes);
-        });
-
         return output;
     }
 };
 
 module.exports = commands;
-
