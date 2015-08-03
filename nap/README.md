@@ -1,18 +1,15 @@
-# GitterBot for FCC
+# GitterBot!
+
+This is a full featured bot for Gitter.
+Main features:
+- integration with github Wiki
+- search, find
+- wrapper for commands
+
+The GBot is integrated into FreeCodeCamp
 
 Join us in Gitter to discuss!
 https://gitter.im/dcsan/gitterbot
-
-## checking out
-lets go!
-ideally fork the project first on github and clone your fork.
-
-    git clone git@github.com:dcsan/gitterbot.git
-
-we use git submodules for some wiki data
-
-    git submodule init
-    git submodule update
 
 
 ## environment
@@ -35,7 +32,20 @@ iojs -v
     // should be at least v2.4.0
 ```
 
+
+## checking out
+clone the repo
+
+    git clone git@github.com:dcsan/gitterbot.git
+
+we use git submodules for some wiki data
+
+    git submodule init
+    git submodule update
+
+
 # Run the app in 'demobot' mode
+The main app is in /nap subdir
 
     cd nap
     bin/run-demobot.sh
