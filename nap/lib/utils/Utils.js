@@ -159,7 +159,7 @@ var Utils = {
 
         uri = host + path;
         name = Utils.namify(text);
-        link = "[" +name + "](" + uri + ")";
+        link = "[" + name + "](" + uri + ")";
         // console.log("Utils.linkify args>", path, where, text);
         Utils.clog("Utils.linkify>", "link", link);
         return link;
