@@ -65,6 +65,7 @@ var GBot = {
             // this looks up a command and calls it
             output = BotCommands[input.keyword](input, this);
         } else {
+            // non-command keywords like 'troll'
             output = RoomMessages.scanInput(input, input.message.room.name, AppConfig.botNoiseLevel);
         }
         return output;
