@@ -116,6 +116,7 @@ All of the botCommands expect these two params eg in thanks.js
     var commands = {
         thanks: function (input, bot) {
 
+readme tweak.
 
 
 # Chat to us!
