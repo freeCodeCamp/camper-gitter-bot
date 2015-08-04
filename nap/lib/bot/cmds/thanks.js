@@ -108,7 +108,7 @@ var commands = {
         var bio = blob.response.about.bio || "no bio set";
 
         var uri = "http://www.freecodecamp.com/" + username;
-        var str = "> :star: " + about.browniePoints + " | " ;
+        var str = "> :star: " + about.browniePoints + " | @" + username + " | ";
             str += TextLib.mdLink(uri, uri);
 
 //        var XXstr = `
