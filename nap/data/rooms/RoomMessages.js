@@ -86,7 +86,7 @@ var RoomMessages = {
         if (Math.random() > chance) {
             return null;   // dont always reply
         }
-        var res;
+        var oneMessage;
         var chat = input.message.model.text.toLowerCase();
         chance = chance || 1;
         room = room.toLowerCase();
@@ -103,10 +103,11 @@ var RoomMessages = {
         if (msgList.length > 0) {
             // TODO order by 'chance' and pick highest
             //Utils.log('msgList', msgList);
-            res = _.sample(msgList);
-            if (Math.random() < (res.chance || 1)) {
-                Utils.clog("scanInput out>", res.word);
-                return res.text;
+            oneMessage = _.sample(msgList);
+            chance = oneMessage.chance || 1;
+            if (Math.random() < (chance)) {
+                Utils.clog("scanInput out>", oneMessage.word);
+                return oneMessage.text;
             }
         } else {
             return null;
