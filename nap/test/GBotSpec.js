@@ -16,6 +16,11 @@ function clog(msg, obj) {
 
 describe("GBot", function () {
 
+
+    it("should load the KBase before other stuff", function () {
+        var kb = KBase.initSync();
+    });
+
     it("would be nice if regexes did not give me a headache", function () {
         var res = "help bootstrap".match(/(help|wiki|check) (.*)/);
         assert.equal(res[2], "bootstrap");
@@ -102,7 +107,7 @@ describe("GBot", function () {
         res = GBot.findAnyReply(msg);
         //console.log("thanks msg> ", res);
         //assert.match( res, /.*@testuser sends karma to/  );
-        expect(res).to.include('testuser sends karma to');
+        expect(res).to.include('testuser sends brownie points to');
     });
 
 

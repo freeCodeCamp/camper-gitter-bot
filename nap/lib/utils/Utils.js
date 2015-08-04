@@ -245,7 +245,9 @@ var Utils = {
     },
 
     betaFooter: function() {
-        return "\n\n >this feature is linked to our [beta site](beta.freecodecamp.com), so it may not have all users til we go live with the new release.";
+        var footer = "\n\n >this feature is linked to our [beta site](beta.freecodecamp.com), so it may not have all users til we go live with the new release. ";
+        footer += "Also check that FCC ID matches githubID!";
+        return footer;
     }
 
 

@@ -49,8 +49,10 @@ var HttpWrap = {
         // request.setTimeout(30000, onProblem);
         // request.on('error', onProblem);
 
-        var request = http.request(this.defaultOptions, handleResponse).end();
-        // request.setTimeout(50, handleTimeout);
+        var request = http.request(this.defaultOptions, handleResponse);
+        request.end();
+
+        request.setTimeout(3000, handleTimeout);
 
     }
 

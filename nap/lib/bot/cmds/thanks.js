@@ -1,19 +1,17 @@
 /*jslint todo: true */
 "use strict";
 
-var assert = require("chai").assert;
-
-var GBot = require("../../../lib/bot/GBot.js"),
-    KBase = require("../../bot/KBase"),
+var // GBot = require("../../../lib/bot/GBot.js"),
+    //KBase = require("../../bot/KBase"),
     Utils = require("../../../lib/utils/Utils"),
-    AppConfig = require("../../../config/AppConfig"),
+    //AppConfig = require("../../../config/AppConfig"),
     HttpWrap = require("../../../lib/utils/HttpWrap");
 
 
 
-var newline = '\n';
+//var newline = '\n';
 
-var clog = require('../../utils/clog.js');
+//var clog = require('../../utils/clog.js');
 
 // clog("clog from thanks");
 
@@ -25,11 +23,11 @@ var clog = require('../../utils/clog.js');
 //     Utils.warn("BotCommands>", msg, obj);
 // }
 
-
+// in case we want to filter the message
 function cleanMessage(message) {
-    return "Couldn't find that user at FCC :frowning: \nCheck their github ID matches their FCC ID!";
+    return message;
     //if (message.match(/^count not/)) {
-        // fix typo
+    //     //fix typo
     //}
     //return message;
 }
@@ -40,8 +38,8 @@ var showInfo = function(input, bot, blob) {
     if (blob.error) {
         var message = cleanMessage(blob.error.message);
         message += Utils.betaFooter();
-        //bot.say(message, input.message.room);
-        Utils.warn("WARN @thanks>", blob.error.message);
+        bot.say(message, input.message.room);
+        Utils.warn("WARN @thanks>", blob.error.message, blob.error);
         return false;
     }
 
@@ -55,6 +53,7 @@ var showInfo = function(input, bot, blob) {
 :star: ${about.browniePoints}       | ${bio}
 
 `;
+    //Utils.clog("thanks callback>", str);
     bot.say(str, input.message.room);
 };
 
@@ -66,41 +65,28 @@ var bpCallback = function (apiRes, options) {
 
 var commands = {
     thanks: function (input, bot) {
-        assert.isObject(input, "checkThanks expects an object");
+        Utils.hasProperty(input, "message", "thanks expects an object");
+
         var mentions, output, fromUser, toUser, toUserMessage;
-
-        //clog("thanks input.message>", input.message);
-
         mentions = input.message.model.mentions;
-        if (mentions) {
-            // TODO - build a list
-            console.log(mentions);
-            var namesList = mentions.map(function (m) {
-                console.log(m.screenName);
-                return m.screenName;
-            });
-
-            console.log(namesList);
-            toUserMessage = namesList.join(", ").toLowerCase();
-
-            var options = {
-                method: 'POST',
-                input: input,
-                bot: bot
-            };
-
-            for (var i = 0; i < namesList.length; i++) {
-                Utils.log('names', namesList);
-                Utils.log('firstName', namesList[i]);
-                toUser = namesList[i];
-                var apiPath = "/api/users/give-brownie-points?receiver=" + toUser + "&giver=" + fromUser;
-                HttpWrap.callApi(apiPath, options, bpCallback);
-            }
-        }
+        if (!mentions) { return null; } // just 'thanks' in a message
 
         fromUser = input.message.model.fromUser.username.toLowerCase();
-        output = "> " + fromUser + " sends brownie points to " + toUserMessage;
-        output += " :thumbsup: :sparkles: :sparkles: ";
+        var options = {
+            method: 'POST',
+            input: input,
+            bot: bot
+        };
+
+        var namesList = mentions.map(function (m) {
+            toUser = m.screenName.toLowerCase();
+            var apiPath = "/api/users/give-brownie-points?receiver=" + toUser + "&giver=" + fromUser;
+            HttpWrap.callApi(apiPath, options, bpCallback);
+            return toUser;
+        });
+        toUserMessage = namesList.join(" and @");
+        output = "> " + fromUser + " sends brownie points to @" + toUserMessage;
+        output += " :sparkles: :thumbsup: :sparkles: ";
         return output;
     }
 };
