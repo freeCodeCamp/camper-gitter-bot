@@ -1,11 +1,6 @@
-> Steps to format your code for pasting in the chat room.
-
 ### Inline code
-This an inline \``<paste code here>`\` code formatting.
+This an inline \``<paste code here>`\` code formatting with a single backtick at start and end.
 
-**^**single backtick at *start* and *end* around the *inline code*.
-
-&nbsp;
 
 ### Code Block
 \`\`\` ⇦ Type 3 backticks, then press `[shift + enter ⏎]`
@@ -15,7 +10,7 @@ This an inline \``<paste code here>`\` code formatting.
 
 \`\`\` ⇦ Type 3 backticks, then press `[enter ⏎]`
 
-**See also,** ☛ [How to type Backticks](https://github.com/FreeCodeCamp/freecodecamp/wiki/code-formatting#typing-backticks), ☯ [Compose Mode](https://gitter.zendesk.com/hc/en-us/articles/201302311-Compose-mode), ❄ [Gitter Formatting Basics](https://gitter.zendesk.com/hc/en-us/articles/200176682-Markdown-basics)
+See also: ☛ [How to type Backticks](https://github.com/FreeCodeCamp/freecodecamp/wiki/code-formatting#typing-backticks) ☯ [Compose Mode](https://gitter.zendesk.com/hc/en-us/articles/201302311-Compose-mode) ❄ [Gitter Formatting Basics](https://gitter.zendesk.com/hc/en-us/articles/200176682-Markdown-basics)
 
 ## Typing Backticks[⤴](http://superuser.com/a/254077/122424)
 ### QWERTY and QWERTZ (Key that's been marked with red border)
