@@ -41,6 +41,9 @@ var Bonfires;
 
 Bonfires = {
     data: null,
+    fixed: {
+        hintWarning: "## :construction: ** After this are possible spoiler hints.**\nMake sure you've tried to hard to solve it yourself before proceeding. :construction:"
+    },
 
     load: function () {
         if (this.data) {
@@ -63,11 +66,12 @@ Bonfires = {
     loadWikiHints: function () {
         //Utils.tlog("-- Bonfires.loadWikiHints start / WikiHints >", testBf.wikiHints);
         this.data.challenges = this.data.challenges.map(function (bf) {
+            bf.hints = bf.description;
+
             var wikiHints = KBase.getWikiHints(bf.dashedName);
             if (wikiHints) {
-                bf.description.concat(wikiHints);
+                bf.hints = bf.hints.concat(Bonfires.fixed.hintWarning, wikiHints);
                 bf.wikiHints = wikiHints;
-                //Utils.tlog('bf.wikihints found', bf);
             } else {
                 //Utils.tlog("bf.wikiHints not found", bf.dashedName);
             }
@@ -118,10 +122,6 @@ Bonfires = {
         }
     },
 
-    getDescription: function (bonfire) {
-        var desc = bonfire.description.join('\n');
-        return desc;
-    },
 
     fromInput: function (input) {
         var roomName, bf;
@@ -131,14 +131,22 @@ Bonfires = {
         return (bf);
     },
 
+    wikiLinkFooter: function(bonfire) {
+        var str = "\n:pencil: ";
+        var text = "[EDIT at the FCC Wiki]";
+        str += Utils.linkify(bonfire.dashedName, "wiki", text);
+        return str;
+    },
+
     getNextHint: function (bonfire) {
         var hint, hintNum;
         hintNum = bonfire.currentHint || 0;
-        hint = bonfire.description[hintNum];
+        hint = bonfire.hints[hintNum];
 
         if (hint) {
-            hint = "`[" + hintNum + "]` " + hint;
+            hint = "`[" + hintNum + "/" + bonfire.hints.length + "]`\n" + hint;
             bonfire.currentHint = hintNum + 1;
+            hint += this.wikiLinkFooter(bonfire);
             return hint;
         } else {
             bonfire.currentHint = 0;
@@ -146,8 +154,13 @@ Bonfires = {
         }
     },
 
+    getDescription: function (bonfire) {
+        var desc = bonfire.description.join('\n');
+        return desc;
+    },
+
     // from input
-    getHint: function (input, num) {
+    getHintNum: function (input, num) {
         num = num || 0;
         var output, bf, roomName;
         roomName = InputWrap.roomShortName(input);

@@ -14,22 +14,28 @@ var newline = "\n";
 var commands;
 commands = {
 
+    //TODO rename as we merge this object. make it more distinctive
     fixed: {
-        footer: "\n\n> for more info: `bf details` `bf links` `bf script` `bf wiki` `bf spoiler`",
+        footer: "\n\n> type: `bf details` `bf links` `bf room`",
         menu: "\n- `bonfire info` for more info " +
         "\n- `bonfire links` " +
-        "\n- `bonfire script` for the script" +
-        "\n- `bonfire spoiler` for some clues on how to solve it" +
-        "\n- `bonfire wiki` for related info from the wiki ",
+        "\n- `bonfire script` for the script",
         askName: "give the name of the bonfire and I'll try to look it up!",
         setName: "Set a bonfire to talk about with `bonfire name`",
         comingSoon: "Coming Soon! We're working on it!",
         nameHint: "no, type part of the name of the bonfire! eg `bonfire roman` ",
+        alert: "\n - :construction: **spoiler alert** :construction:",
         reminder: function (name) {
             return "we're talking about bonfire :fire: " + name;
         },
         cantFind: function (name) {
-            return "> :frown: Sorry, can't find a bonfire called " + name + ". [Check the map?](http://www.freecodecamp.com/map#Basic-Algorithm-Scripting)";
+            return "> Sorry, can't find a bonfire called " + name + ". [ [Check the map?](http://www.freecodecamp.com/map#Basic-Algorithm-Scripting) ]";
+        },
+        roomLink: function(name) {
+            var str =  ":construction: **spoiler alert** ";
+            str += "[dedicated chatroom](https://gitter.im/camperbot/" + name + ")"
+            str += ":arrow_forward:";
+            return str;
         }
     },
 
@@ -41,6 +47,7 @@ commands = {
         }
     },
 
+    // commands to bonfire with a parameter
     bonfire: function (input, bot, blob) {
         var params = input.params;
 
@@ -68,6 +75,9 @@ commands = {
                 return this.bonfireWiki(input, bot, blob);
             case 'name':
                 return this.fixed.nameHint;
+            case 'status':
+                return this.bonfireStatus(input, bot, blob);
+
 
             default:
                 Utils.log('params [' + params + ']');
@@ -82,6 +92,14 @@ commands = {
         }
     },
 
+    bonfireStatus: function(input, bot, blob) {
+        var bf = this.currentBonfire;
+        if (!bf) return;
+        var str = "\n- hints: " + bf.hints.length;
+            str += "\n- wikiHints: " + bf.wikiHints.length;
+            str += "\n- description: " + bf.description.length;
+        return str;
+    },
     bonfireHeader: function () {
         var res = this.checkHasBonfire();
         if (res !== true) {
@@ -111,12 +129,16 @@ commands = {
             return res;
         }
 
+        var name = this.currentBonfire.dashedName;
+
         var str = this.bonfireHeader();
         str += newline + this.bonfireScript();
         str += newline + this.bonfireDescription();
         str += newline + this.bonfireLinks();
         str += newline + '\n-----\n';
         str += newline + this.fixed.menu;
+        str += newline + this.fixed.roomLink(name)
+
         return str;
     },
 
@@ -154,11 +176,15 @@ commands = {
         return Bonfires.getSeed(this.currentBonfire);
     },
 
+    blah: function(input, bot) {
+        console.log("blah", input);
+    },
+
     more: function (input, bot) {
         if (input.params) {
             return;  // random user input matched more ...
         }
-        this.bonfireHint(input, bot);
+        return(this.bonfireHint(input, bot));
     },
 
     bonfireWiki: function (input, bot, blob) {

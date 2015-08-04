@@ -141,7 +141,14 @@ var BotRoomData = {
             name: "egetzel/demo",
             private: true,
             topics: ['egdemo']
-        }
+        },
+
+        // Bonfire single rooms
+        {
+            name: "camperbot/bonfire-factorialize-a-number",
+            topics: ['bonfire factorialize a number'],
+            bonfire: true
+        },
 
     ],
 
@@ -210,7 +217,14 @@ var BotRoomData = {
             topics: ['welcome']
         },
 
-        // {
+        {
+            name: "camperbot/bonfire-factorialize-a-number",
+            topics: ['bonfire factorialize a number'],
+            bonfire: true
+        },
+
+
+// {
         //     title: "HelpBonfires",
         //     name: "FreeCodeCamp/HelpBonfires",
         //     topics: bonfireTopics
