@@ -29,7 +29,7 @@ commands = {
             return "we're talking about bonfire :fire: " + name;
         },
         cantFind: function (name) {
-            return "/me :frown: Sorry, can't find a bonfire called " + name + ". [Check the map?](http://www.freecodecamp.com/map#Basic-Algorithm-Scripting)";
+            return "> :frown: Sorry, can't find a bonfire called " + name + ". [Check the map?](http://www.freecodecamp.com/map#Basic-Algorithm-Scripting)";
         }
     },
 

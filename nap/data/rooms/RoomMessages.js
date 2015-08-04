@@ -9,7 +9,7 @@ var SharedMessages = {
     bonfireChat: {
         word: 'bonfire',
             // text: "> we have bonfire specific chatroom here [FreeCodeCamp/HelpBonfires](https://gitter.im/FreeCodeCamp/HelpBonfires)",
-            text: "> type `bonfire name` to get some info on that bonfire here",
+            text: "> type `bonfire name` to get some info on that bonfire. And check [HelpBonfires chatroom](https://gitter.im/FreeCodeCamp/HelpBonfires)",
             chance: 0.2
     },
     meteorChat: {
@@ -27,7 +27,9 @@ var RoomMessages = {
                 word: 'holler',
                 text: "> holler back!",
                 chance: 1
-            }
+            },
+            SharedMessages.bonfireChat,
+            SharedMessages.meteorChat
         ],
 
         'camperbot/localdev': [
