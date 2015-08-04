@@ -65,17 +65,11 @@ var commands = {
         // var mentioned = InputWrap.mentioned(input);
         var mentions, them, name;
 
-        clog("input---------");
-        // console.log(JSON.stringify(input));
-        debugger;
-
         mentions = input.message.model.mentions;
         them = mentions[0];
         if (!them) {
             return "you need to ask about @someone!";
         }
-        clog('them', them);
-        // name = "berkeleytrue";
         name = them.screenName.toLowerCase();
 
         var apiPath = '/api/users/about?username=' + name;
@@ -90,7 +84,7 @@ var commands = {
     //      input
 
     showInfo: function(blob) {
-        Utils.clog('thanks', "showInfo", blob);
+        //Utils.clog('thanks', "showInfo", blob);
 
         if (blob.response.error) {
             var message = cleanMessage(blob.response.error.message);

@@ -27,4 +27,13 @@ describe("Thanks", function () {
         //assert.equal(res[2], "bootstrap");
     });
 
+
+    it("about should work", function () {
+        var input = TestHelper.makeInputFromString("about @dcsan @bob");
+        var output = GBot.findAnyReply(input.message);
+        expect(output).to.include("> testuser sends brownie points to @mentioneduserone and @mentionedusertwo");
+        //var res = "help bootstrap".match(/(help|wiki|check) (.*)/);
+        //assert.equal(res[2], "bootstrap");
+    });
+
 });
