@@ -88,7 +88,7 @@ var commands = {
     //      input
 
     showInfo: function(blob) {
-        Utils.clog('thanks>', "showInfo>", blob);
+        //Utils.clog('thanks>', "showInfo>", blob);
 
         if (blob.response.error) {
             var message = cleanMessage(blob.response.error.message);
