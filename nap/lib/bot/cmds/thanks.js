@@ -7,6 +7,8 @@ var // GBot = require("../../../lib/bot/GBot.js"),
     //AppConfig = require("../../../config/AppConfig"),
     HttpWrap = require("../../../lib/utils/HttpWrap");
 
+var TextLib = require("../../../lib/utils/TextLib");
+
 
 
 //var newline = '\n';
@@ -105,12 +107,16 @@ var commands = {
         var about = blob.response.about;
         var bio = blob.response.about.bio || "no bio set";
 
-        var str = `
-![${username}](https://avatars2.githubusercontent.com/${username}?&s=32) | [${username}](http://www.freecodecamp.com/${username})
-        -------------                       | -------------
-        :star: ${about.browniePoints}       | ${bio}
+        var uri = "http://www.freecodecamp.com/" + username;
+        var str = "> :star: " + about.browniePoints + " | " ;
+            str += TextLib.mdLink(uri, uri);
 
-        `;
+//        var XXstr = `
+//![${username}](https://avatars2.githubusercontent.com/${username}?&s=32) | [${username}](http://www.freecodecamp.com/${username})
+//        -------------                       | -------------
+//        :star: ${about.browniePoints}       | ${bio}
+//
+//        `;
         //Utils.clog("thanks callback>", str);
         blob.bot.say(str, blob.input.message.room);
     }
