@@ -96,8 +96,8 @@ commands = {
         var bf = this.currentBonfire;
         if (!bf) return;
         var str = "\n- hints: " + bf.hints.length;
-            str += "\n- wikiHints: " + bf.wikiHints.length;
-            str += "\n- description: " + bf.description.length;
+            //str += "\n- wikiHints: " + bf.wikiHints.length;
+            //str += "\n- description: " + bf.description.length;
         return str;
     },
     bonfireHeader: function () {
@@ -136,7 +136,7 @@ commands = {
         str += newline + this.bonfireDescription();
         str += newline + this.bonfireLinks();
         str += newline + '\n-----\n';
-        str += newline + this.fixed.menu;
+        //str += newline + this.fixed.menu;
         str += newline + this.fixed.roomLink(name)
 
         return str;

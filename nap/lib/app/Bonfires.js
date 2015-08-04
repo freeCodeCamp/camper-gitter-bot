@@ -66,12 +66,12 @@ Bonfires = {
     loadWikiHints: function () {
         //Utils.tlog("-- Bonfires.loadWikiHints start / WikiHints >", testBf.wikiHints);
         this.data.challenges = this.data.challenges.map(function (bf) {
-            bf.hints = bf.description;
-
+            //bf.hints = bf.description;
+            bf.hints = [];
             var wikiHints = KBase.getWikiHints(bf.dashedName);
             if (wikiHints) {
                 bf.hints = bf.hints.concat(Bonfires.fixed.hintWarning, wikiHints);
-                bf.wikiHints = wikiHints;
+                //bf.wikiHints = wikiHints;
             } else {
                 //Utils.tlog("bf.wikiHints not found", bf.dashedName);
             }
