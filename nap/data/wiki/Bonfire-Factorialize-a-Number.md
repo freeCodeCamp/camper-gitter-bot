@@ -1,4 +1,4 @@
-## Solution for [bonfire-factorialize-a-number](http://www.freecodecamp.com/challenges/bonfire-factorialize-a-number)
+# Solution for [bonfire-factorialize-a-number](http://www.freecodecamp.com/challenges/bonfire-factorialize-a-number)
 
 ## The problem
 Return the factorial of the provided integer.
@@ -7,7 +7,6 @@ If the integer is represented with the letter n, a factorial is the product of a
 Factorials are often represented with the shorthand notation n!
 
 For example: `5! = 1 * 2 * 3 * 4 * 5 = 120f`
-
 
 ## Author
 ![Luis](https://avatars3.githubusercontent.com/u/6039444?v=3&s=96)

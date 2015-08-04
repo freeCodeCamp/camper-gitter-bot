@@ -157,6 +157,7 @@ commands = {
         if (res !== true) {
             return res;
         }
+        Utils.log("currentBonfire:", this.currentBonfire);
         return Bonfires.getNextHint(this.currentBonfire);
     },
 

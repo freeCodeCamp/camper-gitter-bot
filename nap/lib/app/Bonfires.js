@@ -66,11 +66,10 @@ Bonfires = {
     loadWikiHints: function () {
         //Utils.tlog("-- Bonfires.loadWikiHints start / WikiHints >", testBf.wikiHints);
         this.data.challenges = this.data.challenges.map(function (bf) {
-            //bf.hints = bf.description;
-            bf.hints = [];
+            bf.hints = [Bonfires.fixed.hintWarning];  //bf.description;
             var wikiHints = KBase.getWikiHints(bf.dashedName);
             if (wikiHints) {
-                bf.hints = bf.hints.concat(Bonfires.fixed.hintWarning, wikiHints);
+                bf.hints = bf.hints.concat(wikiHints);
                 //bf.wikiHints = wikiHints;
             } else {
                 //Utils.tlog("bf.wikiHints not found", bf.dashedName);
@@ -78,6 +77,24 @@ Bonfires = {
             return bf;
         });
         //Utils.tlog("Bonfires.loadWikiHints end / WikiHints >", testBf.wikiHints);
+    },
+
+
+    getNextHint: function (bonfire) {
+        var hint, hintNum;
+        hintNum = bonfire.currentHint || 0;
+        hint = bonfire.hints[hintNum];
+
+        if (hintNum < bonfire.hints.length) {
+            hint = "`[" + hintNum + "/" + bonfire.hints.length + "]`\n" + hint;
+            bonfire.currentHint = hintNum + 1;
+            hint += this.wikiLinkFooter(bonfire);
+            return hint;
+        } else {
+            bonfire.currentHint = 0;
+            Utils.log("no hints", hintNum, bonfire);
+            return "no more hints! Let's start again:" + hintNum;
+        }
     },
 
     toMarkdown: function (data) {
@@ -138,21 +155,6 @@ Bonfires = {
         return str;
     },
 
-    getNextHint: function (bonfire) {
-        var hint, hintNum;
-        hintNum = bonfire.currentHint || 0;
-        hint = bonfire.hints[hintNum];
-
-        if (hint) {
-            hint = "`[" + hintNum + "/" + bonfire.hints.length + "]`\n" + hint;
-            bonfire.currentHint = hintNum + 1;
-            hint += this.wikiLinkFooter(bonfire);
-            return hint;
-        } else {
-            bonfire.currentHint = 0;
-            return "no more hints! Let's start again.";
-        }
-    },
 
     getDescription: function (bonfire) {
         var desc = bonfire.description.join('\n');
