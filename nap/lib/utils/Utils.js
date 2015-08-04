@@ -45,7 +45,11 @@ var Utils = {
     // },
 
     log: function(msg, obj) {
-        var where = this.stackLines(3, 4);
+        if (this.logLevel > LOG_LEVEL_INFO) {
+            var where = this.stackLines(3, 4);
+        } else {
+            var where = "";
+        }
         Utils.clog(where, msg, obj);
     },
 
