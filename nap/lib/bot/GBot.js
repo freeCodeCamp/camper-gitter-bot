@@ -178,11 +178,11 @@ var GBot = {
         return text;
     },
 
-    // dont reply to bots
+    // dont reply to bots or you'll get a feedback loop
     isBot: function(who) {
         for (var bot of AppConfig.botlist) {
             if (who === bot) {
-                Utils.warn("GBot", "isBot!");
+                //Utils.warn("GBot", "isBot!");
                 return true;
             }
         }

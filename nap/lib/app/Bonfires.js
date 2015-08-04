@@ -51,6 +51,7 @@ Bonfires = {
             // this.data = yaml.safeLoad(fs.readFileSync('./data/bonfires/basic-bonfires.yml', 'utf8'));
             this.raw = fs.readFileSync('./data/seed/challenges/basic-bonfires.json', 'utf8');
             this.data = JSON.parse(this.raw);
+            Bonfires.loadWikiHints();
             // this.data = Utils.toMarkdown(this.data);
             // Utils.log("bonfires", this.data);
         } catch (e) {
@@ -218,7 +219,6 @@ Bonfires = {
 // though in theory it will load itself before data is needed ...?
 
 Bonfires.load();
-Bonfires.loadWikiHints();
 
 module.exports = Bonfires;
 

@@ -29,7 +29,8 @@ var commands = {
 
         // these throw errors if you're already on a branch
         cmd.stdout.on('data', function (data) {
-            bot.say("data: " + data, input.message.room);
+            var piped = "\n```" + data + "```\n";
+            bot.say(piped, input.message.room);
             // console.log('stdout: ' + data);
         });
 
@@ -40,7 +41,9 @@ var commands = {
 
         cmd.on('close', function (code) {
             KBase.initSync();
-            bot.say("done code: " + code, input.message.room);
+            var output = "\n`done code: " + code + "`";
+            output += "\n :computer: ";
+            bot.say(output, input.message.room);
             // console.log('child process exited with code ' + code);
         });
 
