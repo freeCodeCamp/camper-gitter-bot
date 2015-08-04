@@ -39,7 +39,7 @@ var commands = {
         });
 
         cmd.on('close', function (code) {
-            KBase.initAsync();
+            KBase.initSync();
             bot.say("done code: " + code, input.message.room);
             // console.log('child process exited with code ' + code);
         });
