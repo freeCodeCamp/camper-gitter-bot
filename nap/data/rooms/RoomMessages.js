@@ -61,6 +61,13 @@ var RoomMessages = {
             SharedMessages.meteorChat,
         ],
 
+        'freecodecamp/coreteam': [
+            SharedMessages.holler,
+            SharedMessages.troll,
+            SharedMessages.bonfireChat,
+            SharedMessages.meteor,
+        ],
+
         'camperbot/admins': [
             SharedMessages.troll,
             SharedMessages.bonfireChat,
