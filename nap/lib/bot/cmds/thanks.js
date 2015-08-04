@@ -23,14 +23,6 @@ var // GBot = require("../../../lib/bot/GBot.js"),
 //     Utils.warn("BotCommands>", msg, obj);
 // }
 
-// in case we want to filter the message
-function cleanMessage(message) {
-    return message;
-    //if (message.match(/^count not/)) {
-    //     //fix typo
-    //}
-    //return message;
-}
 
 
 var commands = {
@@ -87,14 +79,25 @@ var commands = {
     //      bot
     //      input
 
+    // in case we want to filter the message
+
     showInfo: function(blob) {
         //Utils.clog('thanks>', "showInfo>", blob);
 
+        var cleanMessage = function(message) {
+            //return message;
+            if (message.match(/^FCC: no user/)) {
+                message = "hmm, can't find that user on the beta site. wait til we release new version!"
+            }
+            message = "> :warning: " + message;
+            return message;
+        }
+
         if (blob.response.error) {
             var message = cleanMessage(blob.response.error.message);
-            message += Utils.betaFooter();
+            //message += Utils.betaFooter();
             Utils.warn("WARN @thanks>", blob.response.error.message, blob.response.error);
-            //blob.bot.say(message, blob.input.message.room);
+            blob.bot.say(message, blob.input.message.room);
             return false;
         }
 
