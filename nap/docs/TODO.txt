@@ -1,5 +1,13 @@
 TODO
 
+- set room topic on entering the room / for that room?
+  if bonfire flag = true
+
+- call to action at the end "add comments / edit"
+
+-
+
+
     step through Luis lesson (wikihints)
     allow users to add hints to bonfires?
     co-browsing panel

@@ -86,7 +86,8 @@ Bonfires = {
         hint = bonfire.hints[hintNum];
 
         if (hintNum < bonfire.hints.length) {
-            hint = "`[" + hintNum + "/" + bonfire.hints.length + "]`\n" + hint;
+            var hintCounter = hintNum + 1; // cant do math inside a string concat line
+            hint = "`hint [" + hintCounter + "/" + bonfire.hints.length + "]`\n## " + hint;
             bonfire.currentHint = hintNum + 1;
             hint += this.wikiLinkFooter(bonfire);
             return hint;
@@ -149,9 +150,10 @@ Bonfires = {
     },
 
     wikiLinkFooter: function(bonfire) {
-        var str = "\n:pencil: ";
-        var text = "[EDIT at the FCC Wiki]";
+        var str = "\n\n> type `more` for next hint  :pencil: ";
+        var text = "[Contribute at the FCC Wiki]";
         str += Utils.linkify(bonfire.dashedName, "wiki", text);
+
         return str;
     },
 

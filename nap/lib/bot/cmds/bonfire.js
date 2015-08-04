@@ -16,7 +16,7 @@ commands = {
 
     //TODO rename as we merge this object. make it more distinctive
     fixed: {
-        footer: "\n\n> type: `bf details` `bf links` `bf room`",
+        footer: "\n\n> type: `bf details` `bf links` `bf spoiler`",
         menu: "\n- `bonfire info` for more info " +
         "\n- `bonfire links` " +
         "\n- `bonfire script` for the script",
@@ -34,7 +34,7 @@ commands = {
         roomLink: function(name) {
             var str =  ":construction: **spoiler alert** ";
             str += "[dedicated chatroom](https://gitter.im/camperbot/" + name + ")"
-            str += ":arrow_forward:";
+            str += " :arrow_forward:";
             return str;
         }
     },
@@ -135,7 +135,7 @@ commands = {
         str += newline + this.bonfireScript();
         str += newline + this.bonfireDescription();
         str += newline + this.bonfireLinks();
-        str += newline + '\n-----\n';
+        //str += newline + '\n-----\n';
         //str += newline + this.fixed.menu;
         str += newline + this.fixed.roomLink(name)
 
