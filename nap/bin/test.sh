@@ -1,4 +1,4 @@
-source bin/credentials-demobot.sh
+#!/usr/bin/env bash
 
 set -x
 
@@ -14,13 +14,18 @@ set -x
 
 # export SERVER_ENV=test
 
-SERVER_ENV=test \
-GITTER_USER_TOKEN=${GITTER_USER_TOKEN} \
-GITTER_APP_KEY=${GITTER_APP_KEY} \
-GITTER_APP_SECRET=${GITTER_APP_SECRET} \
-LOG_LEVEL=3 \
-PORT=7891 \
+#SERVER_ENV=test \
+#GITTER_USER_TOKEN=${GITTER_USER_TOKEN} \
+#GITTER_APP_KEY=${GITTER_APP_KEY} \
+#GITTER_APP_SECRET=${GITTER_APP_SECRET} \
+#LOG_LEVEL=3 \
+#PORT=7891 \
+
+LOG_LEVEL=1 \
     mocha -w \
         --inline-diffs \
         --harmony --sort $1
 
+
+
+#-r dotenv/config your_script.js

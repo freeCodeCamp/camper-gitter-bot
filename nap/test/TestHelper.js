@@ -1,5 +1,7 @@
 "use strict";
 
+var GBot = require('../lib/bot/GBot');
+
 var TestHelper = {
     aboutInput: {
         keyword: 'about',
@@ -123,6 +125,10 @@ var TestHelper = {
 
     makeInputFromString: function (text) {
         var input = TestHelper.aboutInput;
+        input.message.model.text = text;    // initialize before parsing
+        //console.log("input1", input);
+        input = GBot.parseInput(input.message);  // add keywords etc.
+        //console.log("input2", input);
         input.message.model.text = text;
         input.message.model.fromUser = {
             username: "testuser"

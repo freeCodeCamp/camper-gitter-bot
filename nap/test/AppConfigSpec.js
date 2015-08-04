@@ -4,6 +4,7 @@
 
 "use strict";
 
+require('dotenv').load();
 var expect = require("chai").expect;
 
 console.log("--------------- testrun AppConfig ---------------");

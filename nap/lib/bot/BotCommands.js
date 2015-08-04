@@ -268,8 +268,6 @@ var BotCommands = {
 
 };
 
-BotCommands.about = require("./cmds/about");
-BotCommands.thanks = require("./cmds/thanks");
 
 // TODO - iterate and read all files in /cmds
 var wiki = require("./cmds/wiki"),
@@ -277,22 +275,18 @@ var wiki = require("./cmds/wiki"),
     update = require("./cmds/update"),
     bonfire = require("./cmds/bonfire");
 
-
 _.merge(BotCommands, wiki, thanks, update, bonfire);
 
 
-// Object.assign(BotCommands, wiki);
+//aliases
 
 BotCommands.explain = BotCommands.wiki;
 BotCommands.bot = BotCommands.wiki;
-
-// setup aliases
 BotCommands.hi = BotCommands.welcome;
 // BotCommands.bothelp = BotCommands.menu;
 // BotCommands.hello = BotCommands.welcome;
 BotCommands.index = BotCommands.topics;
 BotCommands.thank = BotCommands.thanks;
-
 BotCommands.log = BotCommands.archive;
 BotCommands.archives = BotCommands.archive;
 
@@ -301,6 +295,5 @@ BotCommands.archives = BotCommands.archive;
 // TODO - some of these should be filtered/as private
 BotCommands.cmdList = Object.keys(BotCommands);
 
-clog(BotCommands.cmdList);
 
 module.exports = BotCommands;

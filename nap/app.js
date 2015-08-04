@@ -13,7 +13,7 @@ if (typeof Map !== "function" ) {
 }
 
 var express = require("express");
-var port = process.env.PORT || 7000;
+var port = process.env.PORT || 7891;
 var passport = require("./lib/gitter/passportModule");
 
 // other requires

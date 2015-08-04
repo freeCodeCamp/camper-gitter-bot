@@ -1,5 +1,7 @@
 "use strict";
 
+require('dotenv').load();
+
 var assert = require("chai").assert,
     expect = require("chai").expect;
 
@@ -69,9 +71,12 @@ describe("Commands", function () {
     });
 
     it("should have a find command", function() {
-        var input = TestHelper.makeInputFromString("find css");
+        var input = TestHelper.makeInputFromString("find bootstrap");
+        //console.log('input', input);
+        expect(input.keyword).to.equal("find");
+        expect(input.params).to.equal("bootstrap");
         var res = BotCommands.find(input, {} );
-        expect(res).to.include("find ***");
+        expect(res).to.include("find **bootstrap**");
     });
 
 

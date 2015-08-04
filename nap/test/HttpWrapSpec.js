@@ -26,10 +26,12 @@ describe("HttpWrap", function () {
         // var bot = "dummyBot";
         var name = "berkeleytrue";
         var apiPath = '/api/users/about?username=' + name;
-        HttpWrap.callApi(apiPath, function(apiResult) {
-            // console.log(apiResult);
-            expect(apiResult.about.username).to.equal("berkeleytrue");
-            expect(apiResult.about.github).to.equal("http://github.com/BerkeleyTrue");
+        var options = {method: 'GET'};
+
+        HttpWrap.callApi(apiPath, options, function(apiResult) {
+            console.log(apiResult);
+            expect(apiResult.response.about.username).to.equal("berkeleytrue");
+            expect(apiResult.response.about.github).to.equal("http://github.com/BerkeleyTrue");
             // expect(apiResult.about.bio).to.include("something");
             done();
         });

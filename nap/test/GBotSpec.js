@@ -55,12 +55,12 @@ describe("GBot", function () {
         expect(output).not.to.be.true;
     });
 
-    it("should respond to wiki css", function () {
+    it("should respond to bootstrap", function () {
         var msg, res;
         GBot.init();
-        msg = TestHelper.makeMessageFromString("wiki css");
+        msg = TestHelper.makeMessageFromString("wiki bootstrap");
         res = GBot.findAnyReply(msg);
-        expect(res).to.contain('## :pencil: [css]');
+        expect(res).to.contain('## :pencil: [bootstrap [edit]]');
     });
 
     it("should have a botstatus response", function () {

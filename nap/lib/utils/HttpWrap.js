@@ -37,7 +37,8 @@ var HttpWrap = {
             response.on('end', function () {
                 // Utils.clog('HttpWrap>', 'res>', str);
                 var blob = JSON.parse(str);
-                callback(blob, options);
+                options.response = blob;
+                callback(options);
             });
         };
 
