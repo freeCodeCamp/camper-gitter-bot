@@ -94,7 +94,7 @@ var commands = {
             var message = cleanMessage(blob.response.error.message);
             message += Utils.betaFooter();
             Utils.warn("WARN @thanks>", blob.response.error.message, blob.response.error);
-            blob.bot.say(message, blob.input.message.room);
+            //blob.bot.say(message, blob.input.message.room);
             return false;
         }
 
@@ -103,7 +103,7 @@ var commands = {
         var bio = blob.response.about.bio || "no bio set";
 
         var str = `
-![${username}](https://avatars2.githubusercontent.com/${username}?&s=64) | [${username}](http://www.freecodecamp.com/${username})
+![${username}](https://avatars2.githubusercontent.com/${username}?&s=32) | [${username}](http://www.freecodecamp.com/${username})
         -------------                       | -------------
         :star: ${about.browniePoints}       | ${bio}
 
