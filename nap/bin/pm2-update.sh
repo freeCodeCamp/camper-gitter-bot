@@ -1,4 +1,4 @@
-
+#!/usr/bin/env bash
 set -x
 
 approot="/home/freecodecamp/www/gitterbot/nap"
