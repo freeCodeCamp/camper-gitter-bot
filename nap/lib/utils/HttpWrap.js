@@ -17,8 +17,6 @@ var HttpWrap = {
 
     callApi: function(apiPath, options, callback) {
 
-        Utils.warn("callback", callback);
-
         var body = { data: JSON.stringify(body) };
         this.defaultOptions.body = body;
         _.merge(this.defaultOptions, options);
@@ -34,8 +32,9 @@ var HttpWrap = {
             });
 
             //the whole response has been recieved, so we just print it out here
-            response.on('end', function () {
-                // Utils.clog('HttpWrap>', 'res>', str);
+            response.on('end', function (res) {
+                Utils.clog('HttpWrap.end>','res', res);
+                Utils.clog('HttpWrap.end>', 'str', str);
                 var blob = JSON.parse(str);
                 options.response = blob;
                 callback(options);

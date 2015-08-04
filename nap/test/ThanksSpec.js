@@ -36,4 +36,13 @@ describe("Thanks", function () {
         //assert.equal(res[2], "bootstrap");
     });
 
+    //HttpWrap.callApi(apiPath, options, function(apiResult) {
+    //    console.log(apiResult);
+    //    expect(apiResult.response.about.username).to.equal("berkeleytrue");
+    //    expect(apiResult.response.about.github).to.equal("http://github.com/BerkeleyTrue");
+    //    // expect(apiResult.about.bio).to.include("something");
+    //    done();
+    //});
+
+
 });

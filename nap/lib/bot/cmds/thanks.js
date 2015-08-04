@@ -71,9 +71,13 @@ var commands = {
             return "you need to ask about @someone!";
         }
         name = them.screenName.toLowerCase();
+        var options = {
+            method: 'GET',
+            input: input,
+            bot: bot
+        }
 
         var apiPath = '/api/users/about?username=' + name;
-        var options = {method: 'GET'};
         HttpWrap.callApi(apiPath, options, commands.showInfo);
     },
 
@@ -84,13 +88,13 @@ var commands = {
     //      input
 
     showInfo: function(blob) {
-        //Utils.clog('thanks', "showInfo", blob);
+        Utils.clog('thanks>', "showInfo>", blob);
 
         if (blob.response.error) {
             var message = cleanMessage(blob.response.error.message);
             message += Utils.betaFooter();
-            blob.bot.say(message, blob.input.message.room);
             Utils.warn("WARN @thanks>", blob.response.error.message, blob.response.error);
+            blob.bot.say(message, blob.input.message.room);
             return false;
         }
 

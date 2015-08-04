@@ -54,8 +54,9 @@ var Utils = {
             return;
         }
         obj = obj || "";
-        console.log(this.cols.info(where) );
-        console.log(this.cols.info(msg), obj);
+        msg = ">" + msg;
+        console.log( );
+        console.log(this.cols.info(where), this.cols.info(msg), obj);
         // winston.log(where, msg, obj);
     },
 
@@ -259,9 +260,9 @@ var Utils = {
 
 };
 
-function clog() {
-    Utils.clog.call("Utils", arguments);
-}
+//function clog() {
+//    Utils.clog.call("Utils", arguments);
+//}
 
 Utils.logLevel = parseInt(process.env.LOG_LEVEL || 4);
 
