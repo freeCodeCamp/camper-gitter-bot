@@ -16,40 +16,54 @@ var SharedMessages = {
         word: 'meteor',
             text: "> we have a meteor channel here: [camperbot/meteorJS](https://gitter.im/camperbot/meteorJS)",
             chance: 1
+    },
+    troll: {
+        word: 'troll',
+        text: "> If you're having troll problems [notify admins here](https://gitter.im/camperbot/admins)",
+        chance: 1
+    },
+    holler: {
+        word: 'holler',
+        text: "> holler back!",
+        chance: 1
     }
+
 };
 
 var RoomMessages = {
 
     rooms: {
         'camperbot/testing': [
-            {
-                word: 'holler',
-                text: "> holler back!",
-                chance: 1
-            },
+            SharedMessages.holler,
+            SharedMessages.troll,
             SharedMessages.bonfireChat,
-            SharedMessages.meteorChat
+            SharedMessages.meteorChat,
         ],
 
         'camperbot/localdev': [
-            {
-                word: 'holler',
-                text: "> holler back!",
-                chance: 1
-            },
+            SharedMessages.holler,
+            SharedMessages.troll,
             SharedMessages.bonfireChat,
-            SharedMessages.meteorChat
+            SharedMessages.meteorChat,
         ],
 
         'freecodecamp/help': [
+            SharedMessages.holler,
+            SharedMessages.troll,
             SharedMessages.bonfireChat,
-            SharedMessages.meteorChat
+            SharedMessages.meteorChat,
+
         ],
 
         'freecodecamp/helpbonfires': [
+            SharedMessages.holler,
+            SharedMessages.troll,
+            SharedMessages.meteorChat,
+        ],
+
+        'camperbot/admins': [
+            SharedMessages.troll,
             SharedMessages.bonfireChat,
-            SharedMessages.meteorChat
         ],
 
     },
