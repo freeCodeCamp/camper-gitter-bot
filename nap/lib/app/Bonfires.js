@@ -77,9 +77,10 @@ Bonfires = {
     },
 
     load: function () {
-        if (this.data) {
-            return this.data;
-        }
+        //for now always load as webUI calls this
+        //if (this.data) {
+        //    return this.data;
+        //}
         // Get document, or throw exception on error
         try {
             // this.data = yaml.safeLoad(fs.readFileSync('./data/bonfires/basic-bonfires.yml', 'utf8'));
