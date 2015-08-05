@@ -3,64 +3,48 @@
 
 var TextLib = require("../../../lib/utils/TextLib"),
     Bonfires = require("../../../lib/app/Bonfires"),
-    BotCommands = require("../../../lib/bot/BotCommands"),
+    //BotCommands = require("../../../lib/bot/BotCommands"),
      KBase = require("../../bot/KBase"),
     Rooms = require("../../../lib/app/Rooms"),
     Utils = require("../../../lib/utils/Utils");
     // HttpWrap = require("../../../lib/utils/HttpWrap")
 
 
-var newline = "\n";
+
 
 var commands;
 commands = {
 
-    //TODO rename as we merge this object. make it more distinctive
-    fixed: {
-        footer: "\n\n> type: `bf details` `bf links` `bf spoiler`",
-        menu: "\n- `bonfire info` for more info " +
-        "\n- `bonfire links` " +
-        "\n- `bonfire script` for the script",
-        askName: "give the name of the bonfire and I'll try to look it up!",
-        setName: "Set a bonfire to talk about with `bonfire name`",
-        comingSoon: "Coming Soon! We're working on it!",
-        nameHint: "no, type part of the name of the bonfire! eg `bonfire roman` ",
-        alert: "\n - :construction: **spoiler alert** :construction:",
-        reminder: function (name) {
-            return "we're talking about bonfire :fire: " + name;
-        },
-        cantFind: function (name) {
-            return "> Sorry, can't find a bonfire called " + name + ". [ [Check the map?](http://www.freecodecamp.com/map#Basic-Algorithm-Scripting) ]";
-        },
-        roomLink: function(name) {
-            var str =  ":construction: **spoiler alert** ";
-            str += "[dedicated chatroom](https://gitter.im/camperbot/" + name + ")"
-            str += " :arrow_forward:";
-            return str;
-        },
-        goToBonfireRoom: function(bf) {
-            var link = Utils.linkify(bf.dashedName, "camperbot", "Bonfire's Custom Room");
-            var str = "> Spoilers are only in the " + link + " :point_right: ";
-            return str;
-        }
-    },
 
     // commands to bonfire with a parameter
     bonfire: function (input, bot, blob) {
-        var params = input.params;
 
         var bonfire = this.checkHasBonfire(input, bot);
 
-        switch (params) {
+        var foundCmd = false;
+        var opts = {
+            bonfire: bonfire,
+            input: input,
+            bot: bot,
+            blob: blob
+        };
+        if (bonfire) {
+            foundCmd = this.checkBonfireCommands(opts);
+            if(foundCmd) {
+                return foundCmd;
+            }
+        }
+        if (!foundCmd) {
+            return this.searchBonfire(input, bot);
+        }
+    },
+
+    checkBonfireCommands: function(opts) {
+        var bonfire = opts.bonfire;
+        switch (opts.input.params) {
             //no params just return status
             case undefined:
-                if (bonfire) {
-                    return this.fixed.reminder(bonfire.name);
-                } else {
-                    return this.fixed.askName;
-                }
-                break;
-
+                return Bonfires.fixed.reminder(bonfire.name);
             case 'info':
                 return Bonfires.bonfireInfo(bonfire);
             case 'details':
@@ -69,29 +53,34 @@ commands = {
                 return Bonfires.bonfireLinks(bonfire);
             case 'spoiler':
             case 'hint':
-                return Bonfires.bonfireHint(bonfire);
+                return Bonfires.getNextHint(bonfire);
             case 'script':
                 return Bonfires.bonfireScript(bonfire);
             case 'wiki':
                 return Bonfires.bonfireWiki(bonfire);
             case 'name':
-                return this.fixed.nameHint;
+                return Bonfires.fixed.nameHint;
             case 'status':
-                return this.bonfireStatus(bonfire);
-            case 'wiki':
-                return Bonfires.bonfireWiki(bonfire);
-
+                return Bonfires.bonfireStatus(bonfire);
             default:
-                Utils.log('params [' + params + ']');
-                var newBonfire = Bonfires.findBonfire(params);
-                Utils.warn("newBonfire", newBonfire.dashedName);
-                if (newBonfire) {
-                    this.currentBonfire = newBonfire;
-                    return Bonfires.bonfireInfo(newBonfire);
-                } else {
-                    // TODO - only send this messsage if at the start of a line
-                    return this.fixed.cantFind(params);
-                }
+                return false;
+        }
+    },
+
+    searchBonfire: function(input, bot) {
+        if (!input.params) {
+            return Bonfires.fixed.askName;
+        }
+        Utils.log('params [' + input.params + ']');
+        var newBonfire = Bonfires.findBonfire(input.params);
+        if (newBonfire) {
+            Utils.warn("newBonfire", newBonfire.dashedName);
+            //side effects
+            this.currentBonfire = newBonfire;
+            return Bonfires.bonfireInfo(newBonfire);
+        } else {
+            // TODO - only send this messsage if at the start of a line
+            return Bonfires.fixed.cantFind(params);
         }
     },
 
@@ -99,7 +88,7 @@ commands = {
     checkHasBonfire: function (input, bot) {
         var roomName = input.message.room.name;
         if (Rooms.isBonfire(roomName)) {
-            var bfname = roomName.split("/")[1]
+            var bfname = roomName.split("/")[1];
             var bf = Bonfires.findBonfire(bfName);
             return bf;
         }
@@ -111,16 +100,15 @@ commands = {
         return (this.currentBonfire);
     },
 
-    blah: function(input, bot) {
-        console.log("blah", input);
-    },
-
+    //this is a naked command
     more: function (input, bot) {
-        if (input.params) {
-            return;  // random user input matched more ...
+        var bonfire = this.checkHasBonfire(input, bot);
+        if (!bonfire) {
+            return Bonfires.fixed.setName;
+        } else {
+            return(Bonfires.getNextHint(bonfire));
         }
-        return(this.bonfireHint(input, bot));
-    },
+    }
 
 
 };

@@ -42,7 +42,33 @@ var Bonfires;
 Bonfires = {
     data: null,
     fixed: {
-        hintWarning: "## :construction: ** After this are possible spoiler hints.**\nMake sure you've tried to hard to solve it yourself before proceeding. :construction:"
+        hintWarning: "## :construction: ** After this are possible spoiler hints.**\nMake sure you've tried to hard to solve it yourself before proceeding. :construction:",
+        footer: "\n\n> type: `bf details` `bf links` `bf spoiler`",
+        menu: "\n- `bonfire info` for more info " +
+        "\n- `bonfire links` " +
+        "\n- `bonfire script` for the script",
+        askName: "give the name of the bonfire and I'll try to look it up!",
+        setName: "Set a bonfire to talk about with `bonfire name`",
+        comingSoon: "Coming Soon! We're working on it!",
+        nameHint: "no, type part of the name of the bonfire! eg `bonfire roman` ",
+        alert: "\n - :construction: **spoiler alert** :construction:",
+        reminder: function (name) {
+            return "we're talking about bonfire :fire: " + name;
+        },
+        cantFind: function (name) {
+            return "> Sorry, can't find a bonfire called " + name + ". [ [Check the map?](http://www.freecodecamp.com/map#Basic-Algorithm-Scripting) ]";
+        },
+        roomLink: function(name) {
+            var str =  ":construction: **spoiler alert** ";
+            str += "[dedicated chatroom](https://gitter.im/camperbot/" + name + ")"
+            str += " :arrow_forward:";
+            return str;
+        },
+        goToBonfireRoom: function(bf) {
+            var link = Utils.linkify(bf.dashedName, "camperbot", "Bonfire's Custom Room");
+            var str = "> Spoilers are only in the " + link + " :point_right: ";
+            return str;
+        }
     },
 
     load: function () {
@@ -79,6 +105,23 @@ Bonfires = {
         //Utils.tlog("Bonfires.loadWikiHints end / WikiHints >", testBf.wikiHints);
     },
 
+    findBonfire: function (bfName) {
+        var flag;
+        bfName = TextLib.dashedName(bfName);
+        var bfs = this.data.challenges.filter(function (item) {
+            flag = (item.dashedName.includes(bfName));
+            //Utils.tlog(item.dashedName, bfName);
+            return flag;
+        });
+        var bf = bfs[0];
+        if (!bf) {
+            Utils.warn("cant find bonfire for " + bfName);
+            return null;
+        } else {
+            return bf;
+        }
+    },
+
 
     getNextHint: function (bonfire) {
         var hint, hintNum;
@@ -97,6 +140,31 @@ Bonfires = {
             return "no more hints! Let's start again:" + hintNum;
         }
     },
+
+
+    // from input
+    getHintNum: function (input, num) {
+        num = num || 0;
+        var output, bf, roomName;
+        roomName = InputWrap.roomShortName(input);
+        bf = this.findBonfire(roomName);
+
+        if (!bf || !bf.description) {
+            var msg = ("no outputs found for: " + roomName);
+            Utils.error("Bonfires>", msg, bf);
+            return msg;
+        }
+
+        output = "hint for " + roomName + newline;
+        output += (bf.description[0]);
+        return output;
+    },
+
+    // bonfire features
+    //bonfireHint: function (bonfire) {
+    //    Utils.log("currentBonfire:", this.currentBonfire);
+    //    return Bonfires.getNextHint(this.currentBonfire);
+    //},
 
     toMarkdown: function (data) {
         this.data.challenges = this.data.challenges.map(function (item) {
@@ -123,23 +191,6 @@ Bonfires = {
         return list;
     },
 
-    findBonfire: function (bfName) {
-        var flag;
-        bfName = TextLib.dashedName(bfName);
-        var bfs = this.data.challenges.filter(function (item) {
-            flag = (item.dashedName.includes(bfName));
-            //Utils.tlog(item.dashedName, bfName);
-            return flag;
-        });
-        var bf = bfs[0];
-        if (!bf) {
-            Utils.warn("cant find bonfire for " + bfName);
-            return null;
-        } else {
-            return bf;
-        }
-    },
-
     fromInput: function (input) {
         var roomName, bf;
         roomName = InputWrap.roomShortName(input);
@@ -148,6 +199,7 @@ Bonfires = {
         return (bf);
     },
 
+
     wikiLinkFooter: function(bonfire) {
         var str = "\n\n> type `more` for next hint  :pencil: ";
         var text = "[Contribute at the FCC Wiki]";
@@ -155,29 +207,9 @@ Bonfires = {
 
         return str;
     },
-
-
     getDescription: function (bonfire) {
         var desc = bonfire.description.join('\n');
         return desc;
-    },
-
-    // from input
-    getHintNum: function (input, num) {
-        num = num || 0;
-        var output, bf, roomName;
-        roomName = InputWrap.roomShortName(input);
-        bf = this.findBonfire(roomName);
-
-        if (!bf || !bf.description) {
-            var msg = ("no outputs found for: " + roomName);
-            Utils.error("Bonfires>", msg, bf);
-            return msg;
-        }
-
-        output = "hint for " + roomName + newline;
-        output += (bf.description[0]);
-        return output;
     },
 
     getLinks: function (bonfire) {
@@ -242,24 +274,6 @@ Bonfires = {
         return str;
     },
 
-    // bonfire features
-    bonfireHint: function (bonfire) {
-
-        if (!this.checkHasBonfire(input, bot)) {
-            return this.fixed.setName;
-        }
-
-        var res = this.checkHasBonfire(input, bot);
-        if (res !== true) {
-            return res;
-        }
-        if (!Rooms.isBonfire(input.message.room.name)) {
-            return this.fixed.goToBonfireRoom(this.currentBonfire);
-        }
-        Utils.log("currentBonfire:", this.currentBonfire);
-        return Bonfires.getNextHint(this.currentBonfire);
-    },
-
     bonfireStatus: function(bonfire) {
         var str = "\n- hints: " + bonfire.hints.length;
         //str+= "\n- room.name: " + input.message.room.name;
@@ -284,7 +298,7 @@ Bonfires = {
     bonfireDetails: function (bonfire) {
         var name = bonfire.dashedName;
 
-        var str = this.bonfireHeader();
+        var str = this.bonfireHeader(bonfire);
         str += newline + this.bonfireScript(bonfire);
         str += newline + this.bonfireDescription(bonfire);
         str += newline + this.bonfireLinks(bonfire);
