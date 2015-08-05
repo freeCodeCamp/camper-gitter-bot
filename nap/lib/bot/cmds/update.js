@@ -30,8 +30,8 @@ var commands = {
 
         // these throw errors if you're already on a branch
         cmd.stdout.on('data', function (data) {
-            //var piped = "\n```" + data + "```\n";
-            var piped = data;
+            var piped = "\n```" + data + "```\n";
+            //var piped = data;
             bot.say(piped, input.message.room);
             // console.log('stdout: ' + data);
         });
