@@ -217,7 +217,7 @@ var Utils = {
         }
         out += items.map(function(one) {
             var uri = "http://" + AppConfig[where] + one;
-            return "\n[" + one + "](" + uri + ")";
+            return "\n- [" + one + "](" + uri + ")";
         });
         return out;
     },

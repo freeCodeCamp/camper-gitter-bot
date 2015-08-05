@@ -47,13 +47,13 @@ var commands = {
         var output = "no wiki entry for: `" + input.params + "`";
         output += "\n:pencil: ";
         output += Utils.linkify(input.params, "wiki", "click here to create one now!");
-        output += "after creating your page type `update` to reload it here"
+        output += "after creating your page type `update` to reload it here";
         //output += "\n you could also try typing `find " + input.params + "`";
         return output;
     },
 
     wiki: function(input, bot) {
-        var output = "", topicData;
+        var output, topicData;
         // debugger;
         if (!input.params) { return this.wikiUsage(); }
         // else
@@ -65,8 +65,8 @@ var commands = {
 
         // else OK
         Utils.log('topicData', topicData);
-        var link = Utils.linkify(topicData.dashedName, "wiki", topicData.displayName + " [edit]");
-        output = `## :pencil: ${link} \n`;
+        var link = Utils.linkify(topicData.dashedName, "wiki", topicData.displayName + "  [wiki]");
+        output = '## :point_right: ' + link + '\n';
         output += topicData.shortData;
         output += this.wikiFooter(topicData.dashedName);
         return output;

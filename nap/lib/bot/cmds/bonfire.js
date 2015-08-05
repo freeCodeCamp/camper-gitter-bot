@@ -117,7 +117,7 @@ commands = {
             return Bonfires.fixed.goToBonfireRoom(bonfire);
         }
         // all good so:
-        return(Bonfires.getNextHint(bonfire));
+        return(Bonfires.getNextHint(bonfire, input));
     }
 
 

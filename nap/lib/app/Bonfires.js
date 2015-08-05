@@ -68,6 +68,11 @@ Bonfires = {
             var link = Utils.linkify(bf.dashedName, "camperbot", "Bonfire's Custom Room");
             var str = "> :construction: Spoilers are only in the " + link + " :point_right: ";
             return str;
+        },
+        pleaseContribute: function(bf) {
+            var link = Utils.linkify(bf.dashedName, "wiki", "Bonfire's Wiki Hints Page");
+            var str = "These hints depend on people like you! Please add to this :point_right: " + link;
+            return str;
         }
     },
 
@@ -123,9 +128,13 @@ Bonfires = {
     },
 
 
-    getNextHint: function (bonfire) {
+    getNextHint: function (bonfire, input) {
         var hint, hintNum;
-        hintNum = bonfire.currentHint || 0;
+
+        hintNum = parseInt(input.params);
+        if (isNaN(hintNum)) {
+            hintNum = bonfire.currentHint || 0;
+        }
         hint = bonfire.hints[hintNum];
 
         if (hintNum < bonfire.hints.length) {
@@ -137,29 +146,30 @@ Bonfires = {
         } else {
             bonfire.currentHint = 0;
             Utils.log("no hints", hintNum, bonfire);
-            var str = Bonfires.fixed.lastHint;
-            str += newline + this.wikiLinkFooter(bonfire);
+            var str = Bonfires.fixed.pleaseContribute(bonfire);
+            //str += newline + this.wikiLinkFooter(bonfire);
+            return str;
         }
     },
 
 
     // from input
-    getHintNum: function (input, num) {
-        num = num || 0;
-        var output, bf, roomName;
-        roomName = InputWrap.roomShortName(input);
-        bf = this.findBonfire(roomName);
-
-        if (!bf || !bf.description) {
-            var msg = ("no outputs found for: " + roomName);
-            Utils.error("Bonfires>", msg, bf);
-            return msg;
-        }
-
-        output = "hint for " + roomName + newline;
-        output += (bf.description[0]);
-        return output;
-    },
+    //getHintNum: function (input, num) {
+    //    num = num || 0;
+    //    var output, bf, roomName;
+    //    roomName = InputWrap.roomShortName(input);
+    //    bf = this.findBonfire(roomName);
+    //
+    //    if (!bf || !bf.description) {
+    //        var msg = ("no outputs found for: " + roomName);
+    //        Utils.error("Bonfires>", msg, bf);
+    //        return msg;
+    //    }
+    //
+    //    output = "hint for " + roomName + newline;
+    //    output += (bf.description[0]);
+    //    return output;
+    //},
 
     // bonfire features
     //bonfireHint: function (bonfire) {
