@@ -98,11 +98,17 @@ var Router = {
 
         app.get('/rooms', function(req, res) {
             console.log("req.user", req.user);
+
+            var rooms = RoomData.rooms('camperbot').filter( function(rm) {
+                return rm.isBonfire;
+            });
+            console.log(rooms);
+
             res.render('rooms', {
                 user: req.user,
                 who: AppConfig.who(req),
                 token: req.session.token,
-                rooms: RoomData.rooms(),
+                rooms: rooms,
                 bonfires: Bonfires.data.challenges,
                 topicDmUri: AppConfig.topicDmUri()
             });
