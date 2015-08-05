@@ -66,7 +66,7 @@ Bonfires = {
         },
         goToBonfireRoom: function(bf) {
             var link = Utils.linkify(bf.dashedName, "camperbot", "Bonfire's Custom Room");
-            var str = "> Spoilers are only in the " + link + " :point_right: ";
+            var str = "> :construction: Spoilers are only in the " + link + " :point_right: ";
             return str;
         }
     },
@@ -137,7 +137,8 @@ Bonfires = {
         } else {
             bonfire.currentHint = 0;
             Utils.log("no hints", hintNum, bonfire);
-            return "no more hints! Let's start again:" + hintNum;
+            var str = Bonfires.fixed.lastHint;
+            str += newline + this.wikiLinkFooter(bonfire);
         }
     },
 
@@ -201,7 +202,7 @@ Bonfires = {
 
 
     wikiLinkFooter: function(bonfire) {
-        var str = "\n\n> type `more` for next hint  :pencil: ";
+        var str = "\n\n> type `hint` for next hint  :pencil: ";
         var text = "[Contribute at the FCC Wiki]";
         str += Utils.linkify(bonfire.dashedName, "wiki", text);
 

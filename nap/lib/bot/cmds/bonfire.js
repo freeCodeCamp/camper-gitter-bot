@@ -53,7 +53,7 @@ commands = {
                 return Bonfires.bonfireLinks(bonfire);
             case 'spoiler':
             case 'hint':
-                return Bonfires.getNextHint(bonfire);
+                return this.hint(opts.input, opts.bot);
             case 'script':
                 return Bonfires.bonfireScript(bonfire);
             case 'wiki':
@@ -71,7 +71,7 @@ commands = {
         if (!input.params) {
             return Bonfires.fixed.askName;
         }
-        Utils.log('params [' + input.params + ']');
+        Utils.log('params ', input.params);
         var newBonfire = Bonfires.findBonfire(input.params);
         if (newBonfire) {
             Utils.warn("newBonfire", newBonfire.dashedName);
@@ -80,7 +80,7 @@ commands = {
             return Bonfires.bonfireInfo(newBonfire);
         } else {
             // TODO - only send this messsage if at the start of a line
-            return Bonfires.fixed.cantFind(params);
+            return Bonfires.fixed.cantFind(input.params);
         }
     },
 
@@ -88,7 +88,8 @@ commands = {
     checkHasBonfire: function (input, bot) {
         var roomName = input.message.room.name;
         if (Rooms.isBonfire(roomName)) {
-            var bfname = roomName.split("/")[1];
+            var bfName, bf;
+            bfName = roomName.split("/")[1];
             var bf = Bonfires.findBonfire(bfName);
             return bf;
         }
@@ -100,14 +101,23 @@ commands = {
         return (this.currentBonfire);
     },
 
+    inBonfireRoom: function(input, bot, bonfire) {
+        var roomName = input.message.room.name;
+        return !!Rooms.isBonfire(roomName);
+    },
+
     //this is a naked command
-    more: function (input, bot) {
+    hint: function (input, bot) {
         var bonfire = this.checkHasBonfire(input, bot);
         if (!bonfire) {
             return Bonfires.fixed.setName;
-        } else {
-            return(Bonfires.getNextHint(bonfire));
         }
+
+        if (!this.inBonfireRoom(input, bot)) {
+            return Bonfires.fixed.goToBonfireRoom(bonfire);
+        }
+        // all good so:
+        return(Bonfires.getNextHint(bonfire));
     }
 
 
