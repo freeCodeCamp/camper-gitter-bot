@@ -7,6 +7,7 @@ var spawn = require('child_process').spawn;
 // var _ = require('underscore'); // for some utility goodness
 // var GBot = require("../../../lib/bot/GBot.js"),
 var    KBase = require("../../bot/KBase");
+var    Bonfires = require("../../../lib/app/Bonfires");
 //     Utils = require("../../../lib/utils/Utils"),
 //     AppConfig = require("../../../config/AppConfig"),
 //     HttpWrap = require("../../../lib/utils/HttpWrap");
@@ -29,7 +30,8 @@ var commands = {
 
         // these throw errors if you're already on a branch
         cmd.stdout.on('data', function (data) {
-            var piped = "\n```" + data + "```\n";
+            //var piped = "\n```" + data + "```\n";
+            var piped = data;
             bot.say(piped, input.message.room);
             // console.log('stdout: ' + data);
         });
@@ -41,6 +43,7 @@ var commands = {
 
         cmd.on('close', function (code) {
             KBase.initSync();
+            Bonfires.load();
             var output = "\n`done code: " + code + "`";
             output += "\n :computer: ";
             bot.say(output, input.message.room);
