@@ -45,26 +45,28 @@ we use git submodules for some wiki data
 
 
 # Run the app in 'demobot' mode
-The main app is in /nap subdir
+The main app is in /nap subdir.
 
     cd nap
-    bin/run-demobot.sh
+
+Copy the credentials file
+
+    cp .env-EXAMPLE .env
+
+now it should run as 'demobot'
+    
+    bin/run.sh
 
 That's it! The app should be running at [http://localhost:7891](http://localhost:7891)
 
 You can now visit your gitterbot via Gitter at [https://gitter.im/demobot/test](https://gitter.im/demobot/test)
 
-But! This is using shared credentials, so you may find yourself in a chatroom with other people using the same IDs.
+But! This is using shared login as "demobot" so you may find yourself in a chatroom with other people using the same IDs.
 
-So to setup this up and use your own gitter login info, edit the file
+So to setup this up and use your own gitter login info, you should create your own Gitter API key on their developer site, and replace the info in that `.env` file. Get your own API keys for gitter from: [https://developer.gitter.im/apps](https://developer.gitter.im/apps)
 
-    bin/credentials-demobot.sh
-
-get your own API keys for gitter from:
-[https://developer.gitter.im/apps](https://developer.gitter.im/apps)
-
-
-There are some more detailed docs in docs/credentials.md on how to configure more details
+For more settings info, checkout the `AppConfig.js` and `RoomData.js` files. These define which rooms the bot will listen in to.
+You can ping us in the Dev Chatroom if you have problems [gitterbot chatroom](https://gitter.im/dcsan/gitterbot) .
 
 
 # Running tests

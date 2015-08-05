@@ -234,16 +234,15 @@ var BotCommands = {
         return "WIP camperCount";
     },
 
-    search: function (input, bot) {
-
-        var data = KBase.search(input.params);
-        var str = "searching for " + data;
+    //search: function (input, bot) {
+        //var data = KBase.search(input.params);
+        //var str = "searching for " + data;
         // var str = topLine + wipHeader;
         // str += "## search for" + input.text;
         // str += "\n results will be here!";
         // str += contactBox;
-        return str;
-    },
+        //return str;
+    //},
 
     welcome: function (input, bot) {
         var str;

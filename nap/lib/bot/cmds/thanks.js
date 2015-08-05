@@ -92,11 +92,11 @@ var commands = {
     //      bot
     //      input
 
-    // in case we want to filter the message
 
     showInfo: function(blob) {
         //Utils.clog('thanks>', "showInfo>", blob);
 
+        // in case we want to filter the message
         var cleanMessage = function(message) {
             //return message;
             if (message.match(/^FCC: no user/)) {
