@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # get these keys from here
 # https://developer.gitter.im/apps
 
