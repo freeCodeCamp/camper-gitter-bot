@@ -1,3 +1,7 @@
+"use strict";
+
+require('dotenv').load();
+
 var expect = require("chai").expect;
 var assert = require("chai").assert;
 var routes = require("../lib/app/routes.js");
@@ -6,7 +10,7 @@ var AppConfig = require("../config/AppConfig");
 describe("Routes", function(){
 
     it("should use room from params for route redir", function() {
-        query = {room: "random"};
+        var query = {room: "random"};
         var redir = routes.findRedirect(query);
         assert.property(redir, 'room', 'redir has a room');
         assert.property(redir, 'org', 'route has an org');
@@ -20,7 +24,7 @@ describe("Routes", function(){
 
 
     it("should find DM room go URI", function() {
-        query = {room: "bothelp"};
+        var query = {room: "bothelp"};
         var redir = routes.findRedirect(query);
         assert.property(redir, 'room', 'redir has a room');
         assert.property(redir, 'url', 'route has a url');

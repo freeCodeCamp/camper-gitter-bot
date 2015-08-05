@@ -1,5 +1,7 @@
 "use strict";
 
+require('dotenv').load();
+
 var expect = require("chai").expect;
 
 var HttpWrap = require("../lib/utils/HttpWrap.js"),

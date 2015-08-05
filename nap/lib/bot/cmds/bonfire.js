@@ -3,8 +3,9 @@
 
 var TextLib = require("../../../lib/utils/TextLib"),
     Bonfires = require("../../../lib/app/Bonfires"),
-     BotCommands = require("../../../lib/bot/BotCommands"),
-    // KBase = require("../../bot/KBase"),
+    BotCommands = require("../../../lib/bot/BotCommands"),
+     KBase = require("../../bot/KBase"),
+    Rooms = require("../../../lib/app/Rooms"),
     Utils = require("../../../lib/utils/Utils");
     // HttpWrap = require("../../../lib/utils/HttpWrap")
 
@@ -36,14 +37,11 @@ commands = {
             str += "[dedicated chatroom](https://gitter.im/camperbot/" + name + ")"
             str += " :arrow_forward:";
             return str;
-        }
-    },
-
-    checkHasBonfire: function () {
-        if (!this.currentBonfire) {
-            return this.fixed.setName;
-        } else {
-            return true;
+        },
+        goToBonfireRoom: function(bf) {
+            var link = Utils.linkify(bf.dashedName, "camperbot", "Bonfire's Custom Room");
+            var str = "> Spoilers are only in the " + link + " :point_right: ";
+            return str;
         }
     },
 
@@ -51,40 +49,45 @@ commands = {
     bonfire: function (input, bot, blob) {
         var params = input.params;
 
+        var bonfire = this.checkHasBonfire(input, bot);
+
         switch (params) {
+            //no params just return status
             case undefined:
-                if (this.currentBonfire) {
-                    return this.fixed.reminder(this.currentBonfire.name);
+                if (bonfire) {
+                    return this.fixed.reminder(bonfire.name);
                 } else {
                     return this.fixed.askName;
                 }
                 break;
 
             case 'info':
-                return this.bonfireInfo();
+                return Bonfires.bonfireInfo(bonfire);
             case 'details':
-                return this.bonfireDetails();
+                return Bonfires.bonfireDetails(bonfire);
             case 'links':
-                return this.bonfireLinks();
+                return Bonfires.bonfireLinks(bonfire);
             case 'spoiler':
-            case 'n':
-                return this.bonfireHint();
+            case 'hint':
+                return Bonfires.bonfireHint(bonfire);
             case 'script':
-                return this.bonfireScript();
+                return Bonfires.bonfireScript(bonfire);
             case 'wiki':
-                return this.bonfireWiki(input, bot, blob);
+                return Bonfires.bonfireWiki(bonfire);
             case 'name':
                 return this.fixed.nameHint;
             case 'status':
-                return this.bonfireStatus(input, bot, blob);
-
+                return this.bonfireStatus(bonfire);
+            case 'wiki':
+                return Bonfires.bonfireWiki(bonfire);
 
             default:
                 Utils.log('params [' + params + ']');
-                var bonfire = Bonfires.findBonfire(params);
-                if (bonfire) {
-                    this.currentBonfire = bonfire;
-                    return this.bonfireInfo(bonfire);
+                var newBonfire = Bonfires.findBonfire(params);
+                Utils.warn("newBonfire", newBonfire.dashedName);
+                if (newBonfire) {
+                    this.currentBonfire = newBonfire;
+                    return Bonfires.bonfireInfo(newBonfire);
                 } else {
                     // TODO - only send this messsage if at the start of a line
                     return this.fixed.cantFind(params);
@@ -92,89 +95,20 @@ commands = {
         }
     },
 
-    bonfireStatus: function(input, bot, blob) {
-        var bf = this.currentBonfire;
-        if (!bf) return;
-        var str = "\n- hints: " + bf.hints.length;
-            //str += "\n- wikiHints: " + bf.wikiHints.length;
-            //str += "\n- description: " + bf.description.length;
-        return str;
-    },
-    bonfireHeader: function () {
-        var res = this.checkHasBonfire();
-        if (res !== true) {
-            return res;
+    // FIXME - this is a bit sketchy, return type is "bonfire name" or true.
+    checkHasBonfire: function (input, bot) {
+        var roomName = input.message.room.name;
+        if (Rooms.isBonfire(roomName)) {
+            var bfname = roomName.split("/")[1]
+            var bf = Bonfires.findBonfire(bfName);
+            return bf;
         }
 
-        var str = "## :fire:";
-        str += TextLib.mdLink(
-            this.currentBonfire.name,
-            "www.freecodecamp.com/challenges/" + this.currentBonfire.dashedName
-        );
-        str += " :link:";
-        return str;
-    },
-
-    bonfireInfo: function () {
-        var str = this.bonfireHeader() + newline;
-        str += this.bonfireScript() + newline;
-        str += this.bonfireDescription(1) + newline;
-        str += newline + this.fixed.footer;
-        return str;
-    },
-
-    bonfireDetails: function () {
-        var res = this.checkHasBonfire();
-        if (res !== true) {
-            return res;
+        if (!this.currentBonfire) {
+            return false;
         }
 
-        var name = this.currentBonfire.dashedName;
-
-        var str = this.bonfireHeader();
-        str += newline + this.bonfireScript();
-        str += newline + this.bonfireDescription();
-        str += newline + this.bonfireLinks();
-        //str += newline + '\n-----\n';
-        //str += newline + this.fixed.menu;
-        str += newline + this.fixed.roomLink(name)
-
-        return str;
-    },
-
-    bonfireDescription: function (lines) {
-        if (lines) {
-            var desc = this.currentBonfire.description.slice(0, lines);
-        } else {
-            desc = this.currentBonfire.description;
-        }
-        return desc.join('\n');
-    },
-
-    // bonfire features
-    bonfireHint: function (input, bot) {
-        var res = this.checkHasBonfire();
-        if (res !== true) {
-            return res;
-        }
-        Utils.log("currentBonfire:", this.currentBonfire);
-        return Bonfires.getNextHint(this.currentBonfire);
-    },
-
-    bonfireLinks: function (input, bot) {
-        var res = this.checkHasBonfire();
-        if (res !== true) {
-            return res;
-        }
-        return Bonfires.getLinks(this.currentBonfire);
-    },
-
-    bonfireScript: function (input, bot) {
-        var res = this.checkHasBonfire();
-        if (res !== true) {
-            return res;
-        }
-        return Bonfires.getSeed(this.currentBonfire);
+        return (this.currentBonfire);
     },
 
     blah: function(input, bot) {
@@ -188,14 +122,6 @@ commands = {
         return(this.bonfireHint(input, bot));
     },
 
-    bonfireWiki: function (input, bot, blob) {
-        if (!this.currentBonfire) {
-            return null;
-        } else {
-            input.params = this.currentBonfire.name;
-            //return(BotCommands.wiki(input, bot));
-        }
-    }
 
 };
 

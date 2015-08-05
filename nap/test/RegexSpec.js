@@ -1,5 +1,7 @@
 "use strict";
 
+require('dotenv').load();
+
 var expect = require('chai').expect;
 var assert = require("chai").assert;
 

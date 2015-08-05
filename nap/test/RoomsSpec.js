@@ -1,3 +1,7 @@
+"use strict";
+
+require('dotenv').load();
+
 var expect = require("chai").expect,
     assert = require("chai").assert;
 
@@ -21,8 +25,13 @@ describe("Rooms", function(){
 
     it("should find a room by name", function() {
         var room = Rooms.findByName("bothelp/HelpBonfires");
-        expect(room.title).to.equal("HelpBonfires");
         expect(room.name).to.equal("bothelp/HelpBonfires");
+    });
+
+    it("should find a bonfire room", function() {
+        var room = Rooms.findByName("bothelp/bonfire-factorialize-a-number");
+        expect(room.name).to.equal("bothelp/bonfire-factorialize-a-number");
+        expect(room.isBonfire).to.equal(true);
     });
 
 });

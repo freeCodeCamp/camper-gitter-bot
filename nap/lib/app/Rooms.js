@@ -4,7 +4,11 @@
 
 var RoomData = require('../../data/RoomData'),
     Bonfires = require('./Bonfires'),
+    TextLib = require('../utils/TextLib'),
+    Utils= require('../utils/Utils'),
     AppConfig = require('../../config/AppConfig');
+
+var _ = require('lodash-node');
 
 var Rooms = {
 
@@ -36,10 +40,21 @@ var Rooms = {
     // })
 
     findByName: function(name) {
-        var rooms = RoomData.rooms().filter( function(rm) {
-            return (rm.name === name);
-        });
-        return (this.checkRoom(rooms[0], 'findByName', name));
+        //DONT dashlib it as we want to keep slashe/s
+        //name = TextLib.dashedName(name);
+        var room = _.findWhere(RoomData.rooms(), {name: name});
+        if(room) {return room;}
+        //else
+        Utils.error("cant find room name:", name);
+    },
+
+    isBonfire: function(name) {
+        var room = this.findByName(name);
+        if (room) {
+            Utils.log("isBonfire>room", room);
+            return(room.isBonfire);
+        }
+        return false;
     },
 
     names: function() {
@@ -53,8 +68,8 @@ var Rooms = {
         if (room) {
             return room;
         }
-        // Utils.warn("Rooms", "failed", how, tag);
-        return (RoomData.defaultRoom);  // careful, this is a property not a func
+        Utils.error("Rooms.checkRoom> failed", how, tag);
+        //return (RoomData.defaultRoom);  // careful, this is a property not a func
     },
 
     // bonfireRooms: function() {

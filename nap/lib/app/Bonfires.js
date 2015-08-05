@@ -140,7 +140,6 @@ Bonfires = {
         }
     },
 
-
     fromInput: function (input) {
         var roomName, bf;
         roomName = InputWrap.roomShortName(input);
@@ -227,8 +226,96 @@ Bonfires = {
         output += seed;
         output += "```";
         return output;
-    }
+    },
 
+    //methods that describe a bonfire that accept/expect a bonfire parameter
+    bonfireInfo: function (bonfire) {
+        if(!bonfire){
+            Utils.error("Bonfires.bonfireInfo", "no bonfire");
+        } else {
+            Utils.warn("Bonfires.bonfireInfo", "bonfire:", bonfire.dashedName);
+        }
+        var str = this.bonfireHeader(bonfire) + newline;
+        str += this.bonfireScript(bonfire) + newline;
+        str += this.bonfireDescription(bonfire) + newline;
+        str += newline + this.fixed.footer;
+        return str;
+    },
+
+    // bonfire features
+    bonfireHint: function (bonfire) {
+
+        if (!this.checkHasBonfire(input, bot)) {
+            return this.fixed.setName;
+        }
+
+        var res = this.checkHasBonfire(input, bot);
+        if (res !== true) {
+            return res;
+        }
+        if (!Rooms.isBonfire(input.message.room.name)) {
+            return this.fixed.goToBonfireRoom(this.currentBonfire);
+        }
+        Utils.log("currentBonfire:", this.currentBonfire);
+        return Bonfires.getNextHint(this.currentBonfire);
+    },
+
+    bonfireStatus: function(bonfire) {
+        var str = "\n- hints: " + bonfire.hints.length;
+        //str+= "\n- room.name: " + input.message.room.name;
+        //str+= "\n- isBonfire: " + Rooms.isBonfire(input.message.room.name);
+        //str += "\n- wikiHints: " + bf.wikiHints.length;
+        //str += "\n- description: " + bf.description.length;
+        return str;
+    },
+
+
+    bonfireHeader: function (bonfire) {
+
+        var str = "## :fire:";
+        str += TextLib.mdLink(
+            bonfire.name,
+            "www.freecodecamp.com/challenges/" + bonfire.dashedName
+        );
+        str += " :link:";
+        return str;
+    },
+
+    bonfireDetails: function (bonfire) {
+        var name = bonfire.dashedName;
+
+        var str = this.bonfireHeader();
+        str += newline + this.bonfireScript(bonfire);
+        str += newline + this.bonfireDescription(bonfire);
+        str += newline + this.bonfireLinks(bonfire);
+        //str += newline + '\n-----\n';
+        //str += newline + this.fixed.menu;
+        //str += newline + this.fixed.roomLink(name)
+
+        return str;
+    },
+
+    bonfireDescription: function (bonfire, lines) {
+        if (lines) {
+            var desc = bonfire.description.slice(0, lines);
+        } else {
+            desc = bonfire.description;
+        }
+        return desc.join('\n');
+    },
+
+    bonfireLinks: function (bonfire) {
+        return Bonfires.getLinks(bonfire);
+    },
+
+    bonfireScript: function (bonfire) {
+        return Bonfires.getSeed(bonfire);
+    },
+
+    bonfireWiki: function (bonfire) {
+        var link = Utils.linkify(this.currentBonfire.name)
+        return "> :fire: wiki: " + link;
+    }
 
 };
 

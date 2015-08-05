@@ -1,5 +1,7 @@
 "use strict";
 
+require('dotenv').load();
+
 var expect = require("chai").expect;
 
 var RoomMessages = require("../data/rooms/RoomMessages.js");

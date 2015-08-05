@@ -144,10 +144,12 @@ var BotRoomData = {
         },
 
         // Bonfire single rooms
+
         {
-            name: "camperbot/bonfire-factorialize-a-number",
+            name: "bothelp/bonfire-factorialize-a-number",
             topics: ['bonfire factorialize a number'],
-            bonfire: true
+            isBonfire: true,
+
         },
 
     ],
@@ -217,10 +219,11 @@ var BotRoomData = {
             topics: ['welcome']
         },
 
+        // Bonfire specific rooms
         {
             name: "camperbot/bonfire-factorialize-a-number",
             topics: ['bonfire factorialize a number'],
-            bonfire: true
+            isBonfire: true
         },
 
 

@@ -1,4 +1,5 @@
 "use strict";
+require('dotenv').load();
 
 //var clc = require("cli-color");
 //process.stdout.write(clc.erase.screen);

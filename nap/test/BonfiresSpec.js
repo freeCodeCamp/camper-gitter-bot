@@ -1,5 +1,7 @@
 "use strict";
 
+require('dotenv').load();
+
 
 var assert = require("chai").assert,
     expect = require("chai").expect;
@@ -45,14 +47,20 @@ function activateBonfire() {
 
 describe("Bonfires", function() {
 
-    it("should prep the KBase", function() {
-        KBase.initSync();
-    }),
-
     it("should load the Bonfires", function() {
         var d = Bonfires.load();
         expect(d.challenges[0]).not.to.be.null;
     });
+
+    it("should prep the KBase", function() {
+        KBase.initSync();
+    }),
+
+    it("should find a bonfire by roomname", function() {
+        var bfName = 'bonfire-factorialize-a-number';
+        var bf = Bonfires.findBonfire(bfName);
+        expect(bf.dashedName).to.equal(bfName);
+    }),
 
     it("stubInput should have a message.room.name", function() {
         expect(TestHelper.stubInput.message.room.name).to.equal("bothelp/bonfire-factorialize-a-number");

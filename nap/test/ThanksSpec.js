@@ -1,8 +1,5 @@
-/**
- * Created by dc on 8/3/15.
- */
-
 "use strict";
+require('dotenv').load();
 
 var expect = require("chai").expect;
 
