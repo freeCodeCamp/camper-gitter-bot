@@ -110,7 +110,7 @@ var commands = {
             var message = cleanMessage(blob.response.error.message);
             //message += Utils.betaFooter();
             Utils.warn("WARN @thanks>", blob.response.error.message, blob.response.error);
-            blob.bot.say(message, blob.input.message.room);
+            //blob.bot.say(message, blob.input.message.room);
             return false;
         }
 
