@@ -60,6 +60,45 @@ var bonfireTopics = [
     "Arguments Optional"
 ];
 
+var bonfireDashedNames = [
+    "bonfire-meet-bonfire",
+    "bonfire-reverse-a-string",
+    "bonfire-factorialize-a-number",
+    "bonfire-check-for-palindromes",
+    "bonfire-find-the-longest-word-in-a-string",
+    "bonfire-title-case-a-sentence",
+    "bonfire-return-largest-numbers-in-arrays",
+    "bonfire-confirm-the-ending",
+    "bonfire-repeat-a-string-repeat-a-string",
+    "bonfire-truncate-a-string",
+    "bonfire-chunky-monkey",
+    "bonfire-slasher-flick",
+    "bonfire-mutations",
+    "bonfire-falsey-bouncer",
+    "bonfire-where-art-thou",
+    "bonfire-seek-and-destroy",
+    "bonfire-where-do-i-belong",
+    "bonfire-sum-all-numbers-in-a-range",
+    "bonfire-diff-two-arrays",
+    "bonfire-roman-numeral-converter",
+    "bonfire-search-and-replace",
+    "bonfire-pig-latin",
+    "bonfire-dna-pairing",
+    "bonfire-missing-letters",
+    "bonfire-boo-who",
+    "bonfire-sorted-union",
+    "bonfire-convert-html-entities",
+    "bonfire-spinal-tap-case",
+    "bonfire-sum-all-odd-fibonacci-numbers",
+    "bonfire-sum-all-primes",
+    "bonfire-smallest-common-multiple",
+    "bonfire-finders-keepers",
+    "bonfire-drop-it",
+    "bonfire-steamroller",
+    "bonfire-binary-agents",
+    "bonfire-everything-be-true",
+    "bonfire-arguments-optional",
+]
 
 var BotRoomData = {
 
@@ -199,7 +238,6 @@ var BotRoomData = {
             topics: bonfireTopics
         },
 
-
         {
             title: "CoreTeam",
             name: "FreeCodeCamp/CoreTeam",
@@ -217,13 +255,6 @@ var BotRoomData = {
             title: "Welcome",
             name: "FreeCodeCamp/Welcome",
             topics: ['welcome']
-        },
-
-        // Bonfire specific rooms
-        {
-            name: "camperbot/bonfire-factorialize-a-number",
-            topics: ['bonfire factorialize a number'],
-            isBonfire: true
         },
 
 
@@ -245,6 +276,18 @@ var BotRoomData = {
 };
 
 var botname = null;
+
+bonfireDashedNames.map(function(bfName) {
+    var room = {
+        name: "camperbot/" + bfName,
+        isBonfire: true
+    }
+    BotRoomData.camperbot.push(room);
+})
+
+BotRoomData.camperbot.map(function(elem) {
+    console.log(elem);
+})
 
 RoomData = {
     rooms: function() {
