@@ -45,14 +45,25 @@ var commands = {
 
         var namesList = mentions.map(function (m) {
             toUser = m.screenName.toLowerCase();
-            var apiPath = "/api/users/give-brownie-points?receiver=" + toUser + "&giver=" + fromUser;
-            HttpWrap.callApi(apiPath, options, commands.showInfo);
-            return toUser;
+            if (toUser != fromUser) {
+              var apiPath = "/api/users/give-brownie-points?receiver=" + toUser + "&giver=" + fromUser;
+              HttpWrap.callApi(apiPath, options, commands.showInfo);
+              return toUser;
+            } else {
+              return null;
+            }
         });
-        toUserMessage = namesList.join(" and @");
-        output = "> " + fromUser + " sends brownie points to @" + toUserMessage;
-        output += " :sparkles: :thumbsup: :sparkles: ";
-        return output;
+
+        if ( namesList[0] != null ) {
+          toUserMessage = namesList.join(" and @");
+          output = "> " + fromUser + " sends brownie points to @" + toUserMessage;
+          output += " :sparkles: :thumbsup: :sparkles: ";
+          return output;
+        } else {
+          output = "> sorry " + fromUser + ", you can't send brownie points to yourself!";
+          output += " :sparkles: :sparkles: ";
+          return output;
+      }
     },
 
     about: function(input, bot) {
