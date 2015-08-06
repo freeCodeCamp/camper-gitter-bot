@@ -97,6 +97,8 @@ var Router = {
 
 
         app.get('/rooms', function(req, res) {
+            //for now force login so we dont get webspammed by crawlers
+            if (!req.user) return res.redirect('/');
             console.log("req.user", req.user);
 
             var rooms = RoomData.rooms('camperbot').filter( function(rm) {

@@ -44,10 +44,44 @@ var GBot = {
         }
     },
 
+    // ---------------- room related ----------------
+
+
+    // listen to a know room
+    // does a check to see if not already joined according to internal data
+    listenToRoom: function(room) {
+        // gitter.rooms.find(room.id).then(function (room) {
+
+        if (this.addToRoomList(room) === false) {
+            return;
+        }
+
+        // Utils.clog("listenToRoom ->", room);
+        var chats = room.streaming().chatMessages();
+        // clog("listenToRoom ok:", room.name);
+
+        // The 'chatMessages' event is emitted on each new message
+        chats.on("chatMessages", function(message) {
+            // clog('message> ', message.model.text);
+            if (message.operation !== "create") {
+                // console.log("skip msg reply", msg);
+                return;
+            }
+
+            if (GBot.isBot(message.model.fromUser.username)) {
+                // console.warn("skip reply to bot");
+                return;
+            }
+            message.room = room; // why don't gitter do this?
+            GBot.handleReply(message);
+        });
+    },
+
     // main IO routine called from room listener
     // TODO - add roomName info for the logs
     handleReply: function(message) {
-        clog(" in|", message.model.fromUser.username + "> " + message.model.text);
+        clog(message.room.uri + " @" + message.model.fromUser.username + ":");
+        clog(" in|",  message.model.text);
         var output = this.findAnyReply(message);
         clog("out| ", output);
         this.say(output, message.room);
@@ -105,9 +139,6 @@ var GBot = {
         }
         return input;
     },
-
-    // ---------------- room related ----------------
-
 
     announce: function(opts) {
         clog("announce", opts);
@@ -187,36 +218,6 @@ var GBot = {
             }
         }
         return false;
-    },
-
-    // listen to a know room
-    // does a check to see if not already joined according to internal data
-    listenToRoom: function(room) {
-        // gitter.rooms.find(room.id).then(function (room) {
-
-        if (this.addToRoomList(room) === false) {
-            return;
-        }
-
-        // Utils.clog("listenToRoom ->", room);
-        var chats = room.streaming().chatMessages();
-        // clog("listenToRoom ok:", room.name);
-
-        // The 'chatMessages' event is emitted on each new message
-        chats.on("chatMessages", function(message) {
-            // clog('message> ', message.model.text);
-            if (message.operation !== "create") {
-                // console.log("skip msg reply", msg);
-                return;
-            }
-
-            if (GBot.isBot(message.model.fromUser.username)) {
-                // console.warn("skip reply to bot");
-                return;
-            }
-            message.room = room; // why don't gitter do this?
-            GBot.handleReply(message);
-        });
     },
 
     // this joins rooms contained in the data/RoomData.js file
