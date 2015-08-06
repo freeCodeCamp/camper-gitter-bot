@@ -197,6 +197,8 @@ var GBot = {
     },
 
     getAnnounceMessage: function(opts) {
+        return "";
+        // disable
         var text = "----\n";
         if (opts.who && opts.topic) {
             text += "@" + opts.who + " has a question on\n";
