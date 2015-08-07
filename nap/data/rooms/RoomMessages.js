@@ -29,7 +29,7 @@ var SharedMessages = {
     },
     backticks: {
         word: "'''",
-        text: "> :bulb use backticks! ```"
+        text: "> :bulb: to format code use backticks! ``` [more info](https://github.com/freecodecamp/freecodecamp/wiki/code-formatting)",
         chance: 1
     }
 
