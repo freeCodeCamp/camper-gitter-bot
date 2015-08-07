@@ -58,8 +58,8 @@ var Utils = {
             return;
         }
         obj = obj || "";
-        msg = ">" + msg;
-        console.log( );
+        //msg = ">" + msg;
+        //console.log( );
         console.log(this.cols.info(where), this.cols.info(msg), obj);
         // winston.log(where, msg, obj);
     },

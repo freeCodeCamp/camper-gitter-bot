@@ -285,12 +285,18 @@ bonfireDashedNames.map(function(bfName) {
     BotRoomData.camperbot.push(room);
 })
 
-BotRoomData.camperbot.map(function(elem) {
-    console.log(elem);
+BotRoomData.camperbot.map(function(room) {
+    room.title = room.title || room.name.split("/")[1];
+    if (room.isBonfire) {
+        //room.entry = "FreeCodeCamp/HelpBonfires",
+        room.entry = "camperbot/testing",
+        room.topic = room.title
+    }
+    console.log(room);
 })
 
 RoomData = {
-    rooms: function() {
+    rooms: function(botname) {
         botname = botname || AppConfig.getBotName();
         return BotRoomData[botname];
     },

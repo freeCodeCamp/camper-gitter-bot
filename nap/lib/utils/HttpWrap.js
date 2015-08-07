@@ -6,13 +6,15 @@ var _ = require('lodash-node');
 var AppConfig = require("../../config/AppConfig"),
     Utils = require("./Utils");
 
+http://docs.strongloop.com/display/public/LB/Making+authenticated+requests
 
 var HttpWrap = {
 
     defaultOptions: {
         host: AppConfig.apiServer,
         timeout: 5000,
-        debug: false
+        debug: false,
+        apikey: "TODO"  // get from .env
     },
 
     callApi: function(apiPath, options, callback) {
@@ -21,6 +23,7 @@ var HttpWrap = {
         this.defaultOptions.body = body;
         _.merge(this.defaultOptions, options);
 
+        // TODO add authorisation to header
         this.defaultOptions.path = apiPath;
 
         var handleResponse = function(response) {
