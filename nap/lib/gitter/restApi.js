@@ -59,7 +59,7 @@ var gitter = {
 
         opts = opts || {};
         _.extend(options, opts); // opts takes priority
-        console.log('fetch.options\n', options)
+        //console.log('fetch.options\n', options)
 
         request(options, function(err, res, body) {
             if (err) return cb(err);

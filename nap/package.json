@@ -13,7 +13,8 @@
     "passport": "~0.2.0",
     "passport-oauth2": "~1.1.1",
     "request": "~2.27.0",
-    "simple-node-logger": ""
+    "simple-node-logger": "",
+    "stringy": ""
   },
   "devDependencies": {
     "mocha": "",

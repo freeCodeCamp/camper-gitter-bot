@@ -34,6 +34,15 @@ var GBot = {
         return AppConfig.botlist[0];
     },
 
+    //using a callback to get roomId
+    sayToRoom: function(text, roomName) {
+        var sayIt = function() {
+            console.log("sayIt", text, roomName);
+            GBot.say(text, roomName);
+        }
+        var roomId = GitterHelper.findRoomByName(roomName, sayIt);
+    },
+
     say: function(text, room) {
         Utils.hasProperty(room, 'path', 'expected room object'); // did we get a room
         try {

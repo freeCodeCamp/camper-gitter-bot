@@ -65,6 +65,20 @@ var Router = {
 
         });
 
+
+        // http://localhost:7000/in?topic=FreeCodecamp
+        app.get("/api/v1/msg", function(req, res) {
+            // console.log(req);
+            var topic = req.query.topic,
+                room = req.query.room,
+                who = AppConfig.who(req),
+                redir = that.findRedirect(req.query);
+
+            gbot.announce(redir);
+            res.send("OK");
+        });
+
+
         app.get('/login', passport.authenticate('oauth2'));
 
         app.get('/login/callback',

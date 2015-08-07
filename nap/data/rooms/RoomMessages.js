@@ -1,5 +1,9 @@
 "use strict";
 
+// the users input is scanned for these keywords
+// and can trigger the messages below
+// chance controls the frequency the result will be echoed back by the camper
+
 // using js rather than json so we can have functions and comments
 
 var Utils = require('../../lib/utils/Utils');
@@ -26,6 +30,11 @@ var SharedMessages = {
         word: 'holler',
         text: "> holler back!",
         chance: 1
+    },
+    allyourbase: {
+        word: "allyourbase",
+        text: "![all your base](https://files.gitter.im/FreeCodeCamp/CoreTeam/Bw51/imgres.jpg)",
+        chance: 1
     }
 
 };
@@ -38,6 +47,7 @@ var RoomMessages = {
             SharedMessages.troll,
             SharedMessages.bonfireChat,
             SharedMessages.meteorChat,
+            SharedMessages.allyourbase,
         ],
 
         'camperbot/localdev': [
@@ -45,6 +55,7 @@ var RoomMessages = {
             SharedMessages.troll,
             SharedMessages.bonfireChat,
             SharedMessages.meteorChat,
+            SharedMessages.allyourbase,
         ],
 
         'freecodecamp/help': [
@@ -72,7 +83,8 @@ var RoomMessages = {
             SharedMessages.holler,
             SharedMessages.troll,
             SharedMessages.bonfireChat,
-            SharedMessages.meteor,
+            SharedMessages.meteorChat,
+            SharedMessages.allyourbase,
         ],
 
         'camperbot/admins': [

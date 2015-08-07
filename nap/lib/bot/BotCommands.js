@@ -1,9 +1,19 @@
 /*jslint todo: true */
 "use strict";
 
+/*
+
+    All functions inside botCommands are automatically added to the bot as keywords
+    this is where you can add your own new functions
+
+ */
+
+
 var LOGTHIS = false;
 
 var assert = require("chai").assert;
+
+var stringy = require("stringy");
 
 var _ = require("lodash-node");
 
@@ -78,6 +88,27 @@ var BotCommands = {
             default:
                 return "you called?";
         }
+    },
+
+    // very simple example function showing how to parse a message and respond
+    // 'echo' is already a botCommand
+    echo: function(input, bot) {
+        var username = input.message.model.fromUser.username;
+        return "@" + username + " said: " + input.message.model.text;
+    },
+
+    echojson: function(input, bot) {
+        var jsonString = stringy.stringify(input); // avoid circular refs
+        console.log(jsonString);
+        var safeObj = JSON.parse(jsonString);
+        console.log(safeObj);
+        var pretty = JSON.stringify(safeObj, null, 2);
+        var str = "```json" + pretty + "```";
+        return str;
+    },
+
+    whoami: function(input, bot) {
+        return stringy.stringify(bot);
     },
 
     botversion: function(){
@@ -221,6 +252,13 @@ var BotCommands = {
         var str = "## Music!";
         str += "\n http://plug.dj/freecodecamp";
         return str;
+    },
+
+    announce: function(input, bot) {
+        var parts = input.params.split(' ');
+        var roomName = parts[0]
+        var text = parts.join(" ");
+        this.bot.sayToRoom(text, roomName)
     },
 
     rollem: function (input, bot) {
