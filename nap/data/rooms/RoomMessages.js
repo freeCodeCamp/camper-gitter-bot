@@ -26,6 +26,11 @@ var SharedMessages = {
         word: 'holler',
         text: "> holler back!",
         chance: 1
+    },
+    backticks: {
+        word: "'''",
+        text: "> :bulb use backticks! ```"
+        chance: 1
     }
 
 };
@@ -38,6 +43,7 @@ var RoomMessages = {
             SharedMessages.troll,
             SharedMessages.bonfireChat,
             SharedMessages.meteorChat,
+            SharedMessages.backticks,
         ],
 
         'camperbot/localdev': [
@@ -45,6 +51,7 @@ var RoomMessages = {
             SharedMessages.troll,
             SharedMessages.bonfireChat,
             SharedMessages.meteorChat,
+            SharedMessages.backticks,
         ],
 
         'freecodecamp/help': [
@@ -52,13 +59,14 @@ var RoomMessages = {
             SharedMessages.troll,
             SharedMessages.bonfireChat,
             SharedMessages.meteorChat,
-
+            SharedMessages.backticks,
         ],
 
         'freecodecamp/HelpBonfires': [
             SharedMessages.holler,
             SharedMessages.troll,
             SharedMessages.meteorChat,
+            SharedMessages.backticks,
         ],
 
         'FreeCodeCamp/CoreTeam': [
@@ -66,6 +74,7 @@ var RoomMessages = {
             SharedMessages.troll,
             SharedMessages.bonfireChat,
             SharedMessages.meteor,
+            SharedMessages.backticks,
         ],
 
         'camperbot/devteam': [
@@ -73,6 +82,7 @@ var RoomMessages = {
             SharedMessages.troll,
             SharedMessages.bonfireChat,
             SharedMessages.meteor,
+            SharedMessages.backticks,
         ],
 
         'camperbot/admins': [
