@@ -49,17 +49,20 @@ The main app is in /nap subdir.
 
     cd nap
 
-Copy the credentials file
+The login info needs to be in a file called `dot.env`.
+You'll have to copy the `env-EXAMPLE.env` file and rename it to just `dot.env`
+On the mac:
 
-    cp .env-EXAMPLE .env
+    cp dot-EXAMPLE.env dot.env
 
-now it should run as 'demobot'
+Now you can run the app! You'll see yourself as 'demobot'
     
-    bin/run.sh
+    node app.js
 
 That's it! The app should be running at [http://localhost:7891](http://localhost:7891)
 
-You can now visit your gitterbot via Gitter at [https://gitter.im/demobot/test](https://gitter.im/demobot/test)
+You can now visit your gitterbot via Gitter at
+[https://gitter.im/demobot/test](https://gitter.im/demobot/test)
 
 But! This is using shared login as "demobot" so you may find yourself in a chatroom with other people using the same IDs.
 
