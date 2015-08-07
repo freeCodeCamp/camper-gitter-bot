@@ -62,7 +62,7 @@ describe("GBot", function () {
         GBot.init();
         msg = TestHelper.makeMessageFromString("wiki bootstrap");
         res = GBot.findAnyReply(msg);
-        expect(res).to.contain('## :pencil: [bootstrap [edit]]');
+        expect(res).to.contain('## :point_right: [bootstrap');
     });
 
     it("should have a botstatus response", function () {

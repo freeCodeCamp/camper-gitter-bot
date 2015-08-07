@@ -28,6 +28,7 @@ describe("Thanks", function () {
     it("about should work", function () {
         var input = TestHelper.makeInputFromString("about @dcsan @bob");
         var output = GBot.findAnyReply(input.message);
+        Utils.tlog("output", output);
         expect(output).to.include("> testuser sends brownie points to @mentioneduserone and @mentionedusertwo");
         //var res = "help bootstrap".match(/(help|wiki|check) (.*)/);
         //assert.equal(res[2], "bootstrap");

@@ -19,7 +19,7 @@ var SharedMessages = {
     },
     troll: {
         word: 'troll',
-        text: "> If you're having troll problems [notify admins here](https://gitter.im/camperbot/admins)",
+        text: "> :trollface: troll problems? [notify admins here](https://gitter.im/camperbot/admins)",
         chance: 1
     },
     holler: {
