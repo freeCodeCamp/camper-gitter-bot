@@ -1,6 +1,6 @@
 "use strict";
 
-require('dotenv').load();
+require('dotenv').config({path: 'dot.env'});
 
 var expect = require("chai").expect,
     assert = require("chai").assert;

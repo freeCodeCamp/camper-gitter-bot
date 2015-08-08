@@ -1,6 +1,6 @@
 "use strict";
 
-require('dotenv').load();
+require('dotenv').config({path: 'dot.env'});
 
 var expect = require("chai").expect;
 
@@ -31,9 +31,9 @@ describe("HttpWrap", function () {
         var options = {method: 'GET'};
 
         HttpWrap.callApi(apiPath, options, function(apiResult) {
-            console.log(apiResult);
+            Utils.tlog('callApi', apiResult);
             expect(apiResult.response.about.username).to.equal("berkeleytrue");
-            expect(apiResult.response.about.github).to.equal("http://github.com/BerkeleyTrue");
+            expect(apiResult.response.about.github).to.equal("https://github.com/BerkeleyTrue");
             // expect(apiResult.about.bio).to.include("something");
             done();
         });

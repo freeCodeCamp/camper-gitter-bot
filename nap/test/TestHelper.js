@@ -1,5 +1,5 @@
 "use strict";
-require('dotenv').load();
+require('dotenv').config({path: 'dot.env'});
 
 var GBot = require('../lib/bot/GBot');
 

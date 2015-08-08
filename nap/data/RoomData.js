@@ -252,11 +252,24 @@ var BotRoomData = {
         },
 
         {
-            title: "Welcome",
-            name: "FreeCodeCamp/Welcome",
-            topics: ['welcome']
+            title: "MainHelp",
+            name: "FreeCodeCamp/Help",
+            topics: ['bots', 'fcc']
         },
 
+        {
+            name: "freecodecamp/CodeReview"
+        },
+
+        {
+            name: "FreeCodeCamp/Wiki"
+        },
+        {
+            name: "FreeCodeCamp/CodeReview"
+        },
+        {
+            name: "FreeCodeCamp/HalfWayClub"
+        }
 
 // {
         //     title: "HelpBonfires",

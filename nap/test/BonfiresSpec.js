@@ -1,6 +1,6 @@
 "use strict";
 
-require('dotenv').load();
+require('dotenv').config({path: 'dot.env'});
 
 
 var assert = require("chai").assert,
@@ -48,8 +48,9 @@ function activateBonfire() {
 describe("Bonfires", function() {
 
     it("should load the Bonfires", function() {
-        var d = Bonfires.load();
-        expect(d.challenges[0]).not.to.be.null;
+        var bfData = Bonfires.load();
+        Utils.tlog("bonfires", bfData.data.challenges);
+        expect(bfData.data.challenges[0]).not.to.be.null;
     });
 
     it("should prep the KBase", function() {
@@ -123,7 +124,7 @@ describe("Bonfires", function() {
     it("loaded should have wikiHints linked to bonfire object", function() {
         var bf = Bonfires.findBonfire(TEST_BF_TITLE);
         //Utils.tlog('bf returned to spec', bf);
-        expect(bf.wikiHints).to.be.instanceOf(Array);
+        expect(bf.hints).to.be.instanceOf(Array);
     });
 
 
