@@ -159,23 +159,24 @@ var BotCommands = {
         var baseList = RoomData.rooms();   // bot.roomList doesnt show private / meta data
 
         // https://gitter.im/FreeCodeCamp
-        str = "## rooms\nSee all the FreeCodeCamp rooms at [gitter.im/FreeCodeCamp](https://gitter.im/FreeCodeCamp)\n"
-
-        roomNames = baseList.map(function (rm) {
-            clog("room", rm);
-            if (rm.private) {
-                return "----";
-            } else {
-                uri = "https://gitter.im/" + rm.name;
-                icon = ":" + (rm.icon || "speech_balloon") + ":";
-                link = "\n " + icon + " [" + rm.name + "](" + uri + ")";
-                return link;
-            }
-        });
+        str = "## rooms\nSee all the FreeCodeCamp rooms at [gitter.im/FreeCodeCamp/rooms](https://gitter.im/orgs/FreeCodeCamp/rooms)\n"
+        //
+        //roomNames = baseList.map(function (rm) {
+        //    clog("room", rm);
+        //    if (rm.private) {
+        //        return "----";
+        //    } else {
+        //        uri = "https://gitter.im/" + rm.name;
+        //        icon = ":" + (rm.icon || "speech_balloon") + ":";
+        //        link = "\n " + icon + " [" + rm.name + "](" + uri + ")";
+        //        return link;
+        //    }
+        //});
 
         //trim so we dont get banned
-        roomNames = roomNames.slice(0, AppConfig.MAX_WIKI_LINES);
-        str += roomNames.join(" ");
+        //roomNames = roomNames.slice(0, AppConfig.MAX_WIKI_LINES);
+        //str += roomNames.join(" ");
+        str += "Or check [this wiki article](https://github.com/freecodecamp/freecodecamp/wiki/official-free-code-camp-chat-rooms) for a shortlist"
         return str;
     },
 
