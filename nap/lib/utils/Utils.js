@@ -223,7 +223,7 @@ var Utils = {
     },
 
     timeStamp: function(when, baseDate) {
-        var d1, timestamp, month;
+        var d1, timestamp, month, day;
         baseDate = baseDate || new Date();
         d1 = new Date();
 
@@ -236,7 +236,10 @@ var Utils = {
         month = (d1.getMonth() + 1);
         month = _.padLeft(month, 2, '0');
 
-        timestamp = d1.getFullYear() + '/' + month + '/' + d1.getDate();
+        day = (d1.getDate());
+        day = _.padLeft(day, 2, '0');
+
+        timestamp = d1.getFullYear() + '/' + month + '/' + day;
         return timestamp;
 
     },
