@@ -12,36 +12,11 @@ Join us in Gitter to discuss!
 https://gitter.im/dcsan/gitterbot
 
 
-## environment
-
-we're using the latest es6 so best to get an up to date environment.
-at the time of writing iojs was a bit ahead of node.
-
-```bash
-# ubuntu
-sudo apt-get upgrade
-sudo apt-get install build-essential
-```
-
-we're using n to update node [article](http://davidwalsh.name/upgrade-nodejs)
-We use n to manage iojs and node:
-```
-sudo npm install -g n
-sudo n io latest
-iojs -v  
-    // should be at least v2.4.0
-```
-
 
 ## checking out
 clone the repo
 
     git clone git@github.com:dcsan/gitterbot.git
-
-we use git submodules for some wiki data
-
-    git submodule init
-    git submodule update
 
 
 # Run the app in 'demobot' mode
@@ -49,21 +24,26 @@ The main app is in /nap subdir.
 
     cd nap
 
-Copy the credentials file
+The login info needs to be in a file called `dot.env`.
+You'll have to copy the `env-EXAMPLE.env` file and rename it to just `dot.env`
+On the mac:
 
-    cp .env-EXAMPLE .env
+    cp dot-EXAMPLE.env dot.env
 
-now it should run as 'demobot'
+Now you can run the app! You'll see yourself as 'demobot'
     
-    bin/run.sh
+    node app.js
 
 That's it! The app should be running at [http://localhost:7891](http://localhost:7891)
 
-You can now visit your gitterbot via Gitter at [https://gitter.im/demobot/test](https://gitter.im/demobot/test)
+You can now chat to your gitterbot via Gitter at
+[https://gitter.im/demobot/test](https://gitter.im/demobot/test)
 
-But! This is using shared login as "demobot" so you may find yourself in a chatroom with other people using the same IDs.
 
-So to setup this up and use your own gitter login info, you should create your own Gitter API key on their developer site, and replace the info in that `.env` file. Get your own API keys for gitter from: [https://developer.gitter.im/apps](https://developer.gitter.im/apps)
+# Getting your own appID
+This is using shared login as "demobot" so you may find yourself in a chatroom with other people using the same ID!
+
+To setup this up and use your own gitter login info, you should create your own Gitter API key on their developer site, and replace the info in that `.env` file. Get your own API keys for gitter from: [https://developer.gitter.im/apps](https://developer.gitter.im/apps)
 
 For more settings info, checkout the `AppConfig.js` and `RoomData.js` files. These define which rooms the bot will listen in to.
 You can ping us in the Dev Chatroom if you have problems [gitterbot chatroom](https://gitter.im/dcsan/gitterbot) .
@@ -128,12 +108,46 @@ All of the botCommands expect these two params eg in thanks.js
     var commands = {
         thanks: function (input, bot) {
 
-readme tweak.
+
+
+## environment notes
+
+### wiki data
+we use git submodules for some wiki data. to get these submodules you would do:
+
+    git submodule init
+    git submodule update
+
+
+### ES6 and iojs
+
+we're using the latest es6 so best to get an up to date environment.
+at the time of writing iojs was a bit ahead of node.
+its recommended to run on iojs rather than the older node.
+
+
+```bash
+# ubuntu
+sudo apt-get upgrade
+sudo apt-get install build-essential
+```
+
+we're using n to update node [article](http://davidwalsh.name/upgrade-nodejs)
+We use n to manage iojs and node:
+```
+sudo npm install -g n
+sudo n io latest
+iojs -v  
+    // should be at least v2.4.0
+```
+
 
 
 # Chat to us!
 
 Ping me @dcsan in the [gitterbot chatroom](https://gitter.im/dcsan/gitterbot) if you get stuck.
+
+
 
 
 
