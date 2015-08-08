@@ -66,7 +66,7 @@ var AppConfig = {
     gitterHost: "https://gitter.im/",
     mdn: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/",
     botVersion: "0.0.7",
-    MAX_WIKI_LINES: 40,
+    MAX_WIKI_LINES: 20,
     botNoiseLevel: 1,
 
     init: function() {

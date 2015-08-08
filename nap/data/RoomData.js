@@ -261,6 +261,15 @@ var BotRoomData = {
             name: "freecodecamp/CodeReview"
         },
 
+        {
+            name: "FreeCodeCamp/Wiki"
+        },
+        {
+            name: "FreeCodeCamp/CodeReview"
+        },
+        {
+            name: "FreeCodeCamp/HalfWayClub"
+        }
 
 // {
         //     title: "HelpBonfires",

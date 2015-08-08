@@ -172,6 +172,9 @@ var BotCommands = {
                 return link;
             }
         });
+
+        //trim so we dont get banned
+        roomNames = roomNames.slice(0, AppConfig.MAX_WIKI_LINES);
         str += roomNames.join(" ");
         return str;
     },
