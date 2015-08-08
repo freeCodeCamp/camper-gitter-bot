@@ -324,10 +324,11 @@ Bonfires = {
     bonfireDescription: function (bonfire, lines) {
         if (lines) {
             var desc = bonfire.description.slice(0, lines);
+            return desc.join('\n');
         } else {
-            desc = bonfire.description;
+            desc = bonfire.description[0];
+            return desc;
         }
-        return desc.join('\n');
     },
 
     bonfireLinks: function (bonfire) {
