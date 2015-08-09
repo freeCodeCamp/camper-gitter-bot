@@ -29,6 +29,14 @@ var TextLib = require("../../../lib/utils/TextLib");
 
 var commands = {
 
+    messages: {
+        wikiHint: function(fromUser) {
+            var wikiUrl = "(https://github.com/freecodecamp/freecodecamp/wiki/wiki-style-guide)";
+            var msg = "\n> hey @" + fromUser + " if you found this info helpful :point_right: **[consider adding a wiki article!]" + wikiUrl + "**";
+            return msg;
+        }
+    },
+
     thanks: function (input, bot) {
         Utils.hasProperty(input, "message", "thanks expects an object");
 
@@ -58,6 +66,7 @@ var commands = {
           toUserMessage = namesList.join(" and @");
           output = "> " + fromUser + " sends brownie points to @" + toUserMessage;
           output += " :sparkles: :thumbsup: :sparkles: ";
+          output += this.messages.wikiHint(fromUser);
           return output;
         } else {
           output = "> sorry " + fromUser + ", you can't send brownie points to yourself!";
