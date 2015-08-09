@@ -3,10 +3,13 @@
 //var yaml = require('js-yaml');
 var fs = require('fs');
 
+var _ = require("lodash-node");
+
 var Utils = require('../../lib/utils/Utils'),
     InputWrap = require('../../lib/bot/InputWrap'),
     KBase = require('../../lib/bot/KBase'),
     TextLib = require('../../lib/utils/TextLib');
+
 
 
 var newline = '\n';
@@ -95,8 +98,15 @@ Bonfires = {
         // Get document, or throw exception on error
         try {
             // this.data = yaml.safeLoad(fs.readFileSync('./data/bonfires/basic-bonfires.yml', 'utf8'));
-            this.raw = fs.readFileSync('./data/seed/challenges/basic-bonfires.json', 'utf8');
-            this.data = JSON.parse(this.raw);
+            var raw1 = fs.readFileSync('./data/seed/challenges/basic-bonfires.json', 'utf8');
+            var data1 = JSON.parse(raw1);
+
+            var raw2 = fs.readFileSync('./data/seed/challenges/advanced-bonfires.json', 'utf8');
+            var data2 = JSON.parse(raw2);
+
+            this.data = _.merge(data1, data2);
+            console.log(this.data);
+
             Bonfires.loadWikiHints();
             // this.data = Utils.toMarkdown(this.data);
             // Utils.log("bonfires", this.data);
