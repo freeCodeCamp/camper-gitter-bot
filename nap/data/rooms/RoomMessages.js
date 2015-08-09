@@ -8,13 +8,18 @@ var _ = require('lodash-node');
 
 // TODO - add these to all of the rooms
 // this is easier for people to add content to as they don't have to add to two lists
-var AllRoomMessages = {
-    test: {
-        regex: /help.*bonfires?[.?]$/,
+var AllRoomMessages = [
+    {
+        regex: /help.*bonfire:?s?[.?]$/i,
         text: "> type `bonfire name` to get some info on that bonfire. And check [HelpBonfires chatroom](https://gitter.im/FreeCodeCamp/HelpBonfires)",
-    }
-};
+    },
 
+    {
+        regex: /botx/i,
+        text: "> you called?",
+    },
+
+];
 
 
 // these messages only exist in certain rooms
@@ -51,7 +56,7 @@ var SpecificRoomMessages = {
 
 var RoomMessages = {
 
-    rooms: {
+    messagesPerRoomTable: {
         'camperbot/testing': [
             SpecificRoomMessages.holler,
             SpecificRoomMessages.troll,
@@ -116,12 +121,23 @@ var RoomMessages = {
         var chat = input.message.model.text.toLowerCase();
         chance = chance || 1;
         room = room.toLowerCase();
-        var checkList = this.rooms[room];
-        if (!checkList) { return false; }
-        var msgList = checkList.filter(function(item) {
+        var checkList = this.messagesPerRoomTable[room];
+
+        var thisRoomMessages = AllRoomMessages;
+
+        // _.merge(thisRoomMessages, checkList, AllRoomMessages);
+
+        if (!thisRoomMessages) { return false; }
+        var msgList = thisRoomMessages.filter(function(item) {
             if(!item) { return null; }
+
             //TODO - use a regex here
-            var flag = (chat.includes(item.word));
+            // var flag = chat.includes(item.word) || item.regex.test(chat);
+            Utils.clog("testing", item.regex, chat);
+            if (item.regex) {
+              var flag = item.regex.test(chat);            
+            }
+
             if(flag) {
                 Utils.clog(chat, item.word, "flag:" + flag);
             }
