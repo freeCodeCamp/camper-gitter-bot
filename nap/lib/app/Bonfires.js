@@ -43,7 +43,6 @@ Bonfires = {
     data: null,
     fixed: {
         hintWarning: "## :construction: ** After this are possible spoiler hints.**\nMake sure you've tried to hard to solve it yourself before proceeding. :construction:",
-        footer: "\n\n> type: `bf details` `bf links` `bf spoiler`",
         menu: "\n- `bonfire info` for more info " +
         "\n- `bonfire links` " +
         "\n- `bonfire script` for the script",
@@ -52,6 +51,17 @@ Bonfires = {
         comingSoon: "Coming Soon! We're working on it!",
         nameHint: "no, type part of the name of the bonfire! eg `bonfire roman` ",
         alert: "\n - :construction: **spoiler alert** :construction:",
+
+        bfRoomLink: function(name) {
+            var str = "[spoiler chatroom](https://gitter.im/camperbot/" + name + ")";
+            return str;
+        },
+
+        footer: function(name) {
+          // type `bf details` | `bf links` | :speech_balloon: [spoiler hints](/link/to) 
+          var str = "\n\n> more info type:&nbsp;&nbsp;`bf details` or `bf links` " + this.bfRoomLink(name) + "";
+          return str;
+        },
         reminder: function (name) {
             return "we're talking about bonfire :fire: " + name;
         },
@@ -60,7 +70,8 @@ Bonfires = {
         },
         roomLink: function(name) {
             var str =  ":construction: **spoiler alert** ";
-            str += "[dedicated chatroom](https://gitter.im/camperbot/" + name + ")"
+            str += this.bfRoomLink(name);
+            // str += "[dedicated chatroom](https://gitter.im/camperbot/" + name + ")"
             str += " :arrow_forward:";
             return str;
         },
@@ -282,7 +293,7 @@ Bonfires = {
         var str = this.bonfireHeader(bonfire) + newline;
         str += this.bonfireScript(bonfire) + newline;
         str += this.bonfireDescription(bonfire) + newline;
-        str += newline + this.fixed.footer;
+        str += newline + this.fixed.footer(bonfire.dashedName);
         return str;
     },
 
