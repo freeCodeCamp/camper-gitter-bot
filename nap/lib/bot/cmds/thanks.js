@@ -32,7 +32,7 @@ var thanksCommands = {
     messages: {
         wikiHint: function(fromUser) {
             var wikiUrl = "(https://github.com/freecodecamp/freecodecamp/wiki/wiki-style-guide)";
-            var msg = "\n> hey @" + fromUser + " if you found this info helpful :point_right: **[consider adding a wiki article!]" + wikiUrl + "**";
+            var msg = "\n> hey @" + fromUser + " if you found this info helpful :point_right: *[consider adding a wiki article!]" + wikiUrl + "*";
             return msg;
         }
     },
