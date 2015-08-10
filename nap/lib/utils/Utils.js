@@ -210,10 +210,10 @@ var Utils = {
         }
     },
 
-    makeUrlList: function(items, where) {
+    madeMDNLinks: function(items, where) {
         var out = "";
         if (!items) {
-            Utils.error("tried to makeUrlList for no items");
+            Utils.error("tried to madeMDNLinks for no items");
             return "";
         }
         out += items.map(function(one) {

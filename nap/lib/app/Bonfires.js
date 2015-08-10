@@ -262,7 +262,7 @@ Bonfires = {
         // FIXME - change to actual links see
         // https://github.com/dcsan/gitterbot/issues/45
         var output = "links: \n";
-        output += Utils.makeUrlList(bonfire.MDNlinks, 'mdn');
+        output += Utils.madeMDNLinks(bonfire.MDNlinks, 'mdn');
         return output;
     },
 
