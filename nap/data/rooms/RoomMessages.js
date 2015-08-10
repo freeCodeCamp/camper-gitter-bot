@@ -72,7 +72,7 @@ var RoomMessages = {
 
             //TODO - use a regex here
             // var flag = chat.includes(item.word) || item.regex.test(chat);
-            Utils.clog("testing", item.regex, chat);
+            //Utils.clog("testing", item.regex, chat);
             if (item.regex) {
               var flag = item.regex.test(chat);            
             }
