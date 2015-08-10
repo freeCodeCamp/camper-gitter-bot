@@ -51,7 +51,7 @@ var Rooms = {
     isBonfire: function(name) {
         var room = this.findByName(name);
         if (room) {
-            Utils.log("isBonfire>room", room);
+            //Utils.log("isBonfire>room", room);
             return(room.isBonfire);
         }
         return false;

@@ -383,9 +383,9 @@ Bonfires = {
 
 Bonfires.load();
 
-// Bonfires.allDashedNames().map(function(bf) {
-//     console.log(bf);
-// })
+ Bonfires.allDashedNames().map(function(bf) {
+     console.log(bf);
+ })
 
 module.exports = Bonfires;
 
