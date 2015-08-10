@@ -14,7 +14,7 @@ var HttpWrap = {
         host: AppConfig.apiServer,
         timeout: 5000,
         debug: false,
-        apikey: AppConfig.apiKey
+        apiKey: AppConfig.apiKey
     },
 
     callApi: function(apiPath, options, callback) {
