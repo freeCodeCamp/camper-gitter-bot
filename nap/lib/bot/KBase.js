@@ -73,7 +73,7 @@ KBase = {
                 KBase.allData.push(blob);
             }
         });
-        Utils.clog("loaded KBase items:", KBase.allData.length);
+        // Utils.clog("loaded KBase items:", KBase.allData.length);
         return KBase.allData;
     },
 
@@ -81,7 +81,7 @@ KBase = {
         var topicData = this.getTopicData(bfName);
         if (topicData) {
             var wikiHints = topicData.data.split("##");
-            Utils.tlog('loaded hints for', bfName);
+            // Utils.tlog('loaded hints for', bfName);
             return wikiHints;
         } else {
             return null;

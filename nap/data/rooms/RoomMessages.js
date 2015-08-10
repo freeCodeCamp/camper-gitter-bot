@@ -10,8 +10,10 @@ var _ = require('lodash-node');
 // this is easier for people to add content to as they don't have to add to two lists
 var AllRoomMessages = [
     {
-        regex: /help.*bonfire:?s?[.?]$/i,
-        text: "> type `bonfire name` to get some info on that bonfire. And check [HelpBonfires chatroom](https://gitter.im/FreeCodeCamp/HelpBonfires)",
+        // regex: /help.*bonfire:?s?[.?]$/i,
+        regex: /help.*bonfire/i,
+        text: " > type `bonfire name` to get some info on that bonfire. And check [HelpBonfires chatroom](https://gitter.im/FreeCodeCamp/HelpBonfires)",
+        not: 'freecodecamp/HelpBonfires'  // optional to skip for this room
     },
 
     {
@@ -19,111 +21,133 @@ var AllRoomMessages = [
         text: "> you called?",
     },
 
+    {
+        regex: /troll/i,
+        text: "> :trollface: troll problems? [notify admins here](https://gitter.im/camperbot/admins)",
+    },
+
+    {
+        regex: /'''/,
+        text: "> :bulb: to format code use backticks! ``` [more info](https://github.com/freecodecamp/freecodecamp/wiki/code-formatting)",
+    },
+
+    {      
+        regex: /holler/i,
+        text: "> holler back!"
+    }
+
+
 ];
 
 
-// these messages only exist in certain rooms
-var SpecificRoomMessages = {
+// // these messages only exist in certain rooms
+// var SpecificRoomMessages = {
 
-    bonfireChat: {
-        word: 'bonfire',
-        // text: "> we have bonfire specific chatroom here [FreeCodeCamp/HelpBonfires](https://gitter.im/FreeCodeCamp/HelpBonfires)",
-        text: "> type `bonfire name` to get some info on that bonfire. And check [HelpBonfires chatroom](https://gitter.im/FreeCodeCamp/HelpBonfires)",
-        chance: 0.2
-    },
-    meteorChat: {
-        word: 'meteor',
-        text: "> we have a meteor channel here: [camperbot/meteorJS](https://gitter.im/camperbot/meteorJS)",
-        chance: 1
-    },
-    troll: {
-        word: 'troll',
-        text: "> :trollface: troll problems? [notify admins here](https://gitter.im/camperbot/admins)",
-        chance: 1
-    },
-    holler: {
-        word: 'holler',
-        text: "> holler back!",
-        chance: 1
-    },
-    backticks: {
-        word: "'''",
-        text: "> :bulb: to format code use backticks! ``` [more info](https://github.com/freecodecamp/freecodecamp/wiki/code-formatting)",
-        chance: 1
-    }
+//     bonfireChat: {
+//         word: 'bonfire',
+//         // text: "> we have bonfire specific chatroom here [FreeCodeCamp/HelpBonfires](https://gitter.im/FreeCodeCamp/HelpBonfires)",
+//         text: "> type `bonfire name` to get some info on that bonfire. And check [HelpBonfires chatroom](https://gitter.im/FreeCodeCamp/HelpBonfires)",
+//         chance: 0.2
+//     },
+//     meteorChat: {
+//         word: 'meteor',
+//         text: "> we have a meteor channel here: [camperbot/meteorJS](https://gitter.im/camperbot/meteorJS)",
+//         chance: 1
+//     },
+//     troll: {
+//         word: 'troll',
+//         text: "> :trollface: troll problems? [notify admins here](https://gitter.im/camperbot/admins)",
+//         chance: 1
+//     },
+//     holler: {
+//         word: 'holler',
+//         text: "> holler back!",
+//         chance: 1
+//     },
+//     backticks: {
+//         word: "'''",
+//         text: "> :bulb: to format code use backticks! ``` [more info](https://github.com/freecodecamp/freecodecamp/wiki/code-formatting)",
+//         chance: 1
+//     }
 
-};
+// };
 
 var RoomMessages = {
 
-    messagesPerRoomTable: {
-        'camperbot/testing': [
-            SpecificRoomMessages.holler,
-            SpecificRoomMessages.troll,
-            SpecificRoomMessages.bonfireChat,
-            SpecificRoomMessages.meteorChat,
-            SpecificRoomMessages.backticks,
-        ],
+    // messagesPerRoomTable: {
+    //     'camperbot/testing': [
+    //         SpecificRoomMessages.holler,
+    //         SpecificRoomMessages.troll,
+    //         SpecificRoomMessages.bonfireChat,
+    //         SpecificRoomMessages.meteorChat,
+    //         SpecificRoomMessages.backticks,
+    //     ],
 
-        'camperbot/localdev': [
-            SpecificRoomMessages.holler,
-            SpecificRoomMessages.troll,
-            SpecificRoomMessages.bonfireChat,
-            SpecificRoomMessages.meteorChat,
-            SpecificRoomMessages.backticks,
-        ],
+    //     'camperbot/localdev': [
+    //         SpecificRoomMessages.holler,
+    //         SpecificRoomMessages.troll,
+    //         SpecificRoomMessages.bonfireChat,
+    //         SpecificRoomMessages.meteorChat,
+    //         SpecificRoomMessages.backticks,
+    //     ],
 
-        'freecodecamp/help': [
-            SpecificRoomMessages.holler,
-            SpecificRoomMessages.troll,
-            SpecificRoomMessages.bonfireChat,
-            SpecificRoomMessages.meteorChat,
-            SpecificRoomMessages.backticks,
-        ],
+    //     'freecodecamp/help': [
+    //         SpecificRoomMessages.holler,
+    //         SpecificRoomMessages.troll,
+    //         SpecificRoomMessages.bonfireChat,
+    //         SpecificRoomMessages.meteorChat,
+    //         SpecificRoomMessages.backticks,
+    //     ],
 
-        'freecodecamp/HelpBonfires': [
-            SpecificRoomMessages.holler,
-            SpecificRoomMessages.troll,
-            SpecificRoomMessages.meteorChat,
-            SpecificRoomMessages.backticks,
-        ],
+    //     'freecodecamp/HelpBonfires': [
+    //         SpecificRoomMessages.holler,
+    //         SpecificRoomMessages.troll,
+    //         SpecificRoomMessages.meteorChat,
+    //         SpecificRoomMessages.backticks,
+    //     ],
 
-        'FreeCodeCamp/CoreTeam': [
-            SpecificRoomMessages.holler,
-            SpecificRoomMessages.troll,
-            SpecificRoomMessages.bonfireChat,
-            SpecificRoomMessages.meteor,
-            SpecificRoomMessages.backticks,
-        ],
+    //     'FreeCodeCamp/CoreTeam': [
+    //         SpecificRoomMessages.holler,
+    //         SpecificRoomMessages.troll,
+    //         SpecificRoomMessages.bonfireChat,
+    //         SpecificRoomMessages.meteor,
+    //         SpecificRoomMessages.backticks,
+    //     ],
 
-        'camperbot/devteam': [
-            SpecificRoomMessages.holler,
-            SpecificRoomMessages.troll,
-            SpecificRoomMessages.bonfireChat,
-            SpecificRoomMessages.meteor,
-            SpecificRoomMessages.backticks,
-        ],
+    //     'camperbot/devteam': [
+    //         SpecificRoomMessages.holler,
+    //         SpecificRoomMessages.troll,
+    //         SpecificRoomMessages.bonfireChat,
+    //         SpecificRoomMessages.meteor,
+    //         SpecificRoomMessages.backticks,
+    //     ],
 
-        'camperbot/admins': [
-            SpecificRoomMessages.troll,
-            SpecificRoomMessages.bonfireChat,
-        ],
+    //     'camperbot/admins': [
+    //         SpecificRoomMessages.troll,
+    //         SpecificRoomMessages.bonfireChat,
+    //     ],
 
-    },
+    // },
 
     //TODO - add in the AllRoomMessages to the data structure being scanned
 
-    scanInput: function(input, room, chance) {
+    scanInput: function(input, roomName, chance) {
         if (Math.random() > chance) {
             return null;   // dont always reply
         }
         var oneMessage;
         var chat = input.message.model.text.toLowerCase();
         chance = chance || 1;
-        room = room.toLowerCase();
-        var checkList = this.messagesPerRoomTable[room];
+        roomName = roomName.toLowerCase();
+        // var checkList = this.messagesPerRoomTable[roomName];
 
-        var thisRoomMessages = AllRoomMessages;
+        var thisRoomMessages = AllRoomMessages.filter(function(msg) {
+            if (msg.not) {
+                return (msg.not != roomName);
+            } else {
+                return true;
+            }
+        });
 
         // _.merge(thisRoomMessages, checkList, AllRoomMessages);
 
