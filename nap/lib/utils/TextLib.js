@@ -29,6 +29,7 @@ var TextLib = {
     },
 
     dashedName: function(str) {
+        if (!str) return;
         str = str.replace(/\s/g, "-");
         str = str.toLowerCase();
         str = str.replace('--', '-'); // in case of doubles
