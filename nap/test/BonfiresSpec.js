@@ -49,7 +49,7 @@ describe("Bonfires", function() {
 
     it("should load the Bonfires", function() {
         var bfData = Bonfires.load();
-        Utils.tlog("bonfires", bfData.data.challenges);
+        //Utils.tlog("bonfires", bfData.data.challenges);
         expect(bfData.data.challenges[0]).not.to.be.null;
     });
 

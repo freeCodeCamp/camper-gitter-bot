@@ -106,27 +106,23 @@ Bonfires = {
               'expert-bonfires.json',
             ]
 
-            var allData = [];
+            var allData = {
+                challenges: []
+            };
             bfDataFiles.map(function(fname) {
-              var raw = fs.readFileSync('./data/seed/challenges/' + fname, 'utf8');
-              var thisData = JSON.parse(raw);
-              _.merge(allData, thisData);
+                var raw = fs.readFileSync('./data/seed/challenges/' + fname, 'utf8');
+                var thisData = JSON.parse(raw);
+                allData.challenges = allData.challenges.concat(thisData.challenges);
             })
 
             this.data = allData;
-
-            // var raw1 = fs.readFileSync('./data/seed/challenges/basic-bonfires.json', 'utf8');
-            // var data1 = JSON.parse(raw1);
-
-            // var raw2 = fs.readFileSync('./data/seed/challenges/advanced-bonfires.json', 'utf8');
-            // var data2 = JSON.parse(raw2);
-
-            // this.data = _.merge(data1, data2);
-            // console.log(this.data);
+            //Utils.tlog("Bonfires.data", "is", allData);
 
             Bonfires.loadWikiHints();
+
+            //TODO - convert the embedded HTML to markdown tags
             // this.data = Utils.toMarkdown(this.data);
-            // Utils.log("bonfires", this.data);
+
         } catch (e) {
             Utils.error("can't load bonfire data", e);
         }
