@@ -128,7 +128,7 @@ var GBot = {
     // when the bot sends out a list
     makeListOptions: function(output) {
         var matches = [];
-        output.replace(/\\([a-zA-Z ]+)\]/g, function(g0,g1){
+        output.replace(/\[([a-zA-Z ]+)\]/g, function(g0,g1){
             matches.push(g1);
         });
         this.listReplyOptions = matches;
