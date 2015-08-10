@@ -2,7 +2,7 @@
 
 var gitterHost = process.env.HOST || 'https://gitter.im';
 var AppConfig = require("../../config/AppConfig");
-var    Utils = require("../../lib/utils/Utils");
+var Utils = require("../../lib/utils/Utils");
 
 var request = require('request');
 var _ = require('lodash-node');
@@ -34,7 +34,19 @@ var GitterHelper = {
             }
 
             if (res.statusCode === 200 && callback) {
-                callback(null, JSON.parse(body));
+                //Utils.tlog("200 body:", body);
+                Utils.tlog("body.fromUser:", body.fromUser);
+                //var data;
+                //try {
+                //    data = JSON.parse(body);
+                //} catch (e) {
+                //    Utils.error("GitterHelper", "failed to parse", body);
+                //    Utils.tlog("request.options", defaultOptions);
+                //    Utils.error("err", err);
+                //    data = JSON.parse(body.fromUser);
+                //    console.log("data.fromUser", data);
+                //}
+                callback(null, body);
             } else {
                 Utils.warn("GitterHelper", "non 200 response from", defaultOptions)
                 //var body = JSON.parse(body);
@@ -56,7 +68,7 @@ var GitterHelper = {
         Utils.tlog("postMessage", text, roomId);
 
         this.fetch(
-            '/api/v1/rooms/' + roomId + '/chatMessages',
+            '/rooms/' + roomId + '/chatMessages',
             callback,
             opts
         )
@@ -83,13 +95,14 @@ var GitterHelper = {
     findRoomByName: function(roomUri, callback, cbParams) {
         cbParams = cbParams || {};
         var roomObj, cached;
-        cached = GitterHelper.roomDataCache[roomUri]
-        if (cached != null) {
-            cbParams.gitterRoom = cached;
-            callback(cbParams);
-        }
+        cached = GitterHelper.roomDataCache[roomUri];
+        //if (cached != null) {
+        //    cbParams.gitterRoom = cached;
+        //    callback(cbParams);
+        //}
         //console.log("callback", callback);
         this.fetch('/rooms', function(err, rooms) {
+            Utils.tlog("found rooms", rooms);
             var roomList = rooms.filter(function(rm) {
                 return rm.uri == roomUri;
             })
@@ -114,18 +127,12 @@ var GitterHelper = {
     },
 
     sayToRoomName: function(text, roomUri) {
-        var cbParams = {
-            text: text
-        }
         GitterHelper.findRoomByName(roomUri, function(opts) {
-            GitterHelper.sayToRoomObj(text, opts);
+            GitterHelper.sayToRoomObj(text, opts.gitterRoom);
         })
     }
 
 };
 
 
-
-
 module.exports = GitterHelper;
-

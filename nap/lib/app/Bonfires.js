@@ -146,7 +146,7 @@ Bonfires = {
             return hint;
         } else {
             bonfire.currentHint = 0;
-            Utils.log("no hints", hintNum, bonfire);
+            //Utils.log("no hints", hintNum, bonfire);
             var str = Bonfires.fixed.pleaseContribute(bonfire);
             //str += newline + this.wikiLinkFooter(bonfire);
             return str;
@@ -352,7 +352,7 @@ Bonfires = {
 Bonfires.load();
 
 Bonfires.allDashedNames().map(function(bf) {
-    console.log(bf);
+    //console.log(bf);
 })
 
 module.exports = Bonfires;
