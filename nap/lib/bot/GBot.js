@@ -46,7 +46,6 @@ var GBot = {
 
         // Utils.clog("listenToRoom ->", room);
         var chats = room.streaming().chatMessages();
-        // clog("listenToRoom ok:", room.name);
 
         // The 'chatMessages' event is emitted on each new message
         chats.on("chatMessages", function(message) {
@@ -73,6 +72,7 @@ var GBot = {
             clog("out| ", output);
             GBot.say(output, message.room);
             // message.room.send(output);
+            // this.listReplyOptions = [];
         }
         return (output);  // for debugging
     },
@@ -106,22 +106,64 @@ var GBot = {
     // returns a string to send
     // handleReply takes care of sending to chat system
     findAnyReply: function(message) {
-        var input, output;
+        var input, output, scanCommand;
         input = this.parseInput(message);
+        var listReplyOptionsAvailable = this.findListOption(input);
+
         if (input.command) {
             // this looks up a command and calls it
             output = BotCommands[input.keyword](input, this);
-            return output;
+            if (input.keyword === 'find') {
+                this.makeListOptions(output); // this could be moved to the find command?
+            }
+        } else if (listReplyOptionsAvailable !== false) {
+            output = listReplyOptionsAvailable;
+        } else {
+            // non-command keywords like 'troll'
+            scanCommand = RoomMessages.scanInput(input, input.message.room.name, AppConfig.botNoiseLevel);
+            if (scanCommand) {
+                if (scanCommand.text) {
+                    output = (scanCommand.text);
+                }
+                if (scanCommand.func) {
+                    Utils.tlog("func", scanCommand.func);
+                    output = scanCommand.func(input, this);
+                }
+            }
         }
-        // else if (input.output && input.output.func) {
-        output = RoomMessages.scanInput(input, input.message.room.name, AppConfig.botNoiseLevel);
-        if (output.text) {
-            return output.text;
+        // TODO - check its a string or nothing
+        return output;
+    },
+
+    // save a list of options
+    // when the bot sends out a list
+    makeListOptions: function(output) {
+        var matches = [];
+        output.replace(/\[([a-zA-Z ]+)\]/g, function(g0,g1){
+            matches.push(g1);
+        });
+        this.listReplyOptions = matches;
+        //clog('ListOptions| ', matches);
+        return matches;
+    },
+
+    // reply option to user
+    // if they chose an option from the list
+    findListOption: function(input) {
+        if (this.listReplyOptions === undefined || this.listReplyOptions[0] === undefined) {
+            return false;
         }
-        if (output.func) {
-            Utils.warn("calling", output.func);
-            return output;
+        else if (input.cleanText.match(/^[0-9]+$/i) === null) {
+            return false;
         }
+        else if (this.listReplyOptions[input.cleanText] === undefined) {
+            return 'List option **' + input.cleanText + '** not found.';
+        }
+        //var output = 'User chose option: **' + this.listReplyOptions[input.cleanText] + '**';
+        var output = BotCommands['wiki']({ params: this.listReplyOptions[input.cleanText] }, this);
+        this.listReplyOptions = [];
+        //clog('ListOutput |', 'wiki ' + this.listReplyOptions[input.cleanText]);
+        return output;
     },
 
     // turns raw text input into a json format
