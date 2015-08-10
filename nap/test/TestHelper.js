@@ -22,8 +22,8 @@ var TestHelper = {
                 readBy: 0,
                 urls: [],
                 mentions: [
-                    {screenName: 'mentionedUserOne'},
-                    {screenName: 'mentionedUserTwo'}
+                    {screenName: 'dcsan'},
+                    {screenName: 'berkeleytrue'}
                 ],
                 issues: [],
                 meta: {},
@@ -32,16 +32,16 @@ var TestHelper = {
             room: {
                 path: '/rooms',
                 id: '55b3d5780fc9f982beaaf7f4',
-                name: 'bothelp/GeneralChat',
+                name: 'camperbot/localdev',
                 topic: ' testing',
-                uri: 'bothelp/GeneralChat',
+                uri: 'camperbot/localdev',
                 oneToOne: false,
                 userCount: 5,
                 unreadItems: 100,
                 mentions: 27,
                 lastAccessTime: '2015-07-29T14:41:04.820Z',
                 lurk: false,
-                url: '/bothelp/GeneralChat',
+                url: '/camperbot/localdev',
                 githubType: 'USER_CHANNEL',
                 security: 'PUBLIC',
                 noindex: false,

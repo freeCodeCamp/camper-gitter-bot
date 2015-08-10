@@ -45,8 +45,11 @@ var GBot = {
 
     say: function(text, room) {
         Utils.hasProperty(room, 'path', 'expected room object'); // did we get a room
+        Utils.hasProperty(room, 'text', 'tried to GBot.say with no text');
         try {
-            room.send(text);
+            //room.send(text);
+            GitterHelper.sayToRoomName(text, room.uri);
+
         } catch (err) {
             Utils.warn("GBot.say>", "failed", err);
             Utils.warn("GBot.say>", "room", room);
@@ -92,10 +95,12 @@ var GBot = {
         clog(message.room.uri + " @" + message.model.fromUser.username + ":");
         clog(" in|",  message.model.text);
         var output = this.findAnyReply(message);
-        clog("out| ", output);
-        this.say(output, message.room);
-        // message.room.send(output);
-        return (output);
+        if (output) {
+            clog("out| ", output);
+            GBot.say(output, message.room);
+            // message.room.send(output);
+        }
+        return (output);  // for debugging
     },
 
     // search all reply methods
@@ -222,6 +227,7 @@ var GBot = {
 
     // dont reply to bots or you'll get a feedback loop
     isBot: function(who) {
+        // 'of' IS correct even tho ES6Lint doesn't get it
         for (var bot of AppConfig.botlist) {
             if (who === bot) {
                 //Utils.warn("GBot", "isBot!");

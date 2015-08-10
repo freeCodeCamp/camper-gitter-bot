@@ -33,25 +33,25 @@ var GitterHelper = {
                 return callback(err);
             }
 
-            if (res.statusCode === 200 && callback) {
-                //Utils.tlog("200 body:", body);
-                Utils.tlog("body.fromUser:", body.fromUser);
-                //var data;
-                //try {
-                //    data = JSON.parse(body);
-                //} catch (e) {
-                //    Utils.error("GitterHelper", "failed to parse", body);
-                //    Utils.tlog("request.options", defaultOptions);
-                //    Utils.error("err", err);
-                //    data = JSON.parse(body.fromUser);
-                //    console.log("data.fromUser", data);
-                //}
-                callback(null, body);
+            if (callback == null) return;
+
+            if (res.statusCode === 200) {
+                var data;
+                // FIXME - sometimes we get JSON back (from POST requests)
+                // sometimes we just get a string
+                if (typeof body == 'string') {
+                    //Utils.tlog("got a string for req", defaultOptions.uri);
+                    data = JSON.parse(body);
+                } else {
+                    // hope its json!
+                    data = body;
+                }
+                return callback(null, data);
             } else {
-                Utils.warn("GitterHelper", "non 200 response from", defaultOptions)
+                Utils.warn("GitterHelper", "non 200 response from", defaultOptions);
                 //var body = JSON.parse(body);
                 Utils.warn("GitterHelper", "body", body);
-                callback('err' + res.statusCode);
+                return callback('err' + res.statusCode);
             }
         });
     },
@@ -65,7 +65,7 @@ var GitterHelper = {
             json: true
         }
 
-        Utils.tlog("postMessage", text, roomId);
+        //Utils.tlog("postMessage", text, roomId);
 
         this.fetch(
             '/rooms/' + roomId + '/chatMessages',
@@ -95,21 +95,26 @@ var GitterHelper = {
     findRoomByName: function(roomUri, callback, cbParams) {
         cbParams = cbParams || {};
         var roomObj, cached;
+
+        // avoid doing rest calls if we're posting to a known room
         cached = GitterHelper.roomDataCache[roomUri];
-        //if (cached != null) {
-        //    cbParams.gitterRoom = cached;
-        //    callback(cbParams);
-        //}
-        //console.log("callback", callback);
+        if (cached != null) {
+            //Utils.tlog("return from cached:", cbParams);
+            cbParams.gitterRoom = cached;
+            callback(cbParams);
+        }
+
         this.fetch('/rooms', function(err, rooms) {
-            Utils.tlog("found rooms", rooms);
+            //Utils.tlog("found rooms", rooms);
+            if (!rooms) {
+                Utils.error("can't find rooms with roomUri", roomUri);
+                return;
+            }
             var roomList = rooms.filter(function(rm) {
                 return rm.uri == roomUri;
             })
             if (roomList.length > 0) {
                 var room = roomList[0];
-                //console.log('cb', this);
-                //console.log('cbParams', cbParams);
                 GitterHelper.roomDataCache[roomUri] = room;
                 cbParams.gitterRoom = room;
                 callback(cbParams);
@@ -118,11 +123,11 @@ var GitterHelper = {
     },
 
     responseCallback: function(obj) {
-        Utils.clog("respones callback");
+        Utils.clog("response callback");
     },
 
     sayToRoomObj: function(text, opts) {
-        Utils.tlog("sayToRoomObj>", text, opts);
+        //Utils.tlog("sayToRoomObj>", text, opts);
         GitterHelper.postMessage(text, opts.id, GitterHelper.responseCallback);
     },
 

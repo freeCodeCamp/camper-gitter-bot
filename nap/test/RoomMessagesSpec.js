@@ -24,7 +24,5 @@ describe("RoomMessages", function(){
         expect(msg).to.equal(null);
     });
 
-
-
 });
 

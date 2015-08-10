@@ -1,9 +1,9 @@
 /*jslint todo: true */
 "use strict";
 
-var // GBot = require("../../../lib/bot/GBot.js"),
+var GBot = require("../../../lib/bot/GBot.js");
     //KBase = require("../../bot/KBase"),
-    Utils = require("../../../lib/utils/Utils"),
+var Utils = require("../../../lib/utils/Utils"),
     //AppConfig = require("../../../config/AppConfig"),
     HttpWrap = require("../../../lib/utils/HttpWrap");
 
@@ -27,7 +27,7 @@ var TextLib = require("../../../lib/utils/TextLib");
 
 
 
-var commands = {
+var thanksCommands = {
 
     thanks: function (input, bot) {
         Utils.hasProperty(input, "message", "thanks expects an object");
@@ -47,7 +47,7 @@ var commands = {
             toUser = m.screenName.toLowerCase();
             if (toUser != fromUser) {
               var apiPath = "/api/users/give-brownie-points?receiver=" + toUser + "&giver=" + fromUser;
-              HttpWrap.callApi(apiPath, options, commands.showInfo);
+              HttpWrap.callApi(apiPath, options, thanksCommands.showInfoCallback);
               return toUser;
             } else {
               return null;
@@ -83,7 +83,7 @@ var commands = {
         }
 
         var apiPath = '/api/users/about?username=' + name;
-        HttpWrap.callApi(apiPath, options, commands.showInfo);
+        HttpWrap.callApi(apiPath, options, thanksCommands.showInfoCallback);
     },
 
     // called back from apiCall
@@ -93,8 +93,8 @@ var commands = {
     //      input
 
 
-    showInfo: function(blob) {
-        //Utils.clog('thanks>', "showInfo>", blob);
+    showInfoCallback: function(blob) {
+        //Utils.clog('thanks>', "showInfoCallback>", blob);
 
         // in case we want to filter the message
         var cleanMessage = function(message) {
@@ -129,9 +129,13 @@ var commands = {
 //
 //        `;
         //Utils.clog("thanks callback>", str);
+
+
+        //blob.bot.say(str, blob.input.message.room);
+        Utils.tlog("showInfoCallback GBot", blob);
         blob.bot.say(str, blob.input.message.room);
     }
 
 };
 
-module.exports = commands;
+module.exports = thanksCommands;
