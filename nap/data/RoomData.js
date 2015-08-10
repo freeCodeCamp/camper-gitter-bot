@@ -98,7 +98,16 @@ var bonfireDashedNames = [
     "bonfire-binary-agents",
     "bonfire-everything-be-true",
     "bonfire-arguments-optional",
-]
+    "bonfire-make-a-person",
+    "bonfire-map-the-debris",
+    "bonfire-pairwise",
+    "bonfire-validate-us-telephone-numbers",
+    "bonfire-symmetric-difference",
+    "bonfire-exact-change",
+    "bonfire-inventory-update",
+    "bonfire-no-repeats-please",
+    "bonfire-friendly-date-ranges"
+];
 
 var BotRoomData = {
 
