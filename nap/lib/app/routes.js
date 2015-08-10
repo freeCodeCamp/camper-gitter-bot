@@ -78,7 +78,6 @@ var Router = {
             res.send("OK");
         });
 
-
         app.get('/login', passport.authenticate('oauth2'));
 
         app.get('/login/callback',

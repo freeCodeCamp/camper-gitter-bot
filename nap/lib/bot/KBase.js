@@ -57,7 +57,7 @@ KBase = {
                 //console.log("skipping " + name);
             } else {
                 var filePath = path.join(wikiDataDir, name);
-                var arr = filePath.split("/");
+                var arr = filePath.split("/");  // FIXME for windows
                 var fileName = arr[arr.length - 1];
                 fileName = fileName.toLowerCase();
                 var topicName = fileName.replace(".md", "");
