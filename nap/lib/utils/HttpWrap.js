@@ -14,7 +14,7 @@ var HttpWrap = {
         host: AppConfig.apiServer,
         timeout: 5000,
         debug: false,
-        apikey: "TODO"  // get from .env
+        apikey: AppConfig.apiKey
     },
 
     callApi: function(apiPath, options, callback) {
