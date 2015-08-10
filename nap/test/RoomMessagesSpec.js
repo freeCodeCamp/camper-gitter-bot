@@ -24,5 +24,19 @@ describe("RoomMessages", function(){
         expect(msg).to.equal(null);
     });
 
+    it("should find a message three ticks ''' ", function() {
+        var chat = "mistake ''' text";
+        var input = TestHelper.makeInputFromString(chat);
+        var msg = RoomMessages.scanInput(input, "camperbot/testing", 1);
+        expect(msg).to.include("> :bulb: to format");
+    });
+
+    it("should find a message for bonfire", function() {
+        var chat = "help for bonfire XXX";
+        var input = TestHelper.makeInputFromString(chat);
+        var msg = RoomMessages.scanInput(input, "camperbot/testing", 1);
+        expect(msg).to.include("> type `bonfire name`");
+    });
+
 });
 

@@ -29,6 +29,14 @@ var TextLib = require("../../../lib/utils/TextLib");
 
 var thanksCommands = {
 
+    messages: {
+        wikiHint: function(fromUser) {
+            var wikiUrl = "(https://github.com/freecodecamp/freecodecamp/wiki/wiki-style-guide)";
+            var msg = "\n> hey @" + fromUser + " if you found this info helpful :point_right: **[consider adding a wiki article!]" + wikiUrl + "**";
+            return msg;
+        }
+    },
+
     thanks: function (input, bot) {
         Utils.hasProperty(input, "message", "thanks expects an object");
 
@@ -58,6 +66,7 @@ var thanksCommands = {
           toUserMessage = namesList.join(" and @");
           output = "> " + fromUser + " sends brownie points to @" + toUserMessage;
           output += " :sparkles: :thumbsup: :sparkles: ";
+          output += this.messages.wikiHint(fromUser);
           return output;
         } else {
           output = "> sorry " + fromUser + ", you can't send brownie points to yourself!";
@@ -86,12 +95,11 @@ var thanksCommands = {
         HttpWrap.callApi(apiPath, options, thanksCommands.showInfoCallback);
     },
 
-    // called back from apiCall
+    // called back from apiCall so can't use Global GBot here
     // blob:
     //      response
     //      bot
     //      input
-
 
     showInfoCallback: function(blob) {
         //Utils.clog('thanks>', "showInfoCallback>", blob);
@@ -128,11 +136,7 @@ var thanksCommands = {
 //        :star: ${about.browniePoints}       | ${bio}
 //
 //        `;
-        //Utils.clog("thanks callback>", str);
 
-
-        //blob.bot.say(str, blob.input.message.room);
-        Utils.tlog("showInfoCallback GBot", blob);
         blob.bot.say(str, blob.input.message.room);
     }
 

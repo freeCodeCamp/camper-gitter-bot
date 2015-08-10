@@ -101,38 +101,40 @@ var GitterHelper = {
         if (cached != null) {
             //Utils.tlog("return from cached:", cbParams);
             cbParams.gitterRoom = cached;
-            callback(cbParams);
-        }
+            return callback(cbParams);
+        } else {
 
-        this.fetch('/rooms', function(err, rooms) {
-            //Utils.tlog("found rooms", rooms);
-            if (!rooms) {
-                Utils.error("can't find rooms with roomUri", roomUri);
-                return;
-            }
-            var roomList = rooms.filter(function(rm) {
-                return rm.uri == roomUri;
+            this.fetch('/rooms', function (err, rooms) {
+                //Utils.tlog("found rooms", rooms);
+                if (!rooms) {
+                    Utils.error("can't find rooms with roomUri", roomUri);
+                    return;
+                }
+                var roomList = rooms.filter(function (rm) {
+                    return rm.uri == roomUri;
+                })
+                if (roomList.length > 0) {
+                    var room = roomList[0];
+                    GitterHelper.roomDataCache[roomUri] = room;
+                    cbParams.gitterRoom = room;
+                    return callback(cbParams);
+                }
             })
-            if (roomList.length > 0) {
-                var room = roomList[0];
-                GitterHelper.roomDataCache[roomUri] = room;
-                cbParams.gitterRoom = room;
-                callback(cbParams);
-            }
-        })
+        }
     },
 
     responseCallback: function(obj) {
-        Utils.clog("response callback");
+        Utils.clog("GitterHelper.response callback");
     },
 
     sayToRoomObj: function(text, opts) {
         //Utils.tlog("sayToRoomObj>", text, opts);
-        GitterHelper.postMessage(text, opts.id, GitterHelper.responseCallback);
+        GitterHelper.postMessage(text, opts.id);
     },
 
     sayToRoomName: function(text, roomUri) {
         GitterHelper.findRoomByName(roomUri, function(opts) {
+            Utils.clog("GitterHelper saying", text);
             GitterHelper.sayToRoomObj(text, opts.gitterRoom);
         })
     }

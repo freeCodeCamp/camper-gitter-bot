@@ -3,10 +3,13 @@
 //var yaml = require('js-yaml');
 var fs = require('fs');
 
+var _ = require("lodash-node");
+
 var Utils = require('../../lib/utils/Utils'),
     InputWrap = require('../../lib/bot/InputWrap'),
     KBase = require('../../lib/bot/KBase'),
     TextLib = require('../../lib/utils/TextLib');
+
 
 
 var newline = '\n';
@@ -43,7 +46,6 @@ Bonfires = {
     data: null,
     fixed: {
         hintWarning: "## :construction: ** After this are possible spoiler hints.**\nMake sure you've tried to hard to solve it yourself before proceeding. :construction:",
-        footer: "\n\n> type: `bf details` `bf links` `bf spoiler`",
         menu: "\n- `bonfire info` for more info " +
         "\n- `bonfire links` " +
         "\n- `bonfire script` for the script",
@@ -52,6 +54,17 @@ Bonfires = {
         comingSoon: "Coming Soon! We're working on it!",
         nameHint: "no, type part of the name of the bonfire! eg `bonfire roman` ",
         alert: "\n - :construction: **spoiler alert** :construction:",
+
+        bfRoomLink: function(name) {
+            var str = "[spoiler chatroom](https://gitter.im/camperbot/" + name + ")";
+            return str;
+        },
+
+        footer: function(name) {
+          // type `bf details` | `bf links` | :speech_balloon: [spoiler hints](/link/to) 
+          var str = "\n\n> more info type:&nbsp;&nbsp;`bf details` or `bf links` " + this.bfRoomLink(name) + "";
+          return str;
+        },
         reminder: function (name) {
             return "we're talking about bonfire :fire: " + name;
         },
@@ -60,7 +73,8 @@ Bonfires = {
         },
         roomLink: function(name) {
             var str =  ":construction: **spoiler alert** ";
-            str += "[dedicated chatroom](https://gitter.im/camperbot/" + name + ")"
+            str += this.bfRoomLink(name);
+            // str += "[dedicated chatroom](https://gitter.im/camperbot/" + name + ")"
             str += " :arrow_forward:";
             return str;
         },
@@ -84,8 +98,32 @@ Bonfires = {
         // Get document, or throw exception on error
         try {
             // this.data = yaml.safeLoad(fs.readFileSync('./data/bonfires/basic-bonfires.yml', 'utf8'));
-            this.raw = fs.readFileSync('./data/seed/challenges/basic-bonfires.json', 'utf8');
-            this.data = JSON.parse(this.raw);
+
+            var bfDataFiles = [
+              'basic-bonfires.json', 
+              'intermediate-bonfires.json',
+              'advanced-bonfires.json',
+              'expert-bonfires.json',
+            ]
+
+            var allData = [];
+            bfDataFiles.map(function(fname) {
+              var raw = fs.readFileSync('./data/seed/challenges/' + fname, 'utf8');
+              var thisData = JSON.parse(raw);
+              _.merge(allData, thisData);
+            })
+
+            this.data = allData;
+
+            // var raw1 = fs.readFileSync('./data/seed/challenges/basic-bonfires.json', 'utf8');
+            // var data1 = JSON.parse(raw1);
+
+            // var raw2 = fs.readFileSync('./data/seed/challenges/advanced-bonfires.json', 'utf8');
+            // var data2 = JSON.parse(raw2);
+
+            // this.data = _.merge(data1, data2);
+            // console.log(this.data);
+
             Bonfires.loadWikiHints();
             // this.data = Utils.toMarkdown(this.data);
             // Utils.log("bonfires", this.data);
@@ -282,7 +320,7 @@ Bonfires = {
         var str = this.bonfireHeader(bonfire) + newline;
         str += this.bonfireScript(bonfire) + newline;
         str += this.bonfireDescription(bonfire) + newline;
-        str += newline + this.fixed.footer;
+        str += newline + this.fixed.footer(bonfire.dashedName);
         return str;
     },
 
@@ -351,9 +389,9 @@ Bonfires = {
 
 Bonfires.load();
 
-Bonfires.allDashedNames().map(function(bf) {
-    //console.log(bf);
-})
+// Bonfires.allDashedNames().map(function(bf) {
+//     console.log(bf);
+// })
 
 module.exports = Bonfires;
 

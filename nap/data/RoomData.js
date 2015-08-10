@@ -305,7 +305,6 @@ BotRoomData.camperbot.map(function(room) {
         room.entry = "camperbot/testing",
         room.topic = room.title
     }
-    //console.log(room);
 })
 
 RoomData = {

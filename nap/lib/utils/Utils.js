@@ -30,6 +30,7 @@ var Utils = {
         error: clc.bgRedBright.white.bold,
         warn: clc.black.bgYellow.bold,
         info: clc.black.cyanBright,
+        info2: clc.black.bgCyan,
         notice: clc.blue,
         bright: clc.xterm(237).bgXterm(195),
         dimmed: clc.xterm(232).bgXterm(253),

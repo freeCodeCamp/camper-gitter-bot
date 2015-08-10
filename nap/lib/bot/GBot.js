@@ -34,33 +34,9 @@ var GBot = {
         return AppConfig.botlist[0];
     },
 
-    //using a callback to get roomId
-    sayToRoom: function(text, roomName) {
-        var sayIt = function() {
-            console.log("sayIt", text, roomName);
-            GBot.say(text, roomName);
-        }
-        var roomId = GitterHelper.findRoomByName(roomName, sayIt);
-    },
-
-    say: function(text, room) {
-        Utils.hasProperty(room, 'path', 'expected room object'); // did we get a room
-        Utils.hasProperty(room, 'text', 'tried to GBot.say with no text');
-        try {
-            //room.send(text);
-            GitterHelper.sayToRoomName(text, room.uri);
-
-        } catch (err) {
-            Utils.warn("GBot.say>", "failed", err);
-            Utils.warn("GBot.say>", "room", room);
-        }
-    },
-
-    // ---------------- room related ----------------
-
-
-    // listen to a know room
+    // listen to a known room
     // does a check to see if not already joined according to internal data
+
     listenToRoom: function(room) {
         // gitter.rooms.find(room.id).then(function (room) {
 
@@ -89,8 +65,6 @@ var GBot = {
         });
     },
 
-    // main IO routine called from room listener
-    // TODO - add roomName info for the logs
     handleReply: function(message) {
         clog(message.room.uri + " @" + message.model.fromUser.username + ":");
         clog(" in|",  message.model.text);
@@ -101,6 +75,31 @@ var GBot = {
             // message.room.send(output);
         }
         return (output);  // for debugging
+    },
+
+    //using a callback to get roomId
+    sayToRoom: function(text, roomName) {
+        var sayIt = function() {
+            console.log("sayIt", text, roomName);
+            GBot.say(text, roomName);
+        }
+        var roomId = GitterHelper.findRoomByName(roomName, sayIt);
+    },
+
+    say: function(text, room) {
+        //Utils.clog("GBot.say:", text, room);
+        Utils.hasProperty(room, 'path', 'expected room object'); // did we get a room
+        if (!text) {
+            console.warn("tried to say with no text");
+        }
+        try {
+            //room.send(text);
+            GitterHelper.sayToRoomName(text, room.uri);
+
+        } catch (err) {
+            Utils.warn("GBot.say>", "failed", err);
+            Utils.warn("GBot.say>", "room", room);
+        }
     },
 
     // search all reply methods
