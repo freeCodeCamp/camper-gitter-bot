@@ -46,7 +46,6 @@ var GBot = {
 
         // Utils.clog("listenToRoom ->", room);
         var chats = room.streaming().chatMessages();
-        // clog("listenToRoom ok:", room.name);
 
         // The 'chatMessages' event is emitted on each new message
         chats.on("chatMessages", function(message) {
