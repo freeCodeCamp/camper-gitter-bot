@@ -73,6 +73,7 @@ var GBot = {
             clog("out| ", output);
             GBot.say(output, message.room);
             // message.room.send(output);
+            // this.listReplyOptions = [];
         }
         return (output);  // for debugging
     },
@@ -108,13 +109,50 @@ var GBot = {
     findAnyReply: function(message) {
         var input, output;
         input = this.parseInput(message);
+        var listReplyOptionsAvailable = this.findListOption(input);
         if (input.command) {
             // this looks up a command and calls it
             output = BotCommands[input.keyword](input, this);
+            if (input.keyword === 'find') {
+                this.makeListOptions(output);
+            }
+        } else if (listReplyOptionsAvailable !== false) {
+            output = listReplyOptionsAvailable;
         } else {
             // non-command keywords like 'troll'
             output = RoomMessages.scanInput(input, input.message.room.name, AppConfig.botNoiseLevel);
         }
+        return output;
+    },
+
+    // save a list of options
+    // when the bot sends out a list
+    makeListOptions: function(output) {
+        var matches = [];
+        output.replace(/\\([a-zA-Z ]+)\]/g, function(g0,g1){
+            matches.push(g1);
+        });
+        this.listReplyOptions = matches;
+        //clog('ListOptions| ', matches);
+        return matches;
+    },
+
+    // reply option to user
+    // if they chose an option from the list
+    findListOption: function(input) {
+        if (this.listReplyOptions === undefined || this.listReplyOptions[0] === undefined) {
+            return false;
+        }
+        else if (input.cleanText.match(/^[0-9]+$/i) === null) {
+            return false;
+        }
+        else if (this.listReplyOptions[input.cleanText] === undefined) {
+            return 'List option **' + input.cleanText + '** not found.';
+        }
+        //var output = 'User chose option: **' + this.listReplyOptions[input.cleanText] + '**';
+        var output = BotCommands['wiki']({ params: this.listReplyOptions[input.cleanText] }, this);
+        this.listReplyOptions = [];
+        //clog('ListOutput |', 'wiki ' + this.listReplyOptions[input.cleanText]);
         return output;
     },
 
