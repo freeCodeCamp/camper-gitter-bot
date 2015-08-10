@@ -68,7 +68,7 @@ var BotCommands = {
             if (LOGTHIS) {
                 Utils.warn('isCommand', 'not command', input);
                 Utils.warn('isCommand',
-                    `[ isCommand: ${input.keyword} ] one: ${one} | res ${res} ` );
+                    '[ isCommand: ' + input.keyword + ' one: ' + one + ' res: ' + res );
             }
         }
         return res;

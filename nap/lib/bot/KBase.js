@@ -53,7 +53,7 @@ KBase = {
         KBase.allData = [];
         fs.readdirSync(wikiDataDir).forEach(function (name) {
             //console.log("reading", name);
-            if (!name.includes(".md")) {
+            if (! /md$/.test(name) ) {
                 //console.log("skipping " + name);
             } else {
                 var filePath = path.join(wikiDataDir, name);

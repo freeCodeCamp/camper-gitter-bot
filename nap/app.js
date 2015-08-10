@@ -12,6 +12,8 @@ if (typeof Map !== "function" ) {
     throw new Error("ES6 is required; add --harmony");
 }
 
+require("lib/patch/StringPatch.js");
+
 var express = require("express");
 var port = process.env.PORT || 7891;
 var passport = require("./lib/gitter/passportModule");

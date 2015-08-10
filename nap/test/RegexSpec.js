@@ -30,7 +30,7 @@ describe("Regex", function () {
         uri = AppConfig.wikiHost + str;
         // uri = "https://github.com/freecodecamp/freecodecamp/wiki"
         // console.log('uri', uri);
-        exp = `[some page](${uri})`;
+        exp = '[some page](' + uri + ')';
         expect(res).to.equal(res);
     });
 

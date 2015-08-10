@@ -1,6 +1,7 @@
 "use strict";
 
 require('dotenv').config({path: 'dot.env'});
+require("../lib/patch/StringPatch.js");
 
 
 var assert = require("chai").assert,

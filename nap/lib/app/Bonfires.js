@@ -149,8 +149,8 @@ Bonfires = {
         var flag;
         bfName = TextLib.dashedName(bfName);
         var bfs = this.data.challenges.filter(function (item) {
-            flag = (item.dashedName.includes(bfName));
-            //Utils.tlog(item.dashedName, bfName);
+            flag = (item.dashedName.indexOf(bfName) >= 0);
+            Utils.tlog(item.dashedName, bfName, flag);
             return flag;
         });
         var bf = bfs[0];
