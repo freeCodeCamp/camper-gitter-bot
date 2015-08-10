@@ -111,10 +111,17 @@ var GBot = {
         if (input.command) {
             // this looks up a command and calls it
             output = BotCommands[input.keyword](input, this);
-        } else {
-            output = input.output;
+            return output;
         }
-        return output;
+        // else if (input.output && input.output.func) {
+        output = RoomMessages.scanInput(input, input.message.room.name, AppConfig.botNoiseLevel);
+        if (output.text) {
+            return output.text;
+        }
+        if (output.func) {
+            Utils.warn("calling", output.func);
+            return output;
+        }
     },
 
     // turns raw text input into a json format
@@ -132,33 +139,9 @@ var GBot = {
 
         if (BotCommands.isCommand(input)) {
             input.command = true;
-            return input;
         }
-
-        // else
-        var output = RoomMessages.scanInput(input, input.message.room.name, AppConfig.botNoiseLevel);
-        Utils.tlog("scan output", output);
-
-        if (output.text) {
-            input.output = output;
-        } else if (output.func) {
-            // call the function
-            var func = output.func;
-            Utils.tlog("Func is", func);
-            input.command = true;
-            input.func = output.func;
-        }
-
         return input;
 
-        // check for regex based commands
-        // if message.test( /.*thanks.*/ )
-        // ... input.command = true;
-        //      input.keyword = "thanks"
-
-
-        // clog("input", message.model.text);
-        //return input;
     },
 
     cleanInput: function(input) {
