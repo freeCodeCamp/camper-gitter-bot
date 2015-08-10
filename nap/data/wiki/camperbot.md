@@ -1,4 +1,4 @@
-Hi this is **[CamperBot](https://github.com/FreeCodeCamp/freecodecamp/wiki/camperbot)**! I can assist you in this chatroom :smile: 
+Hi I'm **[CamperBot](https://github.com/FreeCodeCamp/freecodecamp/wiki/camperbot)**! I can help you in this chatroom :smile: 
 
 ### Basic commands:
 - ``find TOPIC``  find all entries about topic. ex: `find js`
@@ -7,13 +7,11 @@ Hi this is **[CamperBot](https://github.com/FreeCodeCamp/freecodecamp/wiki/campe
 - `about @username`   shows info on that user
 - `bonfire BFNAME` info on a bonfire
 
-:unlock: [More commands and info](https://github.com/FreeCodeCamp/freecodecamp/wiki/camperbot)
+:speech_balloon: [meet camperbot in this room!](https://gitter.im/camperbot/testing)
 
-## Learning how to use!
-For playing with CamperBot please use the testing channel:
-[https://gitter.im/camperbot/testing](https://gitter.im/camperbot/testing)
 
 ## example commands
+
 ```
 find js   # all JS entries
 wiki muta  # first entry with muta in name
@@ -22,6 +20,8 @@ wiki video  # and video
 rollem    # secret sauce
 bonfire roman   # any bf with roman in name
 ```
+For playing with CamperBot please use the testing channel:
+[https://gitter.im/camperbot/testing](https://gitter.im/camperbot/testing)
 
 ## help on Bonfires
 Live currently on the HelpBonFires channel on Gitter
