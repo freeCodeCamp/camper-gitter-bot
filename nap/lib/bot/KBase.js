@@ -133,11 +133,21 @@ KBase = {
         }
         // else
         Utils.log("shortList", shortList);
+
+        var emojiList = [':zero:', ':one:', ':two:', ':three:', ':four:', 
+                            ':five:', ':six:', ':seven:', ':eight:', ':nine:'];
+
         var findResults = "";
         for (var i = 0; i < shortList.length; i++) {
             var topicData = shortList[i];
             var link = Utils.linkify(topicData.dashedName, 'wiki', topicData.displayName);
-            var line = "\n[" + i + "] " + link;
+            if (i < 10) {
+                var line = "\n " + emojiList[i] + " " + link;
+            } else if (i < 100) {
+                var iSplit = i.toString().split('');
+                var line = "\n " + emojiList[iSplit[0]] +
+                            emojiList[iSplit[1]] + " " + link;
+            }
             findResults += line;
         }
         return findResults;
