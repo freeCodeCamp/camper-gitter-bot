@@ -15,7 +15,7 @@ var _ = require('lodash-node');
 var AllRoomMessages = [
     {
         // regex: /help.*bonfire:?s?[.?]$/i,
-        regex: /help.*bonfire/i,
+        regex: /.*help.*bonfire:?s?/i,
         text: " > type `bonfire name` to get some info on that bonfire. And check [HelpBonfires chatroom](https://gitter.im/FreeCodeCamp/HelpBonfires)",
         not: 'freecodecamp/HelpBonfires'  // optional to skip for this room
     },
