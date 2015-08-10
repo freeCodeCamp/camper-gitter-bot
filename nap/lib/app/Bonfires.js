@@ -259,10 +259,8 @@ Bonfires = {
     },
 
     getLinks: function (bonfire) {
-        // FIXME - change to actual links see
-        // https://github.com/dcsan/gitterbot/issues/45
         var output = "links: \n";
-        output += Utils.madeMDNLinks(bonfire.MDNlinks, 'mdn');
+        output += Utils.makeMdnLinks(bonfire.MDNlinks, 'mdn');
         return output;
     },
 

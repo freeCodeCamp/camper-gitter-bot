@@ -5,6 +5,7 @@ var assert = require("chai").assert;
 var clc = require("cli-color");
 var _ = require('lodash-node');
 var AppConfig = require("../../config/AppConfig");
+var MDNlinks = require('../../data/seed/bonfireMDNlinks');
 
 var TextLib = require("./TextLib.js");
 
@@ -210,15 +211,15 @@ var Utils = {
         }
     },
 
-    madeMDNLinks: function(items, where) {
+
+    makeMdnLinks: function(items) {
         var out = "";
         if (!items) {
-            Utils.error("tried to madeMDNLinks for no items");
+            Utils.error("tried to makeMdnLinks for no items");
             return "";
         }
-        out += items.map(function(one) {
-            var uri = "http://" + AppConfig[where] + one;
-            return "\n- [" + one + "](" + uri + ")";
+        items.map(function(one) {
+            out += "\n- [" + one + "](" + MDNlinks[one] + ")";
         });
         return out;
     },
