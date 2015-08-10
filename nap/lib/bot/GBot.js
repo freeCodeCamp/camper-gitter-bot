@@ -112,10 +112,8 @@ var GBot = {
             // this looks up a command and calls it
             output = BotCommands[input.keyword](input, this);
         } else {
-            // non-command keywords like 'troll'
-            output = RoomMessages.scanInput(input, input.message.room.name, AppConfig.botNoiseLevel);
+          return output;
         }
-        return output;
     },
 
     // turns raw text input into a json format
@@ -133,7 +131,21 @@ var GBot = {
 
         if (BotCommands.isCommand(input)) {
             input.command = true;
+            return input;
         }
+
+        // else
+        var output = RoomMessages.scanInput(input, input.message.room.name, AppConfig.botNoiseLevel);
+
+        if (oneMessage.text) {
+            return oneMessage.text;
+        } else if (oneMessage.func) {
+            // call the function
+            var func = oneMessage.func;
+            Utils.tlog("Func is", func);
+            func(input);
+        }
+
 
         // check for regex based commands
         // if message.test( /.*thanks.*/ )
@@ -325,5 +337,3 @@ var GBot = {
 };
 
 module.exports = GBot;
-
-

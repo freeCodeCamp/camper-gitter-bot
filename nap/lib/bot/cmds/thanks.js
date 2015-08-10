@@ -39,6 +39,7 @@ var thanksCommands = {
 
     thanks: function (input, bot) {
         Utils.hasProperty(input, "message", "thanks expects an object");
+        Utils.tlog("thanks", input);
 
         var mentions, output, fromUser, toUser, toUserMessage;
         mentions = input.message.model.mentions;
@@ -66,7 +67,7 @@ var thanksCommands = {
           toUserMessage = namesList.join(" and @");
           output = "> " + fromUser + " sends brownie points to @" + toUserMessage;
           output += " :sparkles: :thumbsup: :sparkles: ";
-          output += this.messages.wikiHint(fromUser);
+          // output += BotCommands.messages.wikiHint(fromUser);
           return output;
         } else {
           output = "> sorry " + fromUser + ", you can't send brownie points to yourself!";

@@ -7,6 +7,7 @@
 // using js rather than json so we can have functions and comments
 
 var Utils = require('../../lib/utils/Utils');
+var BotCommands = require('../../lib/bot/BotCommands');
 var _ = require('lodash-node');
 
 
@@ -37,9 +38,14 @@ var AllRoomMessages = [
         regex: /'''/,
         text: "> :bulb: to format code use backticks! ``` [more info](https://github.com/freecodecamp/freecodecamp/wiki/code-formatting)",
     },
-    {      
+    {
         regex: /holler/i,
-        text: "> holler back!"
+        text: "> holler back!",
+        chance: 1   // only say this 50% of the time
+    },
+    {
+        regex: /txtx/,
+        func: BotCommands.thanks
     }
 ]
 
@@ -54,8 +60,8 @@ var RoomMessages = {
         var chat = input.message.model.text.toLowerCase();
         chance = chance || 1;
         roomName = roomName.toLowerCase();
-        // var checkList = this.messagesPerRoomTable[roomName];
 
+        // some messages are only for certain rooms so exclude them here
         var thisRoomMessages = AllRoomMessages.filter(function(msg) {
             if (msg.not) {
                 return (msg.not != roomName);
@@ -63,18 +69,13 @@ var RoomMessages = {
                 return true;
             }
         });
-
-        // _.merge(thisRoomMessages, checkList, AllRoomMessages);
-
         if (!thisRoomMessages) { return false; }
+
         var msgList = thisRoomMessages.filter(function(item) {
             if(!item) { return null; }
 
-            //TODO - use a regex here
-            // var flag = chat.includes(item.word) || item.regex.test(chat);
-            //Utils.clog("testing", item.regex, chat);
             if (item.regex) {
-              var flag = item.regex.test(chat);            
+              var flag = item.regex.test(chat);
             }
 
             if(flag) {
@@ -82,16 +83,15 @@ var RoomMessages = {
             }
             return flag;
         });
-        
+
         // now check if chance is high enough
         if (msgList.length > 0) {
 
-            //Utils.log('msgList', msgList);
-            oneMessage = _.sample(msgList);
-            chance = oneMessage.chance || 1;
+            oneMessage = _.sample(msgList);  // if we have multiple messages, make sure to choose just one
+            chance = oneMessage.chance || 1; // check if the chance is high enough so we can have % of time messages
             if (Math.random() < (chance)) {
-                //Utils.clog("scanInput out>", oneMessage.word);
-                return oneMessage.text;
+                // we have a winner!
+                return oneMessage;
             }
         } else {
             return null;

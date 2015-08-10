@@ -4,8 +4,9 @@ require('dotenv').config({path: 'dot.env'});
 
 var expect = require("chai").expect;
 
-var RoomMessages = require("../data/rooms/RoomMessages.js");
-var TestHelper = require("./TestHelper.js");
+var RoomMessages = require("../data/rooms/RoomMessages");
+var TestHelper = require("./TestHelper");
+var GBot = require("../lib/bot/GBot");
 
 
 describe("RoomMessages", function(){
@@ -39,4 +40,3 @@ describe("RoomMessages", function(){
     });
 
 });
-
