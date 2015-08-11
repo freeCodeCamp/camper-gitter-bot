@@ -13,52 +13,45 @@ https://gitter.im/dcsan/gitterbot
 
 ## Installation instructions
 
+To run GitterBot, you need [Node.js](https://nodejs.org/) before downloading the app.
+
 ### Windows
 
-To run GitterBot, you need [Node.js](https://nodejs.org/). Installing Node.js on Windows is incredibly simple:
+To install Node.js on Windows, follow these instructions: [http://blog.teamtreehouse.com/install-node-js-npm-windows](http://blog.teamtreehouse.com/install-node-js-npm-windows).
 
- - Visit the Node.js homepage at [nodejs.org](https://nodejs.org/) and click the green 'Install' button.
- - A binary (msi) file for the latest x64 version of Node.js will automatically be downloaded. If you are running a 32-bit version of Windows, click the Downloads button below the Install button and download the appropriate binary.
- - Follow the prompts in the installer and restart your computer.
- - Now that you have Node.js installed, you need the actual app itself.
- - There are two ways to download Gitterbot: either download the ZIP or clone it using Git.
- -![Download zip or clone](https://i.imgur.com/ZpiaTa4.png?1 "")
- - Downloading the zip is as simple as clicking the download ZIP button and extracting the files to your chosen directory (it is recommended to save it somewhere in your C:\ directory root so that it is easier to access with CMD).
- - The app can be cloned using Git via this command:
+ - To download the app, clone the repository the bot is in:
 
         git clone https://github.com/dcsan/gitterbot.git
 
- -  Once you have the app on your PC and you have opened a CMD in the directory your app rests in, run the following commands to start the app:
+ -  Run the following commands to run the app:
 
+        cd gitterbot
         cd nap
-        ren dot-EXAMPLE.enp dot.enp
+        ren dot-EXAMPLE.env dot.env
         node app.js
 
- - You will now have the app running on [http://localhost:7891](http://localhost:7891)!
+ - That's it! The app should be running at [http://localhost:7891](http://localhost:7891).
+
+You can now chat to your gitterbot via Gitter at
+[https://gitter.im/demobot/test](https://gitter.im/demobot/test)
 
 
-## checking out
-clone the repo
+### Mac
+
+- To install Node, follow the instructions here: [http://blog.teamtreehouse.com/install-node-js-npm-mac](http://blog.teamtreehouse.com/install-node-js-npm-mac)
+
+- To download the app, clone the repository the bot is in:
 
     git clone git@github.com:dcsan/gitterbot.git
 
+- Run the following commands to run the app:
 
-# Run the app in 'demobot' mode
-The main app is in /nap subdir.
+        cd gitterbot
+        cd nap
+        cp dot-EXAMPLE.env dot.env
+        not app.js
 
-    cd nap
-
-The login info needs to be in a file called `dot.env`.
-You'll have to copy the `env-EXAMPLE.env` file and rename it to just `dot.env`
-On the mac:
-
-    cp dot-EXAMPLE.env dot.env
-
-Now you can run the app! You'll see yourself as 'demobot'
-
-    node app.js
-
-That's it! The app should be running at [http://localhost:7891](http://localhost:7891)
+ - That's it! The app should be running at [http://localhost:7891](http://localhost:7891).
 
 You can now chat to your gitterbot via Gitter at
 [https://gitter.im/demobot/test](https://gitter.im/demobot/test)
