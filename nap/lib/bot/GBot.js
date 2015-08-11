@@ -29,6 +29,8 @@ var GBot = {
         this.joinBonfireRooms();
         this.gitter.currentUser().then(function(user) {
             that.scanRooms(user, AppConfig.token)
+        }, function(err) {
+            Utils.error("GBot.currentUser>", "failed", err);
         });
         BotCommands.init(this);
     },
