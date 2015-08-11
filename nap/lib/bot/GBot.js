@@ -20,13 +20,16 @@ function clog(msg, obj) {
 var GBot = {
 
     init: function() {
+        var that = this;
         // TODO refresh and add oneToOne rooms
         KBase.initSync();
         this.roomList = [];
         this.gitter = new Gitter(AppConfig.token);
         this.joinKnownRooms();
         this.joinBonfireRooms();
-        this.scanRooms();
+        this.gitter.currentUser().then(function(user) {
+            that.scanRooms(user, AppConfig.token)
+        });
         BotCommands.init(this);
     },
 
@@ -320,13 +323,9 @@ var GBot = {
     // as I can't see an event the bot would get to know about that
     // so its kind of like "polling" and currently only called from the webUI
     scanRooms: function(user, token) {
-        user = user || this.gitter.currentUser();
-        token = token || AppConfig.token;
-
+        var that = this;
         clog("user", user);
         clog("token", token);
-        var that = this;
-
         GitterHelper.fetchRooms(user, token, function(err, rooms) {
             if (err) {
                 Utils.warn("GBot", "fetchRooms", err);
