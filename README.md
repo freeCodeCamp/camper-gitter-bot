@@ -25,11 +25,15 @@ To run GitterBot, you need [Node.js](https://nodejs.org/). Installing Node.js on
  -![Download zip or clone](https://i.imgur.com/ZpiaTa4.png?1 "")
  - Downloading the zip is as simple as clicking the download ZIP button and extracting the files to your chosen directory (it is recommended to save it somewhere in your C:\ directory root so that it is easier to access with CMD).
  - The app can be cloned using Git via this command:
+
         git clone https://github.com/dcsan/gitterbot.git
+
  -  Once you have the app on your PC and you have opened a CMD in the directory your app rests in, run the following commands to start the app:
- -      cd nap
+
+        cd nap
         ren dot-EXAMPLE.enp dot.enp
         node app.js
+
  - You will now have the app running on [http://localhost:7891](http://localhost:7891)!
 
 
