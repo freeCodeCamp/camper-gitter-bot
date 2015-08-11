@@ -49,7 +49,7 @@ You can now chat to your gitterbot via Gitter at
         cd gitterbot
         cd nap
         cp dot-EXAMPLE.env dot.env
-        not app.js
+        node app.js
 
  - That's it! The app should be running at [http://localhost:7891](http://localhost:7891).
 
