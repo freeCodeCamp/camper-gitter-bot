@@ -247,11 +247,11 @@ var BotCommands = {
     },
 
     // FIXME - this isn't working it seems
-    rejoin: function (input, bot) {
-        clog("GBot", GBot);
-        BotCommands.bot.scanRooms();
-        return "rejoined";
-    },
+    // rejoin: function (input, bot) {
+    //     clog("GBot", GBot);
+    //     BotCommands.bot.scanRooms();
+    //     return "rejoined";
+    // },
     music: function (input, bot) {
         var str = "## Music!";
         str += "\n http://plug.dj/freecodecamp";

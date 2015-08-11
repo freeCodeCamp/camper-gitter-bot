@@ -15,9 +15,7 @@ function clog(msg, obj) {
     Utils.clog("KbaseSpec>", msg, obj);
 }
 
-
 describe("GBot", function () {
-
 
     it("should load the KBase before other stuff", function () {
         var kb = KBase.initSync();
@@ -94,14 +92,13 @@ describe("GBot", function () {
     //    assert.match(res, /^## topics/i);
     //});
 
-    it("should have a rejoin command", function () {
-        var msg, res;
-        GBot.init();
-        msg = TestHelper.makeMessageFromString("rejoin");
-        res = GBot.findAnyReply(msg);
-        assert.equal(res, "rejoined");
-    });
-
+    // it("should have a rejoin command", function () {
+    //     var msg, res;
+    //     GBot.init();
+    //     msg = TestHelper.makeMessageFromString("rejoin");
+    //     res = GBot.findAnyReply(msg);
+    //     assert.equal(res, "rejoined");
+    // });
 
     it("should send a thanks karma reply", function () {
         var msg, res;
@@ -111,7 +108,4 @@ describe("GBot", function () {
         //assert.match( res, /.*@testuser sends karma to/  );
         expect(res).to.include('testuser sends brownie points to');
     });
-
-
 });
-
