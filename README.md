@@ -11,6 +11,31 @@ The GBot is integrated into FreeCodeCamp
 Join us in Gitter to discuss!
 https://gitter.im/dcsan/gitterbot
 
+# Introducing GitterBot!
+
+GitterBot is a full featured bot for Gitter.im First developed to integrate with the chatrooms [for FreeCodeCamp, the largest online bootcamp in the world,](https://twitter.com/FreeCodeCamp/status/627338604134559744) where he supports more than 15,000 users in the main chatroom.
+
+### Github Wiki Search
+
+You can search for articles in a projects github wiki![](images/anims/find.gif)
+
+### Share wiki summaries in chat
+
+Use `explain` to pull a wiki summary right into the chat:![](images/anims/explain.gif)
+
+### Points system
+
+Allow your users to send points to each other to say 'thanks @friend'![](images/anims/points.gif)
+
+### Fixed messages
+
+Based on scannable expressions, send messages into the chat.
+
+### Extensible
+
+Custom functions can easily be added. Check the [System overview](https://github.com/dcsan/gitterbot#system-overview)  
+ or contact [RIKAI Labs](mailto:dc@rikai.co).
+
 ## Installation instructions
 
 To run GitterBot, you need [Node.js](https://nodejs.org/) before downloading the app.
