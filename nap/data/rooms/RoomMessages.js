@@ -44,11 +44,10 @@ var AllRoomMessages = [
         chance: 1   // only say this 50% of the time
     },
     {
-        regex: /txtx/,
+        regex: /(?:thanks)/,
         func: BotCommands.thanks
     }
 ]
-
 
 var RoomMessages = {
 
