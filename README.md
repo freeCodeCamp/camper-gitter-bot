@@ -17,15 +17,15 @@ GitterBot is a full featured bot for Gitter.im First developed to integrate with
 
 ### Github Wiki Search
 
-You can search for articles in a projects github wiki![](images/anims/find.gif)
+You can search for articles in a projects github wiki![](http://dcsan.github.io/gitterbot/images/anims/find.gif)
 
 ### Share wiki summaries in chat
 
-Use `explain` to pull a wiki summary right into the chat:![](images/anims/explain.gif)
+Use `explain` to pull a wiki summary right into the chat:![](http://dcsan.github.io/gitterbot/images/anims/explain.gif)
 
 ### Points system
 
-Allow your users to send points to each other to say 'thanks @friend'![](images/anims/points.gif)
+Allow your users to send points to each other to say 'thanks @friend'![](http://dcsan.github.io/gitterbot/images/anims/points.gif)
 
 ### Fixed messages
 
