@@ -11,30 +11,47 @@ The GBot is integrated into FreeCodeCamp
 Join us in Gitter to discuss!
 https://gitter.im/dcsan/gitterbot
 
+## Installation instructions
+
+To run GitterBot, you need [Node.js](https://nodejs.org/) before downloading the app.
+
+### Windows
+
+To install Node.js on Windows, follow these instructions: [http://blog.teamtreehouse.com/install-node-js-npm-windows](http://blog.teamtreehouse.com/install-node-js-npm-windows).
+
+ - To download the app, clone the repository the bot is in:
+
+        git clone https://github.com/dcsan/gitterbot.git
+
+ -  Run the following commands to run the app:
+
+        cd gitterbot
+        cd nap
+        ren dot-EXAMPLE.env dot.env
+        node app.js
+
+ - That's it! The app should be running at [http://localhost:7891](http://localhost:7891).
+
+You can now chat to your gitterbot via Gitter at
+[https://gitter.im/demobot/test](https://gitter.im/demobot/test)
 
 
-## checking out
-clone the repo
+### Mac
 
-    git clone git@github.com:dcsan/gitterbot.git
+- To install Node, follow the instructions here: [http://blog.teamtreehouse.com/install-node-js-npm-mac](http://blog.teamtreehouse.com/install-node-js-npm-mac)
 
+- To download the app, clone the repository the bot is in:
 
-# Run the app in 'demobot' mode
-The main app is in /nap subdir.
+        git clone git@github.com:dcsan/gitterbot.git
 
-    cd nap
+- Run the following commands to run the app:
 
-The login info needs to be in a file called `dot.env`.
-You'll have to copy the `env-EXAMPLE.env` file and rename it to just `dot.env`
-On the mac:
+        cd gitterbot
+        cd nap
+        cp dot-EXAMPLE.env dot.env
+        node app.js
 
-    cp dot-EXAMPLE.env dot.env
-
-Now you can run the app! You'll see yourself as 'demobot'
-    
-    node app.js
-
-That's it! The app should be running at [http://localhost:7891](http://localhost:7891)
+ - That's it! The app should be running at [http://localhost:7891](http://localhost:7891).
 
 You can now chat to your gitterbot via Gitter at
 [https://gitter.im/demobot/test](https://gitter.im/demobot/test)
@@ -137,7 +154,7 @@ We use n to manage iojs and node:
 ```
 sudo npm install -g n
 sudo n io latest
-iojs -v  
+iojs -v
     // should be at least v2.4.0
 ```
 
@@ -146,9 +163,3 @@ iojs -v
 # Chat to us!
 
 Ping me @dcsan in the [gitterbot chatroom](https://gitter.im/dcsan/gitterbot) if you get stuck.
-
-
-
-
-
-
