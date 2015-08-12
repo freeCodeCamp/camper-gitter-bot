@@ -27,11 +27,15 @@ var GBot = {
         this.gitter = new Gitter(AppConfig.token);
         this.joinKnownRooms();
         this.joinBonfireRooms();
-        this.gitter.currentUser().then(function(user) {
-            that.scanRooms(user, AppConfig.token)
-        }, function(err) {
-            Utils.error("GBot.currentUser>", "failed", err);
-        });
+
+        // listen to other rooms for 1:1
+        if (AppConfig.supportDmRooms) {
+            this.gitter.currentUser().then(function(user) {
+                that.scanRooms(user, AppConfig.token)
+            }, function(err) {
+                Utils.error("GBot.currentUser>", "failed", err);
+            });
+        }
         BotCommands.init(this);
     },
 
