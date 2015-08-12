@@ -42,7 +42,7 @@ You can now chat to your gitterbot via Gitter at
 
 - To download the app, clone the repository the bot is in:
 
-    git clone git@github.com:dcsan/gitterbot.git
+        git clone git@github.com:dcsan/gitterbot.git
 
 - Run the following commands to run the app:
 
