@@ -6,6 +6,9 @@ Main features:
 - search, find
 - wrapper for commands
 
+
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dcsan/gitterbot?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
+
 The GBot is integrated into FreeCodeCamp
 
 Join us in Gitter to discuss!
