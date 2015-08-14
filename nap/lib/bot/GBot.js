@@ -24,6 +24,7 @@ var GBot = {
         // TODO refresh and add oneToOne rooms
         KBase.initSync();
         this.roomList = [];
+        this.listReplyOptions = [];
         this.gitter = new Gitter(AppConfig.token);
         this.joinKnownRooms();
         this.joinBonfireRooms();
@@ -122,10 +123,8 @@ var GBot = {
         if (input.command) {
             // this looks up a command and calls it
             output = BotCommands[input.keyword](input, this);
-            if (input.keyword === 'find') {
-                this.makeListOptions(output); // this could be moved to the find command?
-            }
         } else if (listReplyOptionsAvailable !== false) {
+            // if a list exists and user chose an option
             output = listReplyOptionsAvailable;
         } else {
             // non-command keywords like 'troll'
@@ -148,9 +147,12 @@ var GBot = {
     // when the bot sends out a list
     makeListOptions: function(output) {
         var matches = [];
+        // find what is between [] brackets in the list of links
+        // example [bonfire arguments optional]
         output.replace(/\[([a-zA-Z ]+)\]/g, function(g0,g1){
             matches.push(g1);
         });
+        // stores 'bonfire arguments optional' and the like in an array
         this.listReplyOptions = matches;
         //clog('ListOptions| ', matches);
         return matches;
@@ -159,19 +161,29 @@ var GBot = {
     // reply option to user
     // if they chose an option from the list
     findListOption: function(input) {
-        if (this.listReplyOptions === undefined || this.listReplyOptions[0] === undefined) {
+        var parsedInput = parseInt(input.cleanText, 10);
+
+        if (this.listReplyOptions.length === 0) {
             return false;
         }
         else if (input.cleanText.match(/^[0-9]+$/i) === null) {
+            // check if input is not a number
             return false;
         }
-        else if (this.listReplyOptions[input.cleanText] === undefined) {
-            return 'List option **' + input.cleanText + '** not found.';
+        else if (this.listReplyOptions[parsedInput] === undefined) {
+            return false;
+            //return 'List option **' + input.cleanText + '** not found.';
         }
-        //var output = 'User chose option: **' + this.listReplyOptions[input.cleanText] + '**';
-        var output = BotCommands['wiki']({ params: this.listReplyOptions[input.cleanText] }, this);
+
+        // get chosen wiki or bonfire article to output
+        input.params = this.listReplyOptions[parsedInput];
+        if (input.params.split(' ')[0] === 'bonfire') {
+            var output = BotCommands['bonfire'](input, this);
+        } else {
+            var output = BotCommands['wiki'](input, this);
+        }
+        
         this.listReplyOptions = [];
-        //clog('ListOutput |', 'wiki ' + this.listReplyOptions[input.cleanText]);
         return output;
     },
 
