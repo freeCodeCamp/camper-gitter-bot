@@ -127,13 +127,30 @@ var thanksCommands = {
             return false;
         }
 
-        var username = blob.response.about.username;
-        var about = blob.response.about;
-        var bio = blob.response.about.bio || "no bio set";
+        try {
+            var username = blob.response.about.username;
+            var about = blob.response.about;
+            var bio = blob.response.about.bio || "no bio set";
 
-        var uri = "http://www.freecodecamp.com/" + username;
-        var str = "> :star: " + about.browniePoints + " | @" + username + " | ";
+            var uri = "http://www.freecodecamp.com/" + username;
+            var str = "> :star: " + about.browniePoints + " | @" + username + " | ";
             str += TextLib.mdLink(uri, uri);
+            blob.bot.say(str, blob.input.message.room);
+        } catch (err) {
+            Utils.error("cant create response from API callback", err);
+            Utils.warn('thanks>', "blob>", blob);
+        }
+
+
+    }
+
+};
+
+module.exports = thanksCommands;
+
+
+
+
 
 //        var XXstr = `
 //![${username}](https://avatars2.githubusercontent.com/${username}?&s=32) | [${username}](http://www.freecodecamp.com/${username})
@@ -142,9 +159,3 @@ var thanksCommands = {
 //
 //        `;
 
-        blob.bot.say(str, blob.input.message.room);
-    }
-
-};
-
-module.exports = thanksCommands;

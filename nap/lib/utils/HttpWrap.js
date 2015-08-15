@@ -41,8 +41,15 @@ var HttpWrap = {
             response.on('end', function (res) {
                 //Utils.clog('HttpWrap>','options', that.defaultOptions);
                 //Utils.clog('HttpWrap>', 'end', str);
-                var blob = JSON.parse(str);
-                options.response = blob;
+                var blob;
+                try {
+                    blob = JSON.parse(str);
+                    options.response = blob;
+                } catch (err) {
+                    Utils.error("cant parse API response", str);
+                    Utils.error("error>", err);
+                    options.response = "api offline";
+                }
                 callback(options);
             });
         };
