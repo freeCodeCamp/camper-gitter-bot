@@ -285,6 +285,9 @@ var BotRoomData = {
         {
             name: "FreeCodeCamp/HalfWayClub"
         },
+        {
+            name: "FreeCodeCamp/LetsPair"
+        },
 
         {
             title: "MainHelp",

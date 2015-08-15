@@ -14,30 +14,33 @@ var HttpWrap = {
         host: AppConfig.apiServer,
         timeout: 5000,
         debug: false,
-        apiKey: AppConfig.apiKey
+        headers: {
+            "Authorization": AppConfig.apiKey
+        }
     },
 
     callApi: function(apiPath, options, callback) {
 
-        var body = { data: JSON.stringify(body) };
-        this.defaultOptions.body = body;
+        //var body = { data: JSON.stringify(body) };
+        //this.defaultOptions.body = body;
         _.merge(this.defaultOptions, options);
 
         // TODO add authorisation to header
         this.defaultOptions.path = apiPath;
 
+        var that = this;
         var handleResponse = function(response) {
             var str = '';
 
-            //another chunk of data has been recieved, so append it to `str`
+            //another chunk of data has been received, so append it to `str`
             response.on('data', function (chunk) {
                 str += chunk;
             });
 
             //the whole response has been recieved, so we just print it out here
             response.on('end', function (res) {
-                Utils.clog('HttpWrap.end>','res', res);
-                Utils.clog('HttpWrap.end>', 'str', str);
+                Utils.clog('HttpWrap>','options', that.defaultOptions);
+                Utils.clog('HttpWrap>', 'end', str);
                 var blob = JSON.parse(str);
                 options.response = blob;
                 callback(options);
@@ -53,9 +56,8 @@ var HttpWrap = {
         // request.on('error', onProblem);
 
         var request = http.request(this.defaultOptions, handleResponse);
-        request.end();
-
         request.setTimeout(3000, handleTimeout);
+        request.end();
 
     }
 
