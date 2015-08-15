@@ -25,14 +25,15 @@ describe("Thanks", function () {
     });
 
 
-    it("about should work", function () {
-        var input = TestHelper.makeInputFromString("about @dcsan @bob");
-        var output = GBot.findAnyReply(input.message);
-        Utils.tlog("output", output);
-        expect(output).to.include("> testuser sends brownie points to @mentioneduserone and @mentionedusertwo");
-        //var res = "help bootstrap".match(/(help|wiki|check) (.*)/);
-        //assert.equal(res[2], "bootstrap");
-    });
+    //TODO - hard to test as it relies on an async http call to get the info
+    //it("about should work", function () {
+    //    var input = TestHelper.makeInputFromString("about @dcsan @bob");
+    //    var output = GBot.findAnyReply(input.message);
+    //    Utils.tlog("input", input);
+    //    Utils.tlog("mentions", input.message.model.mentions);
+    //    Utils.tlog("output", output);
+    //    expect(output).to.include("> about @dcsan");
+    //});
 
     //HttpWrap.callApi(apiPath, options, function(apiResult) {
     //    console.log(apiResult);

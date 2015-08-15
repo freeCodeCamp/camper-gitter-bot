@@ -6,52 +6,6 @@
 
 var _ = require("lodash-node");
 
-
-var envConfigs = {
-
-    // replace this with your own ID
-    YOUR_GITHUB_ID: {
-        botname: "YOUR_GITHUB_ID",
-        appHost: "http://localhost:7000",
-        apiServer: "beta.freecodecamp.com",
-        appRedirectUrl: "http://localhost:7891/login/callback",
-    },
-
-    demobot: {
-        botname: "demobot",
-        appHost: "http://localhost:7000",
-        apiServer: "beta.freecodecamp.com",
-        appRedirectUrl: "http://localhost:7891/login/callback",
-    },
-
-    test: {
-        botname: "bothelp",
-        appHost: "http://localhost:7000",
-        apiServer: "beta.freecodecamp.com",
-        appRedirectUrl: "http://localhost:7891/login/callback",
-    },
-
-    local: {
-        botname: "bothelp",
-        appHost: "http://localhost:7000",
-        apiServer: "beta.freecodecamp.com",
-        appRedirectUrl: "http://localhost:7891/login/callback",
-    },
-    beta: {
-        botname: "bothelp",
-        appHost: "http://localhost:7000",
-        apiServer: "beta.freecodecamp.com",
-        appRedirectUrl: "http://localhost:7891/login/callback",
-    },
-    prod: {
-        botname: "camperbot",
-        appHost: "http://bot.freecodecamp.com",
-        apiServer: "beta.freecodecamp.com",
-        appRedirectUrl: "http://bot.freecodecamp.com/login/callback",
-    }
-};
-
-
 var AppConfig = {
     clientId: process.env.GITTER_APP_KEY,
     token: process.env.GITTER_USER_TOKEN,
@@ -66,7 +20,7 @@ var AppConfig = {
     webuser: "webuser",
     wikiHost: "https://github.com/freecodecamp/freecodecamp/wiki/",
     gitterHost: "https://gitter.im/",
-    botVersion: "0.0.8a",
+    botVersion: "0.0.9a",
     MAX_WIKI_LINES: 20,
     botNoiseLevel: 1,
 
@@ -144,6 +98,51 @@ var AppConfig = {
 
     dmLink: function() {
         return "https://gitter.im/" + AppConfig.getBotName();
+    }
+};
+
+
+var envConfigs = {
+
+    // replace this with your own ID
+    YOUR_GITHUB_ID: {
+        botname: "YOUR_GITHUB_ID",
+        appHost: "http://localhost:7000",
+        apiServer: "beta.freecodecamp.com",
+        appRedirectUrl: "http://localhost:7891/login/callback",
+    },
+
+    demobot: {
+        botname: "demobot",
+        appHost: "http://localhost:7000",
+        apiServer: "beta.freecodecamp.com",
+        appRedirectUrl: "http://localhost:7891/login/callback",
+    },
+
+    test: {
+        botname: "bothelp",
+        appHost: "http://localhost:7000",
+        apiServer: "beta.freecodecamp.com",
+        appRedirectUrl: "http://localhost:7891/login/callback",
+    },
+
+    local: {
+        botname: "bothelp",
+        appHost: "http://localhost:7000",
+        apiServer: "beta.freecodecamp.com",
+        appRedirectUrl: "http://localhost:7891/login/callback",
+    },
+    beta: {
+        botname: "bothelp",
+        appHost: "http://localhost:7000",
+        apiServer: "beta.freecodecamp.com",
+        appRedirectUrl: "http://localhost:7891/login/callback",
+    },
+    prod: {
+        botname: "camperbot",
+        appHost: "http://bot.freecodecamp.com",
+        apiServer: "beta.freecodecamp.com",
+        appRedirectUrl: "http://bot.freecodecamp.com/login/callback",
     }
 };
 

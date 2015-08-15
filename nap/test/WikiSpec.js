@@ -35,10 +35,8 @@ describe("Wiki", function () {
 
     it("should get wiki data back", function () {
         var entry = KBase.getTopicData("camperbot");
-        expect(entry.shortData).to.include("Hi this is **[CamperBot]");
+        expect(entry.shortData).to.include("Hi I\'m **[CamperBot]");
     });
-
-
 
 });
 

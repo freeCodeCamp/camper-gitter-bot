@@ -1,6 +1,7 @@
 "use strict";
 
 var TextLib = require('../utils/TextLib');
+require("../patch/StringPatch");
 
 var fs = require("fs"),
     path = require("path"),

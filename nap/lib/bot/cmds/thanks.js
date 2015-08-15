@@ -39,11 +39,14 @@ var thanksCommands = {
 
     thanks: function (input, bot) {
         Utils.hasProperty(input, "message", "thanks expects an object");
-        Utils.tlog("thanks", input);
+        //Utils.tlog("thanks", input);
 
         var mentions, output, fromUser, toUser, toUserMessage;
         mentions = input.message.model.mentions;
-        if (mentions && mentions.length === 0 ) { return null; } // just 'thanks' in a message
+        if (mentions && mentions.length === 0 ) {
+            Utils.warn("thanks without any mentions", input.message.model);
+            return null;
+        } // just 'thanks' in a message
 
         fromUser = input.message.model.fromUser.username.toLowerCase();
         var options = {
@@ -83,6 +86,7 @@ var thanksCommands = {
         mentions = input.message.model.mentions;
         them = mentions[0];
         if (!them) {
+            Utils.warn("about without any mentions", input.message.model);
             return "you need to ask about @someone!";
         }
         name = them.screenName.toLowerCase();
@@ -90,7 +94,7 @@ var thanksCommands = {
             method: 'GET',
             input: input,
             bot: bot
-        }
+        };
 
         var apiPath = '/api/users/about?username=' + name;
         HttpWrap.callApi(apiPath, options, thanksCommands.showInfoCallback);
