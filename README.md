@@ -43,9 +43,35 @@ Custom functions can easily be added. Check the [System overview](https://github
 
 To run GitterBot, you need [Node.js](https://nodejs.org/) before downloading the app.
 
+
+### Mac / Linux
+
+- To install Node, [follow the instructions here](http://blog.teamtreehouse.com/install-node-js-npm-mac)
+
+- To make your file changes update the local server automatically, install nodemon (you may need sudo)
+
+        sudo npm install -g nodemon
+
+- To download the app, clone the repository the bot is in:
+
+        git clone git@github.com:dcsan/gitterbot.git
+
+- Run the following commands to run the app:
+
+        cd gitterbot
+        cd nap
+        cp dot-EXAMPLE.env dot.env
+        nodemon app.js
+
+- That's it! The app should be running at [http://localhost:7891](http://localhost:7891).
+
+You can now chat to your gitterbot via Gitter at
+[https://gitter.im/demobot/test](https://gitter.im/demobot/test)
+
+
 ### Windows
 
-To install Node.js on Windows, follow these instructions: [http://blog.teamtreehouse.com/install-node-js-npm-windows](http://blog.teamtreehouse.com/install-node-js-npm-windows).
+To install Node.js on Windows, [follow these instructions](http://blog.teamtreehouse.com/install-node-js-npm-windows).
 
 - To make your file changes update the local server automatically, install nodemon in an administrator console.
 
@@ -69,38 +95,13 @@ You can now chat to your gitterbot via Gitter at
 [https://gitter.im/demobot/test](https://gitter.im/demobot/test)
 
 
-### Mac
-
-- To install Node, follow the instructions here: [http://blog.teamtreehouse.com/install-node-js-npm-mac](http://blog.teamtreehouse.com/install-node-js-npm-mac)
-
-- To make your file changes update the local server automatically, install nodemon in an administrator console.
-
-        sudo npm install -g nodemon
-
-- To download the app, clone the repository the bot is in:
-
-        git clone git@github.com:dcsan/gitterbot.git
-
-- Run the following commands to run the app:
-
-        cd gitterbot
-        cd nap
-        cp dot-EXAMPLE.env dot.env
-        nodemon app.js
-
-- That's it! The app should be running at [http://localhost:7891](http://localhost:7891).
-
-You can now chat to your gitterbot via Gitter at
-[https://gitter.im/demobot/test](https://gitter.im/demobot/test)
-
 
 # Getting your own appID
-This is using shared login as "demobot" so you may find yourself in a chatroom with other people using the same ID!
+The `dot.env` file you copied above contains login info. This is using shared "demobot" account so you may find yourself in a chatroom with other people using the same ID!
 
 To setup this up and use your own gitter login info, you should create your own Gitter API key on their developer site, and replace the info in that `.env` file. Get your own API keys for gitter from: [https://developer.gitter.im/apps](https://developer.gitter.im/apps)
 
-For more settings info, checkout the `AppConfig.js` and `RoomData.js` files. These define which rooms the bot will listen in to.
-You can ping us in the Dev Chatroom if you have problems [gitterbot chatroom](https://gitter.im/dcsan/gitterbot) .
+For more settings info, checkout the `AppConfig.js` and `RoomData.js` files. These define which rooms the bot will listen in to. You can ping us in the Dev Chatroom if you have problems [gitterbot chatroom](https://gitter.im/dcsan/gitterbot) .
 
 
 # Running tests
@@ -112,11 +113,9 @@ To run the tests with the right configs
 
 
 # Wiki Content
-The wiki content is pulled in from FCC's wiki using a git submodule
-But then we just copy it and commit it back to the main app as submodules are nasty to deal with on production servers.
+The wiki content is pulled in from FCC's wiki using a git submodule. But then we just copy it and commit it back to the main app as submodules are nasty to deal with on production servers.
 
     bin/wiki-update.sh
-
 
 
 # System Overview
@@ -133,7 +132,36 @@ Each command gets a `input` which is a blob of data including what the user ente
 ### KBase.js
 The Knowledge base. This is an interface to all the data in the wiki.
 
-### How commands are called
+
+### RoomMessages.js
+
+This is for static messages that are fired based on regex matches. If you just want to add some basic responses, this is the place to edit.
+
+### How to add a new Bot Command
+
+Look at BotCommands `echo` function. This is an example of a command being called. Anytime a user types a line starting with `echo` that will get passed to this function in input.
+
+```js
+    echo: function(input, bot) {
+        var username = input.message.model.fromUser.username;
+        return "@" + username + " said: " + input.message.model.text;
+    },
+```
+
+The input object contains `keyword` and `params` fields. If you type `echo this` you'll get
+
+```js
+//input
+{   
+    keyword: 'echo',
+    params: 'this'
+}
+```
+
+From any command you just return the new string you want to output. 
+So you can add new commands with this knowledge.
+
+### More detail on how commands are found and called
 
 In GBot.js
 
@@ -163,6 +191,15 @@ All of the botCommands expect these two params eg in thanks.js
         thanks: function (input, bot) {
 
 
+In `RoomMessages.js` we also have a table of regex and matching functions, and may switch all to just use this method in future. Would you like to help?
+
+```
+    {
+        regex: /\bth?a?n?[xk]s?q?\b/gim,
+        func: BotCommands.thanks
+    }
+```
+
 
 ## environment notes
 
@@ -175,9 +212,9 @@ we use git submodules for some wiki data. to get these submodules you would do:
 
 ### ES6 and iojs
 
-we're using the latest es6 so best to get an up to date environment.
-at the time of writing iojs was a bit ahead of node.
-its recommended to run on iojs rather than the older node.
+We downgraded the app to use basic node, so it should run even without iojs.
+But its recommended to run on iojs rather than the older node (until they merge the projects)
+To do this:
 
 
 ```bash
