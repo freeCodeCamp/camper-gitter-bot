@@ -44,7 +44,7 @@ var AllRoomMessages = [
         chance: 1   // only say this 50% of the time
     },
     {
-        regex: /\btha?n?[xk]s?\b/gim,
+        regex: /\bth?a?n?[xk]s?q?\b/gim,
         func: BotCommands.thanks
     }
 ]
