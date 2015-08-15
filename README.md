@@ -47,21 +47,23 @@ To run GitterBot, you need [Node.js](https://nodejs.org/) before downloading the
 
 To install Node.js on Windows, follow these instructions: [http://blog.teamtreehouse.com/install-node-js-npm-windows](http://blog.teamtreehouse.com/install-node-js-npm-windows).
 
- - To make your file changes update the local server automatically, install nodemon in an administrator console.
+- To make your file changes update the local server automatically, install nodemon in an administrator console.
+
         npm install -g nodemon
 
- - To download the app, clone the repository the bot is in:
+
+- To download the app, clone the repository the bot is in:
 
         git clone https://github.com/dcsan/gitterbot.git
 
- -  Run the following commands to run the app:
+-  Run the following commands to run the app:
 
         cd gitterbot
         cd nap
         ren dot-EXAMPLE.env dot.env
         nodemon app.js
 
- - That's it! The app should be running at [http://localhost:7891](http://localhost:7891).
+- That's it! The app should be running at [http://localhost:7891](http://localhost:7891).
 
 You can now chat to your gitterbot via Gitter at
 [https://gitter.im/demobot/test](https://gitter.im/demobot/test)
@@ -71,9 +73,9 @@ You can now chat to your gitterbot via Gitter at
 
 - To install Node, follow the instructions here: [http://blog.teamtreehouse.com/install-node-js-npm-mac](http://blog.teamtreehouse.com/install-node-js-npm-mac)
 
- - To make your file changes update the local server automatically, install nodemon in an administrator console.
-        sudo npm install -g nodemon
+- To make your file changes update the local server automatically, install nodemon in an administrator console.
 
+        sudo npm install -g nodemon
 
 - To download the app, clone the repository the bot is in:
 
@@ -86,7 +88,7 @@ You can now chat to your gitterbot via Gitter at
         cp dot-EXAMPLE.env dot.env
         nodemon app.js
 
- - That's it! The app should be running at [http://localhost:7891](http://localhost:7891).
+- That's it! The app should be running at [http://localhost:7891](http://localhost:7891).
 
 You can now chat to your gitterbot via Gitter at
 [https://gitter.im/demobot/test](https://gitter.im/demobot/test)
