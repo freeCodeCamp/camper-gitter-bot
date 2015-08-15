@@ -108,28 +108,28 @@ var envConfigs = {
     YOUR_GITHUB_ID: {
         botname: "YOUR_GITHUB_ID",
         appHost: "http://localhost:7000",
-        apiServer: "beta.freecodecamp.com",
+        apiServer: "freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
     },
 
     demobot: {
         botname: "demobot",
         appHost: "http://localhost:7000",
-        apiServer: "beta.freecodecamp.com",
+        apiServer: "freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
     },
 
     test: {
         botname: "bothelp",
         appHost: "http://localhost:7000",
-        apiServer: "beta.freecodecamp.com",
+        apiServer: "freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
     },
 
     local: {
         botname: "bothelp",
         appHost: "http://localhost:7000",
-        apiServer: "beta.freecodecamp.com",
+        apiServer: "freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
     },
     beta: {
@@ -141,7 +141,7 @@ var envConfigs = {
     prod: {
         botname: "camperbot",
         appHost: "http://bot.freecodecamp.com",
-        apiServer: "beta.freecodecamp.com",
+        apiServer: "freecodecamp.com",
         appRedirectUrl: "http://bot.freecodecamp.com/login/callback",
     }
 };
