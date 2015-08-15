@@ -134,7 +134,7 @@ var GBot = {
                     output = (scanCommand.text);
                 }
                 if (scanCommand.func) {
-                    Utils.tlog("func", scanCommand.func);
+                    //Utils.tlog("func", scanCommand.func);
                     output = scanCommand.func(input, this);
                 }
             }

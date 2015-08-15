@@ -134,7 +134,7 @@ var GitterHelper = {
 
     sayToRoomName: function(text, roomUri) {
         GitterHelper.findRoomByName(roomUri, function(opts) {
-            Utils.clog("GitterHelper saying", text);
+            //Utils.clog("GitterHelper saying", text);
             GitterHelper.sayToRoomObj(text, opts.gitterRoom);
         })
     }

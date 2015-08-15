@@ -236,7 +236,7 @@ var BotCommands = {
             commands: shortList.commands
         };
         str += shortList;
-        clog("find", str);
+        //clog("find", str);
         bot.makeListOptions(str);
         return (str);
     },
