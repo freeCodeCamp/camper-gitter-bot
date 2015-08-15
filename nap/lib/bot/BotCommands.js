@@ -213,6 +213,9 @@ var BotCommands = {
 
     // gitter limits to first 10 lines or so
     // TODO - pagination
+    //
+    // ## This command crashes the bot ##
+    /*
     topics: function (input, bot) {
         var str, shortList, list;
         str = "## topics\n";
@@ -226,6 +229,7 @@ var BotCommands = {
         // return "list"
         return str;
     },
+    */
 
     find: function (input, bot) {
         debugger;
