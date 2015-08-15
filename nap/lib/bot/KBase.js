@@ -137,7 +137,7 @@ KBase = {
             // continue list of enteries after limit
             var findResults = this.findMoreResults[1];
             this.findMoreResults = [];
-            return '> more enteries: \n ' + findResults;
+            return "> more enteries: \n " + findResults;
         }
         this.findMoreResults = [];
         // else
@@ -164,7 +164,7 @@ KBase = {
                 findResults += "\n > limited to first " + listLimit + " entries."
                                 + "\n > type `find " + keyword +"` again for more enteries."; 
                 this.findMoreResults[0] = keyword;
-                this.findMoreResults[1] = '' + line;
+                this.findMoreResults[1] = "" + line;
             } else if (i > listLimit) {
                 // exceeds limit
                 this.findMoreResults[1] += line;
