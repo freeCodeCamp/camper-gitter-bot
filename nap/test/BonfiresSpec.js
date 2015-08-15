@@ -92,9 +92,10 @@ describe("Bonfires", function() {
         expect(links).to.include("links:")
     });
 
-    it("should respond to bonfire info", function() {
+    // this sets the current bonfire for the next couple of tests
+    it("should respond to bonfire details", function() {
         var res = activateBonfire();
-        var message = TestHelper.makeMessageFromString("bonfire info");
+        var message = TestHelper.makeMessageFromString("bonfire details");
         var res = GBot.findAnyReply(message);
         expect(res).to.include("## :fire:[Bonfire");
     });
@@ -106,11 +107,8 @@ describe("Bonfires", function() {
         expect(res).to.include("links:");
     });
 
-
     it("should respond to bonfire script", function() {
         var res = activateBonfire();
-        //expect(res).to.include("Let's talk about");
-
         var message = TestHelper.makeMessageFromString("bonfire script");
         var res = GBot.findAnyReply(message);
         expect(res).to.include("```js \nfunction");
@@ -120,6 +118,15 @@ describe("Bonfires", function() {
         var bfName = "Bonfire Factorialize a Number";
         var hints = KBase.getWikiHints(bfName);
         expect(hints).to.be.instanceOf(Array);
+    });
+
+
+    it("should respond to hints command", function() {
+        var res = activateBonfire();
+        var message = TestHelper.makeMessageFromString("hint");
+        var res = GBot.findAnyReply(message);
+        //Utils.tlog('res', res);
+        expect(res).to.include("> :construction: Spoilers");
     });
 
     it("loaded should have wikiHints linked to bonfire object", function() {

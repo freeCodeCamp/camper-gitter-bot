@@ -150,7 +150,7 @@ Bonfires = {
         bfName = TextLib.dashedName(bfName);
         var bfs = this.data.challenges.filter(function (item) {
             flag = (item.dashedName.indexOf(bfName) >= 0);
-            Utils.tlog(item.dashedName, bfName, flag);
+            //Utils.tlog(item.dashedName, bfName, flag);
             return flag;
         });
         var bf = bfs[0];
@@ -309,7 +309,7 @@ Bonfires = {
         if (!bonfire) {
             Utils.error("Bonfires.bonfireInfo", "no bonfire");
         } else {
-            Utils.warn("Bonfires.bonfireInfo", "bonfire:", bonfire.dashedName);
+            //Utils.warn("Bonfires.bonfireInfo", "bonfire:", bonfire.dashedName);
         }
         var str = this.bonfireHeader(bonfire) + newline;
         str += this.bonfireScript(bonfire) + newline;
@@ -383,9 +383,9 @@ Bonfires = {
 
 Bonfires.load();
 
- Bonfires.allDashedNames().map(function(bf) {
-     console.log(bf);
- })
+//Bonfires.allDashedNames().map(function(bf) {
+//   console.log(bf);
+//})
 
 module.exports = Bonfires;
 

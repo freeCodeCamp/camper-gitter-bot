@@ -163,7 +163,7 @@ var GBot = {
     findListOption: function(input) {
         var parsedInput = parseInt(input.cleanText, 10);
 
-        if (this.listReplyOptions.length === 0) {
+        if (!this.listReplyOptions || this.listReplyOptions.length === 0) {
             return false;
         }
         else if (input.cleanText.match(/^[0-9]+$/i) === null) {

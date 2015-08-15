@@ -74,7 +74,7 @@ commands = {
         Utils.log('params ', input.params);
         var newBonfire = Bonfires.findBonfire(input.params);
         if (newBonfire) {
-            Utils.warn("newBonfire", newBonfire.dashedName);
+            //Utils.warn("newBonfire", newBonfire.dashedName);
             //side effects
             this.currentBonfire = newBonfire;
             return Bonfires.bonfireInfo(newBonfire);
