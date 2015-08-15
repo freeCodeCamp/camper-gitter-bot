@@ -39,8 +39,8 @@ var HttpWrap = {
 
             //the whole response has been recieved, so we just print it out here
             response.on('end', function (res) {
-                Utils.clog('HttpWrap>','options', that.defaultOptions);
-                Utils.clog('HttpWrap>', 'end', str);
+                //Utils.clog('HttpWrap>','options', that.defaultOptions);
+                //Utils.clog('HttpWrap>', 'end', str);
                 var blob = JSON.parse(str);
                 options.response = blob;
                 callback(options);
