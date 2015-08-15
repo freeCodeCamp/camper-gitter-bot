@@ -27,6 +27,7 @@ var KBase;
 KBase = {
     files: [],
     topics: null,
+    findMoreResults: [],
 
     staticReplies: {
         ebn: "this is the ebn test response",
@@ -132,12 +133,20 @@ KBase = {
         if (shortList.length === 0) {
             return "nothing found";
         }
+        if (this.findMoreResults[0] === keyword) {
+            // continue list of enteries after limit
+            var findResults = this.findMoreResults[1];
+            this.findMoreResults = [];
+            return '> more enteries: \n ' + findResults;
+        }
+        this.findMoreResults = [];
         // else
         Utils.log("shortList", shortList);
 
         var emojiList = [':zero:', ':one:', ':two:', ':three:', ':four:', 
                             ':five:', ':six:', ':seven:', ':eight:', ':nine:'];
-
+        var listLimit = 20; // 20 items (0 to 19)
+        
         var findResults = "";
         for (var i = 0; i < shortList.length; i++) {
             var topicData = shortList[i];
@@ -149,7 +158,20 @@ KBase = {
                 var line = "\n " + emojiList[iSplit[0]] +
                             emojiList[iSplit[1]] + " " + link;
             }
-            findResults += line;
+            
+            if (i === listLimit) {
+                // meets limit
+                findResults += "\n > limited to first " + listLimit + " entries."
+                                + "\n > type `find " + keyword +"` again for more enteries."; 
+                this.findMoreResults[0] = keyword;
+                this.findMoreResults[1] = '' + line;
+            } else if (i > listLimit) {
+                // exceeds limit
+                this.findMoreResults[1] += line;
+            } else {
+                // below limit
+                findResults += line;
+            }
         }
         return findResults;
     }
