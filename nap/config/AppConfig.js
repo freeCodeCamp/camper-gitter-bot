@@ -20,7 +20,7 @@ var AppConfig = {
     webuser: "webuser",
     wikiHost: "https://github.com/freecodecamp/freecodecamp/wiki/",
     gitterHost: "https://gitter.im/",
-    botVersion: "0.0.9a",
+    botVersion: "0.0.11",
     MAX_WIKI_LINES: 20,
     botNoiseLevel: 1,
 
