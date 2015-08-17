@@ -288,6 +288,9 @@ var BotRoomData = {
         {
             name: "FreeCodeCamp/LetsPair"
         },
+        {
+            name: "FreeCodeCamp/Welcome"
+        },
 
         {
             title: "MainHelp",
