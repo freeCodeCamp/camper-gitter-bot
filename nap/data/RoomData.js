@@ -292,6 +292,10 @@ var BotRoomData = {
             name: "FreeCodeCamp/Welcome"
         },
 
+        {            
+            name: "FreeCodeCamp/HelpZiplines"
+        },
+
         {
             title: "MainHelp",
             name: "FreeCodeCamp/FreeCodeCamp",
