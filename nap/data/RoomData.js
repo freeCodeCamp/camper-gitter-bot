@@ -109,6 +109,9 @@ var bonfireDashedNames = [
     "bonfire-friendly-date-ranges"
 ];
 
+// TODO - probably easier to refactor these as an array of entries
+// since we aren't using the title/icon etc fields anymore
+
 var BotRoomData = {
 
     // this controls which rooms you can access
@@ -255,21 +258,15 @@ var BotRoomData = {
         },
 
         {
-            title: "MainHelp",
             name: "FreeCodeCamp/Help",
-            topics: ['bots', 'fcc']
         },
         
         {
-            title:"LetsPair",
             name: "FreeCodeCamp/LetsPair",
-            topics: ['pairing', 'fcc']
         },
 
         {
-            title: "MainHelp",
             name: "FreeCodeCamp/Help",
-            topics: ['bots', 'fcc']
         },
 
         {
@@ -294,6 +291,34 @@ var BotRoomData = {
 
         {            
             name: "FreeCodeCamp/HelpZiplines"
+        },
+
+        {
+            name: "HelpBasejumps"
+        },
+        {
+            name: "NonprofitProjects"
+        },
+        {
+            name: "CodingJobs"
+        },
+        {
+            name: "YouCanDoThis"
+        },
+        {
+            name: "News"
+        },
+        {
+            name: "TeamViewer"
+        },
+        {
+            name: "PairProgrammingWomen"
+        },
+        {
+            name: "40PlusDevs"
+        },
+        {
+            name: "LiveCoding"
         },
 
         {
