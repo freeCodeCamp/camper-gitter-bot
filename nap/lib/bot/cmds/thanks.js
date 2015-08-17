@@ -43,10 +43,10 @@ var thanksCommands = {
 
         var mentions, output, fromUser, toUser, toUserMessage;
         mentions = input.message.model.mentions;
-        if (mentions && mentions.length === 0 ) {
+        if (mentions && mentions.length == 0 ) {
             Utils.warn("thanks without any mentions", input.message.model);
-            return null;
-        } // just 'thanks' in a message
+            return "if you want to thank someone, put an @ before their name!";
+        }
 
         fromUser = input.message.model.fromUser.username.toLowerCase();
         var options = {
@@ -123,7 +123,9 @@ var thanksCommands = {
             var message = cleanMessage(blob.response.error.message);
             //message += Utils.betaFooter();
             Utils.warn("WARN @thanks>", blob.response.error.message, blob.response.error);
-            //blob.bot.say(message, blob.input.message.room);
+
+            // show the error to the user
+            blob.bot.say(message, blob.input.message.room);
             return false;
         }
 
