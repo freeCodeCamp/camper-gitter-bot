@@ -106,11 +106,7 @@ var BotCommands = {
         var str = "```json" + pretty + "```";
         return str;
     },
-
-    whoami: function(input, bot) {
-        return stringy.stringify(bot);
-    },
-
+    
     botversion: function(){
         return "botVersion: " + AppConfig.botVersion;
     },
