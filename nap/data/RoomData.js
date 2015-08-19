@@ -176,7 +176,6 @@ var BotRoomData = {
 
         {
             title: "PrivateRoomTest",
-            private: true,
             name: "bothelp/PrivateRoomTest",
             topics: ["general", "intros"]
         },
@@ -184,7 +183,6 @@ var BotRoomData = {
         {
             title: "EdaanDemo",
             name: "egetzel/demo",
-            private: true,
             topics: ['egdemo']
         },
 
@@ -204,7 +202,6 @@ var BotRoomData = {
         {
             title: "Botdiscussion",
             name: "dcsan/botzy",
-            private: true,
             topics: ['bots', 'fcc', 'teaching']
         },
 
@@ -246,7 +243,6 @@ var BotRoomData = {
         {
             title: "CoreTeam",
             name: "FreeCodeCamp/CoreTeam",
-            private: true,
             topics: bonfireTopics
         },
 
@@ -314,18 +310,18 @@ bonfireDashedNames.map(function (bfName) {
     var room = {
         name: "camperbot/" + bfName,
         isBonfire: true
-    }
+    };
     BotRoomData.camperbot.push(room);
-})
+});
 
 BotRoomData.camperbot.map(function (room) {
     room.title = room.title || room.name.split("/")[1];
     if (room.isBonfire) {
         //room.entry = "FreeCodeCamp/HelpBonfires",
-        room.entry = "camperbot/testing",
-            room.topic = room.title
+        room.entry = "camperbot/testing";
+        room.topic = room.title;
     }
-})
+});
 
 RoomData = {
     rooms: function (botname) {
