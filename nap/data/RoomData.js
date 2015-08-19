@@ -16,7 +16,6 @@ var AppConfig = require('../config/AppConfig');
 
 var RoomData;
 
-
 // TODO - read this from the JSON file
 var bonfireTopics = [
     "bonfires",
@@ -130,14 +129,12 @@ var BotRoomData = {
     ],
 
     // this is the demobot that ships with the app
-    demobot: [
-        {
-            title: "demobot",
-            name: "demobot/test",
-            icon: "star",
-            topics: ["getting started"]
-        }
-    ],
+    demobot: [{
+        title: "demobot",
+        name: "demobot/test",
+        icon: "star",
+        topics: ["getting started"]
+    }],
 
     // developer bot
     bothelp: [
@@ -197,7 +194,6 @@ var BotRoomData = {
             name: "bothelp/bonfire-factorialize-a-number",
             topics: ['bonfire factorialize a number'],
             isBonfire: true,
-
         },
 
     ],
@@ -232,7 +228,7 @@ var BotRoomData = {
         {
             title: "SanFrancisco",
             name: "FreeCodeCamp/SanFrancisco",
-            topics: ["sf", "crazy rents" ]
+            topics: ["sf", "crazy rents"]
         },
 
         {
@@ -259,9 +255,9 @@ var BotRoomData = {
             name: "FreeCodeCamp/Help",
             topics: ['bots', 'fcc']
         },
-        
+
         {
-            title:"LetsPair",
+            title: "LetsPair",
             name: "FreeCodeCamp/LetsPair",
             topics: ['pairing', 'fcc']
         },
@@ -279,15 +275,19 @@ var BotRoomData = {
         {
             name: "FreeCodeCamp/Wiki"
         },
+
         {
             name: "FreeCodeCamp/CodeReview"
         },
+
         {
             name: "FreeCodeCamp/HalfWayClub"
         },
+
         {
             name: "FreeCodeCamp/LetsPair"
         },
+
         {
             name: "FreeCodeCamp/Welcome"
         },
@@ -304,15 +304,13 @@ var BotRoomData = {
         //     topics: bonfireTopics
         // },
 
-
-
     ]
 
 };
 
 var botname = null;
 
-bonfireDashedNames.map(function(bfName) {
+bonfireDashedNames.map(function (bfName) {
     var room = {
         name: "camperbot/" + bfName,
         isBonfire: true
@@ -320,29 +318,25 @@ bonfireDashedNames.map(function(bfName) {
     BotRoomData.camperbot.push(room);
 })
 
-BotRoomData.camperbot.map(function(room) {
+BotRoomData.camperbot.map(function (room) {
     room.title = room.title || room.name.split("/")[1];
     if (room.isBonfire) {
         //room.entry = "FreeCodeCamp/HelpBonfires",
         room.entry = "camperbot/testing",
-        room.topic = room.title
+            room.topic = room.title
     }
 })
 
 RoomData = {
-    rooms: function(botname) {
+    rooms: function (botname) {
         botname = botname || AppConfig.getBotName();
         return BotRoomData[botname];
     },
 
-    defaultRoom: function() {
+    defaultRoom: function () {
         return RoomData.rooms().rooms[0];
     }
 
 };
 
-
-
-
 module.exports = RoomData;
-
