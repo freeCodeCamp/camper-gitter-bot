@@ -232,6 +232,10 @@ iojs -v
     // should be at least v2.4.0
 ```
 
+# Contributing
+have a look at the [HelpWanted](https://github.com/dcsan/gitterbot/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22)  label issues and consider making some first steps!
+the labels, P1 = priority one, and 'S' means a small task, so good places to start.
+https://waffle.io/dcsan/gitterbot
 
 
 # Chat to us!
