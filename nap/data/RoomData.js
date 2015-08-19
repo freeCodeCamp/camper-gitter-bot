@@ -14,6 +14,26 @@ var AppConfig = require('../config/AppConfig');
 // we find a matching room here with that topic
 // and redirect them
 
+/*
+ * Returns a prefixed room(s) with a common channel name.
+ * e.g. <code>prefixChannelName("FreeCodeCamp", ["Help", "Bonfire"]);</code>
+ * would output <code>["FreeCodeCamp/Help", "FreeCodeCamp/Bonfire"]</code>
+ * and <code>prefixChannelName("FreeCodeCamp", "DataScience"]);</code>
+ * would output <code>"FreeCodeCamp/DataScience"</code>
+ *
+ * @param {string} name Channel name in Gitter
+ * @param {string|Array<string>} roomNames List of room names or a single room name
+ * @return {string|Array<string>} The prefixed string or array of string
+ */
+function prefixChannelName(name, roomNames) {
+    if (roomNames instanceof Array) {
+        return roomNames.map(function (room) {
+            return name + '/' + room;
+        });
+    }
+    return name + '/' + roomNames;
+}
+
 var RoomData;
 
 // TODO - read this from the JSON file
@@ -108,6 +128,85 @@ var bonfireDashedNames = [
     "bonfire-friendly-date-ranges"
 ];
 
+var fccOfficialChatRoomNames = [
+    "40PlusDevs",
+    "Beta",
+    "BookClub",
+    "CodeReview",
+    "CodingJobs",
+    "CurriculumDevelopment",
+    "DataScience",
+    "Design",
+    "FreeCodeCamp",
+    "HalfWayClub",
+    "Help",
+    "HelpBasejumps",
+    "HelpBonfires",
+    "HelpZiplines",
+    "Issues",
+    "LetsPair",
+    "LiveCoding",
+    "News",
+    "NonprofitProjects",
+    "PairProgrammingWomen",
+    "TeamViewer",
+    "Wiki",
+    "YouCanDoThis"
+];
+
+var fccCasualChatRoomNames = [
+
+];
+
+var fccMiscChatRoomNames = [
+    "CodeReview",
+    "CoreTeam",
+    "DataScience",
+    "HalfWayClub",
+    "LetsPair",
+    "Welcome",
+    "Wiki"
+];
+
+var fccCityChatRoomNames = [
+    "SanFrancisco"
+];
+
+var fccChatRooms = {
+    officialChatRooms: prefixChannelName("FreeCodeCamp",
+        fccOfficialChatRoomNames),
+    casualChatRooms: prefixChannelName("FreeCodeCamp",
+        fccCasualChatRoomNames),
+    cityChatRooms: prefixChannelName("FreeCodeCamp", fccCityChatRoomNames),
+};
+
+var camperBotChatRoomNames = [
+    "HelpZiplines",
+    "devteam",
+    "testing"
+];
+
+var otherChatRooms = [
+    "dcsan/botzy",
+    "dcsan/gitterbot"
+];
+
+var camperBotChatRooms = prefixChannelName("camperbot", camperBotChatRoomNames);
+
+// @TODO Refactor into a room generator function
+var camperBotRooms = [
+    fccChatRooms.officialChatRooms,
+    fccChatRooms.cityChatRooms,
+    camperBotChatRooms,
+    otherChatRooms
+].reduce(function (rooms, currRooms) {
+    return rooms.concat(currRooms);
+}).map(function (room) {
+    return {
+        name: room
+    };
+});
+
 var BotRoomData = {
 
     // this controls which rooms you can access
@@ -196,111 +295,7 @@ var BotRoomData = {
 
     ],
 
-    camperbot: [
-
-        // dev rooms
-        {
-            title: "Botdiscussion",
-            name: "dcsan/botzy",
-            topics: ['bots', 'fcc', 'teaching']
-        },
-
-        {
-            name: "dcsan/gitterbot",
-        },
-
-        {
-            name: "camperbot/devteam",
-        },
-
-        {
-            name: "camperbot/testing",
-        },
-
-        {
-            name: "FreeCodeCamp/DataScience",
-            topics: ["general", "DataScience"]
-        },
-
-        {
-            title: "SanFrancisco",
-            name: "FreeCodeCamp/SanFrancisco",
-            topics: ["sf", "crazy rents"]
-        },
-
-        {
-            title: "Help ZipLines",
-            name: "camperbot/HelpZiplines",
-            topics: ["ziplines"]
-        },
-
-        {
-            title: "Help Bonfires",
-            name: "FreeCodeCamp/HelpBonfires",
-            topics: bonfireTopics
-        },
-
-        {
-            title: "CoreTeam",
-            name: "FreeCodeCamp/CoreTeam",
-            topics: bonfireTopics
-        },
-
-        {
-            title: "MainHelp",
-            name: "FreeCodeCamp/Help",
-            topics: ['bots', 'fcc']
-        },
-
-        {
-            title: "LetsPair",
-            name: "FreeCodeCamp/LetsPair",
-            topics: ['pairing', 'fcc']
-        },
-
-        {
-            title: "MainHelp",
-            name: "FreeCodeCamp/Help",
-            topics: ['bots', 'fcc']
-        },
-
-        {
-            name: "freecodecamp/CodeReview"
-        },
-
-        {
-            name: "FreeCodeCamp/Wiki"
-        },
-
-        {
-            name: "FreeCodeCamp/CodeReview"
-        },
-
-        {
-            name: "FreeCodeCamp/HalfWayClub"
-        },
-
-        {
-            name: "FreeCodeCamp/LetsPair"
-        },
-
-        {
-            name: "FreeCodeCamp/Welcome"
-        },
-
-        {
-            title: "MainHelp",
-            name: "FreeCodeCamp/FreeCodeCamp",
-            topics: ['bots', 'fcc']
-        }
-
-        // {
-        //     title: "HelpBonfires",
-        //     name: "FreeCodeCamp/HelpBonfires",
-        //     topics: bonfireTopics
-        // },
-
-    ]
+    camperbot: camperBotRooms
 
 };
 
