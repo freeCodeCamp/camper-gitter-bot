@@ -44,7 +44,7 @@ var thanksCommands = {
         var mentions, output, fromUser, toUser, toUserMessage;
         mentions = input.message.model.mentions;
         if (mentions && mentions.length === 0 ) {
-            Utils.warn("thanks without any mentions", "", input.message.model);
+            Utils.warn("thanks", "without any mentions", input.message.model);
             return null;
         } // just 'thanks' in a message
 
