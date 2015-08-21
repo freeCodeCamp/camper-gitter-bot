@@ -152,10 +152,12 @@ var Router = {
             });
         });
 
-
+        // Alive Status - returns 200/OK on GET
+        app.get('/status', function(req, res) {
+          req.method="NONE"; // To disable etag/cache/304 response
+          res.status(200).send('OK');
+        });
     }
 };
 
 module.exports = Router;
-
-
