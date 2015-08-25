@@ -128,7 +128,6 @@ var bonfireDashedNames = [
     "bonfire-friendly-date-ranges"
 ];
 
-<<<<<<< HEAD
 var fccOfficialChatRoomNames = [
     "40PlusDevs",
     "Beta",
@@ -606,10 +605,6 @@ var camperBotRooms = [
         name: room
     };
 });
-=======
-// TODO - probably easier to refactor these as an array of entries
-// since we aren't using the title/icon etc fields anymore
->>>>>>> rel-012
 
 var BotRoomData = {
 
@@ -699,141 +694,7 @@ var BotRoomData = {
 
     ],
 
-<<<<<<< HEAD
     camperbot: camperBotRooms
-=======
-    camperbot: [
-
-        {
-            title: "MainHelp",
-            name: "FreeCodeCamp/FreeCodeCamp",
-            topics: ['bots', 'fcc']
-        },
-
-        {
-            title: "Help Bonfires",
-            name: "FreeCodeCamp/HelpBonfires",
-            topics: bonfireTopics
-        },
-
-        {
-            name: "dcsan/gitterbot",
-        },
-
-        {
-            name: "camperbot/devteam",
-        },
-
-        {
-            name: "camperbot/testing",
-        },
-
-        {
-            name: "FreeCodeCamp/DataScience",
-            topics: ["general", "DataScience"]
-        },
-
-        {
-            title: "SanFrancisco",
-            name: "FreeCodeCamp/SanFrancisco",
-            topics: ["sf", "crazy rents" ]
-        },
-
-        {
-            title: "Help ZipLines",
-            name: "camperbot/HelpZiplines",
-            topics: ["ziplines"]
-        },
-
-        {
-            title: "CoreTeam",
-            name: "FreeCodeCamp/CoreTeam",
-            private: true,
-            topics: bonfireTopics
-        },
-
-        {
-            name: "FreeCodeCamp/Help",
-        },
-        
-        {
-            name: "FreeCodeCamp/LetsPair",
-        },
-
-        {
-            name: "FreeCodeCamp/Help",
-        },
-
-        {
-            name: "freecodecamp/CodeReview"
-        },
-
-        {
-            name: "FreeCodeCamp/Wiki"
-        },
-        {
-            name: "FreeCodeCamp/CodeReview"
-        },
-        {
-            name: "FreeCodeCamp/HalfWayClub"
-        },
-        {
-            name: "FreeCodeCamp/LetsPair"
-        },
-        {
-            name: "FreeCodeCamp/Welcome"
-        },
-
-        {            
-            name: "FreeCodeCamp/HelpZiplines"
-        },
-
-        {
-            name: "HelpBasejumps"
-        },
-        {
-            name: "NonprofitProjects"
-        },
-        {
-            name: "CodingJobs"
-        },
-        {
-            name: "YouCanDoThis"
-        },
-        {
-            name: "News"
-        },
-        {
-            name: "TeamViewer"
-        },
-        {
-            name: "PairProgrammingWomen"
-        },
-        {
-            name: "40PlusDevs"
-        },
-        {
-            name: "LiveCoding"
-        },
-
-           // dev rooms
-        {
-            title: "Botdiscussion",
-            name: "dcsan/botzy",
-            private: true,
-            topics: ['bots', 'fcc', 'teaching']
-        },
-
-        // {
-        //     title: "HelpBonfires",
-        //     name: "FreeCodeCamp/HelpBonfires",
-        //     topics: bonfireTopics
-        // },
-
-
-
-    ]
->>>>>>> rel-012
 
 };
 
