@@ -207,12 +207,16 @@ var BotRoomData = {
 
     camperbot: [
 
-        // dev rooms
         {
-            title: "Botdiscussion",
-            name: "dcsan/botzy",
-            private: true,
-            topics: ['bots', 'fcc', 'teaching']
+            title: "MainHelp",
+            name: "FreeCodeCamp/FreeCodeCamp",
+            topics: ['bots', 'fcc']
+        },
+
+        {
+            title: "Help Bonfires",
+            name: "FreeCodeCamp/HelpBonfires",
+            topics: bonfireTopics
         },
 
         {
@@ -242,12 +246,6 @@ var BotRoomData = {
             title: "Help ZipLines",
             name: "camperbot/HelpZiplines",
             topics: ["ziplines"]
-        },
-
-        {
-            title: "Help Bonfires",
-            name: "FreeCodeCamp/HelpBonfires",
-            topics: bonfireTopics
         },
 
         {
@@ -321,11 +319,13 @@ var BotRoomData = {
             name: "LiveCoding"
         },
 
+           // dev rooms
         {
-            title: "MainHelp",
-            name: "FreeCodeCamp/FreeCodeCamp",
-            topics: ['bots', 'fcc']
-        }
+            title: "Botdiscussion",
+            name: "dcsan/botzy",
+            private: true,
+            topics: ['bots', 'fcc', 'teaching']
+        },
 
         // {
         //     title: "HelpBonfires",
