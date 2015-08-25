@@ -43,10 +43,17 @@ var thanksCommands = {
 
         var mentions, output, fromUser, toUser, toUserMessage;
         mentions = input.message.model.mentions;
+<<<<<<< HEAD
         if (mentions && mentions.length == 0 ) {
             Utils.warn("thanks without any mentions", input.message.model);
             return "if you want to thank someone, put an @ before their name!";
         }
+=======
+        if (mentions && mentions.length === 0 ) {
+            Utils.warn("thanks", "without any mentions", input.message.model);
+            return null;
+        } // just 'thanks' in a message
+>>>>>>> 13b9d361749ea5a3109d5ee3135e62f4d85abf87
 
         fromUser = input.message.model.fromUser.username.toLowerCase();
         var options = {
