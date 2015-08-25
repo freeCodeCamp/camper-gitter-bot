@@ -232,6 +232,7 @@ var GBot = {
                 // return null; // check - will this add nulls to the list of rooms?
             }
             GBot.roomList.push(room);
+            // have to stagger this for gitter rate limit
             GBot.listenToRoom(room);
             var text = GBot.getAnnounceMessage(opts);
             GBot.say(text, room);
@@ -301,20 +302,25 @@ var GBot = {
     // this joins rooms contained in the data/RoomData.js file
     // ie a set of bot specific discussion rooms
     joinKnownRooms: function() {
+        var apiDelay = 500;    // spacing per call
         var that = this;
         clog("botname on rooms", AppConfig.getBotName() );
+        var delay = 0;
         RoomData.rooms().map(function(oneRoomData) {
             var roomUrl = oneRoomData.name;
-            // clog("oneRoomData", oneRoomData);
-            // clog("gitter.rooms", that.gitter.rooms);
-            that.gitter.rooms.join(roomUrl, function(err, room) {
-                if (err) {
-                    // Utils.warn("Not possible to join the room:", err, roomUrl);
-                    return;
-                }
-                that.listenToRoom(room);
-                clog("joined> ", room.name);
-            });
+            delay += apiDelay;
+            setTimeout(function() {
+                // clog("oneRoomData", oneRoomData);
+                // clog("gitter.rooms", that.gitter.rooms);
+                that.gitter.rooms.join(roomUrl, function(err, room) {
+                    if (err) {
+                        // Utils.warn("Not possible to join the room:", err, roomUrl);
+                        return;
+                    }
+                    that.listenToRoom(room);
+                    clog("joined> ", room.name);
+                });
+            }, delay);
         });
     },
 
