@@ -17,6 +17,9 @@ function clog(msg, obj) {
     Utils.clog("GBot>", msg, obj);
 }
 
+var apiWait = 0;
+var apiDelay = 1000;
+
 var GBot = {
 
     init: function() {
@@ -32,7 +35,7 @@ var GBot = {
         // listen to other rooms for 1:1
         if (AppConfig.supportDmRooms) {
             this.gitter.currentUser().then(function(user) {
-                that.scanRooms(user, AppConfig.token)
+                that.scanRooms(user, AppConfig.token);
             }, function(err) {
                 Utils.error("GBot.currentUser>", "failed", err);
             });
@@ -92,7 +95,7 @@ var GBot = {
         var sayIt = function() {
             console.log("sayIt", text, roomName);
             GBot.say(text, roomName);
-        }
+        };
         var roomId = GitterHelper.findRoomByName(roomName, sayIt);
     },
 
@@ -232,6 +235,7 @@ var GBot = {
                 // return null; // check - will this add nulls to the list of rooms?
             }
             GBot.roomList.push(room);
+            // have to stagger this for gitter rate limit
             GBot.listenToRoom(room);
             var text = GBot.getAnnounceMessage(opts);
             GBot.say(text, room);
@@ -301,36 +305,36 @@ var GBot = {
     // this joins rooms contained in the data/RoomData.js file
     // ie a set of bot specific discussion rooms
     joinKnownRooms: function() {
+        var apiDelay = 500;    // spacing per call
         var that = this;
         clog("botname on rooms", AppConfig.getBotName() );
         RoomData.rooms().map(function(oneRoomData) {
             var roomUrl = oneRoomData.name;
-            // clog("oneRoomData", oneRoomData);
-            // clog("gitter.rooms", that.gitter.rooms);
-            that.gitter.rooms.join(roomUrl, function(err, room) {
-                if (err) {
-                    // Utils.warn("Not possible to join the room:", err, roomUrl);
-                    return;
-                }
-                that.listenToRoom(room);
-                clog("joined> ", room.name);
-            });
+            that.delayedJoin(roomUrl);
         });
     },
 
+
+    delayedJoin: function(roomUrl) {
+        var that = this;
+        apiWait += apiDelay;
+        setTimeout(function() {
+            that.gitter.rooms.join(roomUrl, function(err, room) {
+                if (err) {
+                    Utils.warn("Not possible to join the room:", roomUrl, err);
+                    return;
+                }
+                clog("joined> ", room.name);
+                that.listenToRoom(room);
+            });
+        }, apiWait);
+    },
 
     joinBonfireRooms: function() {
         var that = this;
         Bonfires.allDashedNames().map(function(name) {
             var roomUrl = AppConfig.getBotName() + "/" + name;
-            // Utils.clog("bf room", roomUrl);
-            that.gitter.rooms.join(roomUrl, function(err, room) {
-                if (err) {
-                    // Utils.warn("Not possible to join the room:", err, roomUrl);
-                    return;
-                }
-                that.listenToRoom(room);
-            });
+            that.delayedJoin(roomUrl);
         });
     },
 

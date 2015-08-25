@@ -153,6 +153,10 @@ var Utils = {
 
         where = where || "wiki";
         text = text || path;
+        if (!path) {
+        	Utils.error("tried to linkify an empty item");
+        	return "-----";
+        }
         path = path.replace("?", "%3F");  // not URL encoded
 
         switch (where) {
