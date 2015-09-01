@@ -47,7 +47,7 @@ var AllRoomMessages = [
         regex: /\bth?a?n?[xk]s?q?\b/gim,
         func: BotCommands.thanks
     }
-]
+];
 
 var RoomMessages = {
 
