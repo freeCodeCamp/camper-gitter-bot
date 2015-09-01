@@ -23,22 +23,22 @@ var AllRoomMessages = [
 
     {
         regex: /botx/i,
-        text: "> you called?",
+        text: "> you called?"
     },
 
     {
         regex: /troll/i,
-        text: "> :trollface: troll problems? [notify admins here](https://gitter.im/camperbot/admins)",
+        text: "> :trollface: troll problems? [notify admins here](https://gitter.im/camperbot/admins)"
     },
 
     {
         regex: /allyourbase/,
-        text: "![all your base](https://files.gitter.im/FreeCodeCamp/CoreTeam/Bw51/imgres.jpg)",
+        text: "![all your base](https://files.gitter.im/FreeCodeCamp/CoreTeam/Bw51/imgres.jpg)"
     },
 
     {
         regex: /'''/,
-        text: "> :bulb: to format code use backticks! ``` [more info](https://github.com/freecodecamp/freecodecamp/wiki/code-formatting)",
+        text: "> :bulb: to format code use backticks! ``` [more info](https://github.com/freecodecamp/freecodecamp/wiki/code-formatting)"
     },
 
     {
