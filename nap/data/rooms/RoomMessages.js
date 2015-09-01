@@ -27,7 +27,7 @@ var AllRoomMessages = [
     },
 
     {
-        regex: /troll/i,
+        regex: /\btroll\b/i,
         text: "> :trollface: troll problems? [notify admins here](https://gitter.im/camperbot/admins)"
     },
 
