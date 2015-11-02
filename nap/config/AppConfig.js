@@ -115,21 +115,21 @@ var envConfigs = {
     demobot: {
         botname: "demobot",
         appHost: "http://localhost:7000",
-        apiServer: "freecodecamp.com",
+        apiServer: "www.freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
     },
 
     test: {
         botname: "bothelp",
         appHost: "http://localhost:7000",
-        apiServer: "freecodecamp.com",
+        apiServer: "www.freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
     },
 
     local: {
         botname: "bothelp",
         appHost: "http://localhost:7000",
-        apiServer: "freecodecamp.com",
+        apiServer: "www.freecodecamp.com",
         appRedirectUrl: "http://localhost:7891/login/callback",
     },
     beta: {
@@ -141,7 +141,7 @@ var envConfigs = {
     prod: {
         botname: "camperbot",
         appHost: "http://bot.freecodecamp.com",
-        apiServer: "freecodecamp.com",
+        apiServer: "www.freecodecamp.com",
         appRedirectUrl: "http://bot.freecodecamp.com/login/callback",
     }
 };
