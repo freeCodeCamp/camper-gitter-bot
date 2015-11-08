@@ -37,7 +37,7 @@ We've added some bonfire specific commands. If you type `bonfire $BONFIRENAME` (
 - `topics` selected pages from the wiki
 - `rooms`  all rooms the bot is in
 - `archives` show history
-- `music` link to FCC Plug rooms
+- `music` link to Musare (a music app built by campers)
 - `twitch` show the twitch feed
 
 ## Content for the wiki
