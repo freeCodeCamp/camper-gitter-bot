@@ -9,16 +9,14 @@ Main features:
 - wrapper for commands
 
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dcsan/gitterbot?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
-
-The GBot is integrated into FreeCodeCamp
+The CamperBot is integrated into FreeCodeCamp
 
 Join us in Gitter to discuss!
-https://gitter.im/dcsan/gitterbot
+https://gitter.im/FreeCodeCamp/camperbot
 
 # Introducing CamperBot!
 
-GitterBot is a full featured bot for Gitter.im First developed to integrate with the chatrooms [for FreeCodeCamp, the largest online bootcamp in the world,](https://twitter.com/FreeCodeCamp/status/627338604134559744) where he supports more than 15,000 users in the main chatroom.
+CamperBot is a full featured bot for Gitter.im developed to integrate with the chatrooms [for FreeCodeCamp, the largest online bootcamp in the world,](https://twitter.com/FreeCodeCamp/status/627338604134559744) where he supports more than 30,000 users in the main chatroom.
 
 ### Github Wiki Search
 
