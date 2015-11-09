@@ -1,10 +1,3 @@
-
-## Airtable recommendation
-update: I'm using Airtable to store some data. 
-It's a very cool 'google docs meets DB' service and if you sign up here, I'll get some credit on my account. Thanks!
-https://airtable.com/invite/bV2PbVkk
-
-
 # CamperBot!
 
 This is a full featured bot for Gitter.
