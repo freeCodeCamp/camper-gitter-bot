@@ -1,5 +1,7 @@
 # CamperBot!
 
+[![Join the chat at https://gitter.im/FreeCodeCamp/camperbot](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FreeCodeCamp/camperbot?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This is a full featured bot for Gitter.
 Main features:
 - integration with github Wiki
