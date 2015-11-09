@@ -5,7 +5,7 @@ It's a very cool 'google docs meets DB' service and if you sign up here, I'll ge
 https://airtable.com/invite/bV2PbVkk
 
 
-# GitterBot!
+# CamperBot!
 
 This is a full featured bot for Gitter.
 Main features:
@@ -21,7 +21,7 @@ The GBot is integrated into FreeCodeCamp
 Join us in Gitter to discuss!
 https://gitter.im/dcsan/gitterbot
 
-# Introducing GitterBot!
+# Introducing CamperBot!
 
 GitterBot is a full featured bot for Gitter.im First developed to integrate with the chatrooms [for FreeCodeCamp, the largest online bootcamp in the world,](https://twitter.com/FreeCodeCamp/status/627338604134559744) where he supports more than 15,000 users in the main chatroom.
 
@@ -72,7 +72,7 @@ To run GitterBot, you need [Node.js](https://nodejs.org/) before downloading the
 
 - That's it! The app should be running at [http://localhost:7891](http://localhost:7891).
 
-You can now chat to your gitterbot via Gitter at
+You can now chat to your CamperBot via Gitter at
 [https://gitter.im/demobot/test](https://gitter.im/demobot/test)
 
 
