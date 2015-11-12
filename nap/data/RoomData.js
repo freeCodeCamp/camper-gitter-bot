@@ -14,18 +14,6 @@ var AppConfig = require('../config/AppConfig');
 // we find a matching room here with that topic
 // and redirect them
 
-/*
- * Returns a prefixed room(s) with a common channel name.
- * e.g. <code>prefixChannelName("FreeCodeCamp", ["Help", "Bonfire"]);</code>
- * would output <code>["FreeCodeCamp/Help", "FreeCodeCamp/Bonfire"]</code>
- * and <code>prefixChannelName("FreeCodeCamp", "DataScience"]);</code>
- * would output <code>"FreeCodeCamp/DataScience"</code>
- *
- * @param {string} name Channel name in Gitter
- * @param {string|Array<string>} roomNames List of room names or a single room name
- * @return {string|Array<string>} The prefixed string or array of string
- */
-
 var RoomData;
 
 // TODO - read this from the JSON file
