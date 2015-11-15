@@ -109,42 +109,22 @@ var bonfireDashedNames = [
 ];
 
 var camperBotChatRooms = [
-    "camperbot/HelpZiplines",
-    "camperbot/devteam",
-    "camperbot/testing",
-    "FreeCodeCamp/40PlusDevs",
-    "FreeCodeCamp/Beta",
-    "FreeCodeCamp/BookClub",
+    "FreeCodeCamp/admin",
+    "FreeCodeCamp/camperbot",
     "FreeCodeCamp/Casual",
     "FreeCodeCamp/CodeReview",
     "FreeCodeCamp/CodingJobs",
     "FreeCodeCamp/CurriculumDevelopment",
     "FreeCodeCamp/DataScience",
-    "FreeCodeCamp/Design",
     "FreeCodeCamp/FreeCodeCamp",
     "FreeCodeCamp/HalfWayClub",
     "FreeCodeCamp/Help",
     "FreeCodeCamp/HelpBasejumps",
     "FreeCodeCamp/HelpBonfires",
     "FreeCodeCamp/HelpZiplines",
-    "FreeCodeCamp/Issues",
-    "FreeCodeCamp/LetsPair",
     "FreeCodeCamp/LiveCoding",
-    "FreeCodeCamp/News",
-    "FreeCodeCamp/NonprofitProjects",
     "FreeCodeCamp/PairProgrammingWomen",
-    "FreeCodeCamp/TeamViewer",
-    "FreeCodeCamp/Wiki",
-    "FreeCodeCamp/YouCanDoThis",
-    "FreeCodeCamp/GameDev",
-    "FreeCodeCamp/Gaming",
-    "FreeCodeCamp/Hardware",
-    "FreeCodeCamp/Music",
-    "FreeCodeCamp/Saving",
-    "FreeCodeCamp/SelfImprovement",
-    "FreeCodeCamp/TVandMovies",
-    "dcsan/botzy",
-    "dcsan/gitterbot"
+    "FreeCodeCamp/YouCanDoThis"
 ];
 
 // @TODO Refactor into a room generator function
