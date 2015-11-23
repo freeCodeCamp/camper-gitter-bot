@@ -3,3 +3,4 @@
 .env
 *.env
 !dot-EXAMPLE.env
+node_modules
