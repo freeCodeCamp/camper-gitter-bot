@@ -1,2 +1,8 @@
 .idea
-.env
+*.iml
+*.log
+*.env
+!dot-EXAMPLE.env
+node_modules
+.DS_Store
+Thumbs.db
