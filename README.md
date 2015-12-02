@@ -74,6 +74,7 @@ git clone https://github.com/FreeCodeCamp/camperbot.git
 cd camperbot
 cd nap
 cp dot-EXAMPLE.env dot.env
+npm install
 nodemon app.js
 ```
 
@@ -100,6 +101,7 @@ git clone https://github.com/FreeCodeCamp/camperbot.git
 cd gitterbot
 cd nap
 copy dot-EXAMPLE.env dot.env
+npm install
 nodemon app.js
 ```
 
