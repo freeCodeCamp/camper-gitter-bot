@@ -1,7 +1,7 @@
 "use strict";
 
 var http = require('http');
-var _ = require('lodash-node');
+var _ = require('lodash');
 
 var AppConfig = require("../../config/AppConfig"),
     Utils = require("./Utils");

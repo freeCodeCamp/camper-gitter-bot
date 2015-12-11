@@ -1,5 +1,5 @@
 "use strict";
-require('dotenv').config({path: 'dot.env'});
+
 
 var GBot = require('../lib/bot/GBot');
 
@@ -148,4 +148,3 @@ var TestHelper = {
 
 
 module.exports = TestHelper;
-

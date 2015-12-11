@@ -15,7 +15,7 @@ var assert = require("chai").assert;
 
 var stringy = require("stringy");
 
-var _ = require("lodash-node");
+var _ = require("lodash");
 
 var GBot = require("../../lib/bot/GBot.js"),
     KBase = require("../bot/KBase"),
@@ -151,7 +151,7 @@ var BotCommands = {
     },
 
     tooNoisy: function (input, bot) {
-        // if this.room.name 
+        // if this.room.name
         return false;
     },
 
@@ -300,7 +300,7 @@ var BotCommands = {
         return (this.welcome(input, bot) );
     },
 
-    //DEMO how to add a new 
+    //DEMO how to add a new
     bob: function(input, bot) {
         console.log("bob input>", input.params);
         console.log("from>", input.message.model.fromUser);

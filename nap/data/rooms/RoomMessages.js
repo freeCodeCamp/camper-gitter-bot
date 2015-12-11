@@ -8,7 +8,7 @@
 
 var Utils = require('../../lib/utils/Utils');
 var BotCommands = require('../../lib/bot/BotCommands');
-var _ = require('lodash-node');
+var _ = require('lodash');
 
 
 // TODO - add these to all of the rooms

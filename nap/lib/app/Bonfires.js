@@ -3,7 +3,7 @@
 //var yaml = require('js-yaml');
 var fs = require('fs');
 
-var _ = require("lodash-node");
+var _ = require("lodash");
 
 var Utils = require('../../lib/utils/Utils'),
     InputWrap = require('../../lib/bot/InputWrap'),
@@ -388,4 +388,3 @@ Bonfires.load();
 //})
 
 module.exports = Bonfires;
-

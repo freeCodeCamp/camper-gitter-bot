@@ -1,7 +1,5 @@
 "use strict";
 
-// var _ = require('lodash-node');
-
 var AppConfig = require('../../config/AppConfig');
 require("../patch/StringPatch");
 

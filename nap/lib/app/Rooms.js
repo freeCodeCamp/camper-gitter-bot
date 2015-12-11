@@ -8,7 +8,7 @@ var RoomData = require('../../data/RoomData'),
     Utils= require('../utils/Utils'),
     AppConfig = require('../../config/AppConfig');
 
-var _ = require('lodash-node');
+var _ = require('lodash');
 
 var Rooms = {
 
