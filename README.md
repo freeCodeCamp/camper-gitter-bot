@@ -13,6 +13,8 @@ Join us in [Gitter.im/FreeCodeCamp/camperbot](https://gitter.im/FreeCodeCamp/cam
 
 Test the CamperBot in [Gitter.im/FreeCodeCamp/camperbotPlayground](https://gitter.im/FreeCodeCamp/camperbotPlayground) room.
 
+CamperBot was originally created by for [Free Code Camp](http://www.freecodecamp.com) by [@dcsan](https://github.com/dcsan) at [RIKAI Labs](mailto:dc@rikai.co), and is now maintained our open source community.
+
 ## Contents
 - [Introducing CamperBot!](https://github.com/FreeCodeCamp/camperbot/#introducing-camperbot)
 - [Installation instructions](https://github.com/FreeCodeCamp/camperbot/#installation-instructions)
@@ -238,6 +240,3 @@ The labels, P1 = priority one, and 'S' means a small task, so good places to sta
 
 ## Chat with us!
 Chat with us in the [camperbot chatroom](https://gitter.im/FreeCodeCamp/camperbot) if you get stuck.
-
-## Credits
-[@dcsan](https://github.com/dcsan) &mdash; [RIKAI Labs](mailto:dc@rikai.co) (**Founder**)
