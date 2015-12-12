@@ -13,7 +13,7 @@ Join us in [Gitter.im/FreeCodeCamp/camperbot](https://gitter.im/FreeCodeCamp/cam
 
 Test the CamperBot in [Gitter.im/FreeCodeCamp/camperbotPlayground](https://gitter.im/FreeCodeCamp/camperbotPlayground) room.
 
-CamperBot was originally created by for [Free Code Camp](http://www.freecodecamp.com) by [@dcsan](https://github.com/dcsan) at [RIKAI Labs](mailto:dc@rikai.co), and is now maintained our open source community.
+CamperBot was originally created by for [Free Code Camp](http://www.freecodecamp.com) by [@dcsan](https://github.com/dcsan) at [RIKAI Labs](mailto:dc@rikai.co), and is now maintained by our open source community.
 
 ## Contents
 - [Introducing CamperBot!](https://github.com/FreeCodeCamp/camperbot/#introducing-camperbot)
