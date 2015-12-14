@@ -33,7 +33,6 @@ CamperBot was originally created by for [Free Code Camp](http://www.freecodecamp
 - [Environment Notes](https://github.com/FreeCodeCamp/camperbot/#environment-notes)
 - [Contributing](https://github.com/FreeCodeCamp/camperbot/#contributing)
 - [Chat with us!](https://github.com/FreeCodeCamp/camperbot/#chat-with-us)
-- [Credits](https://github.com/FreeCodeCamp/camperbot/#credits)
 
 ## Introducing CamperBot!
 CamperBot is a full featured chat bot for [Gitter.im](https://gitter.im) developed to integrate with the chat rooms for [FreeCodeCamp &mdash; the largest online coding bootcamp in the world](http://www.freecodecamp.com/), where it serves more than 60,000 campers.
