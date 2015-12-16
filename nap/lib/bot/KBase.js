@@ -29,25 +29,6 @@ KBase = {
     topics: null,
     findMoreResults: [],
 
-    staticReplies: {
-        ebn: "this is the ebn test response",
-        // menu: "I know lots about **javascript**! Pick one of:\n - `functions` \n - `objects`",
-        // help: "Type `menu` for some starting points or check the [guide](http://www.freecodecamp.com/field-guide/all-articles)",
-        link: "try this [guide](http://www.freecodecamp.com/field-guide/all-articles).",
-        objects: "good question! well, shall we talk about **classical** or **prototypical** ?",
-        hint: "depending on the topic, I'm going to show you a context sensitive `hint` here.",
-        image: "![This is a cat](http://40.media.tumblr.com/tumblr_m2nmt6CouC1rtpv45o1_500.jpg)",
-        imageurl: "http://40.media.tumblr.com/tumblr_m2nmt6CouC1rtpv45o1_500.jpg",
-        quote: "> this is a quote",
-        functions: "this is a function: \n ```javascript \nfunction foo() {\n" + "  alert('hi');\n" + "}; ```",
-        heading: "# This is a heading",
-        code: "this is inline code `foo();` yay.",
-        tasks: "- [x] learn to code\n- [ ] ?????\n- [ ] profit?",
-        graph: "http://myserver.com/graphs?period=today.gif",
-        star: "> some stuff here quoted \n\n[vote](http://www.freecodecamp.com/field-guide/all-articles)\n" + "> another one here \n[vote](http://www.freecodecamp.com/field-guide/all-articles)"
-    },
-
-
     initSync: function (forceReload) {
         //forceReload = forceReload || false;
         var wikiDataDir = path.join(__dirname, "/../../data/wiki");  // FIXME - works relative?
@@ -95,10 +76,6 @@ KBase = {
         var res, kb = this;
         var searchDashName = TextLib.dashedName(params);
 
-        res = KBase.staticReplies[searchDashName];
-        if (res) {
-            return (res);
-        }
         if (!KBase.allData) {
             KBase.initSync();
         } else {
@@ -245,4 +222,3 @@ module.exports = KBase;
 //     })
 //     // could also reject
 // },
-
