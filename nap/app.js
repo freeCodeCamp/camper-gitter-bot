@@ -1,63 +1,40 @@
-/*jshint globalstrict:true, trailing:false, unused:true, node:true */
-"use strict";
-
-// var clc = require("cli-color");
-//process.stdout.write(clc.erase.screen);
+'use strict';
 
 require('dotenv').config({path: 'dot.env'});
 
-console.log("--------------- startup ------------------")
+console.log('--------------- startup ------------------');
 
-if (typeof Map !== "function" ) {
-    throw new Error("ES6 is required; add --harmony");
+if (typeof Map !== 'function' ) {
+  throw new Error('ES6 is required; add --harmony');
 }
 
-require("./lib/patch/StringPatch.js");
+const express = require('express'),
+      port = process.env.PORT || 7891,
+      passport = require('./lib/gitter/passportModule'),
+      GBot = require('./lib/bot/GBot'),
+      routes = require('./lib/app/routes.js'),
+      path = require('path');
 
-var express = require("express");
-var port = process.env.PORT || 7891;
-var passport = require("./lib/gitter/passportModule");
-
-// other requires
-var GBot = require("./lib/bot/GBot"),
-    routes = require("./lib/app/routes.js");
-
-//should be loaded before Bonfires for wikihints
-var KBase = require('./lib/bot/KBase');
-var Bonfires = require('./lib/app/Bonfires');
-
-// Utils.cls();
-
-// Client OAuth configuration
-
-var app = express();
+const app = express();
 
 // Middlewares
-app.set("view engine", "jade");
-app.set("views", __dirname + "/views");
+app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, '/views'));
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.session({
-    secret: "keyboard cat"
+  secret: 'keyboard cat'
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
 
-
-
 GBot.init();
 routes.init(app, GBot, passport);
 
-// GBot.updateRooms();
-// needs a room
-// GBot.sendReply("menu");
-
-
-
 app.listen(port);
-console.log("Demo app running at http://localhost:" + port);
+console.log('Demo app running at http://localhost:' + port);

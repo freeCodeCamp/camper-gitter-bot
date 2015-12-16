@@ -1,47 +1,41 @@
-"use strict";
+'use strict';
 
-var https = require('https');
+const https = require('https');
 
 function listenToRoom(roomId, bot) {
-    var token = process.env.GITTER_USER_TOKEN;
-    var heartbeat = " \n";
+  const token = process.env.GITTER_USER_TOKEN,
+        heartbeat = ' \n';
 
-    console.log("listenToRoom", roomId);
+  console.log('listenToRoom', roomId);
 
-    var options = {
-        hostname: 'stream.gitter.im',
-        port: 443,
-        path: '/v1/rooms/' + roomId + '/chatMessages',
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + token
-        }
-    };
+  const options = {
+    hostname: 'stream.gitter.im',
+    port: 443,
+    path: '/v1/rooms/' + roomId + '/chatMessages',
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  };
 
-    var req = https.request(options, function(res) {
-        res.on('data', function(chunk) {
-            var blob, msg = chunk.toString();
-            if (msg !== heartbeat) {
-                // console.log('Message: ' + msg);
-                blob = JSON.parse(msg);
-                blob.roomId = roomId;
-                bot.reply(blob);
-            }
-        });
+  const req = https.request(options, res => {
+    res.on('data', chunk => {
+      const msg = chunk.toString();
+      if (msg !== heartbeat) {
+        const blob = JSON.parse(msg);
+        blob.roomId = roomId;
+        bot.reply(blob);
+      }
     });
+  });
 
-    req.on('error', function(e) {
-        console.log('Something went wrong: ' + e.message);
-    });
+  req.on('error', e => {
+    console.log('Something went wrong: ' + e.message);
+  });
 
-    req.end();
-
+  req.end();
 }
 
-
-
 module.exports = {
-    'listenToRoom': listenToRoom
+  'listenToRoom': listenToRoom
 };
-
-// console.log("streamApi.exports", module.exports);

@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-var Settings = {
-    MAX_WIKI_LINES: 10            // trim wiki output or gitter will barf
+const Settings = {
+  MAX_WIKI_LINES: 10
 };
 
 module.exports = Settings;

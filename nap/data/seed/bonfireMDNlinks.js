@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Copied from
 // https://github.com/FreeCodeCamp/freecodecamp/blob/staging/seed/bonfireMDNlinks.js
 
