@@ -2,20 +2,15 @@
   "name": "gitter-demo-app",
   "version": "0.0.1",
   "dependencies": {
-    "chai": "",
     "cli-color": "",
     "dotenv": "^1.2.0",
     "express": "~3.4.4",
-    "glob": "",
     "jade": "~0.35.0",
-    "js-yaml": "",
     "lodash": "^3.10.1",
-    "node-gitter": "",
+    "node-gitter": "^1.2.8",
     "passport": "~0.2.0",
     "passport-oauth2": "~1.1.1",
-    "request": "~2.27.0",
-    "simple-node-logger": "",
-    "stringy": ""
+    "request": "~2.27.0"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.6",
@@ -31,8 +26,6 @@
   },
   "scripts": {
     "start": "node app.js",
-    "pretest": "make restart-test-server",
-    "test": "NODE_ENV=test mocha",
-    "posttest": "make stop-test-server"
+    "test": "gulp"
   }
 }

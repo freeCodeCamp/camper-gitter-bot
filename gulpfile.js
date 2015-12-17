@@ -28,6 +28,6 @@ gulp.task('set-env', () => {
   });
 });
 
-gulp.task('default', ['set-env', 'test'], () => {
+gulp.task('default', ['lint', 'set-env', 'test'], () => {
 
 });
