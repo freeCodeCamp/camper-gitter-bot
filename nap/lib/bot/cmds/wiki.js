@@ -45,9 +45,9 @@ var commands = {
     wikiCantFind: function(input) {
         Utils.warn("wiki.js", "cant find topic for", input.params);
         var output = "no wiki entry for: `" + input.params + "`";
-        output += "\n:pencil: ";
-        output += Utils.linkify(input.params, "wiki", "click here to create one now!");
-        output += "after creating your page type `update` to reload it here";
+        // output += "\n:pencil: ";
+        // output += Utils.linkify(input.params, "wiki", "click here to create one now!");
+        // output += "after creating your page type `update` to reload it here";
         //output += "\n you could also try typing `find " + input.params + "`";
         return output;
     },
