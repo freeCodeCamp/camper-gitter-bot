@@ -5,7 +5,7 @@ var AppConfig = require("../../config/AppConfig");
 var Utils = require("../../lib/utils/Utils");
 
 var request = require('request');
-var _ = require('lodash-node');
+var _ = require('lodash');
 
 // Gitter API client helper
 var GitterHelper = {

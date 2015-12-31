@@ -166,7 +166,7 @@ var BotRoomData = {
         name: "demobot/test",
         icon: "star",
         topics: ["getting started"]
-    }],
+      }],
 
     // developer bot
     bothelp: [

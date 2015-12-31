@@ -4,7 +4,7 @@
 /*jslint node: true */
 /*global require, module, process, console  __dirname */
 
-var _ = require("lodash-node");
+var _ = require("lodash");
 
 var AppConfig = {
     clientId: process.env.GITTER_APP_KEY,
@@ -156,4 +156,3 @@ AppConfig.init();
 // console.log("AppConfig", AppConfig);
 
 module.exports = AppConfig;
-

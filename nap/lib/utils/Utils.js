@@ -1,13 +1,13 @@
 "use strict";
 
+require('dotenv').config({path: 'dot.env'});
+
 var assert = require("chai").assert;
 
 var clc = require("cli-color");
-var _ = require('lodash-node');
+var _ = require('lodash');
 var AppConfig = require("../../config/AppConfig");
 var MDNlinks = require('../../data/seed/bonfireMDNlinks');
-
-var TextLib = require("./TextLib.js");
 
 // var winston = require("winston");
 
@@ -56,6 +56,7 @@ var Utils = {
     },
 
     clog: function (where, msg, obj) {
+        if (process.env.SERVER_ENV) { return; }
         if (this.logLevel < LOG_LEVEL_INFO) {
             return;
         }
@@ -68,6 +69,7 @@ var Utils = {
 
     // log during test
     tlog: function () {
+        if (process.env.SERVER_ENV) { return; }
         // p1 = p1 || "";
         // p2 = p2 || "";
         // p3 = p3 || "";
@@ -86,6 +88,7 @@ var Utils = {
     },
 
     warn: function (where, msg, obj) {
+        if (process.env.SERVER_ENV) { return; }
         if (this.logLevel < LOG_LEVEL_WARN) {
             // console.log("skipping warn this.logLevel", this.logLevel);
             return;
@@ -108,6 +111,7 @@ var Utils = {
     },
 
     error: function (where, msg, obj) {
+        if (process.env.SERVER_ENV) { return; }
         if (this.logLevel < LOG_LEVEL_ERROR) {
             return;
         }
@@ -173,7 +177,6 @@ var Utils = {
         uri = host + path;
         name = Utils.namify(text);
         link = "[" + name + "](" + uri + ")";
-        // console.log("Utils.linkify args>", path, where, text);
         Utils.clog("Utils.linkify>", "link", link);
         return link;
     },
