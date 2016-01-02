@@ -99,7 +99,7 @@ git clone https://github.com/FreeCodeCamp/camperbot.git
 
 -  Run the following commands to run the app:
 ```sh
-cd gitterbot
+cd campberbot
 cd nap
 copy dot-EXAMPLE.env dot.env
 npm install
