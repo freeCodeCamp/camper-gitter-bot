@@ -305,7 +305,7 @@ var BotCommands = {
         console.log("bob input>", input.params);
         console.log("from>", input.message.model.fromUser);
         console.log("mentions>", input.message.model.mentions);
-        return("this is bob @dcsan");
+        return("this is bob");
     }
 
 };
