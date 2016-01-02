@@ -16,7 +16,7 @@ const AppConfig = {
   webuser: 'webuser',
   wikiHost: 'https://github.com/freecodecamp/freecodecamp/wiki/',
   gitterHost: 'https://gitter.im/',
-  botVersion: '0.0.11',
+  botVersion: '0.0.12',
   MAX_WIKI_LINES: 20,
   botNoiseLevel: 1,
 

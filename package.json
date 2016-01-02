@@ -1,6 +1,6 @@
 {
-  "name": "gitter-demo-app",
-  "version": "0.0.1",
+  "name": "camperbot",
+  "version": "0.0.12",
   "dependencies": {
     "cli-color": "",
     "dotenv": "^1.2.0",
