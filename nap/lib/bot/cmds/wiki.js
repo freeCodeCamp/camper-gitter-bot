@@ -38,7 +38,7 @@ var commands = {
         // return
         var output = "usage:\n";
         output += "    `wiki $topic`   info on that topic\n";
-        output += "    `topics`    for a list of topics\n";
+        //output += "    `topics`    for a list of topics\n";
         return output;
     },
 
