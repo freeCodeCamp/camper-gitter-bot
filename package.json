@@ -1,0 +1,31 @@
+{
+  "name": "camperbot",
+  "version": "0.0.12",
+  "dependencies": {
+    "cli-color": "",
+    "dotenv": "^1.2.0",
+    "express": "~3.4.4",
+    "jade": "~0.35.0",
+    "lodash": "^3.10.1",
+    "node-gitter": "^1.2.8",
+    "passport": "~0.2.0",
+    "passport-oauth2": "~1.1.1",
+    "request": "~2.27.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^4.1.6",
+    "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.11.3",
+    "faucet": "0.0.1",
+    "gulp": "^3.9.0",
+    "gulp-env": "^0.2.0",
+    "gulp-eslint": "^1.1.0",
+    "gulp-tape": "0.0.7",
+    "nodemon": "~1.0.15",
+    "tape": "^4.2.2"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "gulp"
+  }
+}

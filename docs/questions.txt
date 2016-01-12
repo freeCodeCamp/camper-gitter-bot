@@ -6,18 +6,12 @@ eg global "logger" module
 using ES6 by default?
 what about client?
 
-
-
 good logger module
 shows line nums etc.
 
-
-
 simple testing of a node app and classes
 
-
 free license of editor?
-
 
 ## variable names
 mixing Objects and plain data
@@ -25,7 +19,11 @@ using Obj as suffix?
 eg  topic="room"
     topicObj = { name: room}
 
+## content
 
-## testing
-use assert or expect mocha syntax?
+what content to expose through the bot?
 
+-------------------------------------------------------------
+# Tech
+
+CI tool used?
