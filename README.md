@@ -74,7 +74,7 @@ Custom functions can easily be added. Check the [System Overview](https://github
 
 ## Installation instructions
 
-To run camperbot, you need [Node.js](https://nodejs.org/).
+To run camperbot, you need [Node.js](https://nodejs.org/) 4.2.0 or greater.
 
 ### Mac / Linux
 

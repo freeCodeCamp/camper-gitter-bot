@@ -9,9 +9,3 @@ cd ../..
 rm data/wiki/*
 
 cp data/fcc.wiki/*md data/wiki
-
-git add data/wiki
-git commit -am "wiki update and merge"
-git fetch 
-git push -u
-
