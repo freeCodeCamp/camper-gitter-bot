@@ -98,6 +98,7 @@ git clone https://github.com/FreeCodeCamp/camperbot.git
 ```sh
 cd camperbot
 cp dot-EXAMPLE.env dot.env
+git submodule update --remote --checkout --init --recursive
 npm install
 nodemon app.js
 ```
@@ -130,6 +131,7 @@ git clone https://github.com/FreeCodeCamp/camperbot.git
 ```sh
 cd campberbot
 copy dot-EXAMPLE.env dot.env
+git submodule update --remote --checkout --init --recursive
 npm install
 nodemon app.js
 ```
