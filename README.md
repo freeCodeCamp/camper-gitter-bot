@@ -74,7 +74,7 @@ Custom functions can easily be added. Check the [System Overview](https://github
 
 ## Installation instructions
 
-To run camperbot, you need [Node.js](https://nodejs.org/).
+To run camperbot, you need [Node.js](https://nodejs.org/) 4.2.0 or greater.
 
 ### Mac / Linux
 
@@ -98,6 +98,7 @@ git clone https://github.com/FreeCodeCamp/camperbot.git
 ```sh
 cd camperbot
 cp dot-EXAMPLE.env dot.env
+git submodule update --remote --checkout --init --recursive
 npm install
 nodemon app.js
 ```
@@ -130,6 +131,7 @@ git clone https://github.com/FreeCodeCamp/camperbot.git
 ```sh
 cd campberbot
 copy dot-EXAMPLE.env dot.env
+git submodule update --remote --checkout --init --recursive
 npm install
 nodemon app.js
 ```

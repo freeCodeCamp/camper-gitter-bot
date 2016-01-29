@@ -13,8 +13,8 @@
 #LOG_LEVEL=10 \
 #PORT=7891 \
 
-# nodemon -x --harmony iojs app.js
+# nodemon -x node app.js
 
-    # nodemon --harmony app.js
+    # nodemon app.js
 
-nodemon --harmony app.js
+nodemon app.js

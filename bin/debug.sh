@@ -10,12 +10,11 @@ GITTER_APP_KEY=${GITTER_APP_KEY} \
 GITTER_APP_SECRET=${GITTER_APP_SECRET} \
 LOG_LEVEL=10 \
 PORT=7891 \
-    node-debug -x iojs app.js
+    node-debug app.js
 
-    # iojs debug app.js
+    # node debug app.js
 
-    # node-debug --harmony app.js
-    # nodemon -x iojs app.js
-    # nodemon --harmony app.js
-    # node-debug --harmony app.js
-
+    # node-debug app.js
+    # nodemon -x node app.js
+    # nodemon app.js
+    # node-debug app.js
