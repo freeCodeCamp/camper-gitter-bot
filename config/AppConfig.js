@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
+const usercfg = require("usercfg");
 
 const AppConfig = {
   clientId: process.env.GITTER_APP_KEY,
@@ -94,13 +95,8 @@ const AppConfig = {
 
 const envConfigs = {
 
-  // replace this with your own ID
-  YOUR_GITHUB_ID: {
-    botname: 'YOUR_GITHUB_ID',
-    appHost: 'http://localhost:7000',
-    apiServer: 'freecodecamp.com',
-    appRedirectUrl: 'http://localhost:7891/login/callback'
-  },
+  // custom user set in /config/usercfg.js
+  usercfg.user,
 
   demobot: {
     botname: 'demobot',

@@ -6,7 +6,7 @@
 // TODO - move to lib/ dir?
 
 const AppConfig = require('../config/AppConfig');
-
+const usercfg = require("../config/usercfg");
 // from the webapp
 // users enter the rooms with a topic=XXX url
 // we find a matching room here with that topic
@@ -134,14 +134,9 @@ const camperBotRooms = [camperBotChatRooms]
 
 const BotRoomData = {
   // this controls which rooms you can access
-  YOUR_GITHUB_ID: [
+  usercfg.githubId: [
     // change this to be a room your user is already in
-    {
-      title: 'bothelp',
-      name: 'YOUR_GITHUB_ID/testing',
-      icon: 'question',
-      topics: ['chitchat', 'bots', 'bot-development', 'camperbot']
-    },
+    usercfg.room,
     {
       title: 'bothelp',
       name: 'bothelp/testing',
