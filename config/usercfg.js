@@ -1,4 +1,4 @@
-var githubId = 'YOUR_GITHUB_ID';
+var githubId = 'GITHUB_USER_ID';
 var config = {
   // replace 'GITHUB_USER_ID' with your github username
   githubId: githubId,
@@ -8,13 +8,14 @@ var config = {
     apiServer: 'freecodecamp.com',
     appRedirectUrl: 'http://localhost:7891/login/callback'
   },
-  room: {
-    title: 'bothelp',
-    name: githubId + '/b0t',
-    icon: 'question',
-    topics: ['chitchat', 'bots', 'bot-development', 'camperbot']
-  }
-
+  rooms: [
+    {
+      title: 'bothelp',
+      name: githubId + '/b0t',
+      icon: 'question',
+      topics: ['chitchat', 'bots', 'bot-development', 'camperbot']
+    },
+  ]
 }
 
 module.exports = config;
