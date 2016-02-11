@@ -96,7 +96,7 @@ const AppConfig = {
 const envConfigs = {
 
   // custom user set in /config/usercfg.js
-  custom: usercfg.user,
+  //usercfg.githubId: usercfg.user,
 
   demobot: {
     botname: 'demobot',
@@ -131,6 +131,8 @@ const envConfigs = {
     appRedirectUrl: 'http://bot.freecodecamp.com/login/callback'
   }
 };
+
+envConfigs[usercfg.githubId] = usercfg.user;
 
 AppConfig.init();
 

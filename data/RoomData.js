@@ -133,17 +133,6 @@ const camperBotRooms = [camperBotChatRooms]
   .map(room => { return {name: room}; });
 
 const BotRoomData = {
-  // this controls which rooms you can access
-  custom: [
-    // change this to be a room your user is already in
-    usercfg.room,
-    {
-      title: 'bothelp',
-      name: 'bothelp/testing',
-      icon: 'question',
-      topics: ['chitchat', 'bots', 'bot-development', 'camperbot']
-    }
-  ],
   // this is the demobot that ships with the app
   demobot: [{
     title: 'demobot',
@@ -196,6 +185,8 @@ const BotRoomData = {
   ],
   camperbot: camperBotRooms
 };
+BotRoomData[usercfg.githubId] = [usercfg.room];
+
 
 bonfireDashedNames.map(bfName => {
   const room = {
