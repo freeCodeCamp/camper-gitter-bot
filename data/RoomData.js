@@ -134,7 +134,7 @@ const camperBotRooms = [camperBotChatRooms]
 
 const BotRoomData = {
   // this controls which rooms you can access
-  usercfg.githubId: [
+  custom: [
     // change this to be a room your user is already in
     usercfg.room,
     {
