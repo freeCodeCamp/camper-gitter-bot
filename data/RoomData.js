@@ -185,7 +185,7 @@ const BotRoomData = {
   ],
   camperbot: camperBotRooms
 };
-BotRoomData[usercfg.githubId] = [usercfg.room];
+BotRoomData[usercfg.githubId] = usercfg.rooms;
 
 
 bonfireDashedNames.map(bfName => {
