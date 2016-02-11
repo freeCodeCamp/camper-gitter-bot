@@ -28,15 +28,17 @@ CamperBot was originally created by for [Free Code Camp](http://www.freecodecamp
 -   [Installation instructions](https://github.com/FreeCodeCamp/camperbot/#installation-instructions)
   -   [Mac / Linux](https://github.com/FreeCodeCamp/camperbot/#mac--linux)
   -   [Windows](https://github.com/FreeCodeCamp/camperbot/#windows)
+- [Make your own bot user](https://github.com/FreeCodeCamp/camperbot/#make-your-own-bot-user)
   -   [Getting your own appID](https://github.com/FreeCodeCamp/camperbot/#getting-your-own-appid)
-  -   [Running tests](https://github.com/FreeCodeCamp/camperbot/#running-tests)
-  -   [Wiki Content](https://github.com/FreeCodeCamp/camperbot/#wiki-content)
+  - [Configure your bot!](https://github.com/FreeCodeCamp/camperbot/#configure-your-bot)
+-   [Running tests](https://github.com/FreeCodeCamp/camperbot/#running-tests)
+-   [Wiki Content](https://github.com/FreeCodeCamp/camperbot/#wiki-content)
 -   [System Overview](https://github.com/FreeCodeCamp/camperbot/#system-overview)
   -   [Room Joins](https://github.com/FreeCodeCamp/camperbot/#dataroomdatajs)
   -   [Bot Commands](https://github.com/FreeCodeCamp/camperbot/#libbotbotcommandsjs)
   -   [Wiki Data](https://github.com/FreeCodeCamp/camperbot/#kbasejs)
   -   [Room Messages](https://github.com/FreeCodeCamp/camperbot/#roommessagesjs)
--   [Create own bot](https://github.com/FreeCodeCamp/camperbot/#how-to-add-a-new-bot-command)
+-   [Create own bot command](https://github.com/FreeCodeCamp/camperbot/#how-to-add-a-new-bot-command)
 -   [Bot command details](https://github.com/FreeCodeCamp/camperbot/#more-detail-on-how-commands-are-found-and-called)
 -   [Environment Notes](https://github.com/FreeCodeCamp/camperbot/#environment-notes)
 -   [Contributing](https://github.com/FreeCodeCamp/camperbot/#contributing)
@@ -141,23 +143,54 @@ nodemon app.js
 You can now chat to your bot via [Gitter.im](https://gitter.im) at
 [https://gitter.im/demobot/test](https://gitter.im/demobot/test)
 
-### Getting your own appID
+## Make your own bot user
+If you've followed the instructions so far your bot instance is the demobot
+provided for you.
 
 The `dot.env` file you copied above contains login info.
 This is using the shared "demobot" account so you may find yourself in a
 chatroom with other people using the same ID!
+
+Here are instructions on getting your own bot user running.
+### Setup GitHub user
+The first thing you'll want to do is set up a GitHub account which will be the
+username of your bot
+
+You can either
+* make a new account
+* use an existing account
+
+Follow the instructions for signing up on [https://github.com/](GitHub)
+
+change the `SERVER_ENV=demobot` in your `dot.env` to `server_ENV=USERNAMEHERE`
+where *USERNAMEHERE* is your github user name.
+
+### Getting your own appID
 
 To setup your own gitter login info, you should create your own Gitter API key
 on their developer site, and replace the info in that `.env` file.
 Get your own API keys for gitter from:
 [https://developer.gitter.im/apps](https://developer.gitter.im/apps)
 
-For more settings info, checkout the `AppConfig.js` and `RoomData.js` files.
-These define which rooms the bot will listen in to.
+When you sign in to the developer page select the option to make an app.
+Name the app what you want and set the callback url to
+`http://localhost:7891/login/callback`
+
+The next page should show you various API keys/secrets. Use those to replace
+the demobot default options in your `dot.env`.
+
+### Configure your bot
+Now it is time to set up your bot w/ the app.
+Open `config/usercfg.js` in your text editor.
+The only necessary step here is replacing GITHUB_USER_ID with your user name
+set up earlier.
+
+Take note of the the rooms property of config. You can set up additional gitter rooms
+to connect your bot to here. The default room is `GITHUB_USERID/b0t` feel free to change this.
 
 You may chat with us in the CamperBot Dev chat room if you have problems. [camperbot chatroom](https://gitter.im/FreeCodeCamp/camperbot).
 
-### Running tests
+## Running tests
 
 Tests are located in the `test/` folder can be run, along with linting,
 by running `gulp`.
