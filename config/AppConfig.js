@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-const usercfg = require("./usercfg");
+const usercfg = require('./usercfg');
 
 const AppConfig = {
   clientId: process.env.GITTER_APP_KEY,
@@ -94,9 +94,6 @@ const AppConfig = {
 };
 
 const envConfigs = {
-
-  // custom user set in /config/usercfg.js
-  //usercfg.githubId: usercfg.user,
 
   demobot: {
     botname: 'demobot',

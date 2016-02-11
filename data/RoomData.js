@@ -6,7 +6,7 @@
 // TODO - move to lib/ dir?
 
 const AppConfig = require('../config/AppConfig');
-const usercfg = require("../config/usercfg");
+const usercfg = require('../config/usercfg');
 // from the webapp
 // users enter the rooms with a topic=XXX url
 // we find a matching room here with that topic

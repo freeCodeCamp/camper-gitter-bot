@@ -14,8 +14,8 @@ var config = {
       name: githubId + '/b0t',
       icon: 'question',
       topics: ['chitchat', 'bots', 'bot-development', 'camperbot']
-    },
+    }
   ]
-}
+};
 
 module.exports = config;
