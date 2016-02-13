@@ -181,12 +181,13 @@ the demobot default options in your `dot.env`.
 
 ### Configure your bot
 Now it is time to set up your bot w/ the app.
-Open `config/usercfg.js` in your text editor.
-The only necessary step here is replacing GITHUB_USER_ID with your user name
+Copy `example.config.json` to `config.json` and open `config.json` in your
+editor.
+Replace all instances of GITHUB_USER_ID with your user name
 set up earlier.
 
 Take note of the the rooms property of config. You can set up additional gitter rooms
-to connect your bot to here. The default room is `GITHUB_USERID/b0t` feel free to change this.
+to connect your bot to here. The default room is `GITHUB_USERID/test` feel free to change this.
 
 You may chat with us in the CamperBot Dev chat room if you have problems. [camperbot chatroom](https://gitter.im/FreeCodeCamp/camperbot).
 
