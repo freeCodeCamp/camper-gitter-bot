@@ -2,7 +2,7 @@
 
 const test = require('tape'),
       TextLib = require('../lib/utils/TextLib'),
-      KBase = require('../lib/bot/Kbase');
+      KBase = require('../lib/bot/KBase');
 
 test('TextLib tests', t => {
   t.plan(3);
