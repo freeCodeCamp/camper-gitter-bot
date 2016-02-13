@@ -1,0 +1,22 @@
+{
+  "githubId": "GITHUB_USER_ID",
+  "user": {
+    "botname": "GITHUB_USER_ID",
+    "appHost": "http://localhost:7000",
+    "apiServer": "freecodecamp.com",
+    "appRedirectUrl": "http://localhost:7891/login/callback"
+  },
+  "rooms": [
+    {
+      "title": "bothelp",
+      "name": "GITHUB_USER_ID/test",
+      "icon": "question",
+      "topics": [
+        "chitchat",
+        "bots",
+        "bot-development",
+        "camperbot"
+      ]
+    }
+  ]
+}
