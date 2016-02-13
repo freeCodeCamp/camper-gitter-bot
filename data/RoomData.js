@@ -6,7 +6,7 @@
 // TODO - move to lib/ dir?
 
 const AppConfig = require('../config/AppConfig');
-const config = require('../config.json'); // explicit filename
+const config = require('../config.json');
 
 // from the webapp
 // users enter the rooms with a topic=XXX url

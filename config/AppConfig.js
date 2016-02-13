@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-const config = require('../config.json'); // explicit filename for readability.
+const config = require('../config.json');
 
 const AppConfig = {
   clientId: process.env.GITTER_APP_KEY,
@@ -129,7 +129,7 @@ const envConfigs = {
   }
 };
 
-envConfigs[config.json] = config.user;
+envConfigs[config.githubId] = config.user;
 AppConfig.init();
 
 module.exports = AppConfig;
