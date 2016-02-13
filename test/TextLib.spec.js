@@ -44,7 +44,7 @@ test('TextLib tests', t => {
     st.equal(split.length, 12, 'should have trimmed correct number of lines');
     st.ok(split[0].includes('Hi, I\'m **[CamperBot'),
           'first line should be correct');
-    st.equal(split[split.length - 1], '',
+    st.equal(split[split.length - 1], '\r',
           'last line should be correct');
     st.end();
   });

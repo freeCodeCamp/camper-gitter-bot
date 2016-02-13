@@ -6,8 +6,11 @@ const gulp = require('gulp'),
 
 require('dotenv').config({path: 'dot.env'});
 
+const scripts = ['config/*.js', 'data/rooms/*.js', 'data/*.js', 'lib/**/*.js',
+                  'test/*.js', 'app.js', 'gulpfile.js'];
+
 gulp.task('lint', () => {
-    return gulp.src(['**/*.js', '!node_modules/**'])
+    return gulp.src(scripts)
         .pipe(eslint())
         .pipe(eslint.format());
 });
@@ -28,7 +31,7 @@ gulp.task('set-env', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch('./**/*.js', ['lint', 'test']);
+  gulp.watch(scripts, ['lint', 'test']);
 });
 
 gulp.task('default', ['lint', 'test', 'watch'], () => {
