@@ -6,7 +6,8 @@
 // TODO - move to lib/ dir?
 
 const AppConfig = require('../config/AppConfig');
-const usercfg = require('../config/usercfg');
+const config = require('../config.json'); // explicit filename
+
 // from the webapp
 // users enter the rooms with a topic=XXX url
 // we find a matching room here with that topic
@@ -185,7 +186,8 @@ const BotRoomData = {
   ],
   camperbot: camperBotRooms
 };
-BotRoomData[usercfg.githubId] = usercfg.rooms;
+
+BotRoomData[config.githubId] = config.rooms;
 
 
 bonfireDashedNames.map(bfName => {

@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-const usercfg = require('./usercfg');
+const config = require('../config.json'); // explicit filename for readability.
 
 const AppConfig = {
   clientId: process.env.GITTER_APP_KEY,
@@ -13,7 +13,7 @@ const AppConfig = {
   org: 'bothelp',
   testUser: 'bothelp',
   // so bot doesnt get in a loop replying itself
-  botlist: ['bothelp', 'camperbot', 'YOUR_GITHUB_ID', 'demobot'],
+  botlist: ['bothelp', 'camperbot', 'demobot', config.githubId],
   webuser: 'webuser',
   wikiHost: 'https://github.com/freecodecamp/freecodecamp/wiki/',
   gitterHost: 'https://gitter.im/',
@@ -129,8 +129,7 @@ const envConfigs = {
   }
 };
 
-envConfigs[usercfg.githubId] = usercfg.user;
-
+envConfigs[config.json] = config.user;
 AppConfig.init();
 
 module.exports = AppConfig;
