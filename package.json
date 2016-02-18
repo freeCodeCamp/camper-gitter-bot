@@ -26,6 +26,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "gulp"
+    "test": "npm run make-env && gulp test",
+    "make-env": "node -e 'var fs = require(\"fs\"); if(!fs.existsSync(\"./dot.env\")) { var rs = fs.createReadStream(\"./dot-EXAMPLE.env\"); var ws = fs.createWriteStream(\"dot.env\"); rs.pipe(ws); }'"
   }
 }
