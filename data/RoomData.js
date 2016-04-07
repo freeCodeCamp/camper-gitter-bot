@@ -116,6 +116,7 @@ var camperBotChatRooms = [
     'FreeCodeCamp/dotnet',
     'FreeCodeCamp/elixir',
     'FreeCodeCamp/FreeCodeCamp',
+    'FreeCodeCamp/Git',
     'FreeCodeCamp/go',
     'FreeCodeCamp/HalfWayClub',
     'FreeCodeCamp/Help',
