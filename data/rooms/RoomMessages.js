@@ -31,7 +31,7 @@ const AllRoomMessages = [
   {
     regex: /\btroll\b/i,
     text: '> :trollface: troll problems? [notify admins here]' +
-          '(https://gitter.im/freecodecamp/admins)'
+          '(https://gitter.im/FreeCodeCamp/admin)'
   },
   {
     regex: /allyourbase/,
