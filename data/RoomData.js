@@ -127,7 +127,6 @@ var camperBotChatRooms = [
     'FreeCodeCamp/HelpJavaScript',
     'FreeCodeCamp/java',
     'FreeCodeCamp/linux',
-    'FreeCodeCamp/LiveCoding',
     'FreeCodeCamp/PairProgrammingWomen',
     'FreeCodeCamp/php',
     'FreeCodeCamp/python',
