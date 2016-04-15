@@ -4,7 +4,9 @@
 
 # set -x
 
-cd data/fcc.wiki
-git fetch
+git submodule init
+git submodule update --init --checkout --recursive --remote
+# cd data/fcc.wiki
+# git fetch
 # git checkout master
-git pull origin master
+# git pull origin master
