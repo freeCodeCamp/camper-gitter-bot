@@ -6,6 +6,7 @@
 // TODO - move to lib/ dir?
 
 const AppConfig = require('../config/AppConfig');
+const config = require('../config.json');
 
 // from the webapp
 // users enter the rooms with a topic=XXX url
@@ -142,22 +143,6 @@ const camperBotRooms = [camperBotChatRooms]
   .map(room => { return {name: room}; });
 
 const BotRoomData = {
-  // this controls which rooms you can access
-  YOUR_GITHUB_ID: [
-    // change this to be a room your user is already in
-    {
-      title: 'bothelp',
-      name: 'YOUR_GITHUB_ID/testing',
-      icon: 'question',
-      topics: ['chitchat', 'bots', 'bot-development', 'camperbot']
-    },
-    {
-      title: 'bothelp',
-      name: 'bothelp/testing',
-      icon: 'question',
-      topics: ['chitchat', 'bots', 'bot-development', 'camperbot']
-    }
-  ],
   // this is the demobot that ships with the app
   demobot: [{
     title: 'demobot',
@@ -210,6 +195,9 @@ const BotRoomData = {
   ],
   camperbot: camperBotRooms
 };
+
+BotRoomData[config.githubId] = config.rooms;
+
 
 bonfireDashedNames.map(bfName => {
   const room = {

@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
+const config = require('../config.json');
 
 const AppConfig = {
   clientId: process.env.GITTER_APP_KEY,
@@ -12,7 +13,7 @@ const AppConfig = {
   org: 'bothelp',
   testUser: 'bothelp',
   // so bot doesnt get in a loop replying itself
-  botlist: ['bothelp', 'camperbot', 'YOUR_GITHUB_ID', 'demobot'],
+  botlist: ['bothelp', 'camperbot', 'demobot', config.githubId],
   webuser: 'webuser',
   wikiHost: 'https://github.com/freecodecamp/freecodecamp/wiki/',
   gitterHost: 'https://gitter.im/',
@@ -94,14 +95,6 @@ const AppConfig = {
 
 const envConfigs = {
 
-  // replace this with your own ID
-  YOUR_GITHUB_ID: {
-    botname: 'YOUR_GITHUB_ID',
-    appHost: 'http://localhost:7000',
-    apiServer: 'freecodecamp.com',
-    appRedirectUrl: 'http://localhost:7891/login/callback'
-  },
-
   demobot: {
     botname: 'demobot',
     appHost: 'http://localhost:7000',
@@ -136,6 +129,7 @@ const envConfigs = {
   }
 };
 
+envConfigs[config.githubId] = config.user;
 AppConfig.init();
 
 module.exports = AppConfig;
