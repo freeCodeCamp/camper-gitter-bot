@@ -22,12 +22,6 @@ const AllRoomMessages = [
           '(https://gitter.im/FreeCodeCamp/HelpBonfires)',
     not: 'freecodecamp/HelpBonfires'
   },
-
-  {
-    regex: /botx/i,
-    text: '> you called?'
-  },
-
   {
     regex: /\btroll\b/i,
     text: '> :trollface: troll problems? [notify admins here]' +
