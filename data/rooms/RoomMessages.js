@@ -44,8 +44,8 @@ const AllRoomMessages = [
     chance: 1
   },
   {
-    //tests: https://regex101.com/r/hH5cN7/39
-    regex: /([^@`]|\s+|^)((th(n[qx]|x)|t[xyq])|((than[kx])([sxz]){0,2})(u|y(ou)?|q)?)\b/i,
+    //tests: https://regex101.com/r/hH5cN7/40
+    regex: /(?:[^@`]|\s+|^)(?:(?:th(?:n[qx]|x)|t[xyq])|than[kx](?:[sxz]){0,2}(?:[uq]|y(?:ou)?)?)\b/i,
     func: BotCommands.thanks
   },
   {
@@ -54,7 +54,7 @@ const AllRoomMessages = [
     func: function(input) {
         const fromUser = '@' + input.message.model.fromUser.username;
         return fromUser + ', :sparkles: :heart_eyes: :sparkles:';
-    },
+    }
   }
 ];
 
