@@ -44,8 +44,8 @@ const AllRoomMessages = [
     chance: 1
   },
   {
-    //tests: https://regex101.com/r/hH5cN7/41
-    regex: /(?:^|\s)(?=[aZ]*\b)(?:(?:th(?:n[qx]|x)|t[xyq])|than[kx](?:[sxz]){0,2}(?:[uq]|y(?:ou)?)?)\b/i,
+    //tests: https://regex101.com/r/hH5cN7/42
+    regex: /(?:^|\s)(?:(?:th(?:n[qx]|x)|t[xyq])|than[kx](?:[sxz]){0,2}(?:[uq]|y(?:ou)?)?)\b/i,
     func: BotCommands.thanks
   },
   {
