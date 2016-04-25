@@ -49,8 +49,8 @@ const AllRoomMessages = [
     func: BotCommands.thanks
   },
   {
-    //tests: https://regex101.com/r/pT0zJ1/2
-    regex: /(?:[^@`]|\s+|^)(?:love|luv)\s?(?:u|you|me)?,?\s?(?:cbot|@?camperbot)\b/i,
+    //tests: https://regex101.com/r/pT0zJ1/3
+    regex: /(?:^|\s)(?:love|luv)\s?(?:u|you|me)?,?\s?(?:cbot|@?camperbot)\b/i,
     func: function(input) {
         const fromUser = '@' + input.message.model.fromUser.username;
         return fromUser + ', :sparkles: :heart_eyes: :sparkles:';
