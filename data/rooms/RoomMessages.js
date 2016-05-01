@@ -19,8 +19,8 @@ const AllRoomMessages = [
     regex: /.*help.*bonfire:?s?/i,
     text: ' > type `bonfire name` to get some info on that bonfire. ' +
           'And check [HelpBonfires chatroom]' +
-          '(https://gitter.im/FreeCodeCamp/HelpBonfires)',
-    not: 'freecodecamp/HelpBonfires'
+          '(https://gitter.im/FreeCodeCamp/HelpJavaScript)',
+    not: 'freecodecamp/HelpJavaScript'
   },
   {
     regex: /\btroll\b/i,
