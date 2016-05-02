@@ -140,7 +140,7 @@ var camperBotChatRooms = [
 // @TODO Refactor into a room generator function
 const camperBotRooms = [camperBotChatRooms]
   .reduce((rooms, currRooms) => rooms.concat(currRooms))
-  .map(room => { return {name: room}; });
+  .map(room => { return { name: room }; });
 
 const BotRoomData = {
   // this is the demobot that ships with the app

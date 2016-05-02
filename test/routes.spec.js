@@ -8,7 +8,7 @@ test('Routes tests', t => {
 
   t.test('should use room from params for route redir', st => {
     st.plan(4);
-    const query = {room: 'random'},
+    const query = { room: 'random' },
           redir = routes.findRedirect(query),
           url = 'https://gitter.im/' + query.room;
 
@@ -21,7 +21,7 @@ test('Routes tests', t => {
 
   t.test('should find DM room go URI', st => {
     st.plan(3);
-    const query = {room: 'bothelp'},
+    const query = { room: 'bothelp' },
           redir = routes.findRedirect(query),
           url = 'https://gitter.im/' + query.room;
 

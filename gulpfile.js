@@ -4,7 +4,7 @@ const gulp = require('gulp'),
       faucet = require('faucet'),
       env = require('gulp-env');
 
-require('dotenv').config({path: 'dot.env'});
+require('dotenv').config({ path: 'dot.env' });
 
 const scripts = ['config/*.js', 'data/rooms/*.js', 'data/*.js', 'lib/**/*.js',
                   'test/*.js', 'app.js', 'gulpfile.js'];
