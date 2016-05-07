@@ -7,7 +7,7 @@ test('HttpWrap tests', t => {
   t.plan(1);
   const name = 'berkeleytrue',
         apiPath = '/api/users/about?username=' + name,
-        options = {method: 'GET'};
+        options = { method: 'GET' };
 
   HttpWrap.callApi(apiPath, options, apiResult => {
     t.equal(apiResult.response.about.username, 'berkeleytrue',

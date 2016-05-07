@@ -9,7 +9,7 @@ const test = require('tape'),
 
 const TESTROOMNAME = 'bonfire-factorialize-a-number',
       TEST_BF_NAME = 'bonfire factorialize a number',
-      TEST_BF_TITLE = 'Bonfire Factorialize a Number';
+      TEST_BF_TITLE = 'Factorialize a Number';
 
 // sets a bonfire as active inside the current chat
 function testMessage(command) {
@@ -91,14 +91,14 @@ test('Bonfires test', t => {
     st.end();
   });
 
-  t.test('should find raw wiki hints from KBase', st =>{
+  t.test('should find raw wiki hints from KBase', st => {
     st.plan(1);
     const hints = KBase.getWikiHints(TEST_BF_TITLE);
-    st.ok(Array.isArray(hints));
+    st.ok(Array.isArray(hints), 'should be an array');
     st.end();
   });
 
-  t.test('should have wikiHints linked to bonfire object', st =>{
+  t.test('should have wikiHints linked to bonfire object', st => {
     st.plan(1);
     const bf = Bonfires.findBonfire(TEST_BF_TITLE);
     st.ok(Array.isArray(bf.hints));

@@ -25,9 +25,9 @@ test('RoomMessages tests', t => {
     st.end();
   });
 
-  t.test(`should find a message three ticks '''`, st => {
+  t.test('should find a message three ticks \'\'\'', st => {
     st.plan(1);
-    const msg = `mistake ''' text`,
+    const msg = 'mistake \'\'\' text',
           input = TestHelper.makeInputFromString(msg),
           res = RoomMessages.scanInput(input, 'camperbot/testing', 1);
     st.ok(res.text.includes('> :bulb: to format'));

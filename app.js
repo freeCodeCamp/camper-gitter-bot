@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').config({path: 'dot.env'});
+require('dotenv').config({ path: 'dot.env' });
 
 console.log('--------------- startup ------------------');
 

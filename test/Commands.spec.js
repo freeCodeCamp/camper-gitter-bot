@@ -15,7 +15,7 @@ test('Command tests', t => {
 
   t.test('isCommand: menu true', st => {
     st.plan(1);
-    const input = {keyword: 'menu'},
+    const input = { keyword: 'menu' },
           res = BotCommands.isCommand(input);
     st.ok(res);
     st.end();
@@ -23,7 +23,7 @@ test('Command tests', t => {
 
   t.test('isCommand: XXXX false', st => {
     st.plan(1);
-    const input = {keyword: 'XXXX'},
+    const input = { keyword: 'XXXX' },
           res = BotCommands.isCommand(input);
     st.notOk(res);
     st.end();

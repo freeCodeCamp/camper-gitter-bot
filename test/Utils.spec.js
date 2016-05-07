@@ -18,11 +18,11 @@ test('Utils tests', t => {
           'something-special',
           'should sanitize file name strings');
 
-  t.equal(Utils.sanitize('thanks bob', {spaces: false}),
+  t.equal(Utils.sanitize('thanks bob', { spaces: false }),
           'thanks bob',
           'sanitize with spaces:false should not remove spaces');
 
-  t.equal(Utils.sanitize('thanks for that', {spaces: true}),
+  t.equal(Utils.sanitize('thanks for that', { spaces: true }),
           'thanks-for-that',
           'sanitize with spaces:true should convert spaces to dashes');
 

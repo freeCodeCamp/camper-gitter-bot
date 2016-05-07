@@ -101,9 +101,8 @@ const RoomMessages = {
         // we have a winner!
         return oneMessage;
       }
-    } else {
-      return null;
     }
+    return null;
   }
 };
 

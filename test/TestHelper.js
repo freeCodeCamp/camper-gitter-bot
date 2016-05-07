@@ -22,8 +22,8 @@ const TestHelper = {
         readBy: 0,
         urls: [],
         mentions: [
-          {screenName: 'dcsan'},
-          {screenName: 'berkeleytrue'}
+          { screenName: 'dcsan' },
+          { screenName: 'berkeleytrue' }
         ],
         issues: [],
         meta: {},
