@@ -44,12 +44,12 @@ const AllRoomMessages = [
     chance: 1
   },
   {
-    //tests: https://regex101.com/r/hH5cN7/42
+    // tests: https://regex101.com/r/hH5cN7/42
     regex: /(?:^|\s)(?:(?:th(?:n[qx]|x)|t[xyq])|than[kx](?:[sxz]){0,2}(?:[uq]|y(?:ou)?)?)\b/i,
     func: BotCommands.thanks
   },
   {
-    //tests: https://regex101.com/r/pT0zJ1/3
+    // tests: https://regex101.com/r/pT0zJ1/3
     regex: /(?:^|\s)(?:love|luv)\s?(?:u|you|me)?,?\s?(?:cbot|@?camperbot)\b/i,
     func: function(input) {
         const fromUser = '@' + input.message.model.fromUser.username;
