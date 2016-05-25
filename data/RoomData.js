@@ -107,6 +107,7 @@ const bonfireDashedNames = [
 
 var camperBotChatRooms = [
     'FreeCodeCamp/admin',
+    'FreeCodeCamp/Backend-Challenges',
     'FreeCodeCamp/camperbot',
     'FreeCodeCamp/camperbotPlayground',
     'FreeCodeCamp/Casual',
