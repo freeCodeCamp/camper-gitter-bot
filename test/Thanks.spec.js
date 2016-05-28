@@ -2,7 +2,7 @@
 
 const test = require('tape'),
       GBot = require('../lib/bot/GBot'),
-      TestHelper = require('./TestHelper');
+      TestHelper = require('./helpers/TestHelper');
 
 test('Thanks tests', t => {
   t.plan(1);

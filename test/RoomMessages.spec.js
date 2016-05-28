@@ -2,7 +2,7 @@
 
 const test = require('tape'),
       RoomMessages = require('../data/rooms/RoomMessages'),
-      TestHelper = require('./TestHelper');
+      TestHelper = require('./helpers/TestHelper');
 
 test('RoomMessages tests', t => {
   t.plan(4);

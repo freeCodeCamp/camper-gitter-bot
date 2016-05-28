@@ -4,7 +4,7 @@ const test = require('tape'),
       GBot = require('../lib/bot/GBot.js'),
       BotCommands = require('../lib/bot/BotCommands'),
       KBase = require('../lib/bot/KBase.js'),
-      TestHelper = require('./TestHelper');
+      TestHelper = require('./helpers/TestHelper');
 
 test('Command tests', t => {
   t.plan(5);

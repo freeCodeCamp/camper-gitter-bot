@@ -10,7 +10,7 @@ test('GitterHelper tests', t => {
 
   t.test('GitterHelper should find room by name', st => {
     st.plan(1);
-    const foundRoom = function(blob) {
+    const foundRoom = blob => {
       const foundRoomName = blob.gitterRoom.uri.toLowerCase();
       st.equal(foundRoomName, TEST_ROOM_NAME);
       st.end();
@@ -20,7 +20,7 @@ test('GitterHelper tests', t => {
 
   t.test('GitterHelper should store room info in cache', st => {
     st.plan(1);
-    const foundRoom2 = function() {
+    const foundRoom2 = () => {
       const cachedRoom = GitterHelper.roomDataCache[TEST_ROOM_NAME];
       st.equal(cachedRoom.uri, TEST_ROOM_NAME);
       st.end();

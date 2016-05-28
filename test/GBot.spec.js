@@ -3,7 +3,7 @@
 const test = require('tape'),
       AppConfig = require('../config/AppConfig'),
       GBot = require('../lib/bot/GBot'),
-      TestHelper = require('./TestHelper'),
+      TestHelper = require('./helpers/TestHelper'),
       KBase = require('../lib/bot/KBase');
 
 function testMessage(command) {

@@ -3,7 +3,7 @@
 const test = require('tape'),
       Bonfires = require('../lib/app/Bonfires.js'),
       InputWrap = require('../lib/bot/InputWrap'),
-      TestHelper = require('./TestHelper'),
+      TestHelper = require('./helpers/TestHelper'),
       GBot = require('../lib/bot/GBot.js'),
       KBase = require('../lib/bot/KBase.js');
 
@@ -13,8 +13,8 @@ const TESTROOMNAME = 'bonfire-factorialize-a-number',
 
 // sets a bonfire as active inside the current chat
 function testMessage(command) {
-    const message = TestHelper.makeMessageFromString(command);
-    return GBot.findAnyReply(message);
+  const message = TestHelper.makeMessageFromString(command);
+  return GBot.findAnyReply(message);
 }
 
 test('Bonfires test', t => {

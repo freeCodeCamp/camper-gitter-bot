@@ -2,7 +2,7 @@
 
 const test = require('tape'),
       GBot = require('../lib/bot/GBot.js'),
-      TestHelper = require('./TestHelper');
+      TestHelper = require('./helpers/TestHelper');
 
 function testParser(command) {
   const msg = TestHelper.makeMessageFromString(command);

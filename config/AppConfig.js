@@ -2,6 +2,7 @@
 
 const _ = require('lodash');
 const config = require('../config.json');
+require('dotenv').config({ path: 'dot.env' });
 
 const AppConfig = {
   clientId: process.env.GITTER_APP_KEY,
