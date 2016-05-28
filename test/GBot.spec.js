@@ -1,14 +1,14 @@
 'use strict';
 
-const test = require('tape'),
-      AppConfig = require('../config/AppConfig'),
-      GBot = require('../lib/bot/GBot'),
-      TestHelper = require('./helpers/TestHelper'),
-      KBase = require('../lib/bot/KBase');
+const test = require('tape');
+const AppConfig = require('../config/AppConfig');
+const GBot = require('../lib/bot/GBot');
+const TestHelper = require('./helpers/TestHelper');
+const KBase = require('../lib/bot/KBase');
 
 function testMessage(command) {
-    const message = TestHelper.makeMessageFromString(command);
-    return GBot.findAnyReply(message);
+  const message = TestHelper.makeMessageFromString(command);
+  return GBot.findAnyReply(message);
 }
 
 test('GBot tests', t => {
@@ -22,16 +22,16 @@ test('GBot tests', t => {
 
   t.test('GBot should not reply to itself', st => {
     st.plan(1);
-    const botname = AppConfig.getBotName(),
-          flag = GBot.isBot(botname);
+    const botname = AppConfig.getBotName();
+    const flag = GBot.isBot(botname);
     st.ok(flag);
     st.end();
   });
 
   t.test('GBot should parse wiki input', st => {
     st.plan(2);
-    const input = TestHelper.makeInputFromString('wiki bootstrap'),
-          output = GBot.parseInput(input.message);
+    const input = TestHelper.makeInputFromString('wiki bootstrap');
+    const output = GBot.parseInput(input.message);
     st.equal(output.keyword, 'wiki', 'has correct keyword prop');
     st.equal(output.params, 'bootstrap', 'has correct params prop');
     st.end();
@@ -39,8 +39,8 @@ test('GBot tests', t => {
 
   t.test('GBot should format non-help as false command', st => {
     st.plan(1);
-    const input = TestHelper.makeMessageFromString('DONT bootstrap'),
-          output = GBot.parseInput(input);
+    const input = TestHelper.makeMessageFromString('DONT bootstrap');
+    const output = GBot.parseInput(input);
     st.notOk(output.command, 'should return false');
     st.end();
   });
@@ -49,8 +49,8 @@ test('GBot tests', t => {
     st.plan(1);
     const res = testMessage('wiki bootstrap');
     console.log(res);
-    t.ok(res.includes('## :point_right: [bootstrap'));
-    t.end();
+    st.ok(res.includes('## :point_right: [bootstrap'));
+    st.end();
   });
 
   t.test('GBot should have a botstatus response', st => {
@@ -87,4 +87,6 @@ test('GBot tests', t => {
     st.ok(res.includes('find **'));
     st.end();
   });
+
+  t.end();
 });

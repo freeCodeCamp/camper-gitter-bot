@@ -6,9 +6,9 @@
 
 // using js rather than json so we can have functions and comments
 
-const BotCommands = require('../../lib/bot/BotCommands'),
-      _ = require('lodash'),
-      Utils = require('../../lib/utils/Utils');
+const BotCommands = require('../../lib/bot/BotCommands');
+const _ = require('lodash');
+const Utils = require('../../lib/utils/Utils');
 
 
 // TODO - add these to all of the rooms

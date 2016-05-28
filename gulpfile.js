@@ -1,8 +1,8 @@
-const gulp = require('gulp'),
-      eslint = require('gulp-eslint'),
-      tape = require('gulp-tape'),
-      faucet = require('faucet'),
-      env = require('gulp-env');
+const gulp = require('gulp');
+const eslint = require('gulp-eslint');
+const tape = require('gulp-tape');
+const faucet = require('faucet');
+const env = require('gulp-env');
 
 require('dotenv').config({ path: 'dot.env' });
 

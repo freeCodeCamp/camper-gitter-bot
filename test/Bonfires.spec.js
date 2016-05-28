@@ -1,15 +1,15 @@
 'use strict';
 
-const test = require('tape'),
-      Bonfires = require('../lib/app/Bonfires.js'),
-      InputWrap = require('../lib/bot/InputWrap'),
-      TestHelper = require('./helpers/TestHelper'),
-      GBot = require('../lib/bot/GBot.js'),
-      KBase = require('../lib/bot/KBase.js');
+const test = require('tape');
+const Bonfires = require('../lib/app/Bonfires.js');
+const InputWrap = require('../lib/bot/InputWrap');
+const TestHelper = require('./helpers/TestHelper');
+const GBot = require('../lib/bot/GBot.js');
+const KBase = require('../lib/bot/KBase.js');
 
-const TESTROOMNAME = 'bonfire-factorialize-a-number',
-      TEST_BF_NAME = 'bonfire factorialize a number',
-      TEST_BF_TITLE = 'Factorialize a Number';
+const TESTROOMNAME = 'bonfire-factorialize-a-number';
+const TEST_BF_NAME = 'bonfire factorialize a number';
+const TEST_BF_TITLE = 'Factorialize a Number';
 
 // sets a bonfire as active inside the current chat
 function testMessage(command) {
@@ -29,8 +29,8 @@ test('Bonfires test', t => {
   t.test('test find bonfire and stubInput', st => {
     st.plan(3);
 
-    const bfName = TESTROOMNAME,
-          bf = Bonfires.findBonfire(bfName);
+    const bfName = TESTROOMNAME;
+    const bf = Bonfires.findBonfire(bfName);
 
     st.equal(bf.dashedName, bfName, 'should find a bonfire by roomname');
     st.equal(TestHelper.stubInput.message.room.name, `bothelp/${bfName}`,
@@ -51,9 +51,9 @@ test('Bonfires test', t => {
 
   t.test('findBonfire tests', st => {
     st.plan(3);
-    const testBf = Bonfires.findBonfire(TEST_BF_NAME),
-          testDesc = testBf.description[0],
-          testLinks = Bonfires.getLinks(testBf);
+    const testBf = Bonfires.findBonfire(TEST_BF_NAME);
+    const testDesc = testBf.description[0];
+    const testLinks = Bonfires.getLinks(testBf);
 
     st.equal(testDesc,
             'Return the factorial of the provided integer.',

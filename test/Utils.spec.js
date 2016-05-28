@@ -1,7 +1,7 @@
 'use strict';
 
-const test = require('tape'),
-      Utils = require('../lib/utils/Utils');
+const test = require('tape');
+const Utils = require('../lib/utils/Utils');
 
 test('Utils tests', t => {
   t.plan(9);

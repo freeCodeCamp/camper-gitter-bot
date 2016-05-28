@@ -36,17 +36,6 @@ const AppConfig = {
     _.merge(AppConfig, thisConfig);
   },
 
-  showConfig: function() {
-    console.log('AppConfig');
-    Object.keys(AppConfig)
-    .sort()
-    .forEach(v => {
-      if (typeof AppConfig[v] !== 'function') {
-        console.log('\t', v, ':\t\t', AppConfig[v]);
-      }
-    });
-  },
-
   warn: function(msg, obj) {
     console.warn('WARN> AppConfig', msg, obj);
   },

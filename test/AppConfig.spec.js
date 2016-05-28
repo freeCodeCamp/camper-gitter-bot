@@ -1,7 +1,7 @@
 'use strict';
 
-var test = require('tape'),
-    AppConfig = require('../config/AppConfig');
+const test = require('tape');
+const AppConfig = require('../config/AppConfig');
 
 test('AppConfig test', t => {
   t.plan(3);
@@ -9,8 +9,8 @@ test('AppConfig test', t => {
   t.equal(AppConfig.testUser, 'bothelp', 'should have default AppConfig');
 
   t.test('should make a topicDmUri', (st) => {
-    var topicDmUri = AppConfig.topicDmUri(),
-        expUri = AppConfig.appHost + '/go?dm=y&room=bothelp';
+    const topicDmUri = AppConfig.topicDmUri();
+    const expUri = AppConfig.appHost + '/go?dm=y&room=bothelp';
     st.plan(1);
     st.equal(topicDmUri, expUri);
     st.end();

@@ -1,7 +1,7 @@
 'use strict';
 
-const test = require('tape'),
-      GitterHelper = require('../lib/gitter/GitterHelper');
+const test = require('tape');
+const GitterHelper = require('../lib/gitter/GitterHelper');
 
 const TEST_ROOM_NAME = 'camperbot/localdev';
 
@@ -31,4 +31,6 @@ test('GitterHelper tests', t => {
   t.doesNotThrow(() => {
     GitterHelper.sayToRoomName('autotest', TEST_ROOM_NAME);
   }, 'should send a message to a named room');
+
+  t.end();
 });
