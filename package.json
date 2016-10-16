@@ -1,6 +1,6 @@
 {
   "name": "camperbot",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "dependencies": {
     "cli-color": "",
     "dotenv": "^1.2.0",
