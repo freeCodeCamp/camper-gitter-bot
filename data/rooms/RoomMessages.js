@@ -35,7 +35,7 @@ const AllRoomMessages = [
   {
     regex: /'''/,
     text: '> :bulb: to format code use backticks! ``` [more info]' +
-          '(https://github.com/freecodecamp/freecodecamp/wiki/code-formatting)'
+          '(http://forum.freecodecamp.com/t/markdown-code-formatting/18391)'
   },
   {
     regex: /holler/i,
