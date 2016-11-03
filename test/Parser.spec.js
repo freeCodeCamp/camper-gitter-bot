@@ -1,8 +1,8 @@
 'use strict';
 
-const test = require('tape'),
-      GBot = require('../lib/bot/GBot.js'),
-      TestHelper = require('./TestHelper');
+const test = require('tape');
+const GBot = require('../lib/bot/GBot.js');
+const TestHelper = require('./helpers/TestHelper');
 
 function testParser(command) {
   const msg = TestHelper.makeMessageFromString(command);

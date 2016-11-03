@@ -2,6 +2,7 @@
 
 const _ = require('lodash');
 const config = require('../config.json');
+require('dotenv').config({ path: 'dot.env' });
 
 const AppConfig = {
   clientId: process.env.GITTER_APP_KEY,
@@ -33,17 +34,6 @@ const AppConfig = {
       throw new Error(msg);
     }
     _.merge(AppConfig, thisConfig);
-  },
-
-  showConfig: function() {
-    console.log('AppConfig');
-    Object.keys(AppConfig)
-    .sort()
-    .forEach(v => {
-      if (typeof AppConfig[v] !== 'function') {
-        console.log('\t', v, ':\t\t', AppConfig[v]);
-      }
-    });
   },
 
   warn: function(msg, obj) {

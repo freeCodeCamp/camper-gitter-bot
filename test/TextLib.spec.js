@@ -1,15 +1,12 @@
 'use strict';
 
-const test = require('tape'),
-      TextLib = require('../lib/utils/TextLib'),
-      KBase = require('../lib/bot/KBase');
+const fs = require('fs');
+const path = require('path');
+const test = require('tape');
+const TextLib = require('../lib/utils/TextLib');
 
 test('TextLib tests', t => {
-  t.plan(3);
-
-  t.doesNotThrow(() => {
-    KBase.initSync();
-  }, 'kbase should load');
+  t.plan(2);
 
   var longTextBlock = `# Headline
   line 1
@@ -26,8 +23,8 @@ test('TextLib tests', t => {
 
   t.test('should take the first 5 lines of a chunk', st => {
     st.plan(3);
-    const short = TextLib.trimLines(longTextBlock, 5),
-          split = short.split('\n');
+    const short = TextLib.trimLines(longTextBlock, 5);
+    const split = short.split('\n');
     st.equal(split.length, 5, 'should have trimmed correct number of lines');
     st.ok(split[0].includes('# Headline'), 'first line should be correct');
     st.ok(split[split.length - 1].includes('line 4'),
@@ -37,15 +34,17 @@ test('TextLib tests', t => {
 
   t.test('should trim camperbot entry', st => {
     st.plan(3);
-    const params = 'camperbot',
-          topicData = KBase.getTopicData(params),
-          short = TextLib.trimLines(topicData.data),
-          split = short.split('\n');
+    let topicData = fs.readFileSync(path.resolve(__dirname,
+      'helpers/testWikiArticle.md')).toString();
+    let short = TextLib.trimLines(topicData);
+    let split = short.split('\n');
     st.equal(split.length, 12, 'should have trimmed correct number of lines');
     st.ok(split[0].includes('Hi, I\'m **[CamperBot'),
           'first line should be correct');
-    st.equal(split[split.length - 1], '\r',
+    st.equal(split[split.length - 1], '',
           'last line should be correct');
     st.end();
   });
+
+  t.end();
 });

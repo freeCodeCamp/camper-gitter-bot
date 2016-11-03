@@ -1,7 +1,7 @@
 'use strict';
 
-const test = require('tape'),
-      KBase = require('../lib/bot/KBase.js');
+const test = require('tape');
+const KBase = require('../lib/bot/KBase.js');
 
 test('Wiki tests', t => {
   t.plan(4);

@@ -1,6 +1,6 @@
 'use strict';
 
-const GBot = require('../lib/bot/GBot');
+const GBot = require('../../lib/bot/GBot');
 
 const TestHelper = {
   aboutInput: {

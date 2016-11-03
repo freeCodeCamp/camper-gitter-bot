@@ -105,7 +105,7 @@ const bonfireDashedNames = [
   'bonfire-friendly-date-ranges'
 ];
 
-var camperBotChatRooms = [
+const camperBotChatRooms = [
     'FreeCodeCamp/admin',
     'FreeCodeCamp/Backend-Challenges',
     'FreeCodeCamp/camperbotPlayground',

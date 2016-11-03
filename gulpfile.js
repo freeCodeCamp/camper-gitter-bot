@@ -1,8 +1,8 @@
-const gulp = require('gulp'),
-      eslint = require('gulp-eslint'),
-      tape = require('gulp-tape'),
-      faucet = require('faucet'),
-      env = require('gulp-env');
+const gulp = require('gulp');
+const eslint = require('gulp-eslint');
+const tape = require('gulp-tape');
+const faucet = require('faucet');
+const env = require('gulp-env');
 
 require('dotenv').config({ path: 'dot.env' });
 
@@ -10,9 +10,9 @@ const scripts = ['config/*.js', 'data/rooms/*.js', 'data/*.js', 'lib/**/*.js',
                   'test/*.js', 'app.js', 'gulpfile.js'];
 
 gulp.task('lint', () => {
-    return gulp.src(scripts)
-        .pipe(eslint())
-        .pipe(eslint.format());
+  return gulp.src(scripts)
+    .pipe(eslint())
+    .pipe(eslint.format());
 });
 
 gulp.task('test', ['set-env'], () => {
@@ -25,7 +25,8 @@ gulp.task('test', ['set-env'], () => {
 gulp.task('set-env', () => {
   env({
     vars: {
-      SERVER_ENV: 'test'
+      SERVER_ENV: 'test',
+      LOG_LEVEL: 0
     }
   });
 });
@@ -34,6 +35,4 @@ gulp.task('watch', () => {
   gulp.watch(scripts, ['lint', 'test']);
 });
 
-gulp.task('default', ['lint', 'test', 'watch'], () => {
-
-});
+gulp.task('default', ['lint', 'test', 'watch']);

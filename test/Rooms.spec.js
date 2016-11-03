@@ -1,7 +1,7 @@
 'use strict';
 
-const test = require('tape'),
-      Rooms = require('../lib/app/Rooms.js');
+const test = require('tape');
+const Rooms = require('../lib/app/Rooms.js');
 
 test('Rooms tests', t => {
   t.plan(3);

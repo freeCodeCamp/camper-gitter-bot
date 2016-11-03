@@ -1,6 +1,6 @@
 {
   "name": "camperbot",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "dependencies": {
     "cli-color": "",
     "dotenv": "^1.2.0",
@@ -22,11 +22,13 @@
     "gulp-eslint": "^2.0.0",
     "gulp-tape": "0.0.7",
     "nodemon": "~1.0.15",
+    "tap-spec": "^4.1.1",
     "tape": "^4.2.2"
   },
   "scripts": {
+    "lint": "node_modules/eslint/bin/eslint.js 'config/*.js' 'data/rooms/*.js' 'data/*.js' 'lib/**/*.js' 'test/*.js' 'app.js' 'gulpfile.js'",
     "start": "node app.js",
-    "test": "npm run make-env npm && npm run make-config && LOG_LEVEL=0 gulp test",
+    "test": "npm run make-env npm && npm run make-config && npm run lint && LOG_LEVEL=0 SERVER_ENV=test node_modules/tape/bin/tape test/*.spec.js | tap-spec",
     "make-env": "node -e 'var fs = require(\"fs\"); if(!fs.existsSync(\"./dot.env\")) { var rs = fs.createReadStream(\"./dot-EXAMPLE.env\"); var ws = fs.createWriteStream(\"dot.env\"); rs.pipe(ws); }'",
     "make-config": "node -e 'var fs = require(\"fs\"); if(!fs.existsSync(\"./config.json\")) { var rs = fs.createReadStream(\"./example.config.json\"); var ws = fs.createWriteStream(\"config.json\"); rs.pipe(ws); }'"
   }
