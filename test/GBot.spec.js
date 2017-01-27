@@ -12,7 +12,7 @@ function testMessage(command) {
 }
 
 test('GBot tests', t => {
-  t.plan(11);
+  t.plan(8);
 
   t.doesNotThrow(() => {
     KBase.initSync();
@@ -28,15 +28,6 @@ test('GBot tests', t => {
     st.end();
   });
 
-  t.test('GBot should parse wiki input', st => {
-    st.plan(2);
-    const input = TestHelper.makeInputFromString('wiki bootstrap');
-    const output = GBot.parseInput(input.message);
-    st.equal(output.keyword, 'wiki', 'has correct keyword prop');
-    st.equal(output.params, 'bootstrap', 'has correct params prop');
-    st.end();
-  });
-
   t.test('GBot should format non-help as false command', st => {
     st.plan(1);
     const input = TestHelper.makeMessageFromString('DONT bootstrap');
@@ -45,11 +36,11 @@ test('GBot tests', t => {
     st.end();
   });
 
-  t.skip('GBot should respond to wiki bootstrap', st => {
+  t.skip('GBot should respond to wiki migration', st => {
     st.plan(1);
-    const res = testMessage('wiki bootstrap');
+    const res = testMessage('wiki');
     console.log(res);
-    st.ok(res.includes('## :point_right: [bootstrap'));
+    st.ok(res.includes('forum'));
     st.end();
   });
 
@@ -57,20 +48,6 @@ test('GBot tests', t => {
     st.plan(1);
     const res = testMessage('botstatus');
     st.ok(res.includes('All bot systems are go!'));
-    st.end();
-  });
-
-  t.test('GBot should have a menu command', st => {
-    st.plan(1);
-    const res = testMessage('menu');
-    st.ok(res.includes('type help for a list'));
-    st.end();
-  });
-
-  t.test('GBot should have a help command', st => {
-    st.plan(1);
-    const res = testMessage('help');
-    st.ok(res.includes('Hi, I\'m **[CamperBot]'));
     st.end();
   });
 

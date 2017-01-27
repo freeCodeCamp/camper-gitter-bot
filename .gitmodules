@@ -1,4 +1,0 @@
-[submodule "data/fcc.wiki"]
-	path = data/fcc.wiki
-	url = https://github.com/FreeCodeCamp/wiki.git
-	ignore = all

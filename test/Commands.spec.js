@@ -6,15 +6,7 @@ const BotCommands = require('../lib/bot/BotCommands');
 const TestHelper = require('./helpers/TestHelper');
 
 test('Command tests', t => {
-  t.plan(4);
-
-  t.test('isCommand: menu true', st => {
-    st.plan(1);
-    const input = { keyword: 'menu' };
-    const res = BotCommands.isCommand(input);
-    st.ok(res);
-    st.end();
-  });
+  t.plan(3);
 
   t.test('isCommand: XXXX false', st => {
     st.plan(1);
