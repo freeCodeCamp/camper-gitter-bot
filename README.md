@@ -99,7 +99,7 @@ git clone https://github.com/FreeCodeCamp/camperbot.git
 
 ```sh
 cd camperbot
-cp dot-EXAMPLE.env dot.env
+cp dot-EXAMPLE.env .env
 git submodule update --remote --checkout --init --recursive
 npm install
 nodemon app.js
@@ -132,7 +132,7 @@ git clone https://github.com/FreeCodeCamp/camperbot.git
 
 ```sh
 cd camperbot
-copy dot-EXAMPLE.env dot.env
+copy dot-EXAMPLE.env .env
 git submodule update --remote --checkout --init --recursive
 npm install
 nodemon app.js
@@ -147,7 +147,7 @@ You can now chat to your bot via [Gitter.im](https://gitter.im) at
 If you've followed the instructions so far your bot instance is the demobot
 provided for you.
 
-The `dot.env` file you copied above contains login info.
+The `.env` file you copied above contains login info.
 This is using the shared "demobot" account so you may find yourself in a
 chatroom with other people using the same ID!
 
@@ -162,7 +162,7 @@ You can either
 
 Follow the instructions for signing up on [https://github.com/](GitHub)
 
-change the `SERVER_ENV=demobot` in your `dot.env` to `server_ENV=USERNAMEHERE`
+change the `SERVER_ENV=demobot` in your `.env` to `server_ENV=USERNAMEHERE`
 where *USERNAMEHERE* is your github user name.
 
 ### Getting your own appID
@@ -177,7 +177,7 @@ Name the app what you want and set the callback url to
 `http://localhost:7891/login/callback`
 
 The next page should show you various API keys/secrets. Use those to replace
-the demobot default options in your `dot.env`.
+the demobot default options in your `.env`.
 
 ### Configure your bot
 Now it is time to set up your bot w/ the app.

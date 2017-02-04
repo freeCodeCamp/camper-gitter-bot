@@ -4,7 +4,7 @@ const tape = require('gulp-tape');
 const faucet = require('faucet');
 const env = require('gulp-env');
 
-require('dotenv').config({ path: 'dot.env' });
+require('dotenv').config({ path: '.env' });
 
 const scripts = ['config/*.js', 'data/rooms/*.js', 'data/*.js', 'lib/**/*.js',
                   'test/*.js', 'app.js', 'gulpfile.js'];

@@ -4,12 +4,8 @@
   "dependencies": {
     "cli-color": "",
     "dotenv": "^1.2.0",
-    "express": "~3.4.4",
-    "jade": "~0.35.0",
     "lodash": "^3.10.1",
     "node-gitter": "^1.2.8",
-    "passport": "~0.2.0",
-    "passport-oauth2": "~1.1.1",
     "request": "~2.27.0"
   },
   "devDependencies": {
@@ -29,7 +25,27 @@
     "lint": "node_modules/eslint/bin/eslint.js 'config/*.js' 'data/rooms/*.js' 'data/*.js' 'lib/**/*.js' 'test/*.js' 'app.js' 'gulpfile.js'",
     "start": "node app.js",
     "test": "npm run make-env npm && npm run make-config && npm run lint && LOG_LEVEL=0 SERVER_ENV=test node_modules/tape/bin/tape test/*.spec.js | tap-spec",
-    "make-env": "node -e 'var fs = require(\"fs\"); if(!fs.existsSync(\"./dot.env\")) { var rs = fs.createReadStream(\"./dot-EXAMPLE.env\"); var ws = fs.createWriteStream(\"dot.env\"); rs.pipe(ws); }'",
+    "make-env": "node -e 'var fs = require(\"fs\"); if(!fs.existsSync(\"./.env\")) { var rs = fs.createReadStream(\"./dot-EXAMPLE.env\"); var ws = fs.createWriteStream(\".env\"); rs.pipe(ws); }'",
     "make-config": "node -e 'var fs = require(\"fs\"); if(!fs.existsSync(\"./config.json\")) { var rs = fs.createReadStream(\"./example.config.json\"); var ws = fs.createWriteStream(\"config.json\"); rs.pipe(ws); }'"
-  }
+  },
+  "description": "[![Join the chat at https://gitter.im/FreeCodeCamp/camperbot](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FreeCodeCamp/camperbot) [![Stories in Ready](https://badge.waffle.io/FreeCodeCamp/camperbot.png?label=ready&title=Ready)](https://waffle.io/FreeCodeCamp/camperbot)",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freeCodeCamp/camperbot.git"
+  },
+  "keywords": [
+    "bot",
+    "gitter",
+    "chat"
+  ],
+  "author": "freeCodeCamp",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/freeCodeCamp/camperbot/issues"
+  },
+  "homepage": "https://github.com/freeCodeCamp/camperbot#readme"
 }
