@@ -4,7 +4,7 @@
   "dependencies": {
     "cli-color": "",
     "dotenv": "^1.2.0",
-    "express": "~4.14.0",
+    "express": "~3.4.4",
     "jade": "~0.35.0",
     "lodash": "^3.10.1",
     "node-gitter": "^1.2.8",
