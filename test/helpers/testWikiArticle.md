@@ -17,7 +17,6 @@ find js   # all JS entries
 wiki muta  # first entry with muta in name
 wiki bobbytables  # showing images
 wiki video  # and video
-rollem    # secret sauce
 Algorithm roman   # any Algorithm with roman in name
 ```
 For playing with CamperBot please use the testing channel:
