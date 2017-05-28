@@ -38,7 +38,7 @@ const AllRoomMessages = [
           '(http://forum.freecodecamp.com/t/markdown-code-formatting/18391)'
   },
   {
-    regex: /holler/i,
+    regex: /[^\@]\bholler/i,
     text: '> holler back!',
     // only say this 50% of the time
     chance: 1
