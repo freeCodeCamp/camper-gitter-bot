@@ -111,7 +111,6 @@ const camperBotChatRooms = [
     'FreeCodeCamp/camperbotPlayground',
     'FreeCodeCamp/Casual',
     'FreeCodeCamp/CodeReview',
-    'FreeCodeCamp/CodingJobs',
     'FreeCodeCamp/Contributors',
     'FreeCodeCamp/DataScience',
     'FreeCodeCamp/FreeCodeCamp',
