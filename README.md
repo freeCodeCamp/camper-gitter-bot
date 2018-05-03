@@ -86,7 +86,7 @@ To install Node, [follow the instructions here](http://blog.teamtreehouse.com/in
     install "nodemon" (you may need `sudo`)
 
 ```sh
-sudo npm install -g nodemon
+npm install -g nodemon
 ```
 
 -   To download the app, clone the repository the bot is in:
@@ -100,6 +100,7 @@ git clone https://github.com/FreeCodeCamp/camperbot.git
 ```sh
 cd camperbot
 cp dot-EXAMPLE.env .env
+cp example.config.json config.json
 git submodule update --remote --checkout --init --recursive
 npm install
 nodemon app.js
@@ -133,6 +134,7 @@ git clone https://github.com/FreeCodeCamp/camperbot.git
 ```sh
 cd camperbot
 copy dot-EXAMPLE.env .env
+copy example.config.json config.json
 git submodule update --remote --checkout --init --recursive
 npm install
 nodemon app.js
@@ -189,7 +191,7 @@ set up earlier.
 Take note of the the rooms property of config. You can set up additional gitter rooms
 to connect your bot to here. The default room is `GITHUB_USERID/test` feel free to change this.
 
-You may chat with us in the CamperBot Dev chat room if you have problems. [camperbot chatroom](https://gitter.im/FreeCodeCamp/camperbot).
+You may chat with us in the CamperBot Dev chat room if you have problems. [contributors chatroom](https://gitter.im/FreeCodeCamp/Contributors).
 
 ## Running tests
 
@@ -330,4 +332,4 @@ so good places to start.
 ## Chat with us!
 
 Chat with us in the
-[camperbot chatroom](https://gitter.im/FreeCodeCamp/camperbot) if you get stuck.
+[contributors chatroom](https://gitter.im/FreeCodeCamp/Contributors) if you get stuck.
