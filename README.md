@@ -1,6 +1,6 @@
 # CamperBot
 
-[![Join the chat at https://gitter.im/FreeCodeCamp/camperbot](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FreeCodeCamp/camperbot) [![Stories in Ready](https://badge.waffle.io/FreeCodeCamp/camperbot.png?label=ready&title=Ready)](https://waffle.io/FreeCodeCamp/camperbot)
+[![Join the chat at https://gitter.im/FreeCodeCamp/camperbot](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FreeCodeCamp/camperbot) [![Stories in Ready](https://badge.waffle.io/FreeCodeCamp/camperbot.png?label=ready&title=Ready)](https://waffle.io/FreeCodeCamp/camperbot) [![Greenkeeper badge](https://badges.greenkeeper.io/freeCodeCamp/camperbot.svg)](https://greenkeeper.io/)
 
 This is a full featured bot for
 [Gitter.im/FreeCodeCamp](https://gitter.im/orgs/FreeCodeCamp/rooms) chat rooms.
