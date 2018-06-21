@@ -3,22 +3,22 @@
   "version": "0.0.13",
   "dependencies": {
     "cli-color": "",
-    "dotenv": "^1.2.0",
-    "lodash": "^3.10.1",
-    "node-gitter": "^1.2.8",
-    "request": "~2.27.0"
+    "dotenv": "^6.0.0",
+    "lodash": "^4.17.10",
+    "node-gitter": "^2.1.0",
+    "request": "~2.87.0"
   },
   "devDependencies": {
-    "babel-eslint": "^6.0.0",
-    "eslint": "^2.0.0",
-    "eslint-plugin-react": "^3.11.3",
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.9.1",
     "faucet": "0.0.1",
     "gulp": "^3.9.0",
-    "gulp-env": "^0.2.0",
-    "gulp-eslint": "^2.0.0",
-    "gulp-tape": "0.0.7",
-    "nodemon": "~1.0.15",
-    "tap-spec": "^4.1.1",
+    "gulp-env": "^0.4.0",
+    "gulp-eslint": "^4.0.2",
+    "gulp-tape": "1.0.0",
+    "nodemon": "~1.17.5",
+    "tap-spec": "^5.0.0",
     "tape": "^4.2.2"
   },
   "scripts": {
